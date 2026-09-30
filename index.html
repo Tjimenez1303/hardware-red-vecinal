@@ -5,19 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hardware Red Vecinal</title>
 <meta name="description" content="Comparador interno de hardware LoRa/Meshtastic para la Red Vecinal de Manizales: capa fija y capa portátil, con precios fechados y fuentes.">
-<link rel="stylesheet" href="assets/estilo.css?v=2026-09-29e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="assets/estilo.css?v=2026-09-30c">
 </head>
 <body>
 
 <header class="cabecera">
-  <h1>Hardware Red Vecinal LoRa — comparador</h1>
-  <p>Herramienta interna de AIThinkers para decidir la compra. Compara en una sola tabla la <b>capa fija</b> (nodos solares en postes y azoteas, troncal entre cerros) y la <b>capa portátil</b> (aparatos que llevan los vecinos encima). Las dos capas conviven: la portátil se suma a la fija, no la reemplaza.</p>
-  <div class="meta-linea">
-    <span>Precios consultados: <b id="meta-fecha">—</b></span>
-    <span>Levantamiento base: <b id="meta-base">—</b></span>
-    <span>TRM de referencia: <b id="meta-trm">—</b></span>
-    <span>Equipos: <b id="meta-n">—</b></span>
-  </div>
+  <h1>Hardware Red Vecinal</h1>
+  <p class="proposito">Qué comprar para las dos capas de la red: la <b>fija</b>, de nodos solares en postes, azoteas y cerros, y la <b>portátil</b>, de aparatos que los vecinos llevan encima. La portátil se suma a la fija; no la reemplaza.</p>
+  <dl class="meta">
+    <div><dt>Precios consultados</dt><dd id="meta-fecha">—</dd></div>
+    <div><dt>Levantamiento base</dt><dd id="meta-base">—</dd></div>
+    <div><dt>TRM</dt><dd id="meta-trm">—</dd></div>
+    <div><dt>Equipos</dt><dd id="meta-n">—</dd></div>
+  </dl>
 </header>
 
 <nav class="secciones" aria-label="Secciones">
@@ -30,12 +33,12 @@
   <a href="#colombia-sec">Colombia</a>
   <a href="#vacios">Vacíos</a>
   <a href="#referencias">Referencias</a>
-  <button class="boton tema-btn" id="tema" type="button" title="Cambiar tema claro/oscuro">Tema</button>
+  <button class="boton tema-btn" id="tema" type="button">Tema claro u oscuro</button>
 </nav>
 
 <main>
   <div class="aviso" id="carga-error" style="display:none"></div>
-  <div class="aviso"><b>Los precios caducan.</b> Cada precio lleva su fecha de consulta y el enlace al vendedor; un precio sin los dos no se muestra. Son precios de lista en USD, <b>sin</b> el 25–30 % de importación (IVA sobre CIF, flete y agenciamiento; el arancel de las partidas 8517/8525/8526 es 0 %). Convención de celdas: <span class="ausente">✕</span> dato no publicado por la fuente · <span class="espera">aún en espera</span> dato sin confirmar · valor con llamada <span class="llamada">[n]</span> a las referencias.</div>
+  <div class="aviso"><b>Los precios caducan.</b> Cada precio lleva su fecha de consulta y el enlace al vendedor; un precio sin los dos no se muestra. Son precios de lista en USD, <b>sin</b> el 25–30 % de importación (IVA sobre CIF, flete y agenciamiento; el arancel de las partidas 8517/8525/8526 es 0 %). En las celdas, <span class="ausente">✕</span> es un dato que la fuente no publica, <span class="espera">aún en espera</span> es un dato sin confirmar, y un valor con llamada <span class="llamada">[n]</span> está verificado en la referencia n.</div>
 
   <!-- ================= COMPARADOR ================= -->
   <section class="bloque" id="comparador">
@@ -44,13 +47,13 @@
       <label class="campo ancho">Buscar (fabricante, modelo, MCU, chipset de radio)
         <input type="search" id="f-texto" placeholder="p. ej. nRF52840, SX1262, Heltec, T-Echo" autocomplete="off">
       </label>
-      <div class="campo ancho" style="font-size:12px;color:var(--texto-2)">Capa <span class="ausente">(clic alterna; Alt+clic deja solo esa)</span>
-        <div class="chips" id="f-capas" style="margin-top:3px"></div>
-        <div class="chips" style="margin-top:4px">
-          <button class="chip" type="button" data-solo="fija">Solo fija</button>
-          <button class="chip" type="button" data-solo="portatil">Solo portátil</button>
-          <button class="chip" type="button" data-solo="fija,portatil">Fija + portátil</button>
-          <button class="chip" type="button" data-solo="modulo">Solo módulos</button>
+      <div class="campo ancho">Capas <span class="ausente">(clic para mostrar u ocultar; Alt+clic deja solo esa)</span>
+        <div class="capas" id="f-capas" role="group" aria-label="Capas"></div>
+        <div class="atajos">Ver:
+          <button class="atajo" type="button" data-solo="fija,portatil">fija y portátil</button>
+          <button class="atajo" type="button" data-solo="fija">solo fija</button>
+          <button class="atajo" type="button" data-solo="portatil">solo portátil</button>
+          <button class="atajo" type="button" data-solo="modulo">solo módulos</button>
         </div>
       </div>
       <label class="campo">Familia de microcontrolador<select id="f-mcu"></select></label>
@@ -62,7 +65,7 @@
         <span class="rango"><input type="number" id="f-pmin" min="0" step="1" placeholder="mín"><input type="number" id="f-pmax" min="0" step="1" placeholder="máx"></span>
       </label>
       <label class="campo">Batería mínima (mAh)<input type="number" id="f-bat" min="0" step="100" placeholder="p. ej. 1000"></label>
-      <label class="campo" style="flex-direction:row;align-items:center;gap:6px;margin-top:16px"><input type="checkbox" id="f-conprecio"> Solo con precio verificable</label>
+      <label class="campo check"><input type="checkbox" id="f-conprecio"> Solo con precio verificable</label>
       <div class="campo" style="justify-content:flex-end"><button class="boton" type="button" id="f-limpiar">Limpiar filtros</button></div>
     </div>
     <div class="resumen-filtro" id="resumen-filtro"></div>
@@ -80,10 +83,9 @@
     <h2>Barras comparativas</h2>
     <p class="prosa">Las barras usan el mismo filtro que la tabla. Cambie de magnitud y de escala; la figura declara siempre qué escala usa.</p>
     <div class="barras-controles">
-      <label class="grupo">Magnitud <select id="b-metrica" style="width:auto"></select></label>
+      <label class="grupo">Magnitud <select id="b-metrica"></select></label>
       <span class="grupo">Escala
-        <button class="chip" type="button" data-escala="lineal" aria-pressed="true">Lineal desde cero</button>
-        <button class="chip" type="button" data-escala="log" aria-pressed="false">Logarítmica</button>
+        <span class="seg"><button type="button" data-escala="lineal" aria-pressed="true">Lineal desde cero</button><button type="button" data-escala="log" aria-pressed="false">Logarítmica</button></span>
       </span>
     </div>
     <figure class="figura" style="margin:0">
@@ -104,11 +106,26 @@
 
       <div class="aviso"><b>Resultado negativo, primero.</b> No existe ninguna medición ni simulación revisada por pares que diga cuántos nodos Meshtastic en alcance mutuo aguanta el canal. El único preprint que mide perfiles de Meshtastic en 915 MHz (Universidad Militar Nueva Granada, mayo de 2026) mide enlaces punto a punto, no prueba <code>LONG_TURBO</code> y deja la escalabilidad de la inundación como trabajo futuro<span data-ref="arxiv-umng"></span>. Meshtastic tampoco publica un tope de nodos por dominio de colisión<span data-ref="mt-meshalgo mt-blog-flood"></span>. El número de abajo sale de la <b>convergencia de tres umbrales oficiales</b> y de un cálculo propio de carga del canal. Es una cifra de diseño, no una medición.</div>
 
-      <h3>El número</h3>
-      <div>
-        <div class="cifra-clave"><span class="n">≈ 40</span><span class="d">aparatos que retransmiten por dominio de colisión. A partir de ahí el firmware empieza a espaciar su propio tráfico de fondo, y una ráfaga de mensajes en una emergencia lleva el canal al 25 % de ocupación.</span></div>
-        <div class="cifra-clave"><span class="n">60–85</span><span class="d">zona de degradación. La documentación oficial aconseja abandonar LongFast por encima de 60 nodos próximos; con <code>LONG_TURBO</code> y buena supresión, el canal llega al 25 % hacia los 85.</span></div>
-        <div class="cifra-clave"><span class="n">80</span><span class="d">nodos que un aparato nRF52840 puede recordar en la versión estable 2.7.26. Más allá, olvida los más antiguos (casi todos los portátiles son nRF52840).</span></div>
+      <div class="regla">
+        <div class="cifra"><span class="n">≈ 40</span><p>aparatos que retransmiten por <b>dominio de colisión</b> es la cifra de diseño. Por encima, el canal se degrada; pasados unos 85, se satura en una ráfaga de emergencia. Los umbrales vienen del firmware, del blog oficial y del cálculo de carga de abajo.</p></div>
+        <div class="lienzo"><svg viewBox="0 0 900 128" role="img" aria-labelledby="regla-t regla-d" style="color:var(--pizarra)">
+          <title id="regla-t">Regla de densidad de 0 a 120 aparatos en alcance mutuo</title>
+          <desc id="regla-d">Hasta 40 el canal cabe; de 40 a 85 se degrada; por encima de 85 se satura. Marcas en 40, 60, 80 y 85.</desc>
+          <rect x="40" y="40" width="280" height="26" style="fill:var(--zona-ok)"/>
+          <rect x="320" y="40" width="315" height="26" style="fill:var(--zona-media)"/>
+          <rect x="635" y="40" width="245" height="26" style="fill:var(--zona-alta)"/>
+          <text x="54" y="58" font-size="12.5" font-weight="600">cabe</text>
+          <text x="334" y="58" font-size="12.5" font-weight="600">se degrada</text>
+          <text x="649" y="58" font-size="12.5" font-weight="600">se satura</text>
+          <line x1="145" y1="66" x2="145" y2="76" stroke="currentColor"/><text x="145" y="89" font-size="12" text-anchor="middle">piloto: 15</text>
+          <line x1="320" y1="18" x2="320" y2="66" stroke="currentColor" stroke-width="1.5"/><text x="325" y="14" font-size="12.5" text-anchor="start">40: el firmware empieza a espaciar su tráfico de fondo</text>
+          <line x1="460" y1="34" x2="460" y2="66" stroke="currentColor" stroke-width="1.5"/><text x="465" y="30" font-size="12.5" text-anchor="start">60: el blog oficial aconseja dejar LongFast</text>
+          <line x1="600" y1="40" x2="600" y2="80" stroke="currentColor" stroke-width="1.5"/><text x="595" y="89" font-size="12.5" text-anchor="end">80: se llena la NodeDB de un nRF52840</text>
+          <line x1="635" y1="40" x2="635" y2="96" stroke="currentColor" stroke-width="1.5"/><text x="640" y="105" font-size="12.5">85: canal al 25 % con buena supresión</text>
+          <line x1="40" y1="66" x2="880" y2="66" stroke="currentColor" stroke-opacity=".35"/>
+          <text x="40" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">0</text><text x="180" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">20</text><text x="320" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">40</text><text x="460" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">60</text><text x="600" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">80</text><text x="740" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">100</text><text x="880" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">120</text>
+        </svg></div>
+        <p class="pie">Aparatos en alcance mutuo, escala lineal desde cero. Las zonas combinan umbrales oficiales (40, 60, 80) y el cálculo propio de ocupación (85), que es una estimación.</p>
       </div>
 
       <h3>1. ¿Cuántos nodos aguanta el canal? Lo que sí está publicado</h3>
@@ -121,7 +138,7 @@
           <tr><td>Señal para dejar LongFast</td><td class="num">&gt; 60 nodos</td><td>«especialmente si están en relativa proximidad». El mismo texto relata una malla regional de más de 150 nodos en LongFast con picos de ocupación superiores al 65 %, en la que el texto era «extremadamente poco fiable».</td><td>Blog oficial<span data-ref="mt-blog-longfast"></span></td></tr>
           <tr><td>Señal para quitar un rol de infraestructura</td><td class="num">ChUtil 25 %<br>AirUtilTX 7–8 %</td><td>Si se superan, se deja de usar ese rol en el punto.</td><td>Blog oficial<span data-ref="mt-blog-routerlate"></span></td></tr>
           <tr><td>Tamaño de la NodeDB</td><td class="num">80 / 100–250</td><td>80 nodos en nRF52 y de 100 a 250 en ESP32-S3 (v2.7.26). En la pre-release 2.8.0, 120 en nRF52840. Con la base llena se borra el nodo más antiguo que no sea favorito. El blog de DEF CON habla de «unos 100»: <b>contradicción</b> con el código, que da cifras distintas según la plataforma.</td><td>Código y blog<span data-ref="fw-pbconst fw-pbconst-dev mt-blog-defcon"></span></td></tr>
-          <tr><td>Mallas grandes documentadas</td><td>&gt; 100 · &gt; 700 · &gt; 2.000</td><td>El blog oficial afirma que la inundación funciona en mallas de más de 100 nodos «con control de tráfico adecuado», sin cifra de entrega. Bay Mesh tiene más de 700 nodos. En DEF CON 33 los asistentes reportaron más de 2.000, sin cifras oficiales de entrega.</td><td>Blog oficial<span data-ref="mt-blog-flood mt-blog-zerocost mt-blog-defcon"></span></td></tr>
+          <tr><td>Mallas grandes documentadas</td><td>más de 100, 700 y 2.000</td><td>El blog oficial afirma que la inundación funciona en mallas de más de 100 nodos «con control de tráfico adecuado», sin cifra de entrega. Bay Mesh tiene más de 700 nodos. En DEF CON 33 los asistentes reportaron más de 2.000, sin cifras oficiales de entrega.</td><td>Blog oficial<span data-ref="mt-blog-flood mt-blog-zerocost mt-blog-defcon"></span></td></tr>
         </tbody>
       </table>
 
@@ -170,9 +187,9 @@
       <table class="simple">
         <thead><tr><th>Fase (escala de <code>_proyecto.md</code>)</th><th>Portátiles</th><th>Por dominio de colisión</th><th>Configuración</th></tr></thead>
         <tbody>
-          <tr><td>1 · piloto en un barrio de ladera</td><td class="num">15</td><td class="num">15</td><td>Todos en <code>CLIENT</code>. Ocupación en ráfaga del 4 al 9 %: el límite de densidad <b>no aprieta</b> en el piloto.</td></tr>
-          <tr><td>2 · comunas de ladera prioritarias</td><td class="num">80</td><td class="num">10–25 si se reparten en 4 o más barrios</td><td>Todos en <code>CLIENT</code>, salvo en puntos de concentración.</td></tr>
-          <tr><td>3 · ciudad</td><td class="num">300</td><td class="num">hasta ~40 en CLIENT por barrio</td><td>Por encima de ~40 en un mismo barrio que se oye entre sí, los adicionales en <code>CLIENT_MUTE</code>. Primero se silencian las etiquetas de la familia (a), que tienen menos batería y dependen del celular.</td></tr>
+          <tr><td>Fase 1: piloto en un barrio de ladera</td><td class="num">15</td><td class="num">15</td><td>Todos en <code>CLIENT</code>. Ocupación en ráfaga del 4 al 9 %: el límite de densidad <b>no aprieta</b> en el piloto.</td></tr>
+          <tr><td>Fase 2: comunas de ladera prioritarias</td><td class="num">80</td><td class="num">10–25 si se reparten en 4 o más barrios</td><td>Todos en <code>CLIENT</code>, salvo en puntos de concentración.</td></tr>
+          <tr><td>Fase 3: ciudad</td><td class="num">300</td><td class="num">hasta ~40 en CLIENT por barrio</td><td>Por encima de ~40 en un mismo barrio que se oye entre sí, los adicionales en <code>CLIENT_MUTE</code>. Primero se silencian las etiquetas de la familia (a), que tienen menos batería y dependen del celular.</td></tr>
         </tbody>
       </table>
       <p><b>Recomendación por barrio:</b> entre 15 y 40 portátiles en <code>CLIENT</code> por dominio de colisión, repartidos donde no llega el poste. Los que pasen de ~40 van en <code>CLIENT_MUTE</code>, y también en <code>CLIENT_MUTE</code> todos menos 2 o 3 en cualquier punto donde se junten decenas de aparatos. Además:</p>
@@ -191,7 +208,7 @@
   <section class="bloque" id="portatil">
     <h2>Capa portátil: las dos familias</h2>
     <div class="prosa" id="portatil-cuerpo">
-      <p>La capa portátil tiene hoy 26 aparatos: los 10 del 4-sep y 16 añadidos en esta revisión. Se comparan con criterios propios, no con los de la capa fija: la capa fija se juzga por su consumo dormido, y un portátil se juzga por lo que dura andando. Para verlos en la tabla, use el filtro <button class="chip" type="button" data-solo="portatil">Solo portátil</button> y el de familia.</p>
+      <p>La capa portátil tiene hoy 26 aparatos: los 10 del 4-sep y 16 añadidos en esta revisión. Se comparan con criterios propios, no con los de la capa fija: la capa fija se juzga por su consumo dormido, y un portátil se juzga por lo que dura andando. Para verlos en la tabla, use el filtro <button class="atajo" type="button" data-solo="portatil">solo portátil</button> y el de familia.</p>
 
       <table class="simple">
         <thead><tr><th>Criterio</th><th>(a) Etiqueta sin pantalla, emparejada al celular</th><th>(b) Aparato con pantalla propia</th></tr></thead>
@@ -205,7 +222,7 @@
           <tr><td>Robustez</td><td>IP65 (T1000-E) e IP66 (X1, Tag, M3). La mejor protección publicada de la capa.</td><td>Casi todo ✕. La WisMesh TAP es IP65, y la MeshPocket declara que no es resistente al agua.</td></tr>
           <tr><td>Resistencia a caídas</td><td colspan="2"><b>Resultado negativo: ningún fabricante publica altura de caída ni ensayo MIL-STD.</b></td></tr>
           <tr><td>Llega funcionando</td><td>Todas preflasheadas o con soporte oficial.</td><td>La mayoría preflasheados. El T-Watch S3 exige flasheo manual, y el T-Lora Pager no confirma que traiga Meshtastic cargado. El Cardputer declara 868–923 MHz, <b>sin cubrir 923–928</b>.</td></tr>
-          <tr><td>Precio (USD, lista, 29-sep)</td><td>39,00 (Tag) · 39,90 (T1000-E, M3) · 49,90 (X1) · 59,97 · 60,40 · 79,99 · 89,00 (R1 Neo, agotado)</td><td>27,36 (T-Echo Lite) · 47,90 (L1 Pro) · 48,49 (T-Echo) · 49,00 (MeshPocket) · 53,90 (M1, M5) · 74,90 (M9) · … · 109,00 (TAP)</td></tr>
+          <tr><td>Precio (USD, lista, 29-sep)</td><td>De 39,00 (Tag) a 89,00 (R1 Neo, agotado). T1000-E y M3 a 39,90; X1 a 49,90.</td><td>De 27,36 (T-Echo Lite) a 109,00 (TAP). L1 Pro a 47,90, MeshPocket a 49,00, M1 y M5 a 53,90, M9 a 74,90.</td></tr>
           <tr><td>En Colombia</td><td colspan="2"><b>Resultado negativo: ningún portátil autónomo a la venta con vendedor colombiano.</b> Se revisaron Electronilab, Sigma, Ardobot, DynamoElectronics y Didácticas. MercadoLibre no se pudo revisar porque exige iniciar sesión.</td></tr>
         </tbody>
       </table>
@@ -307,7 +324,7 @@
 </main>
 
 <div class="tooltip" id="tooltip" role="tooltip"></div>
-<footer>Red Vecinal LoRa · Manizales, Caldas · AIThinkers. Datos en <code>datos/equipos.json</code>; ver README para actualizarlos. Esta página no detecta nada ni decide niveles de alerta: compara el hardware de la capa de entrega.</footer>
-<script src="assets/app.js?v=2026-09-29e"></script>
+<footer>Red Vecinal LoRa, Manizales (Caldas), AIThinkers. Datos en <code>datos/equipos.json</code>; ver README para actualizarlos. Esta página no detecta nada ni decide niveles de alerta: compara el hardware de la capa de entrega.</footer>
+<script src="assets/app.js?v=2026-09-30c"></script>
 </body>
 </html>

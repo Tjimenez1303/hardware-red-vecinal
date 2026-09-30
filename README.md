@@ -103,6 +103,24 @@ Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
 | `autonomia_texto`, `consumo_texto` | condiciones textuales de la cifra; salen en el tooltip |
 | `refs` | claves de `referencias` |
 
+## Estilo: «Ancho de banda»
+
+Si se edita la página, conviene mantener la dirección visual:
+
+- **Una sola familia, Archivo, usando su eje de ancho.** Títulos expandidos
+  (`wdth` 125) y muy pesados; tabla condensada (`wdth` 78) con cifras tabulares;
+  texto corrido en ancho normal. La monoespaciada es solo para identificadores de
+  configuración como `LONG_TURBO`.
+- **Color de fondo:** papel niebla `#EEF1EF` con tinta pizarra `#1F2A2E`. En modo
+  oscuro, la pizarra se vuelve el fondo.
+- **Cada capa es una franja de color** que aparece en el selector, en el borde de
+  cada fila y en las barras. Los colores (fija `#1F5FA8`, portátil `#EE7B00`,
+  módulo `#159068`, antena `#7B4FB8`, accesorio `#A5782A`) se validaron para
+  daltonismo en los dos modos. Si se añade una capa, hay que volver a validarlos.
+- **El rojo `#B3312A` es solo para contradicciones.**
+- **Se evita:** tarjetas con número grande, metadatos unidos con punto medio,
+  etiquetas en mayúsculas, sombras y el mismo radio en todo.
+
 ## Publicar
 
 El repositorio se creó sin remoto. Para publicarlo en GitHub Pages, el

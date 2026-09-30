@@ -175,17 +175,17 @@
   function filaHTML(e) {
     const capa = CAPAS[e.capa];
     const tds = [];
-    tds.push(`<td><span class="capa-tag"><span class="punto" style="background:${capa.color}"></span>${capa.nombre}</span>${e.subcapa_nombre ? `<div class="sub ausente" style="font-size:11px">${esc(e.subcapa_nombre)}</div>` : ""}</td>`);
-    const fam = e.familia === "a_etiqueta" ? " · familia (a) etiqueta" : e.familia === "b_pantalla" ? " · familia (b) pantalla" : "";
-    tds.push(`<td class="modelo"><b>${esc(e.fabricante)}</b> ${esc(e.modelo)}${llamadas(e.refs)}${e.linea_base ? ` <span class="sub">· línea base</span>` : ""}${fam ? `<div class="sub">${fam.slice(3)}</div>` : ""}</td>`);
+    tds.push(`<td style="--franja:${capa.color}">${capa.nombre}${e.subcapa_nombre ? `<span class="sub">${esc(e.subcapa_nombre)}</span>` : ""}</td>`);
+    const fam = e.familia === "a_etiqueta" ? "familia (a): etiqueta" : e.familia === "b_pantalla" ? "familia (b): pantalla propia" : "";
+    tds.push(`<td class="modelo"><b>${esc(e.fabricante)}</b> ${esc(e.modelo)}${llamadas(e.refs)}${e.linea_base ? `<span class="sub">línea base del proyecto</span>` : ""}${fam ? `<span class="sub">${fam}</span>` : ""}</td>`);
     // precio
     if (precioValido(e)) {
       const max = esNum(e.precio_max_usd) && e.precio_max_usd > e.precio_usd ? `–${fmt(e.precio_max_usd)}` : "";
-      tds.push(`<td class="num"><a href="${esc(e.url)}" target="_blank" rel="noopener" title="${esc(e.variante_precio || "Abrir ficha del vendedor")}">${fmt(e.precio_usd)}${max}</a><span class="precio-fecha" title="${esc((e.vendedor || "") + " · consultado " + e.fecha_consulta)}">${esc(e.fecha_consulta)}</span></td>`);
+      tds.push(`<td class="num"><a href="${esc(e.url)}" target="_blank" rel="noopener" title="${esc(e.variante_precio || "Abrir ficha del vendedor")}">${fmt(e.precio_usd)}${max}</a><span class="precio-fecha" title="${esc((e.vendedor || "") + ", consultado el " + e.fecha_consulta)}">${esc(e.fecha_consulta)}</span></td>`);
     } else if (e.precio_espera) {
       tds.push(`<td class="num"><span class="espera">aún en espera</span><span class="precio-fecha recorte" title="${esc(e.precio_nota || "")}">${esc(e.precio_nota || "")}</span></td>`);
     } else if (e.url) {
-      tds.push(`<td class="num sin-precio"><span class="ausente">✕</span> <a href="${esc(e.url)}" target="_blank" rel="noopener">ficha</a><span class="precio-fecha recorte" title="${esc(e.precio_nota || "precio no legible")}">${esc(e.precio_nota || "precio no legible")}${e.fecha_consulta ? " · " + esc(e.fecha_consulta) : ""}</span></td>`);
+      tds.push(`<td class="num sin-precio"><span class="ausente">✕</span> <a href="${esc(e.url)}" target="_blank" rel="noopener">ficha</a><span class="precio-fecha recorte" title="${esc(e.precio_nota || "precio no legible")}">${esc(e.precio_nota || "precio no legible")}${e.fecha_consulta ? ", " + esc(e.fecha_consulta) : ""}</span></td>`);
     } else {
       tds.push(`<td class="num">${celda(null)}</td>`);
     }
@@ -213,15 +213,15 @@
     tds.push(`<td>${celda(e.dimensiones_mm)}</td>`);
     tds.push(`<td class="num">${celda(e.bateria_mah)}</td>`);
     tds.push(`<td>${celda(e.bateria_reemplazable)}</td>`);
-    tds.push(`<td class="num" title="${esc([e.autonomia_texto, e.autonomia_comunidad ? "Comunidad (no del fabricante): " + e.autonomia_comunidad : ""].filter(Boolean).join(" · "))}">${celda(e.autonomia_uso_h)}${!esNum(e.autonomia_uso_h) && (e.autonomia_texto || e.autonomia_comunidad) ? ` <span class="ausente" style="font-size:10px">(ver)</span>` : ""}</td>`);
+    tds.push(`<td class="num" title="${esc([e.autonomia_texto, e.autonomia_comunidad ? "Comunidad (no del fabricante): " + e.autonomia_comunidad : ""].filter(Boolean).join(". "))}">${celda(e.autonomia_uso_h)}${!esNum(e.autonomia_uso_h) && (e.autonomia_texto || e.autonomia_comunidad) ? ` <span class="ausente" style="font-size:10px">(ver)</span>` : ""}</td>`);
     tds.push(`<td class="num" title="${esc(e.autonomia_texto || "")}">${celda(e.autonomia_dias, { dec: 0 })}</td>`);
     tds.push(`<td class="num" title="${esc(e.consumo_texto || "")}">${celda(e.consumo_ma, { dec: 1 })}</td>`);
     tds.push(`<td>${celda(e.recarga)}</td>`);
     tds.push(`<td title="${esc(e.sin_celular ? "Sin teléfono queda: " + e.sin_celular : "")}">${celda(e.depende_celular)}${e.sin_celular ? ` <span class="ausente" style="font-size:10px">(ver)</span>` : ""}</td>`);
     tds.push(`<td>${celda(e.grado_ip)}</td>`);
     tds.push(`<td class="num">${celda(e.ganancia_dbi, { dec: 1 })}</td>`);
-    const notaTxt = [e.notas, e.contradiccion ? "Contradicción: " + e.contradiccion : "", e.variante_precio ? "Variante de precio: " + e.variante_precio : ""].filter(Boolean).join(" · ");
-    tds.push(`<td class="notas">${notaTxt ? `<span class="recorte r3" title="${esc(notaTxt)}">${e.contradiccion ? `<b class="espera">Contradicción.</b> ` : ""}${esc(e.notas || e.contradiccion || e.variante_precio || "")}</span>` : ""}</td>`);
+    const notaTxt = [e.notas, e.contradiccion ? "Contradicción: " + e.contradiccion : "", e.variante_precio ? "Variante de precio: " + e.variante_precio : ""].filter(Boolean).join(". ");
+    tds.push(`<td class="notas">${notaTxt ? `<span class="recorte r3" title="${esc(notaTxt)}">${e.contradiccion ? `<b class="contra">Contradicción.</b> ` : ""}${esc(e.notas || e.contradiccion || e.variante_precio || "")}</span>` : ""}</td>`);
     return `<tr>${tds.join("")}</tr>`;
   }
 
@@ -230,8 +230,9 @@
     $("#tabla tbody").innerHTML = lista.map(filaHTML).join("") ||
       `<tr><td colspan="${COLUMNAS.length}" style="padding:12px">Ningún equipo cumple los filtros.</td></tr>`;
     const conPrecio = lista.filter(precioValido).length;
+    const col = COLUMNAS.find((c) => c.clave === estado.orden.clave)?.titulo || "";
     $("#resumen-filtro").textContent =
-      `${lista.length} de ${estado.datos.equipos.length} equipos · ${conPrecio} con precio verificable (URL de vendedor y fecha) · orden: ${COLUMNAS.find((c) => c.clave === estado.orden.clave)?.titulo || ""} ${estado.orden.dir > 0 ? "ascendente" : "descendente"}`;
+      `${lista.length} de ${estado.datos.equipos.length} equipos, ${conPrecio} con precio verificable. Ordenado por ${col.replace(/ ↕| ▲| ▼/g, "")}, ${estado.orden.dir > 0 ? "de menor a mayor" : "de mayor a menor"}.`;
   }
 
   // ---------- barras ----------
@@ -306,8 +307,8 @@
       const izq = w > 78;
       const etiquetaValor = `${fmt(v, def.dec)}`;
       const info = `${e.fabricante} ${e.modelo} — ${fmt(v, def.dec)} ${def.unidad}` +
-        (m === "precio_usd" ? ` · ${e.vendedor || ""} · consultado ${e.fecha_consulta}` : "") +
-        (m.startsWith("autonomia") && e.autonomia_texto ? ` · ${e.autonomia_texto}` : "");
+        (m === "precio_usd" ? `, ${e.vendedor || ""}, consultado el ${e.fecha_consulta}` : "") +
+        (m.startsWith("autonomia") && e.autonomia_texto ? `. ${e.autonomia_texto}` : "");
       return `<div class="etq" title="${esc(e.fabricante + " " + e.modelo)}">${esc(e.fabricante)} ${esc(e.modelo)}</div>` +
         `<div class="pista" data-info="${esc(info)}">` +
         `<div class="barra" style="width:${w}%;background:${CAPAS[e.capa].color}"></div>` +
@@ -368,7 +369,7 @@
     const ol = $("#lista-referencias");
     ol.innerHTML = estado.datos.referencias.map((r, i) => {
       const n = i + 1;
-      return `<li id="ref-${n}" value="${n}">${esc(r.entidad)}. ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.titulo)}</a>` : esc(r.titulo)}. <span class="fecha">${r.tipo ? esc(r.tipo) + " · " : ""}consultado ${esc(r.fecha_consulta)}</span></li>`;
+      return `<li id="ref-${n}" value="${n}">${esc(r.entidad)}. ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.titulo)}</a>` : esc(r.titulo)}. <span class="fecha">${r.tipo ? esc(r.tipo) + ", " : ""}consultado el ${esc(r.fecha_consulta)}</span></li>`;
     }).join("");
     document.querySelectorAll("[data-ref]").forEach((el) => {
       el.outerHTML = llamadas(el.getAttribute("data-ref").split(/[\s,]+/));
@@ -393,8 +394,8 @@
     opcionesSelect($("#f-familia"), ["a_etiqueta", "b_pantalla"], { a_etiqueta: "(a) etiqueta sin pantalla", b_pantalla: "(b) con pantalla propia" });
 
     const chips = $("#f-capas");
-    chips.innerHTML = `<button class="chip" type="button" data-capa="__todas" aria-pressed="false">Todas</button>` +
-      Object.entries(CAPAS).map(([k, c]) => `<button class="chip" type="button" data-capa="${k}" aria-pressed="true"><span class="punto" style="background:${c.color}"></span>${c.nombre} <span class="ausente">${eq.filter((e) => e.capa === k).length}</span></button>`).join("");
+    chips.innerHTML = `<button class="capa-btn" type="button" data-capa="__todas" aria-pressed="false">Todas</button>` +
+      Object.entries(CAPAS).map(([k, c]) => `<button class="capa-btn" type="button" data-capa="${k}" aria-pressed="true"><span class="franja" style="background:${c.color}"></span>${c.nombre} <span class="n">${eq.filter((e) => e.capa === k).length}</span></button>`).join("");
     chips.addEventListener("click", (ev) => {
       const b = ev.target.closest("[data-capa]");
       if (!b) return;
@@ -500,6 +501,8 @@
     pintarCambios();
     pintarMercado();
     actualizar();
+    // La tabla se pinta después de cargar el JSON y desplaza las secciones: rehacer el salto al ancla.
+    if (location.hash) { const d = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (d) d.scrollIntoView(); }
   }
 
   try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch (_) { /* sin almacenamiento */ }
