@@ -137,24 +137,39 @@
   },
   "aliexpress": {
    "fecha": "2026-09-30",
-   "metodo": "Fichas leídas con el navegador del responsable, sin iniciar sesión. Solo tiendas oficiales de cada fabricante, variante de 902-928 MHz elegida en la ficha. AliExpress pidió CAPTCHA a mitad de la revisión y ahí se detuvo.",
+   "metodo": "Fichas leídas con el navegador del responsable, sin iniciar sesión, el 30-sep-2026. Se usan las tiendas oficiales de cada fabricante y se elige en la ficha la variante de 902-928 MHz. Seeed: la tienda oficial es la 1103741821, a la que lleva seeedstudio.aliexpress.com; la SeeedStudio Professional Store no se pudo confirmar como oficial y va marcada. Todas las lecturas se repitieron con un lector que toma solo el precio principal de la ficha.",
    "tiendas": {
     "lilygo Official Store": "https://es.aliexpress.com/store/2090076",
     "ELECROW Official Store": "https://es.aliexpress.com/store/1306340",
     "Tienda oficial RAK": "https://es.aliexpress.com/store/2805180",
-    "Heltec Automation Official Store": "https://es.aliexpress.com/store/3213115"
+    "Heltec Automation Official Store": "https://es.aliexpress.com/store/3213115",
+    "M5Stack Official Store": "https://es.aliexpress.com/store/911661199",
+    "Seeedstudio AI Hardware Store": "https://es.aliexpress.com/store/1103741821"
    },
-   "sin_tienda_oficial_hallada": [
-    "Seeed Studio",
-    "M5Stack"
-   ],
+   "sin_tienda_oficial_hallada": [],
    "revendedores_descartados": [
     "Wildgameplus Official Store",
     "KEEPTEEN Store",
     "ChipBoard Discount Store",
     "Wirelessmax Store",
     "Ansiki E-Hive Store",
-    "Nuhybrid Store"
+    "Nuhybrid Store",
+    "Chip suppliers Store",
+    "Tienda oficial KEEPTEEN",
+    "ChipBoard Development Store",
+    "Tienda Internet de las cosas DIY"
+   ],
+   "tiendas_sin_confirmar": {
+    "SeeedStudio Professional Store": "https://es.aliexpress.com/store/1104659138"
+   },
+   "no_hallados_en_tienda_oficial": [
+    "Heltec MeshPocket",
+    "Heltec Mesh Node T114",
+    "LilyGO T-Beam Supreme",
+    "LilyGO T-Deck Pro",
+    "LilyGO T-Echo Lite",
+    "LilyGO T-Echo Card",
+    "Elecrow ThinkNode M3, M6 y M9 (solo revendedores)"
    ]
   }
  },
@@ -359,7 +374,21 @@
    },
    "imagen": "assets/img/seeed-studio-xiao-nrf52840-wio-sx1262-kit-for-meshtastic.jpg",
    "imagen_fuente": "https://www.seeedstudio.com/XIAO-nRF52840-Wio-SX1262-Kit-for-Meshtastic-p-6400.html",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005008760784706.html",
+    "tienda": "Seeedstudio AI Hardware Store",
+    "tienda_url": "https://es.aliexpress.com/store/1103741821",
+    "oficial": true,
+    "precio_usd": 11.29,
+    "envio": "pago",
+    "envio_usd": 7.6,
+    "total_usd": 18.89,
+    "variante": "1 PCS",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": "https://es.aliexpress.com/store/1103741821"
   },
   {
    "id": "heltec-wireless-stick-lite",
@@ -519,7 +548,8 @@
     "total_usd": 18.98,
     "variante": "SX1262 (915MHz)",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -596,7 +626,8 @@
     "total_usd": 26.13,
     "variante": "902-928MHz, 1 pieza",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/3213115"
   },
@@ -824,7 +855,8 @@
     "total_usd": 26.74,
     "variante": "863-928MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/3213115"
   },
@@ -912,7 +944,8 @@
     "total_usd": 27.95,
     "variante": "863-928MHz, sin GPS",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/3213115"
   },
@@ -1281,7 +1314,21 @@
    },
    "imagen": "assets/img/m5stack-c6l-unit-for-meshtastic.jpg",
    "imagen_fuente": "https://shop.m5stack.com/products/m5stack-c6l-unit-for-meshtastic-sx1262-esp32-c6",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005010115125833.html",
+    "tienda": "M5Stack Official Store",
+    "tienda_url": "https://es.aliexpress.com/store/911661199",
+    "oficial": true,
+    "precio_usd": 18.9,
+    "envio": "pago",
+    "envio_usd": 7.25,
+    "total_usd": 26.15,
+    "variante": "única variante",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": "https://es.aliexpress.com/store/911661199"
   },
   {
    "id": "lilygo-t3-s3-e-paper",
@@ -1497,7 +1544,8 @@
     "total_usd": 28.78,
     "variante": "900MHz None, Base Board n Mods 6 por defecto",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -1751,7 +1799,8 @@
     "total_usd": 37.83,
     "variante": "Antena de 915MHz (11cm), T-Beam V1.2",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -1828,7 +1877,8 @@
     "total_usd": 39.63,
     "variante": "863-928MHz, antena de resorte",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/3213115"
   },
@@ -1924,7 +1974,8 @@
     "total_usd": 46.77,
     "variante": "863-928MHz, 1 pieza",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/3213115"
   },
@@ -2150,7 +2201,21 @@
    },
    "imagen": "assets/img/seeed-studio-sensecap-solar-node-p1.jpg",
    "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-for-Meshtastic-LoRa-p-6425.html",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005009296831256.html",
+    "tienda": "SeeedStudio Professional Store",
+    "tienda_url": "https://es.aliexpress.com/store/1104659138",
+    "oficial": false,
+    "precio_usd": 73.82,
+    "envio": "pago",
+    "envio_usd": 50.07,
+    "total_usd": 123.89,
+    "variante": "P1",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": null
   },
   {
    "id": "elecrow-thinknode-m6",
@@ -2340,7 +2405,8 @@
     "total_usd": 121.63,
     "variante": "RAK10729-nGPS-9xx",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -2595,7 +2661,8 @@
     "total_usd": 120.73,
     "variante": "Model2-9XXMHz-US",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -2671,7 +2738,21 @@
    },
    "imagen": "assets/img/seeed-studio-sensecap-solar-node-p1-pro.jpg",
    "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005009301480801.html",
+    "tienda": "SeeedStudio Professional Store",
+    "tienda_url": "https://es.aliexpress.com/store/1104659138",
+    "oficial": false,
+    "precio_usd": 96.05,
+    "envio": "pago",
+    "envio_usd": 59.47,
+    "total_usd": 155.52,
+    "variante": "P1 Pro",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": null
   },
   {
    "id": "heltec-meshtower-v2-30dbm-outdoor-lora-node",
@@ -2989,7 +3070,21 @@
    "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html",
    "fcc_id": "Z4T-T1000-E",
    "tx_fcc_dbm": 20.8,
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005009523863087.html",
+    "tienda": "Seeedstudio AI Hardware Store",
+    "tienda_url": "https://es.aliexpress.com/store/1103741821",
+    "oficial": true,
+    "precio_usd": 54.36,
+    "envio": "pago",
+    "envio_usd": 6.41,
+    "total_usd": 60.77,
+    "variante": "T1000 E (Meshtastic), 868/915 en la misma variante",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": "https://es.aliexpress.com/store/1103741821"
   },
   {
    "id": "lilygo-t-watch-s3",
@@ -3098,7 +3193,8 @@
     "total_usd": 48.17,
     "variante": "SX1262 915MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -3173,7 +3269,21 @@
    },
    "imagen": "assets/img/m5stack-cardputer-mesh-kit-for-meshtastic.jpg",
    "imagen_fuente": "https://shop.m5stack.com/products/cardputer-mesh-kit-for-meshtastic-esp32-s3",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005012208419415.html",
+    "tienda": "M5Stack Official Store",
+    "tienda_url": "https://es.aliexpress.com/store/911661199",
+    "oficial": true,
+    "precio_usd": 44.0,
+    "envio": "pago",
+    "envio_usd": 10.42,
+    "total_usd": 54.42,
+    "variante": "única variante",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": "https://es.aliexpress.com/store/911661199"
   },
   {
    "id": "lilygo-t-echo",
@@ -3267,7 +3377,8 @@
     "total_usd": null,
     "variante": "915 megahercios",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -3437,7 +3548,8 @@
     "total_usd": 96.22,
     "variante": "915MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/1306340"
   },
@@ -3637,7 +3749,8 @@
     "total_usd": 88.63,
     "variante": "915MHz Ublox GNSS",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -3723,7 +3836,8 @@
     "total_usd": 95.56,
     "variante": "sin selector de banda",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -3835,7 +3949,8 @@
     "total_usd": null,
     "variante": "SX1262(915MHz)",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -4032,12 +4147,13 @@
     "tienda": "Tienda oficial RAK",
     "tienda_url": "https://es.aliexpress.com/store/2805180",
     "precio_usd": 28.0,
-    "envio": null,
-    "envio_usd": null,
-    "total_usd": null,
+    "envio": "pago",
+    "envio_usd": 7.79,
+    "total_usd": 35.79,
     "variante": "variante por defecto de la ficha",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -4197,7 +4313,8 @@
     "total_usd": 42.79,
     "variante": "sin selector de banda",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -4304,7 +4421,8 @@
     "total_usd": 67.76,
     "variante": "900MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -4377,12 +4495,13 @@
     "tienda": "Tienda oficial RAK",
     "tienda_url": "https://es.aliexpress.com/store/2805180",
     "precio_usd": 105.0,
-    "envio": null,
-    "envio_usd": null,
-    "total_usd": null,
-    "variante": "sin selector de banda, color negro",
+    "envio": "pago",
+    "envio_usd": 19.75,
+    "total_usd": 124.75,
+    "variante": "900MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2805180"
   },
@@ -4829,7 +4948,21 @@
    "imagen_fuente": "https://www.elecrow.com/thinknode-m5-meshtastic-lora-signal-transceiver-esp32-s3-1-54-screen-gps-function.html",
    "fcc_id": "2BDNA-TNMS-ELE",
    "fcc_nota": "Certificado junto con el M1 bajo la regla 15.249, que mide intensidad de campo y no publica potencia conducida.",
-   "pais_fabricante": "China"
+   "pais_fabricante": "China",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005010302916248.html",
+    "tienda": "ELECROW Official Store",
+    "tienda_url": "https://es.aliexpress.com/store/1306340",
+    "oficial": true,
+    "precio_usd": 77.4,
+    "envio": "pago",
+    "envio_usd": 3.87,
+    "total_usd": 81.27,
+    "variante": "915MHz",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   },
+   "aliexpress_tienda": "https://es.aliexpress.com/store/1306340"
   },
   {
    "id": "thinknode-m9",
@@ -5466,7 +5599,8 @@
     "total_usd": null,
     "variante": "LoRa 915MHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    },
    "aliexpress_tienda": "https://es.aliexpress.com/store/2090076"
   },
@@ -8369,7 +8503,8 @@
     "total_usd": 61.22,
     "variante": "915 megahercios",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    }
   },
   {
@@ -10851,12 +10986,13 @@
     "tienda": "Tienda oficial RAK",
     "tienda_url": "https://es.aliexpress.com/store/2805180",
     "precio_usd": 35.0,
-    "envio": null,
-    "envio_usd": null,
-    "total_usd": null,
+    "envio": "pago",
+    "envio_usd": 7.79,
+    "total_usd": 42.79,
     "variante": "Battery Powered-9XX",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    }
   },
   {
@@ -10938,12 +11074,13 @@
     "tienda": "Tienda oficial RAK",
     "tienda_url": "https://es.aliexpress.com/store/2805180",
     "precio_usd": 32.97,
-    "envio": null,
-    "envio_usd": null,
-    "total_usd": null,
+    "envio": "pago",
+    "envio_usd": 13.77,
+    "total_usd": 46.74,
     "variante": "Modelo1-Tipo1-9XXMHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    }
   },
   {
@@ -11032,12 +11169,13 @@
     "tienda": "Tienda oficial RAK",
     "tienda_url": "https://es.aliexpress.com/store/2805180",
     "precio_usd": 55.97,
-    "envio": null,
-    "envio_usd": null,
-    "total_usd": null,
+    "envio": "pago",
+    "envio_usd": 13.77,
+    "total_usd": 69.74,
     "variante": "Module1-Type1-9XXMHz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    }
   },
   {
@@ -13468,7 +13606,7 @@
    "equivalentes": "Cardputer Mesh Kit (ya en catálogo, 48,00, trae Cardputer Adv más esta Cap)",
    "notas": "La banda publicada termina en 923 MHz, así que no cubre 923-928 MHz. Antena de 3 dBi incluida. Reemplaza a la LoRa+GPS Cap marcada EOL.",
    "contradiccion": "La descripción de la ficha dice LoRa maximum transmission power: +20 dBm y la tabla de especificaciones de la misma ficha dice +22dBm.",
-   "aliexpress_tienda": "https://m5stack.aliexpress.com/store/911661199",
+   "aliexpress_tienda": "https://es.aliexpress.com/store/911661199",
    "nuevo": true,
    "procedencia": "verificado (investigación del 30-sep-2026)",
    "colombia": {
@@ -13513,7 +13651,20 @@
     }
    },
    "imagen": "assets/img/m5stack-cap-lora-1262-cardputer-adv.jpg",
-   "imagen_fuente": "https://cdn.shopify.com/s/files/1/0056/7689/2250/files/1_d1a8dabd-046d-44fc-8ad3-a22f784133a6.webp?v=1766657309"
+   "imagen_fuente": "https://cdn.shopify.com/s/files/1/0056/7689/2250/files/1_d1a8dabd-046d-44fc-8ad3-a22f784133a6.webp?v=1766657309",
+   "aliexpress": {
+    "url": "https://es.aliexpress.com/item/1005010653242467.html",
+    "tienda": "M5Stack Official Store",
+    "tienda_url": "https://es.aliexpress.com/store/911661199",
+    "oficial": true,
+    "precio_usd": 10.5,
+    "envio": "pago",
+    "envio_usd": 4.96,
+    "total_usd": 15.46,
+    "variante": "Cap LoRa-1262",
+    "fecha": "2026-09-30",
+    "destino": "Colombia (destino que detecta AliExpress)"
+   }
   },
   {
    "id": "heltec-antena-blanda-sma-aliexpress",
@@ -13558,7 +13709,8 @@
     "total_usd": 7.77,
     "variante": "1Pc 902-928Mhz",
     "fecha": "2026-09-30",
-    "destino": "Colombia (destino que detecta AliExpress)"
+    "destino": "Colombia (destino que detecta AliExpress)",
+    "oficial": true
    }
   }
  ],

@@ -57,7 +57,7 @@ if ali:
     for e in ali:
         a = e["aliexpress"]
         envio = {"gratis": "gratis", "no se envía a Colombia": "no se envía"}.get(a.get("envio"), f"USD {a['envio_usd']:.2f}" if isinstance(a.get("envio_usd"), (int, float)) else "Sin dato")
-        out.append(f"| {celda(e['modelo'])} | {celda(a.get('tienda'))} | {a['precio_usd']:.2f} | {envio} | {celda(a.get('variante'))} | [{a['fecha']}]({a['url']}) |")
+        out.append(f"| {celda(e['modelo'])} | {celda(a.get('tienda'))}{'' if a.get('oficial', True) else ' (sin confirmar como oficial)'} | {a['precio_usd']:.2f} | {envio} | {celda(a.get('variante'))} | [{a['fecha']}]({a['url']}) |")
     out.append("")
 
 contra = [e for e in d["equipos"] if e.get("contradiccion")]

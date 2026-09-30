@@ -103,6 +103,7 @@
     r.ali = ali && esNum(ali.precio_usd) ? ali : null;
     r.aliEnvio = r.ali ? { gratis: "Envío gratis a Colombia", pago: `Envío a Colombia ${usd(ali.envio_usd)}`, "no se envía a Colombia": "No se envía a Colombia" }[ali.envio] || "Envío sin dato" : null;
     r.aliTotal = r.ali && esNum(ali.total_usd) ? ali.total_usd : null;
+    if (r.ali && ali.oficial === false) r.aliEnvio += ". Tienda no confirmada como oficial";
     r.chip = [e.mcu_familia && !e.mcu_familia.startsWith("otro") ? e.mcu_familia : null, e.radio_familia && !e.radio_familia.startsWith("otro") ? e.radio_familia : null].filter(Boolean).join(" y ") || null;
     r.dimensiones = e.dimensiones_mm ? primeraFrase(e.dimensiones_mm, 30).replace(/\s*x\s*/gi, " × ") : null;
     return r;
@@ -257,7 +258,7 @@
         `<span class="num">${usd(e.precio_anterior_usd)}</span><span class="sub">${!esNum(e.cambio_pct) ? "no comparable" : e.cambio_pct === 0 ? "sin cambio" : e.cambio_pct < 0 ? `bajó ${n(-e.cambio_pct, 1)} %` : `subió ${n(e.cambio_pct, 1)} %`}</span>` },
       { t: "Vendedor", det: true, v: (e) => texto(e.vendedor, 60) },
       { t: "País del fabricante", v: (e) => (e.pais_fabricante ? esc(e.pais_fabricante) : SD) },
-      { t: "En AliExpress, tienda oficial", mejor: (e) => (e.r.aliTotal === null ? null : -e.r.aliTotal), v: (e) => e.r.ali ? `<a class="precio" href="${esc(e.r.ali.url)}" target="_blank" rel="noopener">${usd(e.r.ali.precio_usd)}</a><span class="sub">${esc(e.r.aliEnvio)}</span>` : SD },
+      { t: "En AliExpress", mejor: (e) => (e.r.aliTotal === null ? null : -e.r.aliTotal), v: (e) => e.r.ali ? `<a class="precio" href="${esc(e.r.ali.url)}" target="_blank" rel="noopener">${usd(e.r.ali.precio_usd)}</a><span class="sub">${esc(e.r.aliEnvio)}</span>` : SD },
       { t: "Total en AliExpress con envío", det: true, mejor: (e) => (e.r.aliTotal === null ? null : -e.r.aliTotal), v: (e) => (e.r.aliTotal !== null ? `<span class="num">${usd(e.r.aliTotal)}</span><span class="sub">${esc(e.r.ali.variante)}</span>` : e.r.ali ? `<span class="sin-dato">${esc(e.r.aliEnvio)}</span>` : SD) },
       { t: "Tienda oficial en AliExpress", det: true, v: (e) => (e.aliexpress_tienda ? `<a href="${esc(e.aliexpress_tienda)}" target="_blank" rel="noopener">Abrir la tienda</a>` : SD) },
     ] },

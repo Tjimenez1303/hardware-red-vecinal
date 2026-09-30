@@ -373,7 +373,7 @@
         <span class="fab">${esc(e.fabricante)}${e.pais_fabricante ? `, ${esc(e.pais_fabricante)}` : ""}</span>
         <h2><button type="button" class="abrir-ficha" data-ficha="${esc(e.id)}">${esc(nombre(e))}</button></h2>
         <span class="res">${esc(resumen(e)) || "&nbsp;"}</span>
-        ${e.r.ali ? `<span class="ali">AliExpress ${usd(e.r.ali.precio_usd)}, ${esc(e.r.aliEnvio.replace(" a Colombia", "").toLowerCase())}</span>` : ""}
+        ${e.r.ali ? `<span class="ali">AliExpress ${usd(e.r.ali.precio_usd)}, ${({ gratis: "envío gratis", pago: `envío ${usd(e.r.ali.envio_usd)}`, "no se envía a Colombia": "no se envía a Colombia" })[e.r.ali.envio] || "envío sin dato"}</span>` : ""}
         <div class="pie">
           ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato">Sin dato</span>`}
           <label class="comparar"><input type="checkbox" data-id="${esc(e.id)}" ${marcado ? "checked" : ""} ${lleno ? "disabled" : ""}> Comparar</label>

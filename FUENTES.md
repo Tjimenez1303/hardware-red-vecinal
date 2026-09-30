@@ -631,35 +631,43 @@ Huecos de la ficha que se llenaron con otra fuente. La columna de condiciones di
 
 ## Precios en AliExpress
 
-Fichas leídas con el navegador del responsable, sin iniciar sesión. Solo tiendas oficiales de cada fabricante, variante de 902-928 MHz elegida en la ficha. AliExpress pidió CAPTCHA a mitad de la revisión y ahí se detuvo.
+Fichas leídas con el navegador del responsable, sin iniciar sesión, el 30-sep-2026. Se usan las tiendas oficiales de cada fabricante y se elige en la ficha la variante de 902-928 MHz. Seeed: la tienda oficial es la 1103741821, a la que lleva seeedstudio.aliexpress.com; la SeeedStudio Professional Store no se pudo confirmar como oficial y va marcada. Todas las lecturas se repitieron con un lector que toma solo el precio principal de la ficha.
 
 | Equipo | Tienda | Precio USD | Envío a Colombia | Variante | Ficha |
 |---|---|---|---|---|---|
+| XIAO nRF52840 & Wio-SX1262 Kit for Meshtastic | Seeedstudio AI Hardware Store | 11.29 | USD 7.60 | 1 PCS | [2026-09-30](https://es.aliexpress.com/item/1005008760784706.html) |
 | T3-S3 V1.3 | lilygo Official Store | 18.98 | gratis | SX1262 (915MHz) | [2026-09-30](https://es.aliexpress.com/item/1005004627139838.html) |
 | Wireless Paper | Heltec Automation Official Store | 26.13 | gratis | 902-928MHz, 1 pieza | [2026-09-30](https://es.aliexpress.com/item/1005005647926628.html) |
 | WiFi LoRa 32 (V3 / V3.2) | Heltec Automation Official Store | 26.74 | gratis | 863-928MHz | [2026-09-30](https://es.aliexpress.com/item/1005007593651536.html) |
 | WiFi LoRa 32 (V4.3 / V4.3.1) | Heltec Automation Official Store | 27.95 | gratis | 863-928MHz, sin GPS | [2026-09-30](https://es.aliexpress.com/item/1005011870647672.html) |
+| C6L Unit for Meshtastic | M5Stack Official Store | 18.90 | USD 7.25 | única variante | [2026-09-30](https://es.aliexpress.com/item/1005010115125833.html) |
 | WisBlock Meshtastic Starter Kit (RAK4631+RAK19007) | Tienda oficial RAK | 20.99 | USD 7.79 | 900MHz None, Base Board n Mods 6 por defecto | [2026-09-30](https://es.aliexpress.com/item/1005006901039995.html) |
 | T-Beam (clasico) | lilygo Official Store | 36.98 | USD 0.85 | Antena de 915MHz (11cm), T-Beam V1.2 | [2026-09-30](https://es.aliexpress.com/item/4001178678568.html) |
 | Wireless Tracker V2 | Heltec Automation Official Store | 39.63 | gratis | 863-928MHz, antena de resorte | [2026-09-30](https://es.aliexpress.com/item/1005012052953799.html) |
 | Mesh Node T096 | Heltec Automation Official Store | 46.77 | gratis | 863-928MHz, 1 pieza | [2026-09-30](https://es.aliexpress.com/item/1005012144065046.html) |
+| SenseCAP Solar Node P1 | SeeedStudio Professional Store (sin confirmar como oficial) | 73.82 | USD 50.07 | P1 | [2026-09-30](https://es.aliexpress.com/item/1005009296831256.html) |
 | WisMesh Repeater Mini V2 (RAK10728/RAK10729) | Tienda oficial RAK | 95.90 | USD 25.73 | RAK10729-nGPS-9xx | [2026-09-30](https://es.aliexpress.com/item/1005012968083997.html) |
 | WisMesh Repeater (RAK10721), sin kit solar | Tienda oficial RAK | 95.00 | USD 25.73 | Model2-9XXMHz-US | [2026-09-30](https://es.aliexpress.com/item/1005008579973254.html) |
+| SenseCAP Solar Node P1-Pro | SeeedStudio Professional Store (sin confirmar como oficial) | 96.05 | USD 59.47 | P1 Pro | [2026-09-30](https://es.aliexpress.com/item/1005009301480801.html) |
+| SenseCAP Card Tracker T1000-E | Seeedstudio AI Hardware Store | 54.36 | USD 6.41 | T1000 E (Meshtastic), 868/915 en la misma variante | [2026-09-30](https://es.aliexpress.com/item/1005009523863087.html) |
 | T-Watch S3 | lilygo Official Store | 45.34 | USD 2.83 | SX1262 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005005642999869.html) |
+| Cardputer Mesh Kit for Meshtastic | M5Stack Official Store | 44.00 | USD 10.42 | única variante | [2026-09-30](https://es.aliexpress.com/item/1005012208419415.html) |
 | T-Echo (Meshtastic) | lilygo Official Store | 61.98 | no se envía | 915 megahercios | [2026-09-30](https://es.aliexpress.com/item/1005003026107533.html) |
 | ThinkNode M1 | ELECROW Official Store | 80.07 | USD 16.15 | 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005008707135974.html) |
 | T-Deck Plus Meshtastic | lilygo Official Store | 82.98 | USD 5.65 | 915MHz Ublox GNSS | [2026-09-30](https://es.aliexpress.com/item/1005007568074083.html) |
 | WisMesh Pocket V2 (RAK10709) | Tienda oficial RAK | 87.77 | USD 7.79 | sin selector de banda | [2026-09-30](https://es.aliexpress.com/item/1005008274198434.html) |
 | T-Lora Pager Meshtastic | lilygo Official Store | 95.98 | no se envía | SX1262(915MHz) | [2026-09-30](https://es.aliexpress.com/item/1005009782586146.html) |
-| WisMesh Unify Enclosure 100x75x38mm, con panel solar y antena integrada 902-928 MHz | Tienda oficial RAK | 28.00 | Sin dato | variante por defecto de la ficha | [2026-09-30](https://es.aliexpress.com/item/1005005145247101.html) |
+| WisMesh Unify Enclosure 100x75x38mm, con panel solar y antena integrada 902-928 MHz | Tienda oficial RAK | 28.00 | USD 7.79 | variante por defecto de la ficha | [2026-09-30](https://es.aliexpress.com/item/1005005145247101.html) |
 | WisMesh Tag | Tienda oficial RAK | 35.00 | USD 7.79 | sin selector de banda | [2026-09-30](https://es.aliexpress.com/item/1005009754254701.html) |
 | WisMesh Pocket Mini | Tienda oficial RAK | 59.97 | USD 7.79 | 900MHz | [2026-09-30](https://es.aliexpress.com/item/1005008184475582.html) |
-| WisMesh TAP V2 | Tienda oficial RAK | 105.00 | Sin dato | sin selector de banda, color negro | [2026-09-30](https://es.aliexpress.com/item/1005010777776431.html) |
+| WisMesh TAP V2 | Tienda oficial RAK | 105.00 | USD 19.75 | 900MHz | [2026-09-30](https://es.aliexpress.com/item/1005010777776431.html) |
+| ThinkNode M5 | ELECROW Official Store | 77.40 | USD 3.87 | 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005010302916248.html) |
 | T-Deck (original, sin Plus) | lilygo Official Store | 55.98 | no se envía | LoRa 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005005692235592.html) |
 | T-Beam 1W (Meshtastic) | lilygo Official Store | 56.98 | USD 4.24 | 915 megahercios | [2026-09-30](https://es.aliexpress.com/item/1005010741190479.html) |
-| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | Tienda oficial RAK | 35.00 | Sin dato | Battery Powered-9XX | [2026-09-30](https://es.aliexpress.com/item/1005012898074933.html) |
-| WisMesh Board ONE | Tienda oficial RAK | 32.97 | Sin dato | Modelo1-Tipo1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005002326265820.html) |
-| WisMesh Board ONE Pocket | Tienda oficial RAK | 55.97 | Sin dato | Module1-Type1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005009545369380.html) |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | Tienda oficial RAK | 35.00 | USD 7.79 | Battery Powered-9XX | [2026-09-30](https://es.aliexpress.com/item/1005012898074933.html) |
+| WisMesh Board ONE | Tienda oficial RAK | 32.97 | USD 13.77 | Modelo1-Tipo1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005002326265820.html) |
+| WisMesh Board ONE Pocket | Tienda oficial RAK | 55.97 | USD 13.77 | Module1-Type1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005009545369380.html) |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | M5Stack Official Store | 10.50 | USD 4.96 | Cap LoRa-1262 | [2026-09-30](https://es.aliexpress.com/item/1005010653242467.html) |
 | Antena blanda SMA 902-928 MHz, 17 cm | Heltec Automation Official Store | 7.77 | gratis | 1Pc 902-928Mhz | [2026-09-30](https://es.aliexpress.com/item/1005008783472623.html) |
 
 ## Contradicciones entre fuentes
