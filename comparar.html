@@ -211,7 +211,7 @@
   new IntersectionObserver(([en]) => { const v = !en.isIntersecting && en.boundingClientRect.top < 0; fijo.classList.toggle("visible", v); fijo.setAttribute("aria-hidden", String(!v)); }, { threshold: 0 })
     .observe(document.getElementById("cabeza"));
 
-  document.getElementById("pie").textContent = `Precios de lista en USD, sin importación, consultados el ${RV.fecha(d.meta.fecha_datos)} en la tienda de cada fabricante. El origen de cada dato está en FUENTES.md del repositorio.`;
+  document.getElementById("pie").textContent = `Precios de lista en USD, sin importación, consultados del ${RV.fecha(d.meta.fecha_datos)} en la tienda de cada fabricante. El origen de cada dato está en FUENTES.md del repositorio.`;
   pintar();
 })();
 </script>

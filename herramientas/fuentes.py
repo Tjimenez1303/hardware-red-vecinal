@@ -49,6 +49,17 @@ for e in d["equipos"]:
         out.append(f"| {celda(e['modelo'])} | {CAMPOS.get(campo, campo)} | {celda(e.get(campo))} | [enlace]({f.get('url')}) | {celda(f.get('tipo_fuente'))} | {celda(f.get('condiciones'))} |")
 out.append("")
 
+ali = [e for e in d["equipos"] if e.get("aliexpress")]
+if ali:
+    info = m.get("aliexpress", {})
+    out += ["## Precios en AliExpress", "", info.get("metodo", ""), "",
+            "| Equipo | Tienda | Precio USD | Envío a Colombia | Variante | Ficha |", "|---|---|---|---|---|---|"]
+    for e in ali:
+        a = e["aliexpress"]
+        envio = {"gratis": "gratis", "no se envía a Colombia": "no se envía"}.get(a.get("envio"), f"USD {a['envio_usd']:.2f}" if isinstance(a.get("envio_usd"), (int, float)) else "Sin dato")
+        out.append(f"| {celda(e['modelo'])} | {celda(a.get('tienda'))} | {a['precio_usd']:.2f} | {envio} | {celda(a.get('variante'))} | [{a['fecha']}]({a['url']}) |")
+    out.append("")
+
 contra = [e for e in d["equipos"] if e.get("contradiccion")]
 out += ["## Contradicciones entre fuentes", "", "Se muestran tal cual. No se eligió una de las dos.", ""]
 out += [f"- **{e['fabricante']} {e['modelo']}.** {e['contradiccion']}" for e in contra]

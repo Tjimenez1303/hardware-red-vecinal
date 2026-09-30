@@ -32,6 +32,7 @@
   .item .fab { font-size: 12.5px; color: var(--ink-3); }
   .item h2 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.3; }
   .item .res { font-size: 13.5px; color: var(--ink-2); }
+  .item .ali { font-size: 12.5px; color: var(--ink-3); }
   .item .pie { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
   .item .precio { font-size: 16px; }
   .comparar { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
@@ -249,9 +250,11 @@
     teclado: { t: "Teclado", v: (e) => e.r.teclado, capas: ["portatil"], si: "Con teclado", no: "Sin teclado" },
     gps: { t: "GPS", v: (e) => e.r.gps, capas: ["portatil"], si: "Con GPS", no: "Sin GPS" },
     reemplazable: { t: "Batería reemplazable", v: (e) => e.r.reemplazable, capas: ["portatil", "fija"], si: "Batería reemplazable", no: "Batería fija" },
+    aliexpress: { t: "En AliExpress con envío a Colombia", v: (e) => (e.r.ali ? e.r.ali.envio === "gratis" || e.r.ali.envio === "pago" : null), capas: TODAS, si: "En AliExpress con envío a Colombia", no: "Sin envío a Colombia en AliExpress" },
     banda: { t: "Toda la banda 915 a 928", v: (e) => e.r.banda, capas: ["portatil", "fija", "modulo"], si: "Cubre 915 a 928 MHz", no: "No cubre 915 a 928 MHz" },
   };
   const aplica = (capas) => capas.includes(estado.capa);
+  const paisesDeCapa = () => [...new Set(eq.filter((e) => e.capa === estado.capa).map((e) => e.pais_fabricante || "Sin dato"))].sort((a, b) => a.localeCompare(b, "es"));
   const fabsDeCapa = () => [...new Set(eq.filter((e) => e.capa === estado.capa).map((e) => e.fabricante))].sort((a, b) => a.localeCompare(b, "es"));
 
   // Una condición: {k, min, max} numérica, {k:"ip", min}, {k:<bool>, v:true|false} o {k:"fab", v:[...]}.
@@ -264,6 +267,7 @@
     if (c.k === "ip") { const v = IP_V(e); return v === null ? estado.sinDato : v >= c.min; }
     if (BOOL[c.k]) { const v = BOOL[c.k].v(e); return v === null ? estado.sinDato : v === c.v; }
     if (c.k === "fab") return c.v.includes(e.fabricante);
+    if (c.k === "pais") return c.v.includes(e.pais_fabricante || "Sin dato");
     return true;
   }
   const num = (v, u) => (u === "USD" ? usd(v, v % 1 ? 2 : 0) : `${n(v, 1)} ${u}`);
@@ -276,9 +280,10 @@
     if (c.k === "ip") return IP_OPC.find(([v]) => v === c.min)[1].replace(" o más", "").replace(/^./, (x) => "Resiste " + x.toLowerCase()) + (c.min < 7 ? " o más" : "");
     if (BOOL[c.k]) return c.v ? BOOL[c.k].si : BOOL[c.k].no;
     if (c.k === "fab") return `Fabricante: ${c.v.join(", ")}`;
+    if (c.k === "pais") return `Hecho en ${c.v.join(" o ")}`;
     return "";
   }
-  const vigente = (c) => (NUM[c.k] ? aplica(NUM[c.k].capas) : c.k === "ip" ? aplica(IP_CAPAS) : BOOL[c.k] ? aplica(BOOL[c.k].capas) : c.k === "fab");
+  const vigente = (c) => (NUM[c.k] ? aplica(NUM[c.k].capas) : c.k === "ip" ? aplica(IP_CAPAS) : BOOL[c.k] ? aplica(BOOL[c.k].capas) : c.k === "fab" || c.k === "pais");
 
   // Operadores del buscador, al estilo de Gmail: precio<50 peso<=100 bateria>2000 ip>=6 tiene:pantalla sin:gps fabricante:rak
   const RE_OP = /(^|\s)([a-záéíóúñ]+)\s*(<=|>=|<|>|=|:)\s*([^\s]+)/gi;
@@ -298,6 +303,11 @@
       if ((k === "tiene" || k === "con" || k === "sin" || k === "no") && op === ":") {
         const b = Object.keys(BOOL).find((x) => x.startsWith(val.slice(0, 4)) || BOOL[x].t.toLowerCase().startsWith(val));
         if (b) { conds.push({ k: b, v: k === "tiene" || k === "con" }); return pre; }
+      }
+      if ((k === "pais" || k === "país" || k === "origen") && op === ":") {
+        const norm = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const ps = paisesDeCapa().filter((p) => norm(p).includes(norm(val)));
+        if (ps.length) { conds.push({ k: "pais", v: ps }); return pre; }
       }
       if ((k === "fabricante" || k === "marca") && op === ":") {
         const fs = fabsDeCapa().filter((f) => f.toLowerCase().includes(val));
@@ -360,9 +370,10 @@
       const aviso = e.disponibilidad === "agotado" ? "Agotado" : e.linea_base ? "Línea base del proyecto" : e.nuevo ? "Nuevo en el catálogo" : "";
       return `<li class="item">
         <button type="button" class="abrir-ficha" data-ficha="${esc(e.id)}" aria-label="Ver la ficha completa de ${esc(nombre(e))}" tabindex="-1"><div class="foto marco-foto">${aviso ? `<span class="aviso">${aviso}</span>` : ""}${foto(e)}</div></button>
-        <span class="fab">${esc(e.fabricante)}</span>
+        <span class="fab">${esc(e.fabricante)}${e.pais_fabricante ? `, ${esc(e.pais_fabricante)}` : ""}</span>
         <h2><button type="button" class="abrir-ficha" data-ficha="${esc(e.id)}">${esc(nombre(e))}</button></h2>
         <span class="res">${esc(resumen(e)) || "&nbsp;"}</span>
+        ${e.r.ali ? `<span class="ali">AliExpress ${usd(e.r.ali.precio_usd)}, ${esc(e.r.aliEnvio.replace(" a Colombia", "").toLowerCase())}</span>` : ""}
         <div class="pie">
           ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato">Sin dato</span>`}
           <label class="comparar"><input type="checkbox" data-id="${esc(e.id)}" ${marcado ? "checked" : ""} ${lleno ? "disabled" : ""}> Comparar</label>
@@ -450,9 +461,10 @@
       ${aplica(IP_CAPAS) ? `<div class="campo"><span><label for="f-ip">Agua y polvo</label></span><select id="f-ip">${IP_OPC.map(([v, t]) => `<option value="${v}" ${v === ip ? "selected" : ""}>${t}</option>`).join("")}</select></div>` : ""}
       ${bools.length ? `<div class="campo"><span>Tiene</span><div class="tris">${bools.map(([k, f]) => { const v = cond(k)?.v; return `<label><span>${f.t}</span><span class="tri" role="group" aria-label="${f.t}">
         <button type="button" data-b="${k}" data-v="" aria-pressed="${v === undefined}">Da igual</button><button type="button" data-b="${k}" data-v="1" aria-pressed="${v === true}">Sí</button><button type="button" data-b="${k}" data-v="0" aria-pressed="${v === false}">No</button></span></label>`; }).join("")}</div></div>` : ""}
+      <div class="campo"><span>País del fabricante</span><div class="fabs">${paisesDeCapa().map((p) => `<label><input type="checkbox" data-pais="${esc(p)}" ${(cond("pais")?.v || []).includes(p) ? "checked" : ""}>${esc(p)} <span class="cuenta">${eq.filter((e) => e.capa === estado.capa && (e.pais_fabricante || "Sin dato") === p).length}</span></label>`).join("")}</div></div>
       <div class="campo"><span>Fabricante</span><div class="fabs">${fabs.map((f) => `<label><input type="checkbox" data-fab="${esc(f)}" ${fabSel.includes(f) ? "checked" : ""}>${esc(f)} <span class="cuenta">${eq.filter((e) => e.capa === estado.capa && e.fabricante === f).length}</span></label>`).join("")}</div></div>
       <label class="sindato"><input type="checkbox" id="f-sindato" ${estado.sinDato ? "checked" : ""}> Incluir los equipos que no publican el dato</label>
-      <div class="pie-av"><p class="pista">También desde el buscador: <code>precio&lt;50</code> <code>peso&lt;100</code> <code>ip&gt;=6</code> <code>tiene:pantalla</code> <code>fabricante:rak</code> y Enter.</p>
+      <div class="pie-av"><p class="pista">También desde el buscador: <code>precio&lt;50</code> <code>peso&lt;100</code> <code>ip&gt;=6</code> <code>tiene:pantalla</code> <code>fabricante:rak</code> <code>pais:china</code> <code>tiene:aliexpress</code> y Enter.</p>
         <button type="button" class="borrar-av" data-limpiar>Borrar todo</button>
         <button type="button" class="btn btn-primario" data-aplicar></button></div>`;
     contarBorrador();
@@ -469,6 +481,8 @@
     panel.querySelectorAll('.tri button[aria-pressed="true"][data-v]:not([data-v=""])').forEach((b) => nuevo.push({ k: b.dataset.b, v: b.dataset.v === "1" }));
     const fabs = [...panel.querySelectorAll("[data-fab]:checked")].map((c) => c.dataset.fab);
     if (fabs.length) nuevo.push({ k: "fab", v: fabs });
+    const paises = [...panel.querySelectorAll("[data-pais]:checked")].map((c) => c.dataset.pais);
+    if (paises.length) nuevo.push({ k: "pais", v: paises });
     borrador = nuevo;
   }
   function contarBorrador() {
@@ -482,7 +496,7 @@
   function abrirPanel(foco) {
     borrador = estado.av.map((c) => ({ ...c }));
     pintarPanel(); panel.hidden = false; btnF.setAttribute("aria-expanded", "true");
-    const el = foco && (panel.querySelector(`[data-k="${foco}"]`) || panel.querySelector(`[data-b="${foco}"]`) || (foco === "ip" && panel.querySelector("#f-ip")) || (foco === "fab" && panel.querySelector("[data-fab]")));
+    const el = foco && (panel.querySelector(`[data-k="${foco}"]`) || panel.querySelector(`[data-b="${foco}"]`) || (foco === "ip" && panel.querySelector("#f-ip")) || (foco === "fab" && panel.querySelector("[data-fab]")) || (foco === "pais" && panel.querySelector("[data-pais]")));
     (el || panel.querySelector("input, select, button:not([data-cerrar])"))?.focus();
   }
   function cerrarPanel() { panel.hidden = true; btnF.setAttribute("aria-expanded", "false"); }
@@ -532,7 +546,7 @@
   document.getElementById("capas").addEventListener("click", (ev) => {
     const b = ev.target.closest("button"); if (!b) return;
     estado.capa = b.dataset.k; estado.filtros.clear();
-    estado.av = estado.av.filter((c) => vigente(c) && c.k !== "fab");
+    estado.av = estado.av.filter((c) => vigente(c) && c.k !== "fab" && c.k !== "pais");
     cerrarPanel(); pintarCapas(); pintarGrilla();
   });
   document.getElementById("filtros").addEventListener("click", (ev) => {

@@ -15,7 +15,15 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const esNum = (v) => typeof v === "number" && isFinite(v);
   const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
-  const fecha = (iso) => { if (!iso) return ""; const [a, m, d] = iso.split("-").map(Number); return `${d} ${MESES[m - 1]} ${a}`; };
+  // Acepta una fecha ISO o un rango «desde/hasta» del mismo mes: «29 al 30 sep 2026».
+  const fecha = (iso) => {
+    if (!iso) return "";
+    const [ini, fin] = String(iso).split("/");
+    const [a, m, d] = ini.split("-").map(Number);
+    if (!fin) return `${d} ${MESES[m - 1]} ${a}`;
+    const [a2, m2, d2] = fin.split("-").map(Number);
+    return a === a2 && m === m2 ? `${d} al ${d2} ${MESES[m - 1]} ${a}` : `${d} ${MESES[m - 1]} ${a} al ${d2} ${MESES[m2 - 1]} ${a2}`;
+  };
   const usd = (v, dec = 2) => esNum(v) ? "USD " + v.toLocaleString("es-CO", { minimumFractionDigits: dec, maximumFractionDigits: dec }) : "";
   const n = (v, dec = 0) => esNum(v) ? v.toLocaleString("es-CO", { maximumFractionDigits: dec }) : "";
   // Limpia texto de datos para pantalla: rangos con «a», sin guiones largos ni punto y coma.
@@ -52,12 +60,12 @@
     r.colombia = e.colombia?.estado === "si" ? true : e.colombia?.estado === "no" ? false : null;
     r.listo = e.meshtastic === "preflasheado" ? true : ["oficial", "comunidad"].includes(e.meshtastic) ? false : null;
     r.listoTexto = { preflasheado: "Llega con Meshtastic", oficial: "Se instala, soporte oficial", comunidad: "Se instala, soporte de la comunidad", no_corre: "No corre Meshtastic" }[e.meshtastic] || null;
-    const pant = (e.pantalla || "").toLowerCase();
+    const pant = String(e.pantalla ?? "").toLowerCase();
     r.pantalla = !pant ? null : /^ninguna/.test(pant) ? false : true;
     r.pantallaTexto = r.pantalla ? primeraFrase(e.pantalla, 34) : null;
-    const ent = (e.entrada || "").toLowerCase();
+    const ent = String(e.entrada ?? "").toLowerCase();
     r.teclado = /teclado|minitecado/.test(ent) ? true : ent ? false : (r.pantalla === false ? false : null);
-    const gps = (e.gps || "").toLowerCase();
+    const gps = String(e.gps ?? "").toLowerCase();
     r.gps = /^s[ií]/.test(gps) ? true : /^(no|opcional)/.test(gps) ? false : null;
     r.sinCelular = { no: "total", parcial: "lee", "sí": "nada" }[e.depende_celular] || null;
     const ip = String(e.grado_ip || "").match(/IP\s?([0-9X])([0-9])/i);
@@ -91,6 +99,10 @@
     r.reemplazable = /^s[ií]/.test(br) ? true : /^(no|parcial|con herramientas)/.test(br) ? false : null;
     r.reemplazableTexto = /^s[ií]/.test(br) ? "Sí, celda estándar" : /^(con herramientas|parcial)/.test(br) ? "Con herramientas" : /^no/.test(br) ? "No" : null;
     r.banda = banda915(e);
+    const ali = e.aliexpress;
+    r.ali = ali && esNum(ali.precio_usd) ? ali : null;
+    r.aliEnvio = r.ali ? { gratis: "Envío gratis a Colombia", pago: `Envío a Colombia ${usd(ali.envio_usd)}`, "no se envía a Colombia": "No se envía a Colombia" }[ali.envio] || "Envío sin dato" : null;
+    r.aliTotal = r.ali && esNum(ali.total_usd) ? ali.total_usd : null;
     r.chip = [e.mcu_familia && !e.mcu_familia.startsWith("otro") ? e.mcu_familia : null, e.radio_familia && !e.radio_familia.startsWith("otro") ? e.radio_familia : null].filter(Boolean).join(" y ") || null;
     r.dimensiones = e.dimensiones_mm ? primeraFrase(e.dimensiones_mm, 30).replace(/\s*x\s*/gi, " × ") : null;
     return r;
@@ -244,6 +256,10 @@
       { t: "Precio el 4 de septiembre", det: true, mejor: (e) => (esNum(e.cambio_pct) ? -e.cambio_pct : null), v: (e) => !esNum(e.precio_anterior_usd) ? SD :
         `<span class="num">${usd(e.precio_anterior_usd)}</span><span class="sub">${!esNum(e.cambio_pct) ? "no comparable" : e.cambio_pct === 0 ? "sin cambio" : e.cambio_pct < 0 ? `bajó ${n(-e.cambio_pct, 1)} %` : `subió ${n(e.cambio_pct, 1)} %`}</span>` },
       { t: "Vendedor", det: true, v: (e) => texto(e.vendedor, 60) },
+      { t: "País del fabricante", v: (e) => (e.pais_fabricante ? esc(e.pais_fabricante) : SD) },
+      { t: "En AliExpress, tienda oficial", mejor: (e) => (e.r.aliTotal === null ? null : -e.r.aliTotal), v: (e) => e.r.ali ? `<a class="precio" href="${esc(e.r.ali.url)}" target="_blank" rel="noopener">${usd(e.r.ali.precio_usd)}</a><span class="sub">${esc(e.r.aliEnvio)}</span>` : SD },
+      { t: "Total en AliExpress con envío", det: true, mejor: (e) => (e.r.aliTotal === null ? null : -e.r.aliTotal), v: (e) => (e.r.aliTotal !== null ? `<span class="num">${usd(e.r.aliTotal)}</span><span class="sub">${esc(e.r.ali.variante)}</span>` : e.r.ali ? `<span class="sin-dato">${esc(e.r.aliEnvio)}</span>` : SD) },
+      { t: "Tienda oficial en AliExpress", det: true, v: (e) => (e.aliexpress_tienda ? `<a href="${esc(e.aliexpress_tienda)}" target="_blank" rel="noopener">Abrir la tienda</a>` : SD) },
     ] },
     { titulo: "Frente a su capa", capas: TODAS, filas: [
       { t: "Puesto por precio", det: true, mejor: (e) => (e.r.puesto?.precio ? -e.r.puesto.precio.pos / e.r.puesto.precio.de : null), v: (e) => puesto(e, "precio", "más barato") },

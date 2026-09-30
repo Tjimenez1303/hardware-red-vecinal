@@ -66,6 +66,8 @@ documentos de `docs/`.
 | Equipos nuevos: 16 portátiles, 1 nodo fijo y 6 antenas | Investigación del 29-sep-2026 | 29-sep-2026 |
 | Huecos de ficha llenados con otra fuente | Wikis, manuales y directorios; cada uno anotado en `fuentes_campos` con URL, cita y condiciones | 29 y 30-sep-2026 |
 | Potencia certificada ante la FCC | Concesiones e informes de prueba en fccid.io, leídos con navegador | 30-sep-2026 |
+| 99 equipos nuevos de fabricantes de China, Hong Kong y Taiwán | Tiendas oficiales de LilyGO, Heltec, RAK, Seeed, Elecrow, M5Stack, Ebyte, Waveshare, DFRobot, MinewSemi, Meshnology y ALFA, leídas en vivo | 30-sep-2026 |
+| Precios en AliExpress | Tiendas oficiales de LilyGO, Heltec, RAK y Elecrow en AliExpress, con la variante de 902-928 MHz y el envío a Colombia, leídas con el navegador sin iniciar sesión | 30-sep-2026 |
 | Fotos | `og:image` de la ficha o imagen de la variante en el JSON de la tienda, reducidas a 800 px | 29-sep-2026 |
 
 TRM de referencia: COP 3.140,55/USD (Banco de la República, 3-sep-2026). Los

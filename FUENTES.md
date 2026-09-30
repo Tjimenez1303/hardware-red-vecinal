@@ -1,6 +1,6 @@
 # Fuentes
 
-Generado desde `datos/equipos.json` con `herramientas/fuentes.py`. Precios y fichas al 2026-09-29.
+Generado desde `datos/equipos.json` con `herramientas/fuentes.py`. Precios y fichas al 2026-09-29/2026-09-30.
 La página web no muestra referencias: este archivo es donde se comprueba cada dato.
 
 ## Precios
@@ -37,6 +37,19 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | B&Q Consulting Nano G2 Ultra | 86.00 | [B&Q Consulting / BQ Voyage Shop](https://store.bqvoy.com/product/meshtastic-mesh-device-nano-g2-ultra/) | 2026-09-29 |
 | SpecFive MiniTrekker MKII | 79.99 | [SpecFive](https://specfive.com/products/spec5-minitrekker-mkii) | 2026-09-29 |
 | LilyGO T-Deck (original, sin Plus) | 46.52 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-deck-meshtastic) | 2026-09-29 |
+| LilyGO T-Echo Plus (Meshtastic) | 69.80 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-echo-plus-meshtastic) | 2026-09-30 |
+| LilyGO T-Watch S3 Plus (Meshtastic) | 63.85 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-watch-s3-plus-meshtastic) | 2026-09-30 |
+| LilyGO T-Watch Ultra | 78.32 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-watch-ultra) | 2026-09-30 |
+| LilyGO T-Deck Max | 109.87 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-deck-max) | 2026-09-30 |
+| LilyGO T-Mini E-Paper S3 (Meshtastic) | 44.36 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-mini-e-paper-s3-meshtastic) | 2026-09-30 |
+| LilyGO T5 E-Paper S3 Pro 4,7 pulgadas (Meshtastic) | 88.43 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t5-e-paper-s3-pro-meshtastic) | 2026-09-30 |
+| LilyGO T-Impulse Plus (pulsera) | 45.68 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-lmpulse-plus) | 2026-09-30 |
+| LilyGO T-Echo Lite Kit (T-Echo Lite + KeyShield) | 65.34 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-echo-lite-kit) | 2026-09-30 |
+| Heltec Mesh Node T1 LoRa Position Tag | 39.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/mesh-node-t1/) | 2026-09-30 |
+| Heltec WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | 49.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/wifi-lora-32-v4-expansion-housing/) | 2026-09-30 |
+| Heltec WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF) | 66.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/v4-r8-ex/) | 2026-09-30 |
+| RAKwireless WisMesh Board ONE Pocket | 46.97 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-board-one-pocket-meshtastic-node) | 2026-09-30 |
+| Elecrow ThinkNode M2 con batería | 21.90 | [Elecrow (tienda oficial)](https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-powered-by-esp32-s3-with-1-3-oled-display.html) | 2026-09-30 |
 
 ### Nodos fijos
 
@@ -54,6 +67,16 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | Atlavox Beacon Solar Mesh Node | 235.99 | [Atlavox](https://atlavox.com/products/atlavox-beacon-solar-meshtastic-node) | 2026-09-29 |
 | RAKwireless WisMesh Repeater + Solar Battery Lite (panel 10 W + 5,2 Ah) | 299.00 | [Rokland (299,00 en RAKwireless)](https://store.rokland.com/products/rakwireless-wismesh-repeater-reliable-meshtastic-repeater-for-challenging-environmentsrak) | 2026-09-29 |
 | SpecFive LLC Spec5 Relay (relay solar Meshtastic, RAK WisBlock) | 274.99 | [SpecFive LLC](https://specfive.com/products/spec5-meshtastic-relay) | 2026-09-29 |
+| Heltec SensorHub HRI-3621 (temperatura y humedad) | 59.00 | [Heltec Automation (tienda oficial)](https://heltec.org/project/sensorhub-temperature-humidity-sensor-meshtastic-and-lorawan-compatible/) | 2026-09-30 |
+| RAKwireless WisMesh Station / Station HP (RAK8622 / RAK8623) | 169.99 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | 2026-09-30 |
+| RAKwireless WisMesh WiFi MQTT Gateway V2 (RAK10719) | 34.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-wifi-gateway) | 2026-09-30 |
+| RAKwireless WisMesh Ethernet MQTT Gateway (RAK10720) | 43.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-ethernet-gateway) | 2026-09-30 |
+| Seeed Studio XIAO ESP32S3 & Wio-SX1262 Kit with 3D case | 17.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/XIAO-ESP32S3-for-Meshtastic-LoRa-with-3D-Printed-Enclosure-p-6314.html) | 2026-09-30 |
+| Seeed Studio SenseCAP Indicator D1L / D1Pro (con LoRa SX1262) | 59.00 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/SenseCAP-Indicator-D1L-p-5646.html) | 2026-09-30 |
+| Elecrow ThinkNode M7 Meshtastic Gateway (PoE) | 54.90 | [Elecrow (tienda oficial)](https://www.elecrow.com/thinknode-m7-wireless-communication-gateway-for-meshtastic-support-poe-powered-powered-by-esp32-s3-and-lr1110.html) | 2026-09-30 |
+| Elecrow CrowPanel Advance 3.5 pulgadas para Meshtastic (ESP32-S3 + SX1262) | 36.30 | [Elecrow (tienda oficial)](https://www.elecrow.com/crowpanel-advance-3-5-hmi-esp32-ai-display-for-meshtastic-320x240-ips-artificial-intelligent-screen.html) | 2026-09-30 |
+| Elecrow CrowPanel Advance 2.4 / 2.8 pulgadas para Meshtastic | Sin dato | [Elecrow (tienda oficial)](https://www.elecrow.com/crowpanel-advance-2-8-hmi-ai-display-for-meshtastic-esp32-320x240-artificial-ips-intelligent-touchscreen.html) | 2026-09-30 |
+| Elecrow ThinkNode G3 (gateway LoRaWAN de un canal) | 29.90 | [Elecrow (tienda oficial)](https://www.elecrow.com/thinknode-g3-single-channel-lorawan-gateway-esp32-s3-chip-smart-home-smart-iot-solutions.html) | 2026-09-30 |
 
 ### Placas
 
@@ -76,13 +99,59 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | M5Stack C6L Unit for Meshtastic | 22.90 | [M5Stack store](https://shop.m5stack.com/products/m5stack-c6l-unit-for-meshtastic-sx1262-esp32-c6) | 2026-09-29 |
 | LilyGO T3-S3 E-Paper | 23.61 | [LILYGO store](https://lilygo.cc/en-us/products/ts-s3-epaper) | 2026-09-29 |
 | LilyGO T3-S3 V1.0 | 17.12 | [LILYGO store](https://lilygo.cc/en-us/products/t3s3-v1-0) | 2026-09-29 |
-| RAKwireless WisBlock Meshtastic Starter Kit (RAK4631+RAK19007) | 24.99 | [RAKwireless store](https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit-new) | 2026-09-29 |
+| RAKwireless WisBlock Meshtastic Starter Kit (RAK4631+RAK19007) | 24.99 | [RAKwireless store](https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit) | 2026-09-29 |
 | Heltec Capsule Sensor V3 | 25.90 | [Heltec store](https://heltec.org/project/heltec-capsule-sensor-v3/) | 2026-09-29 |
 | RAKwireless WisMesh RAK3312 Starter Kit | 28.99 | [RAKwireless store](https://store.rakwireless.com/products/meshtastic-starter-kit-esp32-s3-lora-sx1262) | 2026-09-29 |
 | LilyGO T-Beam (clasico) | 33.15 | [LILYGO store](https://lilygo.cc/en-us/products/t-beam) | 2026-09-29 |
 | Heltec Wireless Tracker V2 | 30.90 | [Heltec store](https://heltec.org/project/wireless-tracker-v2/) | 2026-09-29 |
 | Heltec Mesh Node T096 | 33.90 | [Heltec store](https://heltec.org/project/t096/) | 2026-09-29 |
 | LilyGO T-Beam SUPREME | 37.12 | [LILYGO store](https://lilygo.cc/en-us/products/t-beam-supreme) | 2026-09-29 |
+| Ebyte (Chengdu Ebyte Electronic Technology) EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | 16.78 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/ebyte-oem-odm-eora-s3-900tb-22dbm-7km-mini-low-power-and-long-distance-sx1262-rf-module-lora-module-915mhz) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) EoRa-HUB-900TB (ESP32-S3 + LR1121 E80, OLED 0,96) | 22.83 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/ebyte-eora-hub-400tb-433mhz-a-low-power-mcu-system-on-chip-esp32-s3-lr1121-dual-band-lora-wireless-module-development-boards) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) E22-900M30S (SX1262, 30 dBm, SPI) | 8.15 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/sx1262-lora-module-e22-900m30s-868mhz-wireless-module-30dbm-12km-range-ipex-antenna-spi-interface-low-power-consumption-ebyte) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) E22-900M33S (SX1262, 33 dBm, SPI) | 13.93 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/ebyte-e22-900m33s-sx1262-rf-transceiver-module-lora-spread-spectrum-wireless-module-868mhz-915mhz-spi) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) E22-900M22S (SX1262, 22 dBm, SPI) | 5.98 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/sx1262-868mhz-module-electronic-components-22dbm-wireless-transceiver-lora-gfsk-iot-long-range-7km-ebyte-e22-900m22s-spi) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) E80-900M2213S (LR1121, 22 dBm sub-GHz + 13 dBm 2,4 GHz, SPI) | 7.35 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/ebyte-e80-900m2213s-semtech-multi-band-lora-lr1121-chip-22-13dbm-850-930m-2-4ghz-lora-dual-band-wireless-rf-transceiver-module) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) E77-900MBL-01 (placa de prueba con E77-900M22S, STM32WL55) | 14.46 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/stm32-development-testing-board-cdebyte-e77-900mbl-01-pre-soldered-e77-900m22s-usb-interface-lora-module-with-antenna) | 2026-09-30 |
+| Waveshare RP2040-LoRa-HF (RP2040 + SX1262, 850-930 MHz) | 12.99 | [Waveshare (tienda oficial)](https://www.waveshare.com/rp2040-lora.htm?sku=26591) | 2026-09-30 |
+| Waveshare ESP32-S3-LR1121-HF (ESP32-S3 + LR1121, sub-GHz y 2,4 GHz) | 14.99 | [Waveshare (tienda oficial)](https://www.waveshare.com/esp32-s3-lr1121.htm?sku=34010) | 2026-09-30 |
+| Waveshare Core1262-HF (SX1262, SPI, 850-930 MHz) | 7.99 | [Waveshare (tienda oficial)](https://www.waveshare.com/core1262-868m.htm?sku=20855) | 2026-09-30 |
+| Waveshare Pico-LoRa-SX1262-915M (modulo para Raspberry Pi Pico) | 14.99 | [Waveshare (tienda oficial)](https://www.waveshare.com/pico-lora-sx1262-868m.htm?sku=21667) | 2026-09-30 |
+| Waveshare SX1262 LoRaWAN HAT para Raspberry Pi, 868/915M (SPI, opcion GNSS L76K) | 15.99 | [Waveshare (tienda oficial)](https://www.waveshare.com/sx1262-lorawan-hat.htm?sku=22002) | 2026-09-30 |
+| DFRobot DFR1195 LoRaWAN ESP32-S3 Development Board con pantalla (SX1262, 850-930 MHz) | 18.50 | [DFRobot (tienda oficial)](https://www.dfrobot.com/product-2933.html) | 2026-09-30 |
+| MinewSemi (Minew) MS24SF1 (nRF52840 + SX1262 en un modulo) | 9.00 | [MinewSemi Store (tienda oficial)](https://store.minewsemi.com/product/nrf52840sx1262-ms24sf1/) | 2026-09-30 |
+| Meshnology W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | 47.99 | [Meshnology (tienda oficial)](https://meshnology.com/products/meshnology-w10-lora-aiot-dev-kit-esp32-s3-long-range-iot-development-board) | 2026-09-30 |
+| Meshnology W12 "WiFi LoRa 32 V5" (ESP32-S3R8 + LR2021 doble banda, OLED) | 69.99 | [Meshnology (tienda oficial)](https://meshnology.com/products/meshnology-w12-lr2021-ultra-long-range-lora-meshtastic-device-kit) | 2026-09-30 |
+| LilyGO T-Beam 1W (Meshtastic) | 51.43 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-beam-1w-meshtastic) | 2026-09-30 |
+| LilyGO T3-S3 LR1121 | 23.98 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t3-s3-lr1121) | 2026-09-30 |
+| LilyGO T3-TCXO (V3.0, SX1276) | 22.88 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t3-tcxo) | 2026-09-30 |
+| LilyGO T-Connect Pro | 60.74 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-connect-pro) | 2026-09-30 |
+| LilyGO T-ETH Elite + LoRa Shield SX1262 915 MHz | 23.04 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-eth-elite-1) | 2026-09-30 |
+| Heltec Vision Master E213 (e-ink 2,13 pulgadas) | 19.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/vision-master-e213/) | 2026-09-30 |
+| Heltec Vision Master E290 (e-ink 2,90 pulgadas) | 20.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/vision-master-e290/) | 2026-09-30 |
+| Heltec Vision Master T190 (TFT 1,9 pulgadas) | 20.00 | [Heltec Automation (tienda oficial)](https://heltec.org/project/vision-master-t190/) | 2026-09-30 |
+| Heltec HT-CT62 (ESP32-C3 + SX1262, módulo de montaje superficial) | 6.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/ht-ct62/) | 2026-09-30 |
+| Heltec HT-N5262M (nRF52840 + SX1262, módulo) | 14.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/ht-n5262m/) | 2026-09-30 |
+| Heltec HT-RA62 (radio SX1262 sola) | 3.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/ht-ra62/) | 2026-09-30 |
+| Heltec Wireless Shell (V3), módulo ESP32-S3 + SX1262 | 11.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/wireless-shell-v3/) | 2026-09-30 |
+| Heltec Wireless Bridge (ESP32 + SX1276, caja de aluminio) | 28.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/wireless-bridge/) | 2026-09-30 |
+| Heltec WiFi LoRa 32 (V2), ESP32 + SX127x (en retirada) | 17.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/wifi-lora-32v2/) | 2026-09-30 |
+| Heltec MeshSolar (BMS solar + HT-N5262M) | 38.99 | [Heltec Automation (tienda oficial)](https://heltec.org/project/meshsolar/) | 2026-09-30 |
+| RAKwireless WisMesh Pi HAT RAK6421 | 14.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/meshtastic-raspberry-pi-hat-rak6421) | 2026-09-30 |
+| RAKwireless RAK13302 High Power Module for LoRa (SX1262 + SKY66122) | 15.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/rak13302-meshtastic-1w-lora-module) | 2026-09-30 |
+| RAKwireless WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | 39.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/meshtastic-1w-lora-booster-kit-rak3401) | 2026-09-30 |
+| RAKwireless WisMesh Board ONE | 29.97 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-board-one-meshtastic-node) | 2026-09-30 |
+| RAKwireless WisMesh RP2040 Starter Kit (RAK10723, RAK11310) | 23.99 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wisblock-rp2040-starter-kit-for-meshtastic) | 2026-09-30 |
+| RAKwireless WisMesh Base Board RAK19026 (con RAK4630) | 59.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-baseboard-rak19026) | 2026-09-30 |
+| RAKwireless RAK3112 Breakout Board (RAK3212, ESP32-S3 + SX1262) | 16.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/rak3112-breakout-board-esp32-s3-sx1262) | 2026-09-30 |
+| Seeed Studio Wio Tracker L1 (con OLED, sin caja) | 30.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Wio-Tracker-L1-p-6453.html) | 2026-09-30 |
+| Seeed Studio Wio Tracker L1 Lite (sin pantalla) | 28.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Wio-Tracker-L1-Lite-p-6455.html) | 2026-09-30 |
+| Seeed Studio Wio Tracker L1 E-ink | 32.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Wio-Tracker-L1-E-ink-p-6456.html) | 2026-09-30 |
+| Seeed Studio XIAO ESP32S3 & Wio-SX1262 Kit for Meshtastic & LoRa | 10.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html) | 2026-09-30 |
+| Seeed Studio Wio Tracker 1110 Dev Board for Meshtastic | 31.90 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Wio-Tracker-1110-Dev-Board-for-Meshtastic-p-5914.html) | 2026-09-30 |
+| Elecrow Meshstick USB-To-SPI SX1262 TCXO LoRa USB Stick | 23.40 | [Elecrow (tienda oficial)](https://www.elecrow.com/meshstick-usb-to-spi-sx1262-tcxo-lora-usb-stick-usb-plug-and-play-meshtastic-lora-mesh-node.html) | 2026-09-30 |
+| Elecrow Wireless module for CrowPanel Advanced Series, opción LoRa (SX1262) | 6.55 | [Elecrow (tienda oficial)](https://www.elecrow.com/wireless-module-for-crowpanel-advanced-series.html) | 2026-09-30 |
+| M5Stack Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | 14.50 | [M5Stack (tienda oficial)](https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h) | 2026-09-30 |
 
 ### Antenas
 
@@ -94,6 +163,31 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | Laird / TE Connectivity FG9026 omni 8 dBi 902-928 | 319.99 | [RFWEL](https://shop.rfwel.com/902-928-mhz-8dbi-fiberglass-omni-antenna.html) | 2026-09-29 |
 | Seeed Studio Fiberglass Antenna Kit 8 dBi 915 MHz (902-928, 1300 mm) | 29.90 | [Seeed Studio](https://www.seeedstudio.com/RF-Explorer-LoRa-Fiberglass-Antenna-Kit-902-928MHz-8dBi-1300mm-p-5278.html) | 2026-09-29 |
 | PCTEL MFB-9153 omni 5,25 dBi (3 dBd) | 115.38 | [Talley](https://www.talleycom.com/product/MXRMFB9153) | 2026-09-29 |
+| Ebyte (Chengdu Ebyte Electronic Technology) TX915-BLG-40 omni fibra de vidrio 5,5 dBi, N macho, ~400 mm | 31.99 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/470mhz-490mhz-868-mhz-915mhz-fiberglass-series-omnidirectional-antenna-n-j-n-male-interface-cdebyte-fiberglass-long-distance-tx470-blg-40) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) TX915-BLG-26 omni fibra de vidrio 3 dBi, N macho, 260 mm | 18.69 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/915mhz-fiberglass-antenna-high-gain-3dbi-omnidirectional-antenna-n-male-connetctor-tx915-blg-26-waterproof-lora-lorawan-antenna) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) TX900-PB-2323 panel direccional 10 dBi, SMA-J | 45.05 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/panel-directional-antenna-series-433m-868m-915m-cdebyte-antenna-waterproof-high-gain-long-communication-distance-antenna-tx433-pb-2627) | 2026-09-30 |
+| Ebyte (Chengdu Ebyte Electronic Technology) TX915-JKS-20 latiguillo de caucho plegable, SMA-J, 195 mm | 1.51 | [EBYTE Official Online Store (ebyteiot.com)](https://www.ebyteiot.com/products/tx915-jks-20-ebyte-915m-2-5dbi-high-gain-antenna-sma-j-915mhz-omnidirectional-rf-antenna) | 2026-09-30 |
+| ALFA Network AOA-915-10ACM omni 10 dBi fibra de vidrio, N macho, 1600 mm | Sin dato | [ALFA Network (sitio oficial, sin venta)](https://www.alfa.com.tw/products/aoa-915-10acm) | 2026-09-30 |
+| ALFA Network AOA-915-7BF omni exterior 7 dBi, N hembra, 1200 mm | Sin dato | [ALFA Network (sitio oficial, sin venta)](https://www.alfa.com.tw/products/aoa-915-7bf) | 2026-09-30 |
+| LilyGO Antena SMA 915 MHz [N290-01] | 6.54 | [LILYGO (tienda oficial)](https://lilygo.cc/products/sma-antenna) | 2026-09-30 |
+| Heltec Omnidirectional Whip Antenna GT-800 (863-928 MHz, SMA) | 3.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/gt-800-whip-antenna/) | 2026-09-30 |
+| Heltec SMA Antenna, látigo 868/915 MHz 4 dBi | 3.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/sma-antenna/) | 2026-09-30 |
+| Heltec Fiberglass Omni Antenna 900-930 MHz 5,5 dBi, conector N | 12.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/fiberglass-omni-antennas/) | 2026-09-30 |
+| Heltec Fiberglass Omni Antenna 900-930 MHz 7 dBi, conector N | 29.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/fiberglass-omni-antennas/) | 2026-09-30 |
+| RAKwireless WisMesh Blade Antenna 915 MHz (RAKARJ16) | 6.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-antenna) | 2026-09-30 |
+| RAKwireless Flexible Whip Antenna for Meshtastic 915 MHz (RAKARJ21) | 8.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/sma-male-915mhz-868mhz-whip-antenna-20cm) | 2026-09-30 |
+| RAKwireless 5dBi Fiberglass Antenna 902-928 MHz | 35.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/5dbi-fiber-glass-antenna-supports-902-928mhz) | 2026-09-30 |
+| RAKwireless 5.8dBi Fiberglass Antenna blanca 902-928 MHz (RAKARG14) | 40.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/5-8dbi-fiber-glass-antenna) | 2026-09-30 |
+| RAKwireless 5.8dBi BLACK Fiberglass Antenna 902-930 MHz | 20.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/5-8dbi-black-fiberglass-antenna) | 2026-09-30 |
+| RAKwireless 8dBi Fiberglass Antenna 900-930 MHz (RAKARG15) | 60.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/fiber-glass-antenna-1) | 2026-09-30 |
+| RAKwireless 12dBi Directional Antenna 860-930 MHz (RAKARP01) | 229.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/directional-antenna) | 2026-09-30 |
+| RAKwireless 3dBi Fiberglass Antenna 860-930 MHz | 27.50 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/3dbi-fiber-glass-antenna) | 2026-09-30 |
+| Seeed Studio Fiberglass Antenna Kit with RP Cable 860-930 MHz 3 dBi 360 mm | 27.00 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/3dBi-860-930MHz-Fiberglass-Antenna-p-6910.html) | 2026-09-30 |
+| Seeed Studio Fiberglass Antenna Kit 902-928 MHz 3 dBi with Antenna Base | 34.99 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/LoRa-Fiberglass-Antenna-Kit-902-928MHz-3dBi-with-Antenna-Base-p-5130.html) | 2026-09-30 |
+| Seeed Studio Fiberglass Antenna 900-930 MHz 7 dBi 920 mm | 49.00 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/Lora-Fiberglass-Antenna-900-930MHz-7dBi-920mm-p-4926.html) | 2026-09-30 |
+| Seeed Studio 2.6dBi Long Range Antenna SMA male 915 MHz 195 mm | 2.49 | [Seeed Studio (tienda oficial)](https://www.seeedstudio.com/External-Antenna-915MHZ-2-6dBi-SMA-L195mm-p-5047.html) | 2026-09-30 |
+| Elecrow LoRa Antenna SMA/RP-SMA 868/915 MHz Folding Paddle | 3.40 | [Elecrow (tienda oficial)](https://www.elecrow.com/lora-antenna-sma-male-868-915mhz-folding-paddle-directional-lora-antenna.html) | 2026-09-30 |
+| Heltec Antena blanda SMA 902-928 MHz, 17 cm | 7.77 | [Heltec Automation Official Store (AliExpress)](https://es.aliexpress.com/item/1005008783472623.html) | 2026-09-30 |
 
 ### Accesorios
 
@@ -102,6 +196,12 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | Heltec Solar Kit for Dev-board, Waterproof Enclosure | 45.20 | [Heltec Automation](https://heltec.org/project/solar-kit-for-dev-board-waterproof-enclosure-for-outdoor-meshtastic-meshcore/) | 2026-09-29 |
 | RAKwireless Lightning Arrestor 2 (LA-GT1000 SN1-1) | 32.00 | [RAKwireless](https://store.rakwireless.com/products/lora-rf-lightning-arrestor-outdoor-ip67) | 2026-09-29 |
 | RAKwireless WisMesh Unify Enclosure 100x75x38mm, con panel solar y antena integrada 902-928 MHz | 35.00 | [RAKwireless](https://store.rakwireless.com/products/wismesh-unify-enclosure) | 2026-09-29 |
+| LilyGO T-Solar Kit (panel 5,4 W + placa de carga) | 25.34 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-solar-kit) | 2026-09-30 |
+| LilyGO T-Echo Battery Pack 2400 mAh [K263] | 17.69 | [LILYGO (tienda oficial)](https://lilygo.cc/products/t-echo-accessories-1) | 2026-09-30 |
+| Heltec Lightning Protector | 17.00 | [Heltec Automation (tienda oficial)](https://heltec.org/project/lightning-protector/) | 2026-09-30 |
+| Heltec Cable adaptador IPEX (U.FL) a N hembra, 0,1 m | 2.99 | [Heltec Automation (tienda oficial)](https://heltec.org/project/ipex-to-ntype-antenna-adapter-cable/) | 2026-09-30 |
+| Heltec 10W Poly Pet Solar Panel (18 V) | 11.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/10w-poly-pet-solar-panel-2/) | 2026-09-30 |
+| Heltec GPS and Display Expansion Board para MeshSolar | 13.90 | [Heltec Automation (tienda oficial)](https://heltec.org/project/gps-display-expansion-board/) | 2026-09-30 |
 
 ## Datos técnicos que se buscaron aparte
 
@@ -218,6 +318,349 @@ Huecos de la ficha que se llenaron con otra fuente. La columna de condiciones di
 | Fiberglass Antenna Kit 8 dBi 915 MHz (902-928, 1300 mm) | Grado IP | apta para exterior (sin grado IP) | [enlace](https://www.hashtagiot.com/shop/lora-fiberglass-antenna-kit-902-928mhz-8dbi-1300mm-rf-explorer-rfela-5-8x9/) | comercial | Texto copiado de Seeed por un distribuidor; ni Seeed ni la wiki dan IP. Amazon añade «weatherproof» (revendedor). |
 | Spec5 Relay (relay solar Meshtastic, RAK WisBlock) | Peso | 1134.0 | [enlace](https://specfive.com/products/spec5-meshtastic-relay) | comercial | Tabla Overview de la ficha: «Weight 2.5 lbs». Conversión 2,5 × 453,6 g (estimado). Sin aclarar si es equipo o envío. La variante Shopify dice 1.814 g (4 lb), probablemente envío. |
 | Spec5 Relay (relay solar Meshtastic, RAK WisBlock) | Batería reemplazable | sí | [enlace](https://specfive.com/products/spec5-meshtastic-relay) | comercial | Solo por la definición del campo: la ficha declara «Qty (2) Internal 18650 LiPo Batteries» (celdas 18650 estándar, nomenclatura «LiPo» imprecisa). El acceso al compartimento no está documentado. Capacidad en mAh: `no publicado`. |
+| EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | precio_usd | 16.78 | [enlace](https://www.ebyteiot.com/products/ebyte-oem-odm-eora-s3-900tb-22dbm-7km-mini-low-power-and-long-distance-sx1262-rf-module-lora-module-915mhz.js) | oficial |  |
+| EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | mcu/radio/pantalla |  | [enlace](https://www.ebyteiot.com/products/ebyte-oem-odm-eora-s3-900tb-22dbm-7km-mini-low-power-and-long-distance-sx1262-rf-module-lora-module-915mhz) | oficial |  |
+| EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | tx_dbm/consumo |  | [enlace](https://www.ebyteiot.com/products/ebyte-oem-odm-eora-s3-900tb-22dbm-7km-mini-low-power-and-long-distance-sx1262-rf-module-lora-module-915mhz) | oficial |  |
+| EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | Medidas | 27 x 64 | [enlace](https://www.cdebyte.com/products/EoRa-S3-900TB) | oficial |  |
+| EoRa-S3-900TB (ESP32-S3 + E22-900MM22S, OLED 0,96) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/CDEBYTE_EoRa-S3/platformio.ini) | oficial |  |
+| EoRa-HUB-900TB (ESP32-S3 + LR1121 E80, OLED 0,96) | precio_usd | 22.83 | [enlace](https://www.ebyteiot.com/products/ebyte-eora-hub-400tb-433mhz-a-low-power-mcu-system-on-chip-esp32-s3-lr1121-dual-band-lora-wireless-module-development-boards.js) | oficial |  |
+| EoRa-HUB-900TB (ESP32-S3 + LR1121 E80, OLED 0,96) | radio/dimensiones |  | [enlace](https://www.ebyteiot.com/products/ebyte-eora-hub-400tb-433mhz-a-low-power-mcu-system-on-chip-esp32-s3-lr1121-dual-band-lora-wireless-module-development-boards) | oficial |  |
+| EoRa-HUB-900TB (ESP32-S3 + LR1121 E80, OLED 0,96) | meshtastic | comunidad | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/CDEBYTE_EoRa-Hub/variant.h) | oficial |  |
+| E22-900M30S (SX1262, 30 dBm, SPI) | precio_usd | 8.15 | [enlace](https://www.ebyteiot.com/products/sx1262-lora-module-e22-900m30s-868mhz-wireless-module-30dbm-12km-range-ipex-antenna-spi-interface-low-power-consumption-ebyte.js) | oficial |  |
+| E22-900M30S (SX1262, 30 dBm, SPI) | specs |  | [enlace](https://www.ebyteiot.com/products/sx1262-lora-module-e22-900m30s-868mhz-wireless-module-30dbm-12km-range-ipex-antenna-spi-interface-low-power-consumption-ebyte) | oficial |  |
+| E22-900M30S (SX1262, 30 dBm, SPI) | consumo |  | [enlace](https://www.ebyteiot.com/products/sx1262-lora-module-e22-900m30s-868mhz-wireless-module-30dbm-12km-range-ipex-antenna-spi-interface-low-power-consumption-ebyte) | oficial |  |
+| E22-900M30S (SX1262, 30 dBm, SPI) | notas | Modulo de radio pelado, sin MCU. Es el modulo del HAT MeshAdv-Pi para meshtasticd (bin/config.d/lora-MeshAdv-900M30S.yaml, support community) y del objetivo DIY EBYTE_ESP32-S3 del firmware (board_level extra), que se desarrollo para E22-900M30S con ESP32-S3-WROOM-1-N4. 30 dBm de salida mas ganancia de antena puede superar el limite de potencia radiada de la banda en Colombia, hay que revisarlo antes de usarlo al maximo. | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/bin/config.d/lora-MeshAdv-900M30S.yaml) | oficial |  |
+| E22-900M33S (SX1262, 33 dBm, SPI) | precio_usd | 13.93 | [enlace](https://www.ebyteiot.com/products/ebyte-e22-900m33s-sx1262-rf-transceiver-module-lora-spread-spectrum-wireless-module-868mhz-915mhz-spi.js) | oficial |  |
+| E22-900M33S (SX1262, 33 dBm, SPI) | specs |  | [enlace](https://www.ebyteiot.com/products/ebyte-e22-900m33s-sx1262-rf-transceiver-module-lora-spread-spectrum-wireless-module-868mhz-915mhz-spi) | oficial |  |
+| E22-900M22S (SX1262, 22 dBm, SPI) | precio_usd | 5.98 | [enlace](https://www.ebyteiot.com/products/sx1262-868mhz-module-electronic-components-22dbm-wireless-transceiver-lora-gfsk-iot-long-range-7km-ebyte-e22-900m22s-spi.js) | oficial |  |
+| E22-900M22S (SX1262, 22 dBm, SPI) | specs |  | [enlace](https://www.ebyteiot.com/products/sx1262-868mhz-module-electronic-components-22dbm-wireless-transceiver-lora-gfsk-iot-long-range-7km-ebyte-e22-900m22s-spi) | oficial |  |
+| E22-900M22S (SX1262, 22 dBm, SPI) | notas | Modulo de radio sin MCU. Es el modulo del HAT MeshAdv Mini para meshtasticd (bin/config.d/lora-MeshAdv-Mini-900M22S.yaml, support community) y lo usan nodos DIY como la placa MeshLink de LoraItalia segun el comentario de su variante. | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/meshlink/platformio.ini) | oficial |  |
+| E80-900M2213S (LR1121, 22 dBm sub-GHz + 13 dBm 2,4 GHz, SPI) | precio_usd/disponibilidad |  | [enlace](https://www.ebyteiot.com/products/ebyte-e80-900m2213s-semtech-multi-band-lora-lr1121-chip-22-13dbm-850-930m-2-4ghz-lora-dual-band-wireless-rf-transceiver-module.js) | oficial |  |
+| E80-900M2213S (LR1121, 22 dBm sub-GHz + 13 dBm 2,4 GHz, SPI) | specs |  | [enlace](https://www.ebyteiot.com/products/ebyte-e80-900m2213s-semtech-multi-band-lora-lr1121-chip-22-13dbm-850-930m-2-4ghz-lora-dual-band-wireless-rf-transceiver-module) | oficial |  |
+| E77-900MBL-01 (placa de prueba con E77-900M22S, STM32WL55) | precio_usd | 14.46 | [enlace](https://www.ebyteiot.com/products/stm32-development-testing-board-cdebyte-e77-900mbl-01-pre-soldered-e77-900m22s-usb-interface-lora-module-with-antenna.js) | oficial |  |
+| E77-900MBL-01 (placa de prueba con E77-900M22S, STM32WL55) | specs |  | [enlace](https://www.ebyteiot.com/products/stm32-development-testing-board-cdebyte-e77-900mbl-01-pre-soldered-e77-900m22s-usb-interface-lora-module-with-antenna) | oficial |  |
+| E77-900MBL-01 (placa de prueba con E77-900M22S, STM32WL55) | meshtastic | comunidad | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/stm32/CDEBYTE_E77-MBL/platformio.ini) | oficial |  |
+| TX915-BLG-40 omni fibra de vidrio 5,5 dBi, N macho, ~400 mm | precio_usd | 31.99 | [enlace](https://www.ebyteiot.com/products/470mhz-490mhz-868-mhz-915mhz-fiberglass-series-omnidirectional-antenna-n-j-n-male-interface-cdebyte-fiberglass-long-distance-tx470-blg-40.js) | oficial |  |
+| TX915-BLG-40 omni fibra de vidrio 5,5 dBi, N macho, ~400 mm | specs |  | [enlace](https://www.ebyteiot.com/products/470mhz-490mhz-868-mhz-915mhz-fiberglass-series-omnidirectional-antenna-n-j-n-male-interface-cdebyte-fiberglass-long-distance-tx470-blg-40) | oficial |  |
+| TX915-BLG-26 omni fibra de vidrio 3 dBi, N macho, 260 mm | precio_usd | 18.69 | [enlace](https://www.ebyteiot.com/products/915mhz-fiberglass-antenna-high-gain-3dbi-omnidirectional-antenna-n-male-connetctor-tx915-blg-26-waterproof-lora-lorawan-antenna.js) | oficial |  |
+| TX915-BLG-26 omni fibra de vidrio 3 dBi, N macho, 260 mm | specs |  | [enlace](https://www.ebyteiot.com/products/915mhz-fiberglass-antenna-high-gain-3dbi-omnidirectional-antenna-n-male-connetctor-tx915-blg-26-waterproof-lora-lorawan-antenna) | oficial |  |
+| TX900-PB-2323 panel direccional 10 dBi, SMA-J | precio_usd | 45.05 | [enlace](https://www.ebyteiot.com/products/panel-directional-antenna-series-433m-868m-915m-cdebyte-antenna-waterproof-high-gain-long-communication-distance-antenna-tx433-pb-2627.js) | oficial |  |
+| TX900-PB-2323 panel direccional 10 dBi, SMA-J | specs |  | [enlace](https://www.ebyteiot.com/products/panel-directional-antenna-series-433m-868m-915m-cdebyte-antenna-waterproof-high-gain-long-communication-distance-antenna-tx433-pb-2627) | oficial |  |
+| TX915-JKS-20 latiguillo de caucho plegable, SMA-J, 195 mm | precio_usd | 1.51 | [enlace](https://www.ebyteiot.com/products/tx915-jks-20-ebyte-915m-2-5dbi-high-gain-antenna-sma-j-915mhz-omnidirectional-rf-antenna.js) | oficial |  |
+| TX915-JKS-20 latiguillo de caucho plegable, SMA-J, 195 mm | specs |  | [enlace](https://www.ebyteiot.com/products/tx915-jks-20-ebyte-915m-2-5dbi-high-gain-antenna-sma-j-915mhz-omnidirectional-rf-antenna) | oficial |  |
+| RP2040-LoRa-HF (RP2040 + SX1262, 850-930 MHz) | precio_usd | 12.99 | [enlace](https://www.waveshare.com/rp2040-lora.htm?sku=26591) | oficial |  |
+| RP2040-LoRa-HF (RP2040 + SX1262, 850-930 MHz) | precio_max_usd | 15.99 | [enlace](https://www.waveshare.com/rp2040-lora.htm?sku=26542) | oficial |  |
+| RP2040-LoRa-HF (RP2040 + SX1262, 850-930 MHz) | specs |  | [enlace](https://www.waveshare.com/rp2040-lora.htm) | oficial |  |
+| RP2040-LoRa-HF (RP2040 + SX1262, 850-930 MHz) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/rp2040/rp2040-lora/platformio.ini) | oficial |  |
+| ESP32-S3-LR1121-HF (ESP32-S3 + LR1121, sub-GHz y 2,4 GHz) | precio_usd | 14.99 | [enlace](https://www.waveshare.com/esp32-s3-lr1121.htm?sku=34010) | oficial |  |
+| ESP32-S3-LR1121-HF (ESP32-S3 + LR1121, sub-GHz y 2,4 GHz) | specs |  | [enlace](https://www.waveshare.com/esp32-s3-lr1121.htm) | oficial |  |
+| ESP32-S3-LR1121-HF (ESP32-S3 + LR1121, sub-GHz y 2,4 GHz) | meshtastic | comunidad | [enlace](https://docs.waveshare.com/ESP32-S3-LR1121-XF/Meshtastic) | oficial |  |
+| Core1262-HF (SX1262, SPI, 850-930 MHz) | precio_usd | 7.99 | [enlace](https://www.waveshare.com/core1262-868m.htm?sku=20855) | oficial |  |
+| Core1262-HF (SX1262, SPI, 850-930 MHz) | specs |  | [enlace](https://www.waveshare.com/core1262-868m.htm) | oficial |  |
+| Core1262-HF (SX1262, SPI, 850-930 MHz) | notas | Las variantes ai-c3 y bpi_picow_esp32_s3 de meshtastic/firmware (board_level extra) citan este modulo en su variant.h. | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/bpi_picow_esp32_s3/variant.h) | oficial |  |
+| Pico-LoRa-SX1262-915M (modulo para Raspberry Pi Pico) | precio_usd | 14.99 | [enlace](https://www.waveshare.com/pico-lora-sx1262-868m.htm?sku=21667) | oficial |  |
+| Pico-LoRa-SX1262-915M (modulo para Raspberry Pi Pico) | specs |  | [enlace](https://www.waveshare.com/pico-lora-sx1262-868m.htm) | oficial |  |
+| Pico-LoRa-SX1262-915M (modulo para Raspberry Pi Pico) | meshtastic | comunidad | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/bin/config.d/lora-ws-raspberry-pi-pico-to-rpi-adapter.yaml) | oficial |  |
+| SX1262 LoRaWAN HAT para Raspberry Pi, 868/915M (SPI, opcion GNSS L76K) | precio_usd | 15.99 | [enlace](https://www.waveshare.com/sx1262-lorawan-hat.htm?sku=22002) | oficial |  |
+| SX1262 LoRaWAN HAT para Raspberry Pi, 868/915M (SPI, opcion GNSS L76K) | precio_max_usd | 24.99 | [enlace](https://www.waveshare.com/sx1262-lorawan-hat.htm?sku=24654) | oficial |  |
+| SX1262 LoRaWAN HAT para Raspberry Pi, 868/915M (SPI, opcion GNSS L76K) | specs |  | [enlace](https://www.waveshare.com/sx1262-lorawan-hat.htm) | oficial |  |
+| SX1262 LoRaWAN HAT para Raspberry Pi, 868/915M (SPI, opcion GNSS L76K) | meshtastic | comunidad | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/bin/config.d/lora-waveshare-sxxx.yaml) | oficial |  |
+| DFR1195 LoRaWAN ESP32-S3 Development Board con pantalla (SX1262, 850-930 MHz) | precio_usd | 18.5 | [enlace](https://www.dfrobot.com/product-2933.html) | oficial |  |
+| DFR1195 LoRaWAN ESP32-S3 Development Board con pantalla (SX1262, 850-930 MHz) | specs |  | [enlace](https://www.dfrobot.com/product-2933.html) | oficial |  |
+| DFR1195 LoRaWAN ESP32-S3 Development Board con pantalla (SX1262, 850-930 MHz) | meshtastic | comunidad | [enlace](https://wiki.dfrobot.com/dfr1195/) | oficial |  |
+| MS24SF1 (nRF52840 + SX1262 en un modulo) | precio_usd | 9.0 | [enlace](https://store.minewsemi.com/wp-json/wc/store/v1/products?search=MS24SF1) | oficial |  |
+| MS24SF1 (nRF52840 + SX1262 en un modulo) | specs |  | [enlace](https://store.minewsemi.com/product/nrf52840sx1262-ms24sf1/) | oficial |  |
+| MS24SF1 (nRF52840 + SX1262 en un modulo) | meshtastic | comunidad | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/MS24SF1/variant.h) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | precio_usd | 47.99 | [enlace](https://meshnology.com/products/meshnology-w10-lora-aiot-dev-kit-esp32-s3-long-range-iot-development-board.js) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | radio/gps |  | [enlace](https://meshnology.com/products/meshnology-w10-lora-aiot-dev-kit-esp32-s3-long-range-iot-development-board) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | peso/dimensiones |  | [enlace](https://meshnology.com/products/meshnology-w10-lora-aiot-dev-kit-esp32-s3-long-range-iot-development-board) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/meshnology-w10/platformio.ini) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | contradiccion | platformio.ini de la rama develop dice custom_meshtastic_actively_supported = true, y la API api.meshtastic.org/resource/deviceHardware devuelve activelySupported false. | [enlace](https://api.meshtastic.org/resource/deviceHardware) | oficial |  |
+| W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54) | pais |  | [enlace](https://meshnology.com/policies/shipping-policy) | oficial |  |
+| W12 "WiFi LoRa 32 V5" (ESP32-S3R8 + LR2021 doble banda, OLED) | precio_usd | 69.99 | [enlace](https://meshnology.com/products/meshnology-w12-lr2021-ultra-long-range-lora-meshtastic-device-kit.js) | oficial |  |
+| W12 "WiFi LoRa 32 V5" (ESP32-S3R8 + LR2021 doble banda, OLED) | meshtastic | comunidad | [enlace](https://meshnology.com/products/meshnology-w12-lr2021-ultra-long-range-lora-meshtastic-device-kit) | oficial |  |
+| W12 "WiFi LoRa 32 V5" (ESP32-S3R8 + LR2021 doble banda, OLED) | radio/pantalla |  | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/meshnology-w12/platformio.ini) | oficial |  |
+| AOA-915-10ACM omni 10 dBi fibra de vidrio, N macho, 1600 mm | precio_usd |  | [enlace](https://www.alfa.com.tw/products/aoa-915-10acm.js) | oficial |  |
+| AOA-915-10ACM omni 10 dBi fibra de vidrio, N macho, 1600 mm | specs |  | [enlace](https://www.alfa.com.tw/products/aoa-915-10acm) | oficial |  |
+| AOA-915-7BF omni exterior 7 dBi, N hembra, 1200 mm | precio_usd |  | [enlace](https://www.alfa.com.tw/products/aoa-915-7bf.js) | oficial |  |
+| AOA-915-7BF omni exterior 7 dBi, N hembra, 1200 mm | specs |  | [enlace](https://www.alfa.com.tw/products/aoa-915-7bf) | oficial |  |
+| T-Echo Plus (Meshtastic) | precio_usd | 69.8 | [enlace](https://lilygo.cc/products/t-echo-plus-meshtastic.js) | oficial |  |
+| T-Echo Plus (Meshtastic) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/t-echo-plus/platformio.ini) | oficial |  |
+| T-Echo Plus (Meshtastic) | Batería | 2400 | [enlace](https://lilygo.cc/products/t-echo-plus-meshtastic) | oficial |  |
+| T-Echo Plus (Meshtastic) | Potencia declarada | 22 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-echo-series/t-echo-plus/index.md) | oficial |  |
+| T-Echo Plus (Meshtastic) | Pantalla | e-paper 1,54 pulgadas 200x200, 2 niveles de gris, refresco completo 2 s | [enlace](https://lilygo.cc/products/t-echo-plus-meshtastic) | oficial |  |
+| T-Watch S3 Plus (Meshtastic) | precio_usd | 63.85 | [enlace](https://lilygo.cc/products/t-watch-s3-plus-meshtastic.js) | oficial |  |
+| T-Watch S3 Plus (Meshtastic) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/t-watch-s3/variant.h) | oficial |  |
+| T-Watch S3 Plus (Meshtastic) | Medidas | 51.5 x 42 x 20 (sin correa) | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-watch-series/t-watch-s3-plus/index.md) | oficial |  |
+| T-Watch S3 Plus (Meshtastic) | Batería | 940 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-watch-series/t-watch-s3-plus/index.md) | oficial |  |
+| T-Watch S3 Plus (Meshtastic) | gps | sí, u-blox MIA-M10Q o Quectel LS550G | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-watch-series/t-watch-s3-plus/index.md) | oficial |  |
+| T-Watch Ultra | precio_usd | 78.32 | [enlace](https://lilygo.cc/products/t-watch-ultra.js) | oficial |  |
+| T-Watch Ultra | Medidas | 63.5 x 49 x 22 (sin correa) | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-watch-series/t-watch-ultra/index.md) | oficial |  |
+| T-Watch Ultra | Batería | 1100 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-watch-series/t-watch-ultra/index.md) | oficial |  |
+| T-Watch Ultra | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/pull/8171) | oficial |  |
+| T-Deck Max | precio_usd | 109.87 | [enlace](https://lilygo.cc/products/t-deck-max.js) | oficial |  |
+| T-Deck Max | Potencia declarada | 22 | [enlace](https://lilygo.cc/products/t-deck-max) | oficial |  |
+| T-Deck Max | Batería | 1500 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-deck-series/t-deck-max/index.md) | oficial |  |
+| T-Deck Max | meshtastic |  | [enlace](https://github.com/meshtastic/firmware/pull/11527) | oficial |  |
+| T-Mini E-Paper S3 (Meshtastic) | precio_usd | 44.36 | [enlace](https://lilygo.cc/products/t-mini-e-paper-s3-meshtastic.js) | oficial |  |
+| T-Mini E-Paper S3 (Meshtastic) | bateria_formato | 18350 3,7 V (no incluida) | [enlace](https://lilygo.cc/products/t-mini-e-paper-s3-meshtastic) | oficial |  |
+| T-Mini E-Paper S3 (Meshtastic) | Medidas | 102 x 24.5 x 53 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/other/t-mini-e-paper-s3/index.md) | oficial |  |
+| T-Mini E-Paper S3 (Meshtastic) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/mini-epaper-s3/platformio.ini) | oficial |  |
+| T5 E-Paper S3 Pro 4,7 pulgadas (Meshtastic) | precio_usd | 88.43 | [enlace](https://lilygo.cc/products/t5-e-paper-s3-pro-meshtastic.js) | oficial |  |
+| T5 E-Paper S3 Pro 4,7 pulgadas (Meshtastic) | Medidas | 129 x 69 x 11 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t5-series/t5-e-paper-s3-pro/index.md) | oficial |  |
+| T5 E-Paper S3 Pro 4,7 pulgadas (Meshtastic) | Batería | 1500 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t5-series/t5-e-paper-s3-pro/index.md) | oficial |  |
+| T5 E-Paper S3 Pro 4,7 pulgadas (Meshtastic) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/t5s3_epaper/platformio.ini) | oficial |  |
+| T-Impulse Plus (pulsera) | precio_usd | 45.68 | [enlace](https://lilygo.cc/products/t-lmpulse-plus.js) | oficial |  |
+| T-Impulse Plus (pulsera) | Pantalla | OLED 0,49 pulgadas 64x32 | [enlace](https://lilygo.cc/products/t-lmpulse-plus) | oficial |  |
+| T-Impulse Plus (pulsera) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/t-impulse-plus/platformio.ini) | oficial |  |
+| T-Echo Lite Kit (T-Echo Lite + KeyShield) | precio_usd | 65.34 | [enlace](https://lilygo.cc/products/t-echo-lite-kit.js) | oficial |  |
+| T-Echo Lite Kit (T-Echo Lite + KeyShield) | Medidas | 102 x 41 x 22 | [enlace](https://lilygo.cc/products/t-echo-lite-kit) | oficial |  |
+| T-Echo Lite Kit (T-Echo Lite + KeyShield) | Entrada | teclado físico 5x4 (TCA8418) + botón | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-echo-series/t-echo-lite-kit/index.md) | oficial |  |
+| T-Echo Lite Kit (T-Echo Lite + KeyShield) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/t-echo-lite/platformio.ini) | oficial |  |
+| T-Beam 1W (Meshtastic) | precio_usd | 51.43 | [enlace](https://lilygo.cc/products/t-beam-1w-meshtastic.js) | oficial |  |
+| T-Beam 1W (Meshtastic) | Potencia declarada | 32 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-beam-series/t-beam-1w/index.md) | oficial |  |
+| T-Beam 1W (Meshtastic) | bateria_formato | 7,4 V (2S), la placa no la carga | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-beam-series/t-beam-1w/index.md) | oficial |  |
+| T-Beam 1W (Meshtastic) | Medidas | 133 x 43 x 27 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-beam-series/t-beam-1w/index.md) | oficial |  |
+| T-Beam 1W (Meshtastic) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/t-beam-1w/platformio.ini) | oficial |  |
+| T3-S3 LR1121 | precio_usd | 23.98 | [enlace](https://lilygo.cc/products/t3-s3-lr1121.js) | oficial |  |
+| T3-S3 LR1121 | Medidas |  | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t3-series/t3-s3-lr1121/index.md) | oficial |  |
+| T3-S3 LR1121 | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/issues/11592) | oficial |  |
+| T3-TCXO (V3.0, SX1276) | precio_usd | 22.88 | [enlace](https://lilygo.cc/products/t3-tcxo.js) | oficial |  |
+| T3-TCXO (V3.0, SX1276) | radio | SX1276 con TCXO | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t3-series/t3-txco/index.md) | oficial |  |
+| T3-TCXO (V3.0, SX1276) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32/tlora_v3_3_0_tcxo/platformio.ini) | oficial |  |
+| T-Connect Pro | precio_usd | 60.74 | [enlace](https://lilygo.cc/products/t-connect-pro.js) | oficial |  |
+| T-Connect Pro | banda_mhz | 433-920 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-connect-series/t-connect-pro/index.md) | oficial |  |
+| T-Connect Pro | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/pull/11746) | oficial |  |
+| T-ETH Elite + LoRa Shield SX1262 915 MHz | precio_usd | 23.04 | [enlace](https://lilygo.cc/products/t-eth-elite-1.js) | oficial |  |
+| T-ETH Elite + LoRa Shield SX1262 915 MHz | recarga | PoE IEEE 802.3af 36–57 V o USB-C 5 V | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-eth-series/t-eth-elite/index.md) | oficial |  |
+| T-ETH Elite + LoRa Shield SX1262 915 MHz | gps | sí, L76K en el shield LoRa | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/t-eth-series/t-eth-lora-shield/index.md) | oficial |  |
+| T-ETH Elite + LoRa Shield SX1262 915 MHz | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/t-eth-elite/variant.h) | oficial |  |
+| Antena SMA 915 MHz [N290-01] | precio_usd | 6.54 | [enlace](https://lilygo.cc/products/sma-antenna.js) | oficial |  |
+| T-Solar Kit (panel 5,4 W + placa de carga) | precio_usd | 25.34 | [enlace](https://lilygo.cc/products/t-solar-kit.js) | oficial |  |
+| T-Solar Kit (panel 5,4 W + placa de carga) | Panel solar | 5.4 | [enlace](https://raw.githubusercontent.com/Xinyuan-LilyGO/documentation/HEAD/en/products/other/t-solar/index.md) | oficial |  |
+| T-Solar Kit (panel 5,4 W + placa de carga) | notas | Panel de 5,4 W pico (Vmp 5,7 V, Imp 947 mA), entrada 4,4–6 V, conector JST 2.0, para baterías Li-ion o LiPo de 3,7 V. Compatible de forma directa solo con placas que tengan interfaz solar 2.0 (T3, T-Beam, T-Echo Lite según la wiki). Incluye adaptador IPEX a M12 o M16. No incluye batería ni carcasa. | [enlace](https://lilygo.cc/products/t-solar-kit) | oficial |  |
+| T-Echo Battery Pack 2400 mAh [K263] | precio_usd | 17.69 | [enlace](https://lilygo.cc/products/t-echo-accessories-1.js) | oficial |  |
+| T-Echo Battery Pack 2400 mAh [K263] | Batería | 2400 | [enlace](https://lilygo.cc/products/t-echo-accessories-1) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | precio_usd | 39.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/112788) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | Peso | 53 | [enlace](https://heltec.org/project/mesh-node-t1/) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | Batería | 1850 | [enlace](https://heltec.org/project/mesh-node-t1/) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | Grado IP | IP65 | [enlace](https://heltec.org/project/mesh-node-t1/) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | Potencia declarada | 21 | [enlace](https://heltec.org/project/mesh-node-t1/) | oficial |  |
+| Mesh Node T1 LoRa Position Tag | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/heltec_mesh_node_t1/platformio.ini) | oficial |  |
+| Vision Master E213 (e-ink 2,13 pulgadas) | precio_usd | 19.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87348) | oficial |  |
+| Vision Master E213 (e-ink 2,13 pulgadas) | precio_max_usd | 20.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87965) | oficial |  |
+| Vision Master E213 (e-ink 2,13 pulgadas) | Potencia declarada | 21 | [enlace](https://heltec.org/project/vision-master-e213/) | oficial |  |
+| Vision Master E213 (e-ink 2,13 pulgadas) | Medidas | 66.75 x 30.41 x 10 | [enlace](https://heltec.org/project/vision-master-e213/) | oficial |  |
+| Vision Master E213 (e-ink 2,13 pulgadas) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_vision_master_e213/platformio.ini) | oficial |  |
+| Vision Master E290 (e-ink 2,90 pulgadas) | precio_usd | 20.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87369) | oficial |  |
+| Vision Master E290 (e-ink 2,90 pulgadas) | precio_max_usd | 21.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87961) | oficial |  |
+| Vision Master E290 (e-ink 2,90 pulgadas) | Potencia declarada | 21 | [enlace](https://heltec.org/project/vision-master-e290/) | oficial |  |
+| Vision Master E290 (e-ink 2,90 pulgadas) | Medidas | 87.96 x 36.63 x 12 | [enlace](https://heltec.org/project/vision-master-e290/) | oficial |  |
+| Vision Master E290 (e-ink 2,90 pulgadas) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_vision_master_e290/platformio.ini) | oficial |  |
+| Vision Master T190 (TFT 1,9 pulgadas) | precio_usd | 20.0 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87911) | oficial |  |
+| Vision Master T190 (TFT 1,9 pulgadas) | precio_max_usd |  | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87911) | oficial |  |
+| Vision Master T190 (TFT 1,9 pulgadas) | Potencia declarada | 21 | [enlace](https://heltec.org/project/vision-master-t190/) | oficial |  |
+| Vision Master T190 (TFT 1,9 pulgadas) | Medidas | 60 x 25.4 x 10.19 | [enlace](https://heltec.org/project/vision-master-t190/) | oficial |  |
+| Vision Master T190 (TFT 1,9 pulgadas) | meshtastic | preflasheado | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_vision_master_t190/platformio.ini) | oficial |  |
+| HT-CT62 (ESP32-C3 + SX1262, módulo de montaje superficial) | precio_usd | 6.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/78506) | oficial |  |
+| HT-CT62 (ESP32-C3 + SX1262, módulo de montaje superficial) | Medidas | 17.78 x 17.78 x 2.8 | [enlace](https://heltec.org/project/ht-ct62/) | oficial |  |
+| HT-CT62 (ESP32-C3 + SX1262, módulo de montaje superficial) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32c3/heltec_esp32c3/platformio.ini) | oficial |  |
+| HT-N5262M (nRF52840 + SX1262, módulo) | precio_usd | 14.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/95988) | oficial |  |
+| HT-N5262M (nRF52840 + SX1262, módulo) | Medidas | 30 x 20 x 3.2 | [enlace](https://heltec.org/project/ht-n5262m/) | oficial |  |
+| HT-RA62 (radio SX1262 sola) | precio_usd | 3.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/78918) | oficial |  |
+| HT-RA62 (radio SX1262 sola) | Potencia declarada | 21 | [enlace](https://heltec.org/project/ht-ra62/) | oficial |  |
+| Wireless Shell (V3), módulo ESP32-S3 + SX1262 | precio_usd | 11.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/78616) | oficial |  |
+| Wireless Shell (V3), módulo ESP32-S3 + SX1262 | Medidas | 38.4 x 16.1 x 2.8 | [enlace](https://heltec.org/project/wireless-shell-v3/) | oficial |  |
+| Wireless Bridge (ESP32 + SX1276, caja de aluminio) | precio_usd | 28.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/78685) | oficial |  |
+| Wireless Bridge (ESP32 + SX1276, caja de aluminio) | Potencia declarada | 18 | [enlace](https://heltec.org/project/wireless-bridge/) | oficial |  |
+| Wireless Bridge (ESP32 + SX1276, caja de aluminio) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32/heltec_wireless_bridge/platformio.ini) | oficial |  |
+| WiFi LoRa 32 (V2), ESP32 + SX127x (en retirada) | precio_usd | 17.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/87730) | oficial |  |
+| WiFi LoRa 32 (V2), ESP32 + SX127x (en retirada) | banda_mhz | 470-510 / 863-923 | [enlace](https://heltec.org/project/wifi-lora-32v2/) | oficial |  |
+| WiFi LoRa 32 (V2), ESP32 + SX127x (en retirada) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32/heltec_v2.1/platformio.ini) | oficial |  |
+| MeshSolar (BMS solar + HT-N5262M) | precio_usd | 38.99 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98410) | oficial |  |
+| MeshSolar (BMS solar + HT-N5262M) | Medidas | 43 x 97 x 11 | [enlace](https://heltec.org/project/meshsolar/) | oficial |  |
+| MeshSolar (BMS solar + HT-N5262M) | Potencia declarada | 21 | [enlace](https://heltec.org/project/meshsolar/) | oficial |  |
+| MeshSolar (BMS solar + HT-N5262M) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/nrf52840/heltec_mesh_solar/platformio.ini) | oficial |  |
+| SensorHub HRI-3621 (temperatura y humedad) | precio_usd | 59.0 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/97241) | oficial |  |
+| SensorHub HRI-3621 (temperatura y humedad) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_sensor_hub/platformio.ini) | oficial |  |
+| SensorHub HRI-3621 (temperatura y humedad) | Grado IP | IP65 | [enlace](https://heltec.org/project/sensorhub-temperature-humidity-sensor-meshtastic-and-lorawan-compatible/) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | precio_usd | 49.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/100632) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | precio_max_usd | 58.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/101658) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | Peso | 200 | [enlace](https://heltec.org/project/wifi-lora-32-v4-expansion-housing/) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | Batería | 2800 | [enlace](https://heltec.org/project/wifi-lora-32-v4-expansion-housing/) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | Grado IP | sin impermeabilidad | [enlace](https://heltec.org/project/wifi-lora-32-v4-expansion-housing/) | oficial |  |
+| WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_v4/platformio.ini) | oficial |  |
+| WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF) | precio_usd | 66.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/112851) | oficial |  |
+| WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF) | precio_max_usd | 69.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/112850) | oficial |  |
+| WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF) | Peso | 200 | [enlace](https://heltec.org/project/v4-r8-ex/) | oficial |  |
+| WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF) | meshtastic | oficial | [enlace](https://raw.githubusercontent.com/meshtastic/firmware/develop/variants/esp32s3/heltec_v4_r8/platformio.ini) | oficial |  |
+| Omnidirectional Whip Antenna GT-800 (863-928 MHz, SMA) | precio_usd | 3.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/96548) | oficial |  |
+| Omnidirectional Whip Antenna GT-800 (863-928 MHz, SMA) | banda_mhz | 863-928 | [enlace](https://heltec.org/project/gt-800-whip-antenna/) | oficial |  |
+| SMA Antenna, látigo 868/915 MHz 4 dBi | precio_usd | 3.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98484) | oficial |  |
+| SMA Antenna, látigo 868/915 MHz 4 dBi | Ganancia | 4 | [enlace](https://heltec.org/project/sma-antenna/) | oficial |  |
+| Fiberglass Omni Antenna 900-930 MHz 5,5 dBi, conector N | precio_usd | 12.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98888) | oficial |  |
+| Fiberglass Omni Antenna 900-930 MHz 7 dBi, conector N | precio_usd | 29.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98692) | oficial |  |
+| Lightning Protector | precio_usd | 17.0 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/79782) | oficial |  |
+| Cable adaptador IPEX (U.FL) a N hembra, 0,1 m | precio_usd | 2.99 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98494) | oficial |  |
+| 10W Poly Pet Solar Panel (18 V) | precio_usd | 11.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/98905) | oficial |  |
+| 10W Poly Pet Solar Panel (18 V) | Panel solar | 10 | [enlace](https://heltec.org/project/10w-poly-pet-solar-panel-2/) | oficial |  |
+| GPS and Display Expansion Board para MeshSolar | precio_usd | 13.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/99016) | oficial |  |
+| GPS and Display Expansion Board para MeshSolar | precio_max_usd | 15.9 | [enlace](https://heltec.org/wp-json/wc/store/v1/products/99014) | oficial |  |
+| WisMesh Station / Station HP (RAK8622 / RAK8623) | precio_usd | 169.99 | [enlace](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station.js) | oficial |  |
+| WisMesh Station / Station HP (RAK8622 / RAK8623) | Peso | 630 | [enlace](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | oficial |  |
+| WisMesh Station / Station HP (RAK8622 / RAK8623) | Medidas | 92 x 68,3 x 57,5 | [enlace](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | oficial |  |
+| WisMesh Station / Station HP (RAK8622 / RAK8623) | Potencia declarada | 22.0 | [enlace](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | oficial |  |
+| WisMesh Station / Station HP (RAK8622 / RAK8623) | meshtastic | preflasheado | [enlace](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | oficial |  |
+| WisMesh Pi HAT RAK6421 | precio_usd | 14.0 | [enlace](https://store.rakwireless.com/products/meshtastic-raspberry-pi-hat-rak6421.js) | oficial |  |
+| WisMesh Pi HAT RAK6421 | radio | ninguno incluido. Admite RAK13300 o RAK13302 en 2 ranuras IO | [enlace](https://store.rakwireless.com/products/meshtastic-raspberry-pi-hat-rak6421) | oficial |  |
+| WisMesh Pi HAT RAK6421 | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/tree/develop/bin/config.d) | oficial |  |
+| RAK13302 High Power Module for LoRa (SX1262 + SKY66122) | precio_usd | 15.0 | [enlace](https://store.rakwireless.com/products/rak13302-meshtastic-1w-lora-module.js) | oficial |  |
+| RAK13302 High Power Module for LoRa (SX1262 + SKY66122) | Potencia declarada | 30.0 | [enlace](https://store.rakwireless.com/products/rak13302-meshtastic-1w-lora-module) | oficial |  |
+| RAK13302 High Power Module for LoRa (SX1262 + SKY66122) | notas | 30 dBm es el máximo de hardware. La configuración certificada FCC llega a unos 24,5 dBm (280 mW). Necesita 5 V y no funciona con 3,3 V. La revisión nueva viene en dos módulos distintos según la alimentación y ya no se conmuta. | [enlace](https://store.rakwireless.com/products/rak13302-meshtastic-1w-lora-module) | oficial |  |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | precio_usd | 39.0 | [enlace](https://store.rakwireless.com/products/meshtastic-1w-lora-booster-kit-rak3401.js) | oficial |  |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | Potencia declarada | 30.0 | [enlace](https://store.rakwireless.com/products/meshtastic-1w-lora-booster-kit-rak3401) | oficial |  |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | notas | Es la pista WisMesh 1W. Hardware hasta 30 dBm, certificado FCC a unos 24,5 dBm. En la versión Battery Powered el nodo no arranca solo con USB o panel si no hay batería. Firmware oficial rak3401-1watt. | [enlace](https://store.rakwireless.com/products/meshtastic-1w-lora-booster-kit-rak3401) | oficial |  |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/nrf52840/rak3401_1watt/platformio.ini) | oficial |  |
+| WisMesh Board ONE | precio_usd | 29.97 | [enlace](https://store.rakwireless.com/products/wismesh-board-one-meshtastic-node.js) | oficial |  |
+| WisMesh Board ONE | Medidas | 60,8 x 22,9 x 9,85 (placa, 36 de ancho con OLED) | [enlace](https://store.rakwireless.com/products/wismesh-board-one-meshtastic-node) | oficial |  |
+| WisMesh Board ONE | contradiccion | La ficha describe un conector MHF para la antena LoRa, y la sección de preguntas frecuentes de la misma ficha dice que tiene conector RP-SMA para antena externa. | [enlace](https://store.rakwireless.com/products/wismesh-board-one-meshtastic-node) | oficial |  |
+| WisMesh Board ONE Pocket | precio_usd | 46.97 | [enlace](https://store.rakwireless.com/products/wismesh-board-one-pocket-meshtastic-node.js) | oficial |  |
+| WisMesh Board ONE Pocket | Batería | 1000 | [enlace](https://store.rakwireless.com/products/wismesh-board-one-pocket-meshtastic-node) | oficial |  |
+| WisMesh Board ONE Pocket | contradiccion | La lista de características dice batería de 1000 mAh y la lista de contenido de la misma ficha dice 11000mAh Battery. | [enlace](https://store.rakwireless.com/products/wismesh-board-one-pocket-meshtastic-node) | oficial |  |
+| WisMesh Board ONE Pocket | Medidas | 77 x 50 x 26,1 (sin antena) | [enlace](https://store.rakwireless.com/products/wismesh-board-one-pocket-meshtastic-node) | oficial |  |
+| WisMesh WiFi MQTT Gateway V2 (RAK10719) | precio_usd | 34.0 | [enlace](https://store.rakwireless.com/products/wismesh-wifi-gateway.js) | oficial |  |
+| WisMesh WiFi MQTT Gateway V2 (RAK10719) | Grado IP | IP65 (solo con caja Unify) | [enlace](https://store.rakwireless.com/products/wismesh-wifi-gateway) | oficial |  |
+| WisMesh WiFi MQTT Gateway V2 (RAK10719) | mcu | ESP32-S3 (RAK3312) | [enlace](https://store.rakwireless.com/products/wismesh-wifi-gateway) | oficial |  |
+| WisMesh Ethernet MQTT Gateway (RAK10720) | precio_usd | 43.0 | [enlace](https://store.rakwireless.com/products/wismesh-ethernet-gateway.js) | oficial |  |
+| WisMesh Ethernet MQTT Gateway (RAK10720) | meshtastic | preflasheado | [enlace](https://store.rakwireless.com/products/wismesh-ethernet-gateway) | oficial |  |
+| WisMesh RP2040 Starter Kit (RAK10723, RAK11310) | precio_usd | 23.99 | [enlace](https://store.rakwireless.com/products/wisblock-rp2040-starter-kit-for-meshtastic.js) | oficial |  |
+| WisMesh RP2040 Starter Kit (RAK10723, RAK11310) | meshtastic | preflasheado | [enlace](https://store.rakwireless.com/products/wisblock-rp2040-starter-kit-for-meshtastic) | oficial |  |
+| WisMesh Base Board RAK19026 (con RAK4630) | precio_usd | 59.0 | [enlace](https://store.rakwireless.com/products/wismesh-baseboard-rak19026.js) | oficial |  |
+| WisMesh Base Board RAK19026 (con RAK4630) | gps | sí, u-blox ZOE-M8Q integrado | [enlace](https://store.rakwireless.com/products/wismesh-baseboard-rak19026) | oficial |  |
+| RAK3112 Breakout Board (RAK3212, ESP32-S3 + SX1262) | precio_usd | 16.0 | [enlace](https://store.rakwireless.com/products/rak3112-breakout-board-esp32-s3-sx1262.js) | oficial |  |
+| RAK3112 Breakout Board (RAK3212, ESP32-S3 + SX1262) | Medidas | 29 x 40 x 4,28 | [enlace](https://store.rakwireless.com/products/rak3112-breakout-board-esp32-s3-sx1262) | oficial |  |
+| RAK3112 Breakout Board (RAK3212, ESP32-S3 + SX1262) | meshtastic | comunidad | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/rak3312/platformio.ini) | oficial |  |
+| WisMesh Blade Antenna 915 MHz (RAKARJ16) | precio_usd | 6.0 | [enlace](https://store.rakwireless.com/products/wismesh-antenna.js) | oficial |  |
+| WisMesh Blade Antenna 915 MHz (RAKARJ16) | Ganancia | 2.3 | [enlace](https://store.rakwireless.com/products/wismesh-antenna) | oficial |  |
+| WisMesh Blade Antenna 915 MHz (RAKARJ16) | vswr | ≤1,5 (ficha), ≤2,0 en datasheet con 1,28 a 902 y 1,46 a 928 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarj16/datasheet/) | oficial |  |
+| Flexible Whip Antenna for Meshtastic 915 MHz (RAKARJ21) | precio_usd | 8.0 | [enlace](https://store.rakwireless.com/products/sma-male-915mhz-868mhz-whip-antenna-20cm.js) | oficial |  |
+| Flexible Whip Antenna for Meshtastic 915 MHz (RAKARJ21) | Ganancia | 2.0 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarj21/datasheet/) | oficial |  |
+| Flexible Whip Antenna for Meshtastic 915 MHz (RAKARJ21) | Peso | 25 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarj21/datasheet/) | oficial |  |
+| 5dBi Fiberglass Antenna 902-928 MHz | precio_usd | 35.0 | [enlace](https://store.rakwireless.com/products/5dbi-fiber-glass-antenna-supports-902-928mhz.js) | oficial |  |
+| 5dBi Fiberglass Antenna 902-928 MHz | Ganancia | 5.0 | [enlace](https://store.rakwireless.com/products/5dbi-fiber-glass-antenna-supports-902-928mhz) | oficial |  |
+| 5dBi Fiberglass Antenna 902-928 MHz | vswr | ≤1,47 | [enlace](https://store.rakwireless.com/products/5dbi-fiber-glass-antenna-supports-902-928mhz) | oficial |  |
+| 5dBi Fiberglass Antenna 902-928 MHz | Grado IP | IP67 | [enlace](https://store.rakwireless.com/products/5dbi-fiber-glass-antenna-supports-902-928mhz) | oficial |  |
+| 5.8dBi Fiberglass Antenna blanca 902-928 MHz (RAKARG14) | precio_usd | 40.0 | [enlace](https://store.rakwireless.com/products/5-8dbi-fiber-glass-antenna.js) | oficial |  |
+| 5.8dBi Fiberglass Antenna blanca 902-928 MHz (RAKARG14) | Ganancia | 5.8 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarg14/datasheet/) | oficial |  |
+| 5.8dBi Fiberglass Antenna blanca 902-928 MHz (RAKARG14) | Medidas | 29,8 x 800 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarg14/datasheet/) | oficial |  |
+| 5.8dBi BLACK Fiberglass Antenna 902-930 MHz | precio_usd | 20.0 | [enlace](https://store.rakwireless.com/products/5-8dbi-black-fiberglass-antenna.js) | oficial |  |
+| 5.8dBi BLACK Fiberglass Antenna 902-930 MHz | notas | La ficha solo publica especificaciones de la variante 863-870 (ganancia máxima 5,9 dBi, VSWR ≤2). Para 902-930 no hay datasheet propio de la versión negra, la ganancia sale del nombre del producto. Mitad de precio que la blanca. | [enlace](https://store.rakwireless.com/products/5-8dbi-black-fiberglass-antenna) | oficial |  |
+| 8dBi Fiberglass Antenna 900-930 MHz (RAKARG15) | precio_usd | 60.0 | [enlace](https://store.rakwireless.com/products/fiber-glass-antenna-1.js) | oficial |  |
+| 8dBi Fiberglass Antenna 900-930 MHz (RAKARG15) | Ganancia | 8.0 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarg15/datasheet/) | oficial |  |
+| 8dBi Fiberglass Antenna 900-930 MHz (RAKARG15) | notas | La tabla del datasheet mide 7,3 dBi a 915 MHz y entre 6,3 y 8,3 dBi en la banda, con eficiencia media de 50 %. El envío cuesta 50 USD por el largo según la ficha. El cable RP-SMA a N incluido es solo para interior. | [enlace](https://store.rakwireless.com/products/fiber-glass-antenna-1) | oficial |  |
+| 12dBi Directional Antenna 860-930 MHz (RAKARP01) | precio_usd | 229.0 | [enlace](https://store.rakwireless.com/products/directional-antenna.js) | oficial |  |
+| 12dBi Directional Antenna 860-930 MHz (RAKARP01) | Ganancia | 12.0 | [enlace](https://store.rakwireless.com/products/directional-antenna) | oficial |  |
+| 12dBi Directional Antenna 860-930 MHz (RAKARP01) | Peso | 4300 | [enlace](https://docs.rakwireless.com/product-categories/accessories/rakarp01/datasheet/) | oficial |  |
+| 3dBi Fiberglass Antenna 860-930 MHz | precio_usd | 27.5 | [enlace](https://store.rakwireless.com/products/3dbi-fiber-glass-antenna.js) | oficial |  |
+| 3dBi Fiberglass Antenna 860-930 MHz | Ganancia | 3.0 | [enlace](https://store.rakwireless.com/products/3dbi-fiber-glass-antenna) | oficial |  |
+| 3dBi Fiberglass Antenna 860-930 MHz | vswr | ≤1,8 | [enlace](https://store.rakwireless.com/products/3dbi-fiber-glass-antenna) | oficial |  |
+| Wio Tracker L1 (con OLED, sin caja) | precio_usd | 30.9 | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-p-6453.html) | oficial |  |
+| Wio Tracker L1 (con OLED, sin caja) | gps | sí, L76K (GPS, BeiDou, GLONASS, QZSS) | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-p-6453.html) | oficial |  |
+| Wio Tracker L1 (con OLED, sin caja) | meshtastic | preflasheado | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-p-6453.html) | oficial |  |
+| Wio Tracker L1 Lite (sin pantalla) | precio_usd | 28.9 | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-Lite-p-6455.html) | oficial |  |
+| Wio Tracker L1 Lite (sin pantalla) | Pantalla | ninguna (conectores para OLED 1,3 y e-ink 2,13) | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-Lite-p-6455.html) | oficial |  |
+| Wio Tracker L1 E-ink | precio_usd | 32.9 | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-E-ink-p-6456.html) | oficial |  |
+| Wio Tracker L1 E-ink | Pantalla | e-ink 2,13 pulgadas 122x250, refresco parcial 0,42 s y completo 3 s | [enlace](https://www.seeedstudio.com/Wio-Tracker-L1-E-ink-p-6456.html) | oficial |  |
+| Wio Tracker L1 E-ink | meshtastic | preflasheado | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/nrf52840/seeed_wio_tracker_L1_eink/platformio.ini) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit for Meshtastic & LoRa | precio_usd | 10.9 | [enlace](https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit for Meshtastic & LoRa | Medidas | 21 x 17,8 | [enlace](https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit for Meshtastic & LoRa | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/seeed_xiao_s3/platformio.ini) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit with 3D case | precio_usd | 17.9 | [enlace](https://www.seeedstudio.com/XIAO-ESP32S3-for-Meshtastic-LoRa-with-3D-Printed-Enclosure-p-6314.html) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit with 3D case | Peso | 37.1 | [enlace](https://www.seeedstudio.com/XIAO-ESP32S3-for-Meshtastic-LoRa-with-3D-Printed-Enclosure-p-6314.html) | oficial |  |
+| XIAO ESP32S3 & Wio-SX1262 Kit with 3D case | Medidas | 22 x 23 x 57 | [enlace](https://www.seeedstudio.com/XIAO-ESP32S3-for-Meshtastic-LoRa-with-3D-Printed-Enclosure-p-6314.html) | oficial |  |
+| Wio Tracker 1110 Dev Board for Meshtastic | precio_usd | 31.9 | [enlace](https://www.seeedstudio.com/Wio-Tracker-1110-Dev-Board-for-Meshtastic-p-5914.html) | oficial |  |
+| Wio Tracker 1110 Dev Board for Meshtastic | Potencia declarada | 20.0 | [enlace](https://www.seeedstudio.com/Wio-Tracker-1110-Dev-Board-for-Meshtastic-p-5914.html) | oficial |  |
+| Wio Tracker 1110 Dev Board for Meshtastic | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/nrf52840/wio-tracker-wm1110/platformio.ini) | oficial |  |
+| SenseCAP Indicator D1L / D1Pro (con LoRa SX1262) | precio_usd | 59.0 | [enlace](https://www.seeedstudio.com/SenseCAP-Indicator-D1L-p-5646.html) | oficial |  |
+| SenseCAP Indicator D1L / D1Pro (con LoRa SX1262) | precio_max_usd | 89.0 | [enlace](https://www.seeedstudio.com/SenseCAP-Indicator-D1Pro-p-5644.html) | oficial |  |
+| SenseCAP Indicator D1L / D1Pro (con LoRa SX1262) | Potencia declarada | 21.0 | [enlace](https://www.seeedstudio.com/SenseCAP-Indicator-D1L-p-5646.html) | oficial |  |
+| SenseCAP Indicator D1L / D1Pro (con LoRa SX1262) | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/seeed-sensecap-indicator/platformio.ini) | oficial |  |
+| Fiberglass Antenna Kit with RP Cable 860-930 MHz 3 dBi 360 mm | precio_usd | 27.0 | [enlace](https://www.seeedstudio.com/3dBi-860-930MHz-Fiberglass-Antenna-p-6910.html) | oficial |  |
+| Fiberglass Antenna Kit with RP Cable 860-930 MHz 3 dBi 360 mm | Ganancia | 3.07 | [enlace](https://www.seeedstudio.com/3dBi-860-930MHz-Fiberglass-Antenna-p-6910.html) | oficial |  |
+| Fiberglass Antenna Kit with RP Cable 860-930 MHz 3 dBi 360 mm | Grado IP | IP67 | [enlace](https://www.seeedstudio.com/3dBi-860-930MHz-Fiberglass-Antenna-p-6910.html) | oficial |  |
+| Fiberglass Antenna Kit 902-928 MHz 3 dBi with Antenna Base | precio_usd | 34.99 | [enlace](https://www.seeedstudio.com/LoRa-Fiberglass-Antenna-Kit-902-928MHz-3dBi-with-Antenna-Base-p-5130.html) | oficial |  |
+| Fiberglass Antenna Kit 902-928 MHz 3 dBi with Antenna Base | contradiccion | Precio visible y JSON-LD de 34,99, pero el bloque de datos de producto para Mailchimp de la misma página dice 29.9. Además la ficha declara Efficiency 60% y la tabla de la misma ficha da cerca de 80 %. | [enlace](https://www.seeedstudio.com/LoRa-Fiberglass-Antenna-Kit-902-928MHz-3dBi-with-Antenna-Base-p-5130.html) | oficial |  |
+| Fiberglass Antenna Kit 902-928 MHz 3 dBi with Antenna Base | vswr | ≤2,5 | [enlace](https://www.seeedstudio.com/LoRa-Fiberglass-Antenna-Kit-902-928MHz-3dBi-with-Antenna-Base-p-5130.html) | oficial |  |
+| Fiberglass Antenna 900-930 MHz 7 dBi 920 mm | precio_usd | 49.0 | [enlace](https://www.seeedstudio.com/Lora-Fiberglass-Antenna-900-930MHz-7dBi-920mm-p-4926.html) | oficial |  |
+| Fiberglass Antenna 900-930 MHz 7 dBi 920 mm | disponibilidad | agotado | [enlace](https://www.seeedstudio.com/Lora-Fiberglass-Antenna-900-930MHz-7dBi-920mm-p-4926.html) | oficial |  |
+| Fiberglass Antenna 900-930 MHz 7 dBi 920 mm | Ganancia | 7.0 | [enlace](https://www.seeedstudio.com/Lora-Fiberglass-Antenna-900-930MHz-7dBi-920mm-p-4926.html) | oficial |  |
+| Fiberglass Antenna 900-930 MHz 7 dBi 920 mm | vswr | ≤2,0 | [enlace](https://www.seeedstudio.com/Lora-Fiberglass-Antenna-900-930MHz-7dBi-920mm-p-4926.html) | oficial |  |
+| 2.6dBi Long Range Antenna SMA male 915 MHz 195 mm | precio_usd | 2.49 | [enlace](https://www.seeedstudio.com/External-Antenna-915MHZ-2-6dBi-SMA-L195mm-p-5047.html) | oficial |  |
+| 2.6dBi Long Range Antenna SMA male 915 MHz 195 mm | Ganancia | 2.6 | [enlace](https://www.seeedstudio.com/External-Antenna-915MHZ-2-6dBi-SMA-L195mm-p-5047.html) | oficial |  |
+| ThinkNode M7 Meshtastic Gateway (PoE) | precio_usd | 54.9 | [enlace](https://www.elecrow.com/thinknode-m7-wireless-communication-gateway-for-meshtastic-support-poe-powered-powered-by-esp32-s3-and-lr1110.html) | oficial |  |
+| ThinkNode M7 Meshtastic Gateway (PoE) | Peso | 80 | [enlace](https://www.elecrow.com/thinknode-m7-wireless-communication-gateway-for-meshtastic-support-poe-powered-powered-by-esp32-s3-and-lr1110.html) | oficial |  |
+| ThinkNode M7 Meshtastic Gateway (PoE) | recarga | USB-C 5 V 1 A o PoE 802.3af (37 a 57 V) | [enlace](https://www.elecrow.com/thinknode-m7-wireless-communication-gateway-for-meshtastic-support-poe-powered-powered-by-esp32-s3-and-lr1110.html) | oficial |  |
+| ThinkNode M7 Meshtastic Gateway (PoE) | meshtastic | preflasheado | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/ELECROW-ThinkNode-M7/platformio.ini) | oficial |  |
+| ThinkNode M2 con batería | precio_usd | 21.9 | [enlace](https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-powered-by-esp32-s3-with-1-3-oled-display.html) | oficial |  |
+| ThinkNode M2 con batería | Batería | 1000 | [enlace](https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-powered-by-esp32-s3-with-1-3-oled-display.html) | oficial |  |
+| ThinkNode M2 con batería | Peso | 50 | [enlace](https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-powered-by-esp32-s3-with-1-3-oled-display.html) | oficial |  |
+| ThinkNode M2 con batería | Consumo | 217.0 | [enlace](https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-powered-by-esp32-s3-with-1-3-oled-display.html) | oficial |  |
+| Meshstick USB-To-SPI SX1262 TCXO LoRa USB Stick | precio_usd | 23.4 | [enlace](https://www.elecrow.com/meshstick-usb-to-spi-sx1262-tcxo-lora-usb-stick-usb-plug-and-play-meshtastic-lora-mesh-node.html) | oficial |  |
+| Meshstick USB-To-SPI SX1262 TCXO LoRa USB Stick | Potencia declarada | 22.0 | [enlace](https://www.elecrow.com/meshstick-usb-to-spi-sx1262-tcxo-lora-usb-stick-usb-plug-and-play-meshtastic-lora-mesh-node.html) | oficial |  |
+| Meshstick USB-To-SPI SX1262 TCXO LoRa USB Stick | Peso | 36.6 | [enlace](https://www.elecrow.com/meshstick-usb-to-spi-sx1262-tcxo-lora-usb-stick-usb-plug-and-play-meshtastic-lora-mesh-node.html) | oficial |  |
+| Meshstick USB-To-SPI SX1262 TCXO LoRa USB Stick | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/tree/develop/bin/config.d) | oficial |  |
+| CrowPanel Advance 3.5 pulgadas para Meshtastic (ESP32-S3 + SX1262) | precio_usd | 36.3 | [enlace](https://www.elecrow.com/crowpanel-advance-3-5-hmi-esp32-ai-display-for-meshtastic-320x240-ips-artificial-intelligent-screen.html) | oficial |  |
+| CrowPanel Advance 3.5 pulgadas para Meshtastic (ESP32-S3 + SX1262) | precio_max_usd | 38.1 | [enlace](https://www.elecrow.com/crowpanel-advance-3-5-hmi-esp32-ai-display-for-meshtastic-320x240-ips-artificial-intelligent-screen.html) | oficial |  |
+| CrowPanel Advance 3.5 pulgadas para Meshtastic (ESP32-S3 + SX1262) | Medidas | 101,4 x 63,3 x 15,8 | [enlace](https://www.elecrow.com/crowpanel-advance-3-5-hmi-esp32-ai-display-for-meshtastic-320x240-ips-artificial-intelligent-screen.html) | oficial |  |
+| CrowPanel Advance 3.5 pulgadas para Meshtastic (ESP32-S3 + SX1262) | radio | SX1262 (módulo inalámbrico intercambiable) | [enlace](https://www.elecrow.com/crowpanel-advance-3-5-hmi-esp32-ai-display-for-meshtastic-320x240-ips-artificial-intelligent-screen.html) | oficial |  |
+| CrowPanel Advance 2.4 / 2.8 pulgadas para Meshtastic | disponibilidad | agotado | [enlace](https://www.elecrow.com/crowpanel-advance-2-8-hmi-ai-display-for-meshtastic-esp32-320x240-artificial-ips-intelligent-touchscreen.html) | oficial |  |
+| CrowPanel Advance 2.4 / 2.8 pulgadas para Meshtastic | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/elecrow_panel/platformio.ini) | oficial |  |
+| Wireless module for CrowPanel Advanced Series, opción LoRa (SX1262) | precio_usd | 6.55 | [enlace](https://www.elecrow.com/wireless-module-for-crowpanel-advanced-series.html) | oficial |  |
+| ThinkNode G3 (gateway LoRaWAN de un canal) | precio_usd | 29.9 | [enlace](https://www.elecrow.com/thinknode-g3-single-channel-lorawan-gateway-esp32-s3-chip-smart-home-smart-iot-solutions.html) | oficial |  |
+| ThinkNode G3 (gateway LoRaWAN de un canal) | Peso | 66 | [enlace](https://www.elecrow.com/thinknode-g3-single-channel-lorawan-gateway-esp32-s3-chip-smart-home-smart-iot-solutions.html) | oficial |  |
+| ThinkNode G3 (gateway LoRaWAN de un canal) | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/ELECROW-ThinkNode-G3/platformio.ini) | oficial |  |
+| LoRa Antenna SMA/RP-SMA 868/915 MHz Folding Paddle | precio_usd | 3.4 | [enlace](https://www.elecrow.com/lora-antenna-sma-male-868-915mhz-folding-paddle-directional-lora-antenna.html) | oficial |  |
+| LoRa Antenna SMA/RP-SMA 868/915 MHz Folding Paddle | Ganancia | 3.0 | [enlace](https://www.elecrow.com/lora-antenna-sma-male-868-915mhz-folding-paddle-directional-lora-antenna.html) | oficial |  |
+| LoRa Antenna SMA/RP-SMA 868/915 MHz Folding Paddle | Peso | 29 | [enlace](https://www.elecrow.com/lora-antenna-sma-male-868-915mhz-folding-paddle-directional-lora-antenna.html) | oficial |  |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | precio_usd | 14.5 | [enlace](https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h.js) | oficial |  |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | banda_mhz | 868-923 | [enlace](https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h) | oficial |  |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | contradiccion | La descripción de la ficha dice LoRa maximum transmission power: +20 dBm y la tabla de especificaciones de la misma ficha dice +22dBm. | [enlace](https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h) | oficial |  |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | Peso | 34.0 | [enlace](https://shop.m5stack.com/products/cap-lora-1262-for-cardputer-adv-sx1262-atgm336h) | oficial |  |
+| Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H) | meshtastic | oficial | [enlace](https://github.com/meshtastic/firmware/blob/develop/variants/esp32s3/m5stack_cardputer_adv/platformio.ini) | oficial |  |
+| Antena blanda SMA 902-928 MHz, 17 cm | Ganancia | 10 | [enlace](https://es.aliexpress.com/item/1005008783472623.html) | comercial |  |
+
+## Precios en AliExpress
+
+Fichas leídas con el navegador del responsable, sin iniciar sesión. Solo tiendas oficiales de cada fabricante, variante de 902-928 MHz elegida en la ficha. AliExpress pidió CAPTCHA a mitad de la revisión y ahí se detuvo.
+
+| Equipo | Tienda | Precio USD | Envío a Colombia | Variante | Ficha |
+|---|---|---|---|---|---|
+| T3-S3 V1.3 | lilygo Official Store | 18.98 | gratis | SX1262 (915MHz) | [2026-09-30](https://es.aliexpress.com/item/1005004627139838.html) |
+| Wireless Paper | Heltec Automation Official Store | 26.13 | gratis | 902-928MHz, 1 pieza | [2026-09-30](https://es.aliexpress.com/item/1005005647926628.html) |
+| WiFi LoRa 32 (V3 / V3.2) | Heltec Automation Official Store | 26.74 | gratis | 863-928MHz | [2026-09-30](https://es.aliexpress.com/item/1005007593651536.html) |
+| WiFi LoRa 32 (V4.3 / V4.3.1) | Heltec Automation Official Store | 27.95 | gratis | 863-928MHz, sin GPS | [2026-09-30](https://es.aliexpress.com/item/1005011870647672.html) |
+| WisBlock Meshtastic Starter Kit (RAK4631+RAK19007) | Tienda oficial RAK | 20.99 | USD 7.79 | 900MHz None, Base Board n Mods 6 por defecto | [2026-09-30](https://es.aliexpress.com/item/1005006901039995.html) |
+| T-Beam (clasico) | lilygo Official Store | 36.98 | USD 0.85 | Antena de 915MHz (11cm), T-Beam V1.2 | [2026-09-30](https://es.aliexpress.com/item/4001178678568.html) |
+| Wireless Tracker V2 | Heltec Automation Official Store | 39.63 | gratis | 863-928MHz, antena de resorte | [2026-09-30](https://es.aliexpress.com/item/1005012052953799.html) |
+| Mesh Node T096 | Heltec Automation Official Store | 46.77 | gratis | 863-928MHz, 1 pieza | [2026-09-30](https://es.aliexpress.com/item/1005012144065046.html) |
+| WisMesh Repeater Mini V2 (RAK10728/RAK10729) | Tienda oficial RAK | 95.90 | USD 25.73 | RAK10729-nGPS-9xx | [2026-09-30](https://es.aliexpress.com/item/1005012968083997.html) |
+| WisMesh Repeater (RAK10721), sin kit solar | Tienda oficial RAK | 95.00 | USD 25.73 | Model2-9XXMHz-US | [2026-09-30](https://es.aliexpress.com/item/1005008579973254.html) |
+| T-Watch S3 | lilygo Official Store | 45.34 | USD 2.83 | SX1262 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005005642999869.html) |
+| T-Echo (Meshtastic) | lilygo Official Store | 61.98 | no se envía | 915 megahercios | [2026-09-30](https://es.aliexpress.com/item/1005003026107533.html) |
+| ThinkNode M1 | ELECROW Official Store | 80.07 | USD 16.15 | 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005008707135974.html) |
+| T-Deck Plus Meshtastic | lilygo Official Store | 82.98 | USD 5.65 | 915MHz Ublox GNSS | [2026-09-30](https://es.aliexpress.com/item/1005007568074083.html) |
+| WisMesh Pocket V2 (RAK10709) | Tienda oficial RAK | 87.77 | USD 7.79 | sin selector de banda | [2026-09-30](https://es.aliexpress.com/item/1005008274198434.html) |
+| T-Lora Pager Meshtastic | lilygo Official Store | 95.98 | no se envía | SX1262(915MHz) | [2026-09-30](https://es.aliexpress.com/item/1005009782586146.html) |
+| WisMesh Unify Enclosure 100x75x38mm, con panel solar y antena integrada 902-928 MHz | Tienda oficial RAK | 28.00 | Sin dato | variante por defecto de la ficha | [2026-09-30](https://es.aliexpress.com/item/1005005145247101.html) |
+| WisMesh Tag | Tienda oficial RAK | 35.00 | USD 7.79 | sin selector de banda | [2026-09-30](https://es.aliexpress.com/item/1005009754254701.html) |
+| WisMesh Pocket Mini | Tienda oficial RAK | 59.97 | USD 7.79 | 900MHz | [2026-09-30](https://es.aliexpress.com/item/1005008184475582.html) |
+| WisMesh TAP V2 | Tienda oficial RAK | 105.00 | Sin dato | sin selector de banda, color negro | [2026-09-30](https://es.aliexpress.com/item/1005010777776431.html) |
+| T-Deck (original, sin Plus) | lilygo Official Store | 55.98 | no se envía | LoRa 915MHz | [2026-09-30](https://es.aliexpress.com/item/1005005692235592.html) |
+| T-Beam 1W (Meshtastic) | lilygo Official Store | 56.98 | USD 4.24 | 915 megahercios | [2026-09-30](https://es.aliexpress.com/item/1005010741190479.html) |
+| WisMesh High Power Booster Starter Kit (RAK10724: RAK3401 + RAK13302 + RAK19007) | Tienda oficial RAK | 35.00 | Sin dato | Battery Powered-9XX | [2026-09-30](https://es.aliexpress.com/item/1005012898074933.html) |
+| WisMesh Board ONE | Tienda oficial RAK | 32.97 | Sin dato | Modelo1-Tipo1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005002326265820.html) |
+| WisMesh Board ONE Pocket | Tienda oficial RAK | 55.97 | Sin dato | Module1-Type1-9XXMHz | [2026-09-30](https://es.aliexpress.com/item/1005009545369380.html) |
+| Antena blanda SMA 902-928 MHz, 17 cm | Heltec Automation Official Store | 7.77 | gratis | 1Pc 902-928Mhz | [2026-09-30](https://es.aliexpress.com/item/1005008783472623.html) |
 
 ## Contradicciones entre fuentes
 
@@ -261,6 +704,24 @@ Se muestran tal cual. No se eligió una de las dos.
 - **Seeed Studio Fiberglass Antenna Kit 8 dBi 915 MHz (902-928, 1300 mm).** el mismo registro de eBee da VSWR <2,0 en el texto y 2,5 en la tabla; la ficha de Seeed no publica ROE en el extracto
 - **PCTEL MFB-9153 omni 5,25 dBi (3 dBd).** ninguna
 - **SpecFive LLC Spec5 Relay (relay solar Meshtastic, RAK WisBlock).** ninguna
+- **Ebyte (Chengdu Ebyte Electronic Technology) E80-900M2213S (LR1121, 22 dBm sub-GHz + 13 dBm 2,4 GHz, SPI).** La tabla principal dice 22 dBm maximo, la tabla RF de la misma ficha dice 21,5 dBm maximo.
+- **Ebyte (Chengdu Ebyte Electronic Technology) TX900-PB-2323 panel direccional 10 dBi, SMA-J.** Existe otra ficha del mismo modelo TX900-PB-2323 en la tienda a 45,09 y marcada no disponible (handle 915mhz-868mhz-10dbi-high-gain-wifi-antenna-sma-j-50w-exterior-aerial-directional-antena-tx).
+- **Ebyte (Chengdu Ebyte Electronic Technology) TX915-JKS-20 latiguillo de caucho plegable, SMA-J, 195 mm.** El titulo de la ficha dice 2.5dBi y la tabla tecnica de la misma ficha dice 3.0 dBi. Se registra 3,0 de la tabla.
+- **Meshnology W10 LoRa AIoT Dev Kit (ESP32-S3 + Ebyte E22-900MM22S, GPS L76K, LCD 1,54).** platformio.ini de la rama develop dice custom_meshtastic_actively_supported = true, y la API api.meshtastic.org/resource/deviceHardware devuelve activelySupported false.
+- **Meshnology W12 "WiFi LoRa 32 V5" (ESP32-S3R8 + LR2021 doble banda, OLED).** platformio.ini de develop usa custom_meshtastic_hw_model = 255 (PRIVATE_HW) y la API api.meshtastic.org devuelve hwModel 145.
+- **LilyGO T-Echo Plus (Meshtastic).** RAM: la tienda dice «RAM 2MB» y la wiki dice 256 KB.
+- **LilyGO T-Beam 1W (Meshtastic).** Rango de frecuencia: la wiki da 830–945 MHz en características y 830–950 MHz en la tabla de parámetros RF.
+- **LilyGO T3-S3 LR1121.** Dimensiones: la tienda dice «66 X 36MM» y la wiki «66 × 27 × 15 mm». Pantalla: la tienda dice 0,96 pulgadas y la wiki 1,3 pulgadas.
+- **LilyGO T-Connect Pro.** Banda: la wiki dice 433–920 MHz, pero la tienda vende una variante de 915 MHz y otra de 920 MHz sin aclarar si cubre 920–928.
+- **Heltec Wireless Shell (V3), módulo ESP32-S3 + SX1262.** El título de la ficha dice «Meshtastic and LoRaWAN Compatible», pero el firmware oficial no tiene un target Wireless Shell.
+- **Heltec WiFi LoRa 32 (V2), ESP32 + SX127x (en retirada).** Banda: la ficha dice 863~923 MHz, que no cubre 923–928 MHz, aunque la variante se vende como 902~928 MHz.
+- **Heltec WiFi LoRa 32 Expansion Kit (V4 + carcasa, 28 dBm).** Dimensiones: la ficha publica 52×52×15 mm, cifra incompatible con una celda 18650 de 65 mm de largo que el mismo kit aloja.
+- **Heltec WiFi LoRa 32 Expansion Kit V2 (V4-R8 + carcasa de aluminio, GNSS, TF).** Dimensiones: la ficha publica 52×52×15 mm, cifra incompatible con la celda 18650 de 65 mm que el kit aloja.
+- **RAKwireless WisMesh Board ONE.** La ficha describe un conector MHF para la antena LoRa, y la sección de preguntas frecuentes de la misma ficha dice que tiene conector RP-SMA para antena externa.
+- **RAKwireless WisMesh Board ONE Pocket.** La lista de características dice batería de 1000 mAh y la lista de contenido de la misma ficha dice 11000mAh Battery.
+- **RAKwireless WisMesh Blade Antenna 915 MHz (RAKARJ16).** La ficha de tienda da VSWR ≤1,5 para 902-928 y el datasheet RAKARJ16 da VSWR ≤2,0.
+- **Seeed Studio Fiberglass Antenna Kit 902-928 MHz 3 dBi with Antenna Base.** Precio visible y JSON-LD de 34,99, pero el bloque de datos de producto para Mailchimp de la misma página dice 29.9. Además la ficha declara Efficiency 60% y la tabla de la misma ficha da cerca de 80 %.
+- **M5Stack Cap LoRa 1262 for Cardputer Adv (SX1262, ATGM336H).** La descripción de la ficha dice LoRa maximum transmission power: +20 dBm y la tabla de especificaciones de la misma ficha dice +22dBm.
 
 ## Registros FCC sin cifra de potencia
 
