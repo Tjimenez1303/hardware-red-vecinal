@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&display=swap">
+<style>
+  /* Logo de Red Vecinal LoRa. Tema por parámetro: ?t=claro | ?t=oscuro. Fondo transparente. */
+  html, body { margin: 0; background: transparent; }
+  body { width: 720px; height: 200px; display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Sans", sans-serif; }
+  .logo { display: flex; align-items: center; gap: 26px; }
+  svg.marca { width: 150px; height: 150px; flex: none; }
+  .texto { display: flex; flex-direction: column; gap: 6px; }
+  .nombre { font-size: 64px; font-weight: 700; letter-spacing: -0.035em; line-height: 0.95; }
+  .nombre span { font-weight: 500; }
+  .grupo { font-size: 21px; font-weight: 500; letter-spacing: 0.01em; }
+  body.claro { --tinta: #18181a; --tenue: #55565b; --monte: #18181a; --senal: #d9480f; --nieve: #ffffff; }
+  body.oscuro { --tinta: #f2f2f0; --tenue: #b6b7bb; --monte: #f2f2f0; --senal: #ff7a3d; --nieve: #0d1117; }
+  .nombre { color: var(--tinta); }
+  .grupo { color: var(--tenue); }
+</style>
+</head>
+<body>
+<div class="logo">
+  <svg class="marca" viewBox="0 0 120 120" role="img" aria-label="Cordillera con nodos de radio">
+    <!-- Ondas centradas en la cima: la alerta que sale del cerro -->
+    <g fill="none" stroke="var(--senal)" stroke-width="4.5" stroke-linecap="round">
+      <path d="M64.5 28.5 A12 12 0 0 1 83.5 28.5"/>
+      <path d="M58.2 23 A20 20 0 0 1 89.8 23" opacity=".45"/>
+    </g>
+    <!-- Filo de Manizales a la izquierda y cono del volcán a la derecha, silueta abierta -->
+    <path d="M6 100 L38 56 L52 72 L74 40 L114 100" fill="none" stroke="var(--monte)" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M66 51.5 L74 40 L82 51.5 L78 49 L74 53 L70 49 Z" fill="var(--monte)"/>
+    <!-- Enlaces de la malla: troncal entre cerros y bajadas a los barrios de ladera -->
+    <g fill="none" stroke="var(--senal)" stroke-width="3.5" stroke-linecap="round">
+      <path d="M38 56 Q54 30 74 40"/>
+      <path d="M38 56 L30 86"/>
+      <path d="M74 40 L78 84"/>
+      <path d="M30 86 L54 90 L78 84"/>
+    </g>
+    <g fill="var(--senal)" stroke="var(--nieve)" stroke-width="3">
+      <circle cx="38" cy="56" r="7.5"/>
+      <circle cx="74" cy="40" r="8"/>
+      <circle cx="30" cy="86" r="5.5"/>
+      <circle cx="54" cy="90" r="5.5"/>
+      <circle cx="78" cy="84" r="5.5"/>
+    </g>
+  </svg>
+  <div class="texto">
+    <div class="nombre">Red Vecinal <span>LoRa</span></div>
+    <div class="grupo">AI Tinkeres Manizales</div>
+  </div>
+</div>
+<script>
+  document.body.className = new URLSearchParams(location.search).get("t") === "oscuro" ? "oscuro" : "claro";
+</script>
+</body>
+</html>

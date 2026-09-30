@@ -1,172 +1,171 @@
-# Hardware Red Vecinal LoRa
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/logo-oscuro.png">
+    <img src="assets/readme/logo-claro.png" alt="Red Vecinal LoRa, de AI Tinkeres Manizales" width="420">
+  </picture>
+</p>
 
-Herramienta **interna** de la comunidad AIThinkers para decidir la compra de
-hardware de la Red Vecinal LoRa (Manizales, Caldas). La Red Vecinal es una capa
-de entrega resiliente para las alertas que el SAT y el SISMAN-LISA ya calculan:
-no detecta nada ni decide niveles de alerta.
+<p align="center">
+  Comparador de radios LoRa y Meshtastic para armar una red de alertas en Manizales<br>
+  que siga funcionando cuando se va la luz y se cae el celular.
+</p>
 
-Cubre las dos capas de la red:
+<p align="center">
+  <a href="https://tjimenez1303.github.io/hardware-red-vecinal/">Abrir el sitio</a> |
+  <a href="docs/densidad.md">Estudio de densidad</a> |
+  <a href="FUENTES.md">Fuentes</a>
+</p>
 
-- **Capa fija:** nodos solares en postes y azoteas, más la troncal entre cerros.
-  Incluye placas sueltas, antenas y accesorios.
-- **Capa portátil:** aparatos de bolsillo que llevan los vecinos. Hay dos familias:
-  (a) etiqueta sin pantalla emparejada al celular y (b) aparato con pantalla propia.
+<p align="center">
+  <img src="assets/readme/portada.png" alt="Mapa nocturno de Manizales con nodos solares en los cerros, portátiles en los barrios y una alerta que se reparte desde un cerro, junto a cuatro vistas del sitio" width="100%">
+</p>
 
-## Las páginas
+## De qué se trata
 
-| Página | Para qué |
+Manizales vive en laderas. Cuando llueve fuerte, el Sistema de Alerta Temprana de la
+ciudad y el SISMAN-LISA emiten alertas. El problema es el último tramo: si la emergencia tumba la energía y las antenas de
+celular, la alerta no le llega a la persona que vive en la ladera.
+
+La Red Vecinal LoRa es una idea de AI Tinkeres Manizales para cubrir ese tramo. Son
+radios pequeños que hablan entre sí sin internet y sin operador, con el firmware
+abierto [Meshtastic](https://meshtastic.org). Unos van fijos en postes y azoteas con
+panel solar. Otros los carga la gente en el bolsillo. Cada aparato repite lo que oye,
+así que un mensaje salta de vecino en vecino hasta cubrir el barrio. La red no detecta
+nada ni decide niveles de alerta. Solo entrega lo que el sistema oficial ya calculó.
+
+Este repositorio es la parte de compras. Antes de gastar plata en aparatos
+necesitábamos saber qué existe, cuánto cuesta de verdad, qué se consigue en Colombia y
+cuántos equipos aguanta un barrio antes de que la red se sature.
+
+## Lo que hemos encontrado
+
+Hasta el 30 de septiembre de 2026 revisamos 171 equipos de 20 fabricantes. Casi todos
+son de Shenzhen y Chengdu, en China. Algunos hallazgos que cambian la forma de comprar:
+
+- Un barrio aguanta unos 40 aparatos que retransmiten al mismo tiempo. Por encima, el
+  canal se empieza a llenar en una emergencia y conviene que el resto quede en modo
+  de solo escucha. Es una cifra de diseño que sale de umbrales del firmware y de un
+  cálculo propio, no de una medición en campo. El detalle está en
+  [docs/densidad.md](docs/densidad.md).
+- La norma colombiana pide un ancho de banda mínimo de 500 kHz, y el único perfil de
+  Meshtastic que lo cumple es `LONG_TURBO`. La comunidad Meshtastic Colombia usa otro
+  perfil, y los dos no se oyen entre sí. Esa decisión le toca al proyecto.
+- Ningún fabricante de estos radios tiene tienda en Colombia. Todo se importa, y al
+  precio de lista hay que sumarle envío e impuestos.
+- La potencia que anuncia el fabricante no siempre es la que certificó. Revisamos el
+  registro de 20 equipos en la FCC, y la mayoría de los de LilyGO y Heltec anuncian
+  22 dBm pero pasaron la prueba con menos de 8 dBm. El sitio muestra las dos cifras
+  por separado.
+- En AliExpress la tienda oficial no siempre es más barata que la del fabricante, y
+  tres equipos de LilyGO en versión de 915 MHz no se despachan a Colombia.
+
+Las dos familias de aparatos portátiles, la etiqueta que depende del celular y el
+aparato con pantalla propia, están comparadas en
+[docs/familias-portatiles.md](docs/familias-portatiles.md).
+
+## El sitio
+
+Está en <https://tjimenez1303.github.io/hardware-red-vecinal/> y tiene cinco páginas:
+
+| Página | Qué hace |
 |---|---|
-| `index.html` | **Catálogo.** Galería con foto, filtros rápidos y orden. El ícono de filtros junto al orden abre un panel por campos (rangos de precio, peso, batería, potencia, grado IP, rasgos de sí o no y fabricante); cada filtro queda como una ficha que se edita o se quita. El buscador entiende operadores: `precio<50 peso<100 ip>=6 tiene:pantalla fabricante:rak` y Enter. Se marcan hasta cuatro equipos y se comparan en una ventana con lo esencial. Al tocar la foto o el nombre, la ficha completa del equipo se abre a pantalla completa encima del catálogo; se pasa al anterior o al siguiente con las flechas y se cierra con la X o con Esc. |
-| `tabla.html` | **Tabla de resultados.** Todas las cifras en una cuadrícula, con barras dentro de las celdas y un panel de detalle por equipo. |
-| `comparar.html` | **Comparación completa** de dos a cuatro equipos: además de lo esencial, puesto dentro de su capa, rendimiento por dólar, textos de la ficha, radio, FCC, instalación y fuentes que no coinciden. En cada fila, el mejor valor va en negrilla, y cada columna dice en cuántas filas gana. |
-| `asistente.html` | **Asistente de compra.** Preguntas que cambian según las respuestas (a un portátil le pregunta el tamaño, a un repetidor de cerro la exposición) y una recomendación con dos alternativas. |
-| `graficas.html` | **Gráficas.** Mapa de compromisos con ejes a elegir, índices de valor por dólar, precios por capa con sus cuartiles, perfil de un equipo frente a su capa y las dos familias portátiles. Lo que se toque en cualquiera aparece a la derecha con su ficha completa. |
+| Catálogo | Todos los equipos con foto, precio y enlace a la tienda. Tiene filtros por rango y un buscador que entiende cosas como `precio<50 peso<100 tiene:pantalla pais:china`. Al tocar un equipo se abre su ficha completa encima del catálogo. |
+| Tabla | Las cifras en una cuadrícula que se ordena por cualquier columna. |
+| Comparar | Hasta cuatro equipos lado a lado. En cada fila el mejor valor va en negrilla. |
+| Asistente | Unas preguntas sobre para quién es el aparato y dónde va a estar, y una recomendación con dos alternativas. |
+| Gráficas | Precio contra batería, rendimiento por dólar, precios por capa y cómo queda un equipo frente a los de su tipo. |
 
-La selección para comparar se guarda en el navegador y pasa de una página a otra.
-El tema claro u oscuro se cambia con el botón del sol y la luna.
+Todo es HTML, CSS y JavaScript sin dependencias ni paso de compilación.
 
-## Verla
+## Verlo en tu computador
 
-Es HTML, CSS y JS sin dependencias, sin construcción y sin `npm install`. La
-única carga externa es la fuente IBM Plex Sans de Google Fonts.
+El navegador no deja leer el archivo de datos si abres la página directamente, así
+que hay que servir la carpeta:
 
-- **Publicada:** <https://tjimenez1303.github.io/hardware-red-vecinal/>, servida por GitHub Pages desde la raíz de la rama `main`.
-- **En local:** el navegador no deja leer `datos/equipos.json` desde `file://`,
-  así que hay que servir la carpeta:
+```bash
+python3 -m http.server 8000
+```
 
-  ```bash
-  python3 -m http.server 8000
-  ```
+Después abre <http://localhost:8000>.
 
-  y abrir <http://localhost:8000>.
-
-## Estructura
+## Cómo está organizado
 
 ```
 index.html, tabla.html, comparar.html, asistente.html, graficas.html
-assets/comun.js         carga de datos, rasgos derivados, filas del comparador, barra y tema
-assets/comun.css        tokens de color (claro y oscuro), barra, botones, estados
-assets/img/<id>.jpg     una foto por equipo, descargada de la ficha del fabricante
-datos/equipos.json      todos los datos: equipos, mercado colombiano, referencias
-FUENTES.md              de dónde sale cada precio y cada dato (se genera)
-herramientas/fuentes.py genera FUENTES.md desde el JSON
-docs/densidad.md        el límite de densidad del enjambre, roles y configuración para Manizales
-docs/familias-portatiles.md   comparación de las dos familias portátiles
+assets/comun.js          datos, filas de comparación, barra y tema claro u oscuro
+assets/comun.css         colores y piezas compartidas
+assets/img/              una foto por equipo, bajada de la ficha del fabricante
+assets/readme/           logo y portada de este README
+datos/equipos.json       todos los datos del catálogo
+FUENTES.md               de dónde sale cada precio y cada dato
+docs/                    estudio de densidad y comparación de las familias portátiles
+herramientas/fuentes.py  vuelve a generar FUENTES.md a partir del JSON
+herramientas/readme/     el HTML con el que se dibujaron el logo y la portada
 ```
-
-Las referencias no están en la web: viven en `FUENTES.md` y en los dos
-documentos de `docs/`.
 
 ## De dónde salen los datos
 
-| Qué | Origen | Fecha |
-|---|---|---|
-| 48 equipos base | `datos/equipos-2026-09-04b.json` del proyecto Red Vecinal LoRa (49 relevados; el WisBlock Starter Kit estaba duplicado y se fusionó) | 4-sep-2026 |
-| Precios, disponibilidad y fichas | Reverificados en la ficha del fabricante o del distribuidor: JSON de variantes de la tienda, JSON-LD de la ficha o navegador | 29-sep-2026 |
-| Equipos nuevos: 16 portátiles, 1 nodo fijo y 6 antenas | Investigación del 29-sep-2026 | 29-sep-2026 |
-| Huecos de ficha llenados con otra fuente | Wikis, manuales y directorios; cada uno anotado en `fuentes_campos` con URL, cita y condiciones | 29 y 30-sep-2026 |
-| Potencia certificada ante la FCC | Concesiones e informes de prueba en fccid.io, leídos con navegador | 30-sep-2026 |
-| 99 equipos nuevos de fabricantes de China, Hong Kong y Taiwán | Tiendas oficiales de LilyGO, Heltec, RAK, Seeed, Elecrow, M5Stack, Ebyte, Waveshare, DFRobot, MinewSemi, Meshnology y ALFA, leídas en vivo | 30-sep-2026 |
-| Precios en AliExpress | Tiendas oficiales de LilyGO, Heltec, RAK y Elecrow en AliExpress, con la variante de 902-928 MHz y el envío a Colombia, leídas con el navegador sin iniciar sesión | 30-sep-2026 |
-| Fotos | `og:image` de la ficha o imagen de la variante en el JSON de la tienda, reducidas a 800 px | 29-sep-2026 |
+Cada precio se leyó en la tienda del fabricante o de su distribuidor oficial, con la
+dirección de la ficha y la fecha de consulta. En las tiendas Shopify se lee el JSON de
+la ficha, y en las demás el precio publicado en la página. Los de AliExpress se
+leyeron con un navegador, eligiendo la variante de 915 MHz y mirando el envío a
+Colombia. Los datos técnicos que faltaban en las fichas se buscaron en manuales, wikis
+y registros de la FCC. Todo queda anotado en [FUENTES.md](FUENTES.md).
 
-TRM de referencia: COP 3.140,55/USD (Banco de la República, 3-sep-2026). Los
-precios son de lista en USD, **sin** el costo de importación.
+Los precios son de lista en dólares y no incluyen importación. La tasa de referencia
+es de 3.140,55 pesos por dólar, del Banco de la República el 3 de septiembre de 2026.
 
-## Reglas de los datos
+Seguimos unas reglas que no negociamos:
 
-Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
-
-1. **Un precio sin URL de vendedor y sin fecha no entra.** La página lo hace
-   cumplir: si falta `url` o `fecha_consulta`, muestra «Sin dato» y deja el equipo
-   fuera de las barras, los umbrales y las gráficas de precio.
-2. **Dato no publicado:** `null` en el JSON, que la página muestra como «Sin dato».
-   Nunca se rellena con una estimación. Antes de dejar un hueco se busca la
-   referencia exacta en la ficha, el manual, la wiki del fabricante y, si existe,
-   el registro FCC.
-3. **Dato que no aplica** a la capa (la autonomía en uso de una antena, por
-   ejemplo): la página muestra «No aplica». Sale de la lista `capas` de cada fila
-   en `assets/comun.js`, no del JSON.
-4. **Dato llenado con otra fuente:** va en `fuentes_campos.<campo>` con `url`,
-   `cita`, `tipo_fuente` (oficial, comercial o comunidad) y `condiciones`. La
-   autonomía dice además si la dio el fabricante o la midió la comunidad.
-5. **Las contradicciones entre fuentes se reportan** en el campo `contradiccion`,
-   no se resuelven.
-6. **La potencia declarada y la certificada son dos datos distintos.** `tx_dbm` es
-   lo que publica el fabricante (casi siempre el máximo del chip). `tx_fcc_dbm` es
-   la potencia conducida con la que se certificó el equipo ante la FCC. Varios
-   equipos LilyGO y Heltec se certificaron por debajo de 8 dBm. Tres Elecrow (M1,
-   M5 y M9) se certificaron por intensidad de campo y no tienen cifra.
-7. **No se añade a `referencias` ninguna fuente que no se haya abierto.**
-8. **Los precios de buscadores o de su caché no valen.** Exa sirvió copias viejas
-   de varias tiendas. Hay que leer la ficha en vivo.
+1. Un precio sin enlace al vendedor y sin fecha no se publica. La página lo muestra
+   como «Sin dato» y lo deja por fuera de las gráficas.
+2. Si el fabricante no publica un dato, queda vacío. No lo llenamos con una
+   estimación.
+3. Cuando dos fuentes no coinciden, se muestran las dos en el campo `contradiccion`.
+4. No citamos una fuente que no hayamos abierto.
+5. Los precios que muestran los buscadores no sirven porque suelen ser copias viejas.
+   Hay que abrir la ficha.
 
 ## Cómo actualizar
 
-### Precios
+Para cambiar un precio, abre la ficha del equipo, copia el precio viejo a
+`precio_anterior_usd` y actualiza `precio_usd`, `disponibilidad` y `fecha_consulta`
+en `datos/equipos.json`. En las tiendas Shopify, agregar `.js` al final de la
+dirección del producto devuelve el precio y el stock de cada variante.
 
-1. Abrir la ficha de cada equipo (`url`). En tiendas Shopify (RAK, LilyGO,
-   Rokland, SpecFive, Atlavox, M5Stack), añadir `.js` a la URL del producto
-   devuelve el JSON de variantes con precio y stock.
-2. En `datos/equipos.json`, para cada equipo:
-   - antes de tocar nada, copiar el precio viejo a `precio_anterior_usd`;
-   - actualizar `precio_usd`, `precio_max_usd`, `variante_precio`, `disponibilidad`
-     (`en stock`, `agotado`, `preventa`, `backorder`, `descontinuado` o `null`) y
-     `fecha_consulta` (AAAA-MM-DD);
-   - anotar en `cambio` lo que cambió.
-3. Actualizar `meta.fecha_datos` y regenerar las fuentes:
+Para agregar un equipo, dale un `id` en minúsculas con guiones, guarda su foto en
+`assets/img/<id>.jpg` y pon esa ruta en el campo `imagen`. En macOS se reduce así:
 
-   ```bash
-   python3 herramientas/fuentes.py
-   ```
+```bash
+sips -s format jpeg -s formatOptions 82 -Z 800 original.png --out assets/img/<id>.jpg
+```
 
-### Un equipo nuevo
+Cuando termines, vuelve a generar las fuentes:
 
-1. Añadirlo a `datos/equipos.json` con un `id` único en minúsculas y guiones.
-2. Guardar su foto en `assets/img/<id>.jpg` y poner esa ruta en `imagen`, con la
-   URL de donde salió en `imagen_fuente`. En macOS, para dejarla como las demás:
+```bash
+python3 herramientas/fuentes.py
+```
 
-   ```bash
-   sips -s format jpeg -s formatOptions 82 -Z 800 original.png --out assets/img/<id>.jpg
-   ```
+Las filas de la comparación están en `GRUPOS`, dentro de `assets/comun.js`. Los
+filtros del catálogo están en `NUM` y `BOOL`, dentro de `index.html`. Las preguntas
+del asistente están en `PREGUNTAS`, dentro de `asistente.html`.
 
-   Sin foto, la página dibuja una silueta según el tipo de equipo.
-3. Regenerar `FUENTES.md`.
+Cada `git push` a `main` vuelve a publicar el sitio en uno o dos minutos. Si ves la
+versión anterior, agrega un `?v=` distinto a `assets/comun.css` y `assets/comun.js`
+en las cinco páginas.
 
-### Una fila o una columna
+## Contribuir
 
-- Las filas del comparador y de la ventana de comparación están en `GRUPOS`
-  (`assets/comun.js`). Cada fila tiene un título, una función que pinta la celda,
-  las capas a las que aplica y, si tiene sentido, una función `mejor` que decide
-  cuál va en negrilla. Las filas con `det: true` solo salen en la comparación
-  completa y en la ficha de las gráficas, no en la ventana del catálogo.
-- Los campos del panel de filtros y sus palabras para el buscador están en `NUM`
-  y `BOOL` (`index.html`).
-- Las columnas de la tabla están en `COL` y `PORCAPA` (`tabla.html`).
-- Los ejes del mapa de compromisos y los índices de valor están en `MAG` e
-  `INDICES` (`graficas.html`).
-- Las preguntas del asistente están en `PREGUNTAS` (`asistente.html`). Cada una
-  tiene una condición `cuando` que decide si aparece según las respuestas previas.
+Si encuentras un precio desactualizado, un equipo que falta o un dato mal copiado,
+abre un issue con el enlace a la ficha. Si quieres corregirlo tú:
 
-### Caché de GitHub Pages
+1. Haz un fork del repositorio.
+2. Crea una rama, por ejemplo `git checkout -b precio-t1000e`.
+3. Haz el cambio en `datos/equipos.json` con su enlace y su fecha.
+4. Abre un pull request contando qué cambiaste y de dónde salió.
 
-Si después de publicar se sigue viendo la versión vieja, añadir o subir un sufijo
-`?v=` a `assets/comun.css` y `assets/comun.js` en las cinco páginas.
+## Quiénes somos
 
-## Estilo
-
-- **Una sola familia, IBM Plex Sans**, con cifras tabulares en las tablas.
-- **Cada capa tiene su color**: fija azul, portátil naranja, placa verde, antena
-  violeta y accesorio ocre. Se usan igual en las cinco páginas y en las gráficas.
-- **El mejor valor de una fila va en negrilla.** No se usa color para eso.
-- **Se evita:** cajas alrededor de cada bloque, etiquetas en mayúsculas, metadatos
-  unidos con punto medio, guiones largos como separador y llamadas numeradas en
-  el texto.
-
-## Publicar
-
-- **Repositorio:** <https://github.com/Tjimenez1303/hardware-red-vecinal>, público.
-- **Sitio:** <https://tjimenez1303.github.io/hardware-red-vecinal/>. GitHub Pages lo sirve desde la raíz de la rama `main`.
-
-Cada `git push` a `main` vuelve a publicar el sitio en uno o dos minutos. Si se sigue
-viendo la versión anterior, ver la sección de caché más arriba.
+AI Tinkeres Manizales es una comunidad de gente que arma cosas con tecnología en
+Manizales, Caldas. La Red Vecinal LoRa es uno de nuestros proyectos. Todavía no
+definimos una licencia para este repositorio.

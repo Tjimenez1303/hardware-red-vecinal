@@ -66,7 +66,7 @@ Cada precio sale de la ficha del vendedor en la fecha indicada. Sin URL o sin fe
 | Heltec MeshTower V2, 30dBm Outdoor LoRa Node | 109.00 | [Heltec Automation](https://heltec.org/project/meshtower/) | 2026-09-29 |
 | Atlavox Beacon Solar Mesh Node | 235.99 | [Atlavox](https://atlavox.com/products/atlavox-beacon-solar-meshtastic-node) | 2026-09-29 |
 | RAKwireless WisMesh Repeater + Solar Battery Lite (panel 10 W + 5,2 Ah) | 299.00 | [Rokland (299,00 en RAKwireless)](https://store.rokland.com/products/rakwireless-wismesh-repeater-reliable-meshtastic-repeater-for-challenging-environmentsrak) | 2026-09-29 |
-| SpecFive LLC Spec5 Relay (relay solar Meshtastic, RAK WisBlock) | 274.99 | [SpecFive LLC](https://specfive.com/products/spec5-meshtastic-relay) | 2026-09-29 |
+| SpecFive Spec5 Relay (relay solar Meshtastic, RAK WisBlock) | 274.99 | [SpecFive LLC](https://specfive.com/products/spec5-meshtastic-relay) | 2026-09-29 |
 | Heltec SensorHub HRI-3621 (temperatura y humedad) | 59.00 | [Heltec Automation (tienda oficial)](https://heltec.org/project/sensorhub-temperature-humidity-sensor-meshtastic-and-lorawan-compatible/) | 2026-09-30 |
 | RAKwireless WisMesh Station / Station HP (RAK8622 / RAK8623) | 169.99 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/meshtastic-gateway-raspberry-pi-wismesh-station) | 2026-09-30 |
 | RAKwireless WisMesh WiFi MQTT Gateway V2 (RAK10719) | 34.00 | [RAKwireless (tienda oficial)](https://store.rakwireless.com/products/wismesh-wifi-gateway) | 2026-09-30 |
@@ -711,7 +711,7 @@ Se muestran tal cual. No se eligió una de las dos.
 - **Laird / TE Connectivity FG9026 omni 8 dBi 902-928.** peso: 0,23 kg en la hoja de TE, 1815 g en ArcAntenna, 11 lb en RFWEL. Potencia máxima: 100 W en la hoja, 200 W en RadioParts
 - **Seeed Studio Fiberglass Antenna Kit 8 dBi 915 MHz (902-928, 1300 mm).** el mismo registro de eBee da VSWR <2,0 en el texto y 2,5 en la tabla; la ficha de Seeed no publica ROE en el extracto
 - **PCTEL MFB-9153 omni 5,25 dBi (3 dBd).** ninguna
-- **SpecFive LLC Spec5 Relay (relay solar Meshtastic, RAK WisBlock).** ninguna
+- **SpecFive Spec5 Relay (relay solar Meshtastic, RAK WisBlock).** ninguna
 - **Ebyte (Chengdu Ebyte Electronic Technology) E80-900M2213S (LR1121, 22 dBm sub-GHz + 13 dBm 2,4 GHz, SPI).** La tabla principal dice 22 dBm maximo, la tabla RF de la misma ficha dice 21,5 dBm maximo.
 - **Ebyte (Chengdu Ebyte Electronic Technology) TX900-PB-2323 panel direccional 10 dBi, SMA-J.** Existe otra ficha del mismo modelo TX900-PB-2323 en la tienda a 45,09 y marcada no disponible (handle 915mhz-868mhz-10dbi-high-gain-wifi-antenna-sma-j-50w-exterior-aerial-directional-antena-tx).
 - **Ebyte (Chengdu Ebyte Electronic Technology) TX915-JKS-20 latiguillo de caucho plegable, SMA-J, 195 mm.** El titulo de la ficha dice 2.5dBi y la tabla tecnica de la misma ficha dice 3.0 dBi. Se registra 3,0 de la tabla.
