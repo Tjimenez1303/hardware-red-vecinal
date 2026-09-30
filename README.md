@@ -167,5 +167,12 @@ abre un issue con el enlace a la ficha. Si quieres corregirlo tú:
 ## Quiénes somos
 
 AI Tinkeres Manizales es una comunidad de gente que arma cosas con tecnología en
-Manizales, Caldas. La Red Vecinal LoRa es uno de nuestros proyectos. Todavía no
-definimos una licencia para este repositorio.
+Manizales, Caldas. La Red Vecinal LoRa es uno de nuestros proyectos.
+
+## Licencia
+
+El código usa la licencia [MIT](LICENSE). Los datos, los textos de `docs/` y
+`FUENTES.md`, el logo y la portada usan
+[CC BY 4.0](LICENSE-DATOS.md): puedes reutilizarlos citando a AI Tinkeres Manizales.
+Las fotos de los equipos son de sus fabricantes y quedan por fuera de las dos
+licencias.
