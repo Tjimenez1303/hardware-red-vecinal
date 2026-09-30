@@ -146,3 +146,12 @@ select { padding-right: 28px; }
 .celda-mejor .si svg, .celda-mejor .no svg { stroke-width: 2.4; }
 .texto-dato{font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .contra .texto-dato{color:var(--accent-ink)}
+
+/* ---------- Ficha completa (gráficas y catálogo) ---------- */
+.ficha-grupo { margin-top: 18px; break-inside: avoid; }
+.ficha-grupo h3 { font-size: 13.5px; font-weight: 600; margin: 0 0 2px; color: var(--ink); }
+.ficha-grupo dl { margin: 0; }
+.ficha-grupo dl div { display: grid; grid-template-columns: 44% minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+.ficha-grupo dt { color: var(--ink-2); }
+.ficha-grupo dd { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.ficha-grupo dd .si svg, .ficha-grupo dd .no svg { width: 15px; height: 15px; }

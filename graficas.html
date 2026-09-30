@@ -14,8 +14,8 @@
   /* Cinco vistas sobre los mismos datos: dispersión libre, índices de valor, distribución de precios
      por capa, perfil por percentiles y las dos familias portátiles. Ejes lineales desde cero salvo
      donde se declara otra cosa en la propia figura. */
-  /* Ficha completa fija a la izquierda: lo que se toque en cualquier gráfica se ve ahí con todos sus datos. */
-  main { max-width: 1500px; margin: 0 auto; padding: 28px 24px 56px; display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 36px; align-items: start; }
+  /* Ficha completa fija a la derecha: lo que se toque en cualquier gráfica se ve ahí con todos sus datos. */
+  main { max-width: 1500px; margin: 0 auto; padding: 28px 24px 56px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 36px; align-items: start; }
   .contenido { min-width: 0; }
   aside.ficha { position: sticky; top: 72px; max-height: calc(100vh - 88px); overflow: auto; overscroll-behavior: contain; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 22px; }
   .ficha .foto { aspect-ratio: 4 / 3; padding: 14px; margin-bottom: 12px; }
@@ -26,13 +26,6 @@
   .ficha .acciones .precio { font-size: 19px; margin-right: auto; }
   .ficha .acciones .btn { padding: 7px 12px; font-size: 13.5px; }
   .ficha .acciones .btn svg { width: 14px; height: 14px; }
-  .ficha section { margin-top: 18px; }
-  .ficha h3 { font-size: 13.5px; font-weight: 600; margin: 0 0 2px; color: var(--ink); }
-  .ficha dl { margin: 0; }
-  .ficha dl div { display: grid; grid-template-columns: 44% minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
-  .ficha dt { color: var(--ink-2); }
-  .ficha dd { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
-  .ficha dd .si svg, .ficha dd .no svg { width: 15px; height: 15px; }
   .ficha .vacio { color: var(--ink-2); font-size: 14px; margin: 0; }
   .ficha .cerrar-ficha { display: none; }
   .fila-r { cursor: pointer; border-radius: 8px; }
@@ -118,10 +111,9 @@
 <body>
 <header id="barra"></header>
 <main>
-  <aside class="ficha" id="ficha" aria-live="polite" aria-label="Ficha del equipo elegido"></aside>
   <div class="contenido">
   <h1>Gráficas y comparativas</h1>
-  <p class="sub-h">Cinco maneras de mirar los mismos datos. Toca un equipo en cualquier gráfica y su ficha completa aparece a la izquierda. Precios de lista del <span id="fecha-datos"></span>; los equipos sin el dato quedan fuera, avisándolo.</p>
+  <p class="sub-h">Cinco maneras de mirar los mismos datos. Toca un equipo en cualquier gráfica y su ficha completa aparece a la derecha. Precios de lista del <span id="fecha-datos"></span>; los equipos sin el dato quedan fuera, avisándolo.</p>
   <nav class="indice" aria-label="Gráficas">
     <a href="#mapa">Mapa de compromisos</a><a href="#indices">Índices de valor</a><a href="#precios">Precios por capa</a><a href="#perfil">Perfil frente a la capa</a><a href="#familias">Las dos familias portátiles</a>
   </nav>
@@ -170,6 +162,7 @@
     <div class="lienzo"><div class="familias" id="fa"></div></div>
   </section>
   </div>
+  <aside class="ficha" id="ficha" aria-live="polite" aria-label="Ficha del equipo elegido"></aside>
 </main>
 
 <script src="assets/comun.js"></script>
@@ -262,7 +255,7 @@
     if (!e) { fichaEl.innerHTML = `<p class="vacio">Toca un punto del mapa, una fila de los índices o un punto de los precios, y aquí aparece la ficha completa del equipo.</p>`; return; }
     const enComp = leerSeleccion().includes(e.id);
     fichaEl.innerHTML = `<button class="cerrar-ficha" type="button" data-cerrar-ficha aria-label="Cerrar la ficha">${ICONOS.cerrar}</button>
-      <div class="foto marco-foto">${foto(e)}</div>
+      <div class="foto marco-foto">${foto(e).replace('loading="lazy"', 'loading="eager"')}</div>
       <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
       <span class="fab">${esc(e.fabricante)}</span>
       <h2>${esc(nombre(e))}</h2>
@@ -272,7 +265,7 @@
         ${enComp ? `<a class="btn btn-secundario" href="comparar.html">Ya está en la comparación</a>` : `<button class="btn btn-secundario" type="button" data-anadir>${ICONOS.mas} Comparar</button>`}
         ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Tienda ${ICONOS.externo}</a>` : ""}
       </div>
-      ${filasPara([e], { completo: true }).map((g) => `<section><h3>${esc(g.titulo)}</h3><dl>${g.filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")}</dl></section>`).join("")}`;
+      ${RV.fichaGrupos(e)}`;
     fichaEl.scrollTop = 0;
   }
   fichaEl.addEventListener("click", (ev) => {

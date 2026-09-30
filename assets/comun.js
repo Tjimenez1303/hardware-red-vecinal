@@ -331,6 +331,12 @@
       })),
     })).filter((g) => g.filas.length);
   }
+  // Ficha completa de un equipo: todos los grupos con sus filas de detalle. La usan la columna de
+  // las gráficas y la ventana a pantalla completa del catálogo.
+  function fichaGrupos(e) {
+    return filasPara([e], { completo: true }).map((g) =>
+      `<section class="ficha-grupo"><h3>${esc(g.titulo)}</h3><dl>${g.filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")}</dl></section>`).join("");
+  }
   // Datos clave de una línea para listas y tarjetas.
   function resumen(e) {
     const r = e.r, p = [];
@@ -374,5 +380,5 @@
     return d;
   }
 
-  window.RV = { texto, foto, PAGINAS, GRUPOS, filasPara, resumen, nombre, guardarSeleccion, leerSeleccion, CAPAS, esc, esNum, fecha, usd, n, limpiar, primeraFrase, precioValido, rasgos, forma, silueta, ICONOS, siNo, sinCel, barra, cargar };
+  window.RV = { fichaGrupos, texto, foto, PAGINAS, GRUPOS, filasPara, resumen, nombre, guardarSeleccion, leerSeleccion, CAPAS, esc, esNum, fecha, usd, n, limpiar, primeraFrase, precioValido, rasgos, forma, silueta, ICONOS, siNo, sinCel, barra, cargar };
 })();

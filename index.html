@@ -67,6 +67,40 @@
   .hoja-fila .t { color: var(--ink-2); font-size: 13.5px; }
   .hoja-fila .c { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
+  /* Ficha a pantalla completa: se abre encima del catálogo, que sigue detrás con su scroll y sus filtros. */
+  .abrir-ficha { all: unset; cursor: pointer; display: block; border-radius: 14px; }
+  .abrir-ficha:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .item h2 .abrir-ficha { border-radius: 4px; }
+  .item h2 .abrir-ficha:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .item .abrir-ficha .foto { transition: transform .2s; }
+  .item .abrir-ficha:hover .foto { transform: scale(1.015); }
+  dialog.pantalla { width: calc(100vw - 32px); height: calc(100dvh - 32px); max-width: none; max-height: none; margin: 16px; border-radius: 18px; padding: 0; overflow: hidden; }
+  dialog.pantalla[open] { display: flex; flex-direction: column; }
+  .pantalla .barra-ficha { flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 16px 12px 20px; border-bottom: 1px solid var(--line); }
+  .pantalla .barra-ficha .pos { font-size: 13.5px; color: var(--ink-3); margin-right: auto; }
+  .pantalla .nav-ficha { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; color: var(--ink-2); }
+  .pantalla .nav-ficha:hover:not(:disabled) { color: var(--ink); border-color: var(--ink-3); }
+  .pantalla .nav-ficha:disabled { opacity: .35; cursor: default; }
+  .pantalla .nav-ficha svg { width: 18px; height: 18px; }
+  .pantalla .cerrar { position: static; width: 40px; height: 40px; }
+  .pantalla .cuerpo-ficha { flex: 1 1 auto; overflow: auto; display: grid; grid-template-columns: minmax(300px, 400px) minmax(0, 1fr); gap: 40px; padding: 28px 32px 40px; }
+  .pantalla .lado { position: sticky; top: 0; align-self: start; }
+  .pantalla .lado .foto { aspect-ratio: 1; padding: 22px; margin-bottom: 16px; }
+  .pantalla .lado .fab { display: block; font-size: 13.5px; color: var(--ink-3); margin-top: 8px; }
+  .pantalla .lado h2 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; letter-spacing: -0.02em; margin: 2px 0 6px; }
+  .pantalla .lado .res { margin: 0 0 16px; color: var(--ink-2); }
+  .pantalla .lado .precio { font-size: 24px; font-weight: 600; }
+  .pantalla .lado .acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .pantalla .lado .acciones .btn svg { width: 15px; height: 15px; }
+  .pantalla .datos { columns: 2 340px; column-gap: 36px; }
+  .pantalla .datos .ficha-grupo:first-child { margin-top: 0; }
+  @media (max-width: 760px) {
+    dialog.pantalla { width: 100vw; height: 100dvh; margin: 0; border-radius: 0; }
+    .pantalla .cuerpo-ficha { grid-template-columns: 1fr; gap: 20px; padding: 18px 16px 32px; }
+    .pantalla .lado { position: static; }
+    .pantalla .lado .foto { aspect-ratio: 4 / 3; max-height: 42vh; }
+  }
+
   /* Filtros avanzados: botón de ícono junto al orden, panel tipo Gmail (formulario por campos) y
      condiciones aplicadas como fichas removibles tipo GCP. El buscador también entiende operadores. */
   .av { position: relative; }
@@ -160,6 +194,16 @@
   <div id="hoja-contenido"></div>
 </dialog>
 
+<dialog id="ficha-dlg" class="pantalla" aria-labelledby="ficha-titulo">
+  <div class="barra-ficha">
+    <span class="pos" id="ficha-pos"></span>
+    <button class="nav-ficha" type="button" id="ficha-ant" aria-label="Equipo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="nav-ficha" type="button" id="ficha-sig" aria-label="Equipo siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button class="cerrar" type="button" id="ficha-cerrar" aria-label="Cerrar la ficha"></button>
+  </div>
+  <div class="cuerpo-ficha" id="ficha-cuerpo"></div>
+</dialog>
+
 <script src="assets/comun.js"></script>
 <script>
 (async function () {
@@ -168,6 +212,7 @@
   try { d = await cargar(); } catch (err) { document.getElementById("grilla").textContent = "No se pudieron cargar los datos: " + err.message; return; }
   barra("index.html", d.meta.fecha_datos);
   document.getElementById("cerrar").innerHTML = ICONOS.cerrar;
+  document.getElementById("ficha-cerrar").innerHTML = ICONOS.cerrar;
   const eq = d.equipos;
   const porId = new Map(eq.map((e) => [e.id, e]));
   const MAX = 4;
@@ -314,9 +359,9 @@
       const lleno = !marcado && estado.sel.length >= MAX;
       const aviso = e.disponibilidad === "agotado" ? "Agotado" : e.linea_base ? "Línea base del proyecto" : e.nuevo ? "Nuevo en el catálogo" : "";
       return `<li class="item">
-        <div class="foto marco-foto">${aviso ? `<span class="aviso">${aviso}</span>` : ""}${foto(e)}</div>
+        <button type="button" class="abrir-ficha" data-ficha="${esc(e.id)}" aria-label="Ver la ficha completa de ${esc(nombre(e))}" tabindex="-1"><div class="foto marco-foto">${aviso ? `<span class="aviso">${aviso}</span>` : ""}${foto(e)}</div></button>
         <span class="fab">${esc(e.fabricante)}</span>
-        <h2>${esc(nombre(e))}</h2>
+        <h2><button type="button" class="abrir-ficha" data-ficha="${esc(e.id)}">${esc(nombre(e))}</button></h2>
         <span class="res">${esc(resumen(e)) || "&nbsp;"}</span>
         <div class="pie">
           ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato">Sin dato</span>`}
@@ -325,6 +370,67 @@
       </li>`;
     }).join("") || `<li class="vacio">Ningún equipo cumple estos filtros.</li>`;
   }
+
+  // ---------- ficha a pantalla completa ----------
+  const dlg = document.getElementById("ficha-dlg");
+  let fichaId = null, fichaOrigen = null;
+  function pintarFicha() {
+    const e = porId.get(fichaId), l = lista(), i = l.findIndex((x) => x.id === fichaId);
+    const marcado = estado.sel.includes(e.id), lleno = !marcado && estado.sel.length >= MAX;
+    document.getElementById("ficha-pos").textContent = i >= 0 ? `${i + 1} de ${l.length} ${CAPAS[e.capa].plural.toLowerCase()}` : CAPAS[e.capa].nombre;
+    document.getElementById("ficha-ant").disabled = i <= 0;
+    document.getElementById("ficha-sig").disabled = i < 0 || i >= l.length - 1;
+    document.getElementById("ficha-cuerpo").innerHTML = `<div class="lado">
+        <div class="foto marco-foto">${foto(e).replace('loading="lazy"', 'loading="eager"')}</div>
+        <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
+        <span class="fab">${esc(e.fabricante)}</span>
+        <h2 id="ficha-titulo">${esc(nombre(e))}</h2>
+        ${resumen(e) ? `<p class="res">${esc(resumen(e))}</p>` : ""}
+        ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato">Sin precio</span>`}
+        <div class="acciones">
+          <button class="btn ${marcado ? "btn-secundario" : "btn-primario"}" type="button" id="ficha-comparar" ${lleno ? "disabled" : ""}>${marcado ? "Quitar de la comparación" : lleno ? "Ya hay cuatro para comparar" : `${ICONOS.mas} Añadir a la comparación`}</button>
+          ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Ver en la tienda ${ICONOS.externo}</a>` : ""}
+        </div>
+      </div>
+      <div class="datos">${RV.fichaGrupos(e)}</div>`;
+    document.getElementById("ficha-cuerpo").scrollTop = 0;
+  }
+  function abrirFicha(id, origen) {
+    fichaId = id; fichaOrigen = origen || null;
+    pintarFicha();
+    if (!dlg.open) dlg.showModal();
+    document.getElementById("ficha-cerrar").focus();
+  }
+  function moverFicha(paso) {
+    const l = lista(), i = l.findIndex((x) => x.id === fichaId);
+    if (i < 0 || !l[i + paso]) return;
+    fichaId = l[i + paso].id; pintarFicha();
+  }
+  document.getElementById("ficha-cerrar").addEventListener("click", () => dlg.close());
+  document.getElementById("ficha-ant").addEventListener("click", () => moverFicha(-1));
+  document.getElementById("ficha-sig").addEventListener("click", () => moverFicha(1));
+  dlg.addEventListener("keydown", (ev) => {
+    if (ev.target.closest("input, select, textarea")) return;
+    if (ev.key === "ArrowLeft") { ev.preventDefault(); moverFicha(-1); }
+    if (ev.key === "ArrowRight") { ev.preventDefault(); moverFicha(1); }
+  });
+  dlg.addEventListener("click", (ev) => {
+    if (ev.target === dlg) { dlg.close(); return; } // clic en el fondo oscuro
+    if (!ev.target.closest("#ficha-comparar")) return;
+    estado.sel = estado.sel.includes(fichaId) ? estado.sel.filter((x) => x !== fichaId) : [...estado.sel, fichaId].slice(0, MAX);
+    pintarGrilla(); pintarBandeja(); pintarFicha();
+  });
+  dlg.addEventListener("close", () => {
+    // Al cerrar, el foco vuelve a la tarjeta del último equipo visto, que puede no ser el que se abrió.
+    // Va después de que el navegador devuelva el foco por su cuenta.
+    setTimeout(() => {
+      const destino = document.querySelector(`#grilla h2 [data-ficha="${CSS.escape(fichaId)}"]`) || fichaOrigen;
+      destino?.focus({ preventScroll: true }); destino?.closest(".item")?.scrollIntoView({ block: "nearest" });
+    });
+  });
+  document.getElementById("grilla").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-ficha]"); if (b) abrirFicha(b.dataset.ficha, b);
+  });
 
   // ---------- panel de filtros ----------
   const panel = document.getElementById("panel-av"), btnF = document.getElementById("btn-filtros");

@@ -16,11 +16,11 @@ Cubre las dos capas de la red:
 
 | Página | Para qué |
 |---|---|
-| `index.html` | **Catálogo.** Galería con foto, filtros rápidos y orden. El ícono de filtros junto al orden abre un panel por campos (rangos de precio, peso, batería, potencia, grado IP, rasgos de sí o no y fabricante); cada filtro queda como una ficha que se edita o se quita. El buscador entiende operadores: `precio<50 peso<100 ip>=6 tiene:pantalla fabricante:rak` y Enter. Se marcan hasta cuatro equipos y se comparan en una ventana con lo esencial. |
+| `index.html` | **Catálogo.** Galería con foto, filtros rápidos y orden. El ícono de filtros junto al orden abre un panel por campos (rangos de precio, peso, batería, potencia, grado IP, rasgos de sí o no y fabricante); cada filtro queda como una ficha que se edita o se quita. El buscador entiende operadores: `precio<50 peso<100 ip>=6 tiene:pantalla fabricante:rak` y Enter. Se marcan hasta cuatro equipos y se comparan en una ventana con lo esencial. Al tocar la foto o el nombre, la ficha completa del equipo se abre a pantalla completa encima del catálogo; se pasa al anterior o al siguiente con las flechas y se cierra con la X o con Esc. |
 | `tabla.html` | **Tabla de resultados.** Todas las cifras en una cuadrícula, con barras dentro de las celdas y un panel de detalle por equipo. |
 | `comparar.html` | **Comparación completa** de dos a cuatro equipos: además de lo esencial, puesto dentro de su capa, rendimiento por dólar, textos de la ficha, radio, FCC, instalación y fuentes que no coinciden. En cada fila, el mejor valor va en negrilla, y cada columna dice en cuántas filas gana. |
 | `asistente.html` | **Asistente de compra.** Preguntas que cambian según las respuestas (a un portátil le pregunta el tamaño, a un repetidor de cerro la exposición) y una recomendación con dos alternativas. |
-| `graficas.html` | **Gráficas.** Mapa de compromisos con ejes a elegir, índices de valor por dólar, precios por capa con sus cuartiles, perfil de un equipo frente a su capa y las dos familias portátiles. Lo que se toque en cualquiera aparece a la izquierda con su ficha completa. |
+| `graficas.html` | **Gráficas.** Mapa de compromisos con ejes a elegir, índices de valor por dólar, precios por capa con sus cuartiles, perfil de un equipo frente a su capa y las dos familias portátiles. Lo que se toque en cualquiera aparece a la derecha con su ficha completa. |
 
 La selección para comparar se guarda en el navegador y pasa de una página a otra.
 El tema claro u oscuro se cambia con el botón del sol y la luna.
