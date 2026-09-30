@@ -12,26 +12,33 @@
 <link rel="stylesheet" href="assets/comun.css">
 <style>
   /* Tabla de comparación de producto (NN/g, Baymard): productos en columnas, atributos en filas
-     agrupadas, encabezado fijo, interruptor de solo diferencias y el mejor valor de cada fila en negrilla. */
-  main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 0; }
+     agrupadas, encabezado fijo, interruptor de solo diferencias y el mejor valor de cada fila en negrilla.
+     Aquí van todas las filas; la ventana del catálogo solo muestra las esenciales. */
+  main { max-width: 1300px; margin: 0 auto; padding: 32px 24px 0; }
   .intro { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; }
   h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 6px; text-wrap: balance; }
-  .intro p { margin: 0; color: var(--ink-2); max-width: 56ch; }
+  .intro p { margin: 0; color: var(--ink-2); max-width: 60ch; }
+  .intro .btn svg { width: 16px; height: 16px; }
   .atajos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .atajos button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: 13.5px; cursor: pointer; color: var(--ink-2); }
   .atajos button:hover { border-color: var(--ink-3); color: var(--ink); }
 
-  .rejilla { display: grid; grid-template-columns: 220px repeat(3, minmax(0, 1fr)); column-gap: 24px; }
+  .rejilla { display: grid; grid-template-columns: 200px repeat(var(--k, 3), minmax(0, 1fr)); column-gap: 22px; }
   .cabeza { margin-top: 36px; align-items: start; }
-  .cabeza .vacio { grid-column: 1; }
-  .prod { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 0; }
-  .prod select { width: 100%; max-width: 280px; margin-bottom: 18px; }
-  .prod .foto { width: 100%; max-width: 240px; aspect-ratio: 1; padding: 14px; }
+  .prod { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 0; position: relative; }
+  .prod .elegir { display: flex; gap: 6px; width: 100%; max-width: 280px; margin-bottom: 18px; }
+  .prod select { flex: 1 1 auto; min-width: 0; }
+  .quitar { flex: none; width: 38px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; cursor: pointer; display: grid; place-items: center; color: var(--ink-2); }
+  .quitar:hover { color: var(--ink); border-color: var(--ink-3); }
+  .quitar svg { width: 16px; height: 16px; }
+  .prod .foto { width: 100%; max-width: 220px; aspect-ratio: 1; padding: 14px; }
   .prod .fab { font-size: 13px; color: var(--ink-3); margin-top: 10px; }
-  .prod .modelo { font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; min-height: 2.4em; display: flex; align-items: center; }
+  .prod .modelo { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; min-height: 2.4em; display: flex; align-items: center; }
   .prod .res { font-size: 13.5px; color: var(--ink-2); min-height: 2.6em; }
-  .prod .precio-grande { font-size: 19px; margin: 8px 0 12px; }
+  .prod .precio-grande { font-size: 19px; margin: 8px 0 4px; }
   .prod .precio-grande .precio { font-weight: 600; }
+  .prod .gana { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .prod .gana b { color: var(--ink); }
 
   .fijo { position: sticky; top: calc(56px + env(safe-area-inset-top, 0px)); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); margin: 0 -24px; padding: 10px 24px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
   .fijo.visible { opacity: 1; transform: none; pointer-events: auto; }
@@ -43,21 +50,20 @@
 
   .controles { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 28px 0 8px; flex-wrap: wrap; }
   .controles .nota { font-size: 13px; color: var(--ink-3); }
-  section.grupo { margin-top: 28px; }
+  section.grupo { margin-top: 30px; }
   section.grupo h2 { font-size: 20px; letter-spacing: -0.01em; margin: 0 0 4px; }
-  .fila { padding: 14px 0; border-top: 1px solid var(--line); align-items: start; }
+  .fila { padding: 13px 0; border-top: 1px solid var(--line); align-items: start; }
   .fila .t { font-size: 14px; color: var(--ink-2); padding-top: 1px; }
   .fila .c { font-size: 15px; min-width: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
-  .fila.igual { display: none; }
+  .fila .c .texto-dato { text-align: center; }
   .solo-dif .fila.igual { display: none; }
-  body:not(.solo-dif) .fila.igual { display: grid; }
-  .sin-grupo { display: none; }
+  .pie-proto { max-width: 1300px; margin: 40px auto 0; padding: 0 24px 40px; font-size: 13px; color: var(--ink-3); }
 
   @media (max-width: 760px) {
     main { padding: 24px 16px 0; }
     .rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
     .cabeza .vacio, .fijo .vacio { display: none; }
-    .col3 { display: none !important; }
+    .extra { display: none !important; }
     .fila .t { grid-column: 1 / -1; text-align: center; margin-bottom: 6px; }
     .fijo { margin: 0 -16px; padding: 8px 16px; }
     .prod .modelo { font-size: 18px; }
@@ -69,15 +75,16 @@
 <main>
   <div class="intro">
     <div>
-      <h1>Compara hasta tres equipos</h1>
-      <p>Elige un equipo en cada columna. En cada fila, el mejor valor va en negrilla. Puedes esconder lo que es igual en los tres.</p>
+      <h1>Compara hasta cuatro equipos</h1>
+      <p>Aquí está todo lo que se sabe de cada uno: puesto frente a su capa, rendimiento por dólar, radio, batería, instalación y las fuentes que no coinciden. En cada fila, el mejor valor va en negrilla.</p>
     </div>
+    <button class="btn btn-secundario" type="button" id="anadir"></button>
   </div>
   <div class="atajos" id="atajos" aria-label="Comparaciones sugeridas"></div>
 
-  <div class="rejilla cabeza" id="cabeza"><div class="vacio"></div></div>
+  <div class="rejilla cabeza" id="cabeza"></div>
 
-  <div class="fijo" id="fijo" aria-hidden="true"><div class="rejilla" id="fijo-rejilla"><div class="vacio"></div></div></div>
+  <div class="fijo" id="fijo" aria-hidden="true"><div class="rejilla" id="fijo-rejilla"></div></div>
 
   <div class="controles">
     <label class="interruptor"><input type="checkbox" role="switch" id="dif"> Mostrar solo las diferencias</label>
@@ -90,72 +97,86 @@
 <script src="assets/comun.js"></script>
 <script>
 (async function () {
-  const { esc, usd, foto, filasPara, resumen, nombre, CAPAS, barra, cargar, leerSeleccion } = RV;
+  const { esc, usd, foto, filasPara, resumen, nombre, CAPAS, ICONOS, barra, cargar, leerSeleccion, guardarSeleccion } = RV;
   let d;
   try { d = await cargar(); } catch (err) { document.getElementById("tabla").textContent = "No se pudieron cargar los datos: " + err.message; return; }
   barra("comparar.html", d.meta.fecha_datos);
+  const MAX = 4, MIN = 2;
   const eq = d.equipos;
   const porId = new Map(eq.map((e) => [e.id, e]));
   const buscar = (patron) => eq.find((e) => patron.test(e.fabricante + " " + e.modelo))?.id;
 
   const ATAJOS = [
-    ["Etiquetas de bolsillo", [/T1000-E/, /MeshTracker X1/, /WisMesh Tag/]],
-    ["Con pantalla propia", [/ThinkNode M1/, /T-Echo \(/, /MeshPocket/]],
-    ["Con teclado", [/ThinkNode M9/, /Cardputer/, /T-Deck Plus/]],
-    ["Nodos solares", [/Solar Node P1-Pro$/, /ThinkNode M6/, /Repeater Mini V2/]],
+    ["Etiquetas de bolsillo", [/T1000-E/, /MeshTracker X1/, /WisMesh Tag/, /ThinkNode M3/]],
+    ["Con pantalla propia", [/ThinkNode M1/, /T-Echo \(/, /MeshPocket/, /Wio Tracker L1 Pro/]],
+    ["Con teclado", [/ThinkNode M9/, /Cardputer/, /T-Deck Plus/, /T-Lora Pager|T-LoRa Pager/i]],
+    ["Nodos solares", [/Solar Node P1-Pro$/, /ThinkNode M6/, /Repeater Mini V2/, /MeshTower/]],
     ["Antenas para la troncal", [/AYA-9012/, /FG9026/, /Fiberglass/]],
   ].map(([t, ps]) => [t, ps.map(buscar).filter(Boolean)]);
 
-  let sel = leerSeleccion().filter((id) => porId.has(id)).slice(0, 3);
-  if (sel.length < 2) sel = ATAJOS[0][1].slice();
-  while (sel.length < 3) sel.push(eq.find((e) => !sel.includes(e.id) && e.capa === porId.get(sel[0]).capa).id);
+  let sel = leerSeleccion().filter((id) => porId.has(id)).slice(0, MAX);
+  if (sel.length < MIN) sel = ATAJOS[0][1].slice(0, 3);
+  while (sel.length < MIN) sel.push(eq.find((e) => !sel.includes(e.id) && e.capa === porId.get(sel[0]).capa).id);
 
   document.getElementById("atajos").innerHTML = ATAJOS.map(([t], i) => `<button type="button" data-i="${i}">${t}</button>`).join("");
   document.getElementById("atajos").addEventListener("click", (ev) => {
     const b = ev.target.closest("button"); if (!b) return;
-    sel = ATAJOS[+b.dataset.i][1].slice(0, 3); pintar();
+    sel = ATAJOS[+b.dataset.i][1].slice(0, MAX); pintar();
   });
 
-  const orden = Object.keys(CAPAS);
-  const opciones = orden.map((c) => `<optgroup label="${CAPAS[c].plural}">` +
+  const opciones = Object.keys(CAPAS).map((c) => `<optgroup label="${CAPAS[c].plural}">` +
     eq.filter((e) => e.capa === c).sort((a, b) => (a.r.precio ?? 1e9) - (b.r.precio ?? 1e9))
       .map((e) => `<option value="${esc(e.id)}">${esc(e.fabricante)} ${esc(nombre(e))}${e.r.precio !== null ? ", " + usd(e.r.precio, 0) : ""}</option>`).join("") + `</optgroup>`).join("");
 
-  function columna(e, i) {
-    return `<div class="prod ${i === 2 ? "col3" : ""}">
-      <label class="visually-hidden" for="s${i}">Equipo ${i + 1}</label>
-      <select id="s${i}" data-i="${i}">${opciones}</select>
+  function columna(e, i, k, gana, filas) {
+    return `<div class="prod ${i >= 2 ? "extra" : ""}">
+      <div class="elegir">
+        <label class="visually-hidden" for="s${i}">Equipo ${i + 1}</label>
+        <select id="s${i}" data-i="${i}">${opciones}</select>
+        ${k > MIN ? `<button class="quitar" type="button" data-quitar="${i}" aria-label="Quitar ${esc(nombre(e))} de la comparación">${ICONOS.cerrar}</button>` : ""}
+      </div>
       <div class="foto marco-foto">${foto(e)}</div>
       <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
       <span class="fab">${esc(e.fabricante)}</span>
       <span class="modelo">${esc(nombre(e))}</span>
       <span class="res">${esc(resumen(e))}</span>
       <span class="precio-grande">${e.r.precio !== null ? `<span class="precio">${usd(e.r.precio)}</span>` : `<span class="sin-dato">Sin dato</span>`}</span>
-      ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Ver en la tienda ${RV.ICONOS.externo}</a>` : ""}
+      <span class="gana">Mejor valor en <b>${gana}</b> de ${filas} filas</span>
+      ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Ver en la tienda ${ICONOS.externo}</a>` : ""}
     </div>`;
   }
 
   function pintar() {
+    guardarSeleccion(sel);
     const lista = sel.map((id) => porId.get(id));
-    const cab = document.getElementById("cabeza");
-    cab.innerHTML = `<div class="vacio"></div>` + lista.map(columna).join("");
-    lista.forEach((e, i) => { const s = document.getElementById("s" + i); s.value = e.id; });
-    document.getElementById("fijo-rejilla").innerHTML = `<div class="vacio"></div>` + lista.map((e, i) =>
-      `<div class="mini ${i === 2 ? "col3" : ""}"><div class="foto marco-foto">${foto(e, "")}</div><div style="min-width:0"><b>${esc(nombre(e))}</b><span>${e.r.precio !== null ? usd(e.r.precio) : "Sin precio"}</span></div></div>`).join("");
+    const k = lista.length;
+    document.querySelector("main").style.setProperty("--k", k);
+    const anadir = document.getElementById("anadir");
+    anadir.hidden = k >= MAX;
+    anadir.innerHTML = `${ICONOS.mas} Añadir un equipo (${k} de ${MAX})`;
 
-    const grupos = filasPara(lista);
+    const grupos = filasPara(lista, { completo: true });
+    const conMejor = grupos.flatMap((g) => g.filas).filter((f) => f.mejores.length);
+    const gana = lista.map((_, i) => conMejor.filter((f) => f.mejores.includes(i)).length);
+
+    document.getElementById("cabeza").innerHTML = `<div class="vacio"></div>` + lista.map((e, i) => columna(e, i, k, gana[i], conMejor.length)).join("");
+    lista.forEach((e, i) => { document.getElementById("s" + i).value = e.id; });
+    document.getElementById("fijo-rejilla").innerHTML = `<div class="vacio"></div>` + lista.map((e, i) =>
+      `<div class="mini ${i >= 2 ? "extra" : ""}"><div class="foto marco-foto">${foto(e, "")}</div><div style="min-width:0"><b>${esc(nombre(e))}</b><span>${e.r.precio !== null ? usd(e.r.precio) : "Sin precio"}</span></div></div>`).join("");
+
     const movil = matchMedia("(max-width: 760px)").matches;
     document.getElementById("tabla").innerHTML = grupos.map((g) => {
+      let iguales = 0;
       const filas = g.filas.map((f) => {
         const comparables = movil ? f.celdas.slice(0, 2) : f.celdas;
         const igual = comparables.every((c) => c === comparables[0]);
-        return `<div class="rejilla fila ${igual ? "igual" : ""}"><div class="t">${esc(f.t)}</div>${f.celdas.map((c, i) => `<div class="c ${i === 2 ? "col3" : ""} ${f.mejores.includes(i) ? "celda-mejor" : ""}">${c}</div>`).join("")}</div>`;
+        if (igual) iguales++;
+        return `<div class="rejilla fila ${igual ? "igual" : ""}"><div class="t">${esc(f.t)}</div>${f.celdas.map((c, i) => `<div class="c ${i >= 2 ? "extra" : ""} ${f.mejores.includes(i) ? "celda-mejor" : ""}">${c}</div>`).join("")}</div>`;
       });
-      const todasIguales = g.filas.every((f, k) => filas[k].includes('fila igual'));
-      return `<section class="grupo ${todasIguales ? "todo-igual" : ""}"><h2>${esc(g.titulo)}</h2>${filas.join("")}</section>`;
+      return `<section class="grupo ${iguales === g.filas.length ? "todo-igual" : ""}"><h2>${esc(g.titulo)}</h2>${filas.join("")}</section>`;
     }).join("");
     aplicarDif();
-    document.getElementById("nota-movil").textContent = movil ? "En pantallas angostas se comparan los dos primeros." : "";
+    document.getElementById("nota-movil").textContent = movil && k > 2 ? "En pantallas angostas se comparan los dos primeros." : "";
   }
 
   function aplicarDif() {
@@ -166,7 +187,21 @@
 
   document.getElementById("cabeza").addEventListener("change", (ev) => {
     const s = ev.target.closest("select"); if (!s) return;
-    sel[+s.dataset.i] = s.value; pintar();
+    const i = +s.dataset.i, otro = sel.indexOf(s.value);
+    if (otro >= 0 && otro !== i) sel[otro] = sel[i]; // si ya estaba en otra columna, se intercambian
+    sel[i] = s.value; pintar();
+  });
+  document.getElementById("cabeza").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-quitar]"); if (!b) return;
+    sel.splice(+b.dataset.quitar, 1); pintar();
+  });
+  document.getElementById("anadir").addEventListener("click", () => {
+    if (sel.length >= MAX) return;
+    const capa = porId.get(sel[sel.length - 1]).capa;
+    const libre = eq.filter((e) => e.capa === capa && !sel.includes(e.id) && e.r.precio !== null).sort((a, b) => a.r.precio - b.r.precio)[0]
+      || eq.find((e) => !sel.includes(e.id));
+    sel.push(libre.id); pintar();
+    document.getElementById("s" + (sel.length - 1)).focus();
   });
   document.getElementById("dif").addEventListener("change", aplicarDif);
   matchMedia("(max-width: 760px)").addEventListener("change", pintar);
@@ -176,7 +211,7 @@
   new IntersectionObserver(([en]) => { const v = !en.isIntersecting && en.boundingClientRect.top < 0; fijo.classList.toggle("visible", v); fijo.setAttribute("aria-hidden", String(!v)); }, { threshold: 0 })
     .observe(document.getElementById("cabeza"));
 
-  document.getElementById("pie").textContent = `Precios de lista en USD, sin importación, consultados el ${RV.fecha(d.meta.fecha_datos)} en la tienda de cada fabricante.`;
+  document.getElementById("pie").textContent = `Precios de lista en USD, sin importación, consultados el ${RV.fecha(d.meta.fecha_datos)} en la tienda de cada fabricante. El origen de cada dato está en FUENTES.md del repositorio.`;
   pintar();
 })();
 </script>

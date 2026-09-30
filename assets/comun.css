@@ -69,6 +69,15 @@ button { font: inherit; color: inherit; }
 .barra nav a[aria-current="page"] { color: var(--ink); font-weight: 600; }
 .barra .espacio { flex: 1; }
 .barra .fecha { font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+.barra nav { min-width: 0; flex: 0 1 auto; scrollbar-width: none; }
+.barra nav::-webkit-scrollbar { display: none; }
+.barra .tema, .barra .marca { flex: none; }
+/* En pantallas angostas la barra deja el nombre y la fecha para que quepan las cinco páginas y el tema. */
+@media (max-width: 760px) {
+  .barra { gap: 14px; padding: 0 12px 0 16px; }
+  .barra .fecha, .marca span { display: none; }
+  .barra nav { gap: 14px; }
+}
 
 /* Conmutador de tema: sol y luna (patrón web.dev «Building a theme switch component»). */
 .tema { --size: 36px; inline-size: var(--size); block-size: var(--size); border: 0; background: none; padding: 7px; border-radius: 50%; cursor: pointer; color: var(--ink-2); touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
@@ -135,3 +144,5 @@ select { padding-right: 28px; }
 .marco-foto .silueta .cuerpo { fill: #efefed; }
 .celda-mejor { font-weight: 700; color: var(--ink); }
 .celda-mejor .si svg, .celda-mejor .no svg { stroke-width: 2.4; }
+.texto-dato{font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.contra .texto-dato{color:var(--accent-ink)}

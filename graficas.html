@@ -14,7 +14,38 @@
   /* Cinco vistas sobre los mismos datos: dispersión libre, índices de valor, distribución de precios
      por capa, perfil por percentiles y las dos familias portátiles. Ejes lineales desde cero salvo
      donde se declara otra cosa en la propia figura. */
-  main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 56px; }
+  /* Ficha completa fija a la izquierda: lo que se toque en cualquier gráfica se ve ahí con todos sus datos. */
+  main { max-width: 1500px; margin: 0 auto; padding: 28px 24px 56px; display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 36px; align-items: start; }
+  .contenido { min-width: 0; }
+  aside.ficha { position: sticky; top: 72px; max-height: calc(100vh - 88px); overflow: auto; overscroll-behavior: contain; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 22px; }
+  .ficha .foto { aspect-ratio: 4 / 3; padding: 14px; margin-bottom: 12px; }
+  .ficha .fab { display: block; font-size: 13px; color: var(--ink-3); margin-top: 6px; }
+  .ficha h2 { font-size: 21px; line-height: 1.2; letter-spacing: -0.01em; margin: 2px 0 4px; }
+  .ficha .res { margin: 0 0 12px; font-size: 14px; color: var(--ink-2); }
+  .ficha .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 6px; }
+  .ficha .acciones .precio { font-size: 19px; margin-right: auto; }
+  .ficha .acciones .btn { padding: 7px 12px; font-size: 13.5px; }
+  .ficha .acciones .btn svg { width: 14px; height: 14px; }
+  .ficha section { margin-top: 18px; }
+  .ficha h3 { font-size: 13.5px; font-weight: 600; margin: 0 0 2px; color: var(--ink); }
+  .ficha dl { margin: 0; }
+  .ficha dl div { display: grid; grid-template-columns: 44% minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .ficha dt { color: var(--ink-2); }
+  .ficha dd { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .ficha dd .si svg, .ficha dd .no svg { width: 15px; height: 15px; }
+  .ficha .vacio { color: var(--ink-2); font-size: 14px; margin: 0; }
+  .ficha .cerrar-ficha { display: none; }
+  .fila-r { cursor: pointer; border-radius: 8px; }
+  .fila-r:hover { background: var(--surface-2); }
+  .fila-r.sel { background: var(--surface-2); box-shadow: inset 3px 0 0 var(--ink); }
+  .fila-r.sel .nom { font-weight: 600; }
+  @media (max-width: 1000px) {
+    main { grid-template-columns: 1fr; }
+    aside.ficha { position: fixed; left: 8px; right: 8px; bottom: 8px; top: auto; max-height: 80vh; z-index: 50; box-shadow: 0 20px 60px rgb(0 0 0 / .3); transform: translateY(calc(100% + 24px)); transition: transform .25s; }
+    aside.ficha.abierta { transform: none; }
+    .ficha .cerrar-ficha { display: grid; place-items: center; position: sticky; top: 0; margin: -6px -6px 0 auto; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--surface-2); cursor: pointer; z-index: 1; }
+    .ficha .cerrar-ficha svg { width: 18px; height: 18px; }
+  }
   h1 { font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -0.02em; margin: 0 0 4px; }
   .sub-h { margin: 0; color: var(--ink-2); max-width: 72ch; }
   .indice { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
@@ -45,14 +76,6 @@
   .nota { font-size: 12.5px; color: var(--ink-3); margin: 8px 4px 2px; }
   .tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; padding: 7px 10px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, calc(-100% - 12px)); opacity: 0; transition: opacity .1s; z-index: 5; }
   .tip.visible { opacity: 1; }
-  .con-panel { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
-  aside.panel .foto { aspect-ratio: 4 / 3; padding: 14px; margin-bottom: 12px; }
-  aside.panel h3 { font-size: 19px; margin: 2px 0 4px; line-height: 1.2; }
-  aside.panel dl { margin: 10px 0 14px; }
-  aside.panel dl div { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
-  aside.panel dt { color: var(--ink-2); }
-  aside.panel dd { margin: 0; text-align: right; }
-  aside.panel .vacio { color: var(--ink-2); font-size: 14px; }
 
   /* Ranking de índices */
   .ranking { display: grid; gap: 4px; }
@@ -84,7 +107,6 @@
   .familias { display: grid; gap: 14px; }
   .familias .fila-f { display: grid; grid-template-columns: 180px 1fr; gap: 14px; align-items: center; font-size: 14px; }
   .familias .fila-f > span { color: var(--ink-2); }
-  @media (max-width: 900px) { .con-panel { grid-template-columns: 1fr; } }
   @media (max-width: 640px) {
     main { padding: 20px 16px 40px; }
     .perfil .attr, .perfil .ejes, .familias .fila-f { grid-template-columns: 1fr; gap: 4px; }
@@ -96,8 +118,10 @@
 <body>
 <header id="barra"></header>
 <main>
+  <aside class="ficha" id="ficha" aria-live="polite" aria-label="Ficha del equipo elegido"></aside>
+  <div class="contenido">
   <h1>Gráficas y comparativas</h1>
-  <p class="sub-h">Cinco maneras de mirar los mismos datos. Todas usan precios de lista del <span id="fecha-datos"></span> y dejan fuera, avisándolo, a los equipos sin el dato.</p>
+  <p class="sub-h">Cinco maneras de mirar los mismos datos. Toca un equipo en cualquier gráfica y su ficha completa aparece a la izquierda. Precios de lista del <span id="fecha-datos"></span>; los equipos sin el dato quedan fuera, avisándolo.</p>
   <nav class="indice" aria-label="Gráficas">
     <a href="#mapa">Mapa de compromisos</a><a href="#indices">Índices de valor</a><a href="#precios">Precios por capa</a><a href="#perfil">Perfil frente a la capa</a><a href="#familias">Las dos familias portátiles</a>
   </nav>
@@ -111,20 +135,17 @@
       <label for="m-y">Eje vertical <select id="m-y"></select></label>
       <label for="m-color">Color <select id="m-color"></select></label>
     </div>
-    <div class="con-panel">
-      <div class="lienzo" id="m-lienzo">
-        <div class="leyenda" id="m-leyenda"></div>
-        <svg class="g" id="m-g" role="img" aria-label="Dispersión"></svg>
-        <p class="nota" id="m-fuera"></p>
-        <div class="tip" id="m-tip" role="tooltip"></div>
-      </div>
-      <aside class="panel" id="m-panel" aria-live="polite"></aside>
+    <div class="lienzo" id="m-lienzo">
+      <div class="leyenda" id="m-leyenda"></div>
+      <svg class="g" id="m-g" role="img" aria-label="Dispersión"></svg>
+      <p class="nota" id="m-fuera"></p>
+      <div class="tip" id="m-tip" role="tooltip"></div>
     </div>
   </section>
 
   <section class="vista" id="indices">
     <h2>Índices de valor</h2>
-    <p>Cuánto rinde cada dólar, o cada gramo. Barras en escala lineal desde cero; el nombre en negrilla es la línea base del proyecto.</p>
+    <p>Cuánto rinde cada dólar, o cada gramo. Barras en escala lineal desde cero. Toca una fila para ver la ficha.</p>
     <div class="controles"><label for="i-indice">Índice <select id="i-indice"></select></label></div>
     <div class="lienzo"><div class="ranking" id="i-ranking"></div><p class="nota" id="i-nota"></p></div>
   </section>
@@ -148,12 +169,13 @@
     <div class="leyenda" id="fa-leyenda"></div>
     <div class="lienzo"><div class="familias" id="fa"></div></div>
   </section>
+  </div>
 </main>
 
 <script src="assets/comun.js"></script>
 <script>
 (async function () {
-  const { esc, usd, n, foto, nombre, filasPara, CAPAS, ICONOS, barra, cargar, guardarSeleccion, leerSeleccion } = RV;
+  const { esc, usd, n, foto, nombre, resumen, filasPara, CAPAS, ICONOS, barra, cargar, guardarSeleccion, leerSeleccion } = RV;
   let d;
   try { d = await cargar(); } catch (err) { document.querySelector("main").insertAdjacentHTML("afterbegin", `<p>No se pudieron cargar los datos: ${err.message}</p>`); return; }
   barra("graficas.html", d.meta.fecha_datos);
@@ -231,23 +253,45 @@
     document.getElementById("m-leyenda").innerHTML = cats.map((c) => `<span><i style="background:${colorDe(c)}"></i>${esc(c)}</span>`).join("") + (et.size ? `<span style="color:var(--ink-3)">Con nombre: línea base y equipo elegido</span>` : "");
     const fuera = todos.length - pts.length;
     document.getElementById("m-fuera").textContent = fuera ? `${fuera} de ${todos.length} ${fuera === 1 ? "equipo no aparece" : "equipos no aparecen"} por falta de ${X.t.toLowerCase()} o ${Y.t.toLowerCase()}. Ejes lineales desde cero.` : "Ejes lineales desde cero.";
-    panelMapa();
   }
 
-  function panelMapa() {
-    const p = document.getElementById("m-panel"), e = eq.find((x) => x.id === m.sel);
-    if (!e) { p.innerHTML = `<p class="vacio">Toca un punto para ver aquí la ficha del equipo, con su precio y el enlace a la tienda.</p>`; return; }
-    const filas = filasPara([e]).flatMap((g) => g.filas).slice(1, 8);
-    p.innerHTML = `<div class="foto marco-foto">${foto(e)}</div><span class="sub">${esc(e.fabricante)}</span><h3>${esc(nombre(e))}</h3>
-      ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : ""}
-      <dl>${filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")}</dl>
-      <button class="btn btn-secundario" type="button" id="m-anadir">Añadir a la comparación</button>`;
-    document.getElementById("m-anadir").addEventListener("click", (ev) => { const s = leerSeleccion().filter((x) => x !== e.id); s.unshift(e.id); guardarSeleccion(s.slice(0, 3)); ev.target.outerHTML = `<a class="btn btn-secundario" href="comparar.html">Añadido. Abrir la comparación</a>`; });
+  // ================= Ficha completa del equipo elegido =================
+  const fichaEl = document.getElementById("ficha");
+  function ficha() {
+    const e = eq.find((x) => x.id === m.sel);
+    if (!e) { fichaEl.innerHTML = `<p class="vacio">Toca un punto del mapa, una fila de los índices o un punto de los precios, y aquí aparece la ficha completa del equipo.</p>`; return; }
+    const enComp = leerSeleccion().includes(e.id);
+    fichaEl.innerHTML = `<button class="cerrar-ficha" type="button" data-cerrar-ficha aria-label="Cerrar la ficha">${ICONOS.cerrar}</button>
+      <div class="foto marco-foto">${foto(e)}</div>
+      <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
+      <span class="fab">${esc(e.fabricante)}</span>
+      <h2>${esc(nombre(e))}</h2>
+      ${resumen(e) ? `<p class="res">${esc(resumen(e))}</p>` : ""}
+      <div class="acciones">
+        ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato" style="margin-right:auto">Sin precio</span>`}
+        ${enComp ? `<a class="btn btn-secundario" href="comparar.html">Ya está en la comparación</a>` : `<button class="btn btn-secundario" type="button" data-anadir>${ICONOS.mas} Comparar</button>`}
+        ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Tienda ${ICONOS.externo}</a>` : ""}
+      </div>
+      ${filasPara([e], { completo: true }).map((g) => `<section><h3>${esc(g.titulo)}</h3><dl>${g.filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")}</dl></section>`).join("")}`;
+    fichaEl.scrollTop = 0;
+  }
+  fichaEl.addEventListener("click", (ev) => {
+    if (ev.target.closest("[data-cerrar-ficha]")) { fichaEl.classList.remove("abierta"); return; }
+    const b = ev.target.closest("[data-anadir]"); if (!b) return;
+    const s = leerSeleccion().filter((x) => x !== m.sel); s.push(m.sel);
+    guardarSeleccion(s.slice(-4));
+    b.outerHTML = `<a class="btn btn-secundario" href="comparar.html">Añadido. Abrir la comparación</a>`;
+  });
+  // Elegir un equipo desde cualquier gráfica: marca el punto o la fila en todas y llena la ficha.
+  function elegir(id, abrir = true) {
+    m.sel = id;
+    mapa(); indices(); precios(); familias(); ficha();
+    if (abrir) fichaEl.classList.add("abierta");
   }
 
   const mg = document.getElementById("m-g"), mtip = document.getElementById("m-tip");
-  mg.addEventListener("click", (ev) => { const p = ev.target.closest(".p"); if (p) { m.sel = p.dataset.id; mapa(); } });
-  mg.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { const p = ev.target.closest(".p"); if (p) { ev.preventDefault(); m.sel = p.dataset.id; mapa(); } } });
+  mg.addEventListener("click", (ev) => { const p = ev.target.closest(".p"); if (p) elegir(p.dataset.id); });
+  mg.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { const p = ev.target.closest(".p"); if (p) { ev.preventDefault(); elegir(p.dataset.id); } } });
   mg.addEventListener("mousemove", (ev) => {
     const p = ev.target.closest(".p"); if (!p) { mtip.classList.remove("visible"); return; }
     const e = eq.find((x) => x.id === p.dataset.id), X = MAG[m.x], Y = MAG[m.y];
@@ -255,7 +299,7 @@
     const r = document.getElementById("m-lienzo").getBoundingClientRect(); mtip.style.left = ev.clientX - r.left + "px"; mtip.style.top = ev.clientY - r.top + "px"; mtip.classList.add("visible");
   });
   mg.addEventListener("mouseleave", () => mtip.classList.remove("visible"));
-  document.getElementById("m-capas").addEventListener("click", (ev) => { const b = ev.target.closest("button"); if (!b) return; m.capa = b.dataset.k; m.sel = null; controlesMapa(); mapa(); });
+  document.getElementById("m-capas").addEventListener("click", (ev) => { const b = ev.target.closest("button"); if (!b) return; m.capa = b.dataset.k; controlesMapa(); mapa(); });
   ["x", "y", "color"].forEach((k) => document.getElementById("m-" + k).addEventListener("change", (ev) => { m[k] = ev.target.value; if (k !== "color") controlesMapa(); mapa(); }));
 
   // ================= 2. Índices de valor =================
@@ -276,13 +320,16 @@
     const max = Math.max(...l.map((x) => x.v), 1e-9);
     document.getElementById("i-ranking").innerHTML = l.map(({ e, v }) => {
       const w = (v / max) * 100, dentro = w > 70;
-      return `<div class="fila-r ${e.linea_base ? "base" : ""}"><span class="foto marco-foto">${foto(e, "")}</span><span class="nom" title="${esc(e.fabricante + " " + nombre(e))}">${esc(nombre(e))} <small>${esc(e.fabricante)}</small></span>
+      return `<div class="fila-r ${e.linea_base ? "base" : ""} ${m.sel === e.id ? "sel" : ""}" data-id="${esc(e.id)}" role="button" tabindex="0" aria-label="Ver la ficha de ${esc(nombre(e))}"><span class="foto marco-foto">${foto(e, "")}</span><span class="nom" title="${esc(e.fabricante + " " + nombre(e))}">${esc(nombre(e))} <small>${esc(e.fabricante)}</small></span>
         <div class="pista-r"><div class="barra-r" style="width:${w}%;--c:${CAPAS[e.capa].color}"></div><span class="v" style="${dentro ? `right:${100 - w + 1}%;color:#fff` : `left:calc(${w}% + 6px)`}">${I.f(v)}</span></div></div>`;
     }).join("") || `<p class="nota">Ningún equipo de esta capa tiene los dos datos que pide el índice.</p>`;
     const fuera = todos.length - l.length;
     document.getElementById("i-nota").textContent = fuera ? `${fuera} de ${todos.length} equipos no aparecen porque les falta uno de los dos datos del índice.` : "";
   }
   document.getElementById("i-indice").addEventListener("change", (ev) => { indice = ev.target.value; indices(); });
+  const ir = document.getElementById("i-ranking");
+  ir.addEventListener("click", (ev) => { const f = ev.target.closest(".fila-r"); if (f) elegir(f.dataset.id); });
+  ir.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { const f = ev.target.closest(".fila-r"); if (f) { ev.preventDefault(); elegir(f.dataset.id); } } });
 
   // ================= 3. Precios por capa =================
   function precios() {
@@ -305,7 +352,7 @@
         out += [q1, q3].map((q) => `<line x1="${px(q)}" x2="${px(q)}" y1="${y - 12}" y2="${y + 12}" stroke="var(--ink-3)" stroke-width="1.5"/>`).join("");
         out += `<line x1="${px(q2)}" x2="${px(q2)}" y1="${y - 16}" y2="${y + 16}" stroke="var(--ink)" stroke-width="3"/><text x="${px(q2)}" y="${y - 20}" text-anchor="middle" style="fill:var(--ink);font-weight:600">${usd(q2, 0)}</text>`;
       }
-      vals.forEach((e, k) => { out += `<g class="p" data-id="${esc(e.id)}"><circle cx="${px(e.r.precio)}" cy="${y + ((k % 3) - 1) * 6}" r="5" style="fill:${CAPAS[c].color};opacity:.85"/></g>`; });
+      vals.forEach((e, k) => { out += `<g class="p ${m.sel === e.id ? "sel" : ""}" data-id="${esc(e.id)}"><circle cx="${px(e.r.precio)}" cy="${y + ((k % 3) - 1) * 6}" r="5" style="fill:${CAPAS[c].color};opacity:.85"/></g>`; });
     });
     el.setAttribute("viewBox", `0 0 ${W} ${H}`);
     el.innerHTML = out;
@@ -313,6 +360,7 @@
   const pg = document.getElementById("p-g"), ptip = document.getElementById("p-tip");
   pg.addEventListener("mousemove", (ev) => { const p = ev.target.closest(".p"); if (!p) { ptip.classList.remove("visible"); return; } const e = eq.find((x) => x.id === p.dataset.id); ptip.textContent = `${nombre(e)}: ${usd(e.r.precio)}`; const r = pg.parentElement.getBoundingClientRect(); ptip.style.left = ev.clientX - r.left + "px"; ptip.style.top = ev.clientY - r.top + "px"; ptip.classList.add("visible"); });
   pg.addEventListener("mouseleave", () => ptip.classList.remove("visible"));
+  pg.addEventListener("click", (ev) => { const p = ev.target.closest(".p"); if (p) elegir(p.dataset.id); });
 
   // ================= 4. Perfil frente a la capa =================
   const COLS3 = ["var(--portatil)", "var(--fija)", "var(--modulo)"];
@@ -329,7 +377,7 @@
     { t: "Ganancia", v: (e) => e.r.ganancia, capas: ["antena"] },
   ];
   const porId = new Map(eq.map((e) => [e.id, e]));
-  let perfilSel = leerSeleccion().filter((id) => porId.has(id)).slice(0, 3);
+  let perfilSel = leerSeleccion().filter((id) => porId.has(id)).slice(0, 3); // el perfil compara hasta tres, uno por color
   if (perfilSel.length < 2) perfilSel = ["seeed-studio-sensecap-card-tracker-t1000-e", "elecrow-thinknode-m1", "heltec-meshpocket"].filter((id) => porId.has(id));
   const opciones = Object.keys(CAPAS).map((c) => `<optgroup label="${CAPAS[c].plural}">${eq.filter((e) => e.capa === c).map((e) => `<option value="${esc(e.id)}">${esc(e.fabricante)} ${esc(nombre(e))}</option>`).join("")}</optgroup>`).join("");
   function perfil() {
@@ -359,13 +407,14 @@
     const met = [["Precio", (e) => e.r.precio, "USD", 0], ["Peso", (e) => e.r.peso, "g", 0], ["Batería", (e) => e.r.bateria, "mAh", 0], ["Autonomía en uso", (e) => e.r.autonomia, "h", 0]];
     const W = Math.max(280, document.getElementById("fa").clientWidth - 200);
     document.getElementById("fa").innerHTML = met.map(([t, f, u]) => {
-      const porFam = fams.map(([k]) => eq.filter((e) => e.capa === "portatil" && e.familia === k).map(f).filter((v) => typeof v === "number").sort((a, b) => a - b));
+      const eqFam = fams.map(([k]) => eq.filter((e) => e.capa === "portatil" && e.familia === k && typeof f(e) === "number"));
+      const porFam = eqFam.map((l) => l.map(f).sort((a, b) => a - b));
       const max = Math.max(...porFam.flat(), 1), T = ticks(max);
       const x = (v) => 8 + (v / T.tope) * (W - 16);
       const meds = porFam.map((vs) => percentil(vs, 0.5));
       const svg = `<svg class="g" viewBox="0 0 ${W} 56" role="img" aria-label="${t}: mediana por familia">
         ${T.t.map((v) => `<text x="${x(v)}" y="54" text-anchor="middle">${n(v)}</text>`).join("")}
-        ${porFam.map((vs, i) => vs.map((v) => `<circle cx="${x(v)}" cy="${14 + i * 16}" r="4" style="fill:${fams[i][2]};opacity:.3"/>`).join("")).join("")}
+        ${eqFam.map((l, i) => l.map((e) => `<g class="p ${m.sel === e.id ? "sel" : ""}" data-id="${esc(e.id)}"><title>${esc(nombre(e))}: ${n(f(e))} ${u}</title><circle cx="${x(f(e))}" cy="${14 + i * 16}" r="4.5" style="fill:${fams[i][2]};opacity:${m.sel === e.id ? 1 : .35};stroke-width:1"/></g>`).join("")).join("")}
         ${meds[0] !== null && meds[1] !== null ? `<line x1="${x(meds[0])}" x2="${x(meds[1])}" y1="22" y2="22" stroke="var(--ink-3)" stroke-width="2"/>` : ""}
         ${meds.map((md, i) => md === null ? "" : `<circle cx="${x(md)}" cy="22" r="7" style="fill:${fams[i][2]};stroke:var(--surface);stroke-width:2"/>`).join("")}
       </svg>`;
@@ -374,7 +423,9 @@
     }).join("");
   }
 
-  function todo() { mapa(); indices(); precios(); perfil(); familias(); }
+  document.getElementById("fa").addEventListener("click", (ev) => { const p = ev.target.closest(".p"); if (p) elegir(p.dataset.id); });
+
+  function todo() { mapa(); indices(); precios(); perfil(); familias(); ficha(); }
   m.sel = eq.find((e) => /MeshTracker X1/.test(e.modelo))?.id || null;
   controlesMapa(); todo();
   let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { mapa(); precios(); familias(); }, 150); });

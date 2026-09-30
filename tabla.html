@@ -167,7 +167,7 @@
     a.classList.add("abierto"); a.setAttribute("aria-hidden", "false");
     a.querySelector(".cerrar").addEventListener("click", cerrar);
     a.querySelector("#anadir").addEventListener("click", (ev) => {
-      const s = leerSeleccion().filter((x) => x !== e.id); s.unshift(e.id); guardarSeleccion(s.slice(0, 3));
+      const s = leerSeleccion().filter((x) => x !== e.id); s.unshift(e.id); guardarSeleccion(s.slice(0, 4));
       ev.target.outerHTML = `<a class="btn btn-secundario" href="comparar.html">Añadido. Abrir la comparación</a>`;
     });
     a.querySelector(".cerrar").focus();

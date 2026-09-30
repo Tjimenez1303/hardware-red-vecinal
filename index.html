@@ -67,7 +67,51 @@
   .hoja-fila .t { color: var(--ink-2); font-size: 13.5px; }
   .hoja-fila .c { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
+  /* Filtros avanzados: botón de ícono junto al orden, panel tipo Gmail (formulario por campos) y
+     condiciones aplicadas como fichas removibles tipo GCP. El buscador también entiende operadores. */
+  .av { position: relative; }
+  .btn-filtros { position: relative; width: 42px; height: 40px; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; cursor: pointer; display: grid; place-items: center; color: var(--ink-2); }
+  .btn-filtros:hover, .btn-filtros[aria-expanded="true"] { color: var(--ink); border-color: var(--ink-3); }
+  .btn-filtros svg { width: 20px; height: 20px; }
+  .btn-filtros .insignia { position: absolute; top: -7px; right: -7px; min-width: 19px; height: 19px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 11.5px; font-weight: 600; display: grid; place-items: center; border: 2px solid var(--bg); }
+  .panel-av { position: absolute; right: 0; top: calc(100% + 8px); z-index: 45; width: min(480px, calc(100vw - 32px)); max-height: min(72vh, 640px); overflow: auto;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 50px rgb(0 0 0 / .18); padding: 18px 18px 0; }
+  .panel-av[hidden] { display: none; }
+  .panel-av .cab { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .panel-av .cab b { font-size: 16px; }
+  .panel-av .cab button { width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; cursor: pointer; color: var(--ink-3); display: grid; place-items: center; }
+  .panel-av .cab button:hover { background: var(--surface-2); color: var(--ink); }
+  .panel-av .cab svg { width: 18px; height: 18px; }
+  .campo { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 10px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); }
+  .campo > span { font-size: 14px; color: var(--ink-2); }
+  .rango { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-3); }
+  .rango input { width: 92px; padding: 7px 9px; font-size: 14px; }
+  .tri { display: inline-flex; background: var(--surface-2); border-radius: 9px; padding: 2px; }
+  .tri button { border: 0; background: none; padding: 5px 11px; border-radius: 7px; font-size: 13px; cursor: pointer; color: var(--ink-2); }
+  .tri button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgb(0 0 0 / .12); font-weight: 600; }
+  .tris { display: grid; gap: 8px; }
+  .tris label { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14px; }
+  .fabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .fabs label { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px 4px 8px; font-size: 13px; cursor: pointer; }
+  .fabs input { margin: 0; accent-color: var(--ink); }
+  .fabs .cuenta { color: var(--ink-3); }
+  .panel-av .sindato { display: flex; gap: 8px; align-items: center; font-size: 13.5px; color: var(--ink-2); padding: 10px 0; border-top: 1px solid var(--line); }
+  .panel-av .pie-av { position: sticky; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); margin: 0 -18px; padding: 12px 18px 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .panel-av .pista { flex: 1 1 100%; font-size: 12.5px; color: var(--ink-3); margin: 0 0 4px; }
+  .panel-av .pista code { font-size: 12px; background: var(--surface-2); padding: 1px 5px; border-radius: 5px; color: var(--ink-2); }
+  .panel-av .pie-av .btn-primario { margin-left: auto; }
+  .ficha-av { display: inline-flex; align-items: center; border: 1px solid var(--ink-3); background: var(--surface); border-radius: 999px; font-size: 13.5px; overflow: hidden; }
+  .ficha-av button { border: 0; background: none; cursor: pointer; padding: 6px 4px 6px 12px; color: var(--ink); }
+  .ficha-av button + button { padding: 6px 9px 6px 5px; color: var(--ink-3); display: grid; place-items: center; }
+  .ficha-av button + button:hover { color: var(--ink); }
+  .ficha-av svg { width: 14px; height: 14px; }
+  .ficha-av.previa { border-style: dashed; }
+  .borrar-av { border: 0; background: none; font-size: 13.5px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 6px 4px; }
+  .aviso-buscar { font-size: 12.5px; color: var(--ink-3); margin: -4px 0 12px; }
+
   @media (max-width: 640px) {
+    .panel-av { position: fixed; left: 8px; right: 8px; top: auto; bottom: 8px; width: auto; max-height: 82vh; }
+    .campo { grid-template-columns: 1fr; gap: 6px; }
     main { padding: 20px 16px 150px; }
     .grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
     .hoja-cab, .hoja-fila { grid-template-columns: repeat(var(--k), minmax(0, 1fr)); }
@@ -82,13 +126,13 @@
   <div class="cabecera">
     <div>
       <h1>Hardware para la Red Vecinal</h1>
-      <p>Los equipos para la capa fija y la portátil, con precio de lista y enlace a la tienda. Marca «Comparar» en hasta tres y ábrelos lado a lado.</p>
+      <p>Los equipos para la capa fija y la portátil, con precio de lista y enlace a la tienda. Marca «Comparar» en hasta cuatro y ábrelos lado a lado.</p>
     </div>
   </div>
   <div class="herramientas">
     <div class="segmentado" id="capas" role="tablist" aria-label="Tipo de equipo"></div>
     <label class="visually-hidden" for="buscar">Buscar</label>
-    <input type="search" id="buscar" placeholder="Buscar por nombre o fabricante">
+    <input type="search" id="buscar" placeholder="Buscar, o escribe peso<100" autocomplete="off">
     <label class="visually-hidden" for="orden">Ordenar</label>
     <select id="orden">
       <option value="precio">Más baratos primero</option>
@@ -96,7 +140,12 @@
       <option value="peso">Más livianos primero</option>
       <option value="nombre">Por nombre</option>
     </select>
+    <div class="av">
+      <button class="btn-filtros" type="button" id="btn-filtros" aria-expanded="false" aria-controls="panel-av" title="Filtros"><span class="visually-hidden">Filtros</span></button>
+      <div class="panel-av" id="panel-av" role="dialog" aria-label="Filtros" hidden></div>
+    </div>
   </div>
+  <p class="aviso-buscar" id="aviso-buscar" hidden></p>
   <div class="filtros" id="filtros"></div>
   <ul class="grilla" id="grilla"></ul>
 </main>
@@ -121,8 +170,8 @@
   document.getElementById("cerrar").innerHTML = ICONOS.cerrar;
   const eq = d.equipos;
   const porId = new Map(eq.map((e) => [e.id, e]));
-  const MAX = 3;
-  const estado = { capa: "portatil", texto: "", orden: "precio", filtros: new Set(), sel: [] };
+  const MAX = 4;
+  const estado = { capa: "portatil", texto: "", orden: "precio", filtros: new Set(), sel: [], av: [], sinDato: false };
 
   const FILTROS = [
     ["listo", "Llega con Meshtastic", (e) => e.r.listo === true],
@@ -132,17 +181,122 @@
     ["co", "Se vende en Colombia", (e) => e.r.colombia === true],
   ];
 
+  // ---------- filtros avanzados ----------
+  const TODAS = Object.keys(CAPAS);
+  const IP_V = (e) => (e.r.ip ? +e.r.ip.slice(-1) : e.r.ipTexto ? (e.r.agua ? 4.5 : 0) : null);
+  // Campos numéricos: se filtran por rango. alias: palabras que entiende el buscador.
+  const NUM = {
+    precio: { t: "Precio", u: "USD", v: (e) => e.r.precio, capas: TODAS, alias: ["precio", "usd", "costo"] },
+    peso: { t: "Peso", u: "g", v: (e) => e.r.peso, capas: ["portatil", "fija", "antena"], alias: ["peso", "g"] },
+    bateria: { t: "Batería", u: "mAh", v: (e) => e.r.bateria, capas: ["portatil", "fija"], alias: ["bateria", "batería", "mah"] },
+    autonomia: { t: "Autonomía", u: "h", v: (e) => e.r.autonomia, capas: ["portatil"], alias: ["autonomia", "autonomía", "horas"] },
+    panel: { t: "Panel solar", u: "W", v: (e) => e.r.panel, capas: ["fija"], alias: ["panel", "w"] },
+    ganancia: { t: "Ganancia", u: "dBi", v: (e) => e.r.ganancia, capas: ["antena", "fija"], alias: ["ganancia", "dbi"] },
+    tx: { t: "Potencia declarada", u: "dBm", v: (e) => e.r.tx, capas: ["portatil", "fija", "modulo"], alias: ["potencia", "tx", "dbm"] },
+    fcc: { t: "Potencia FCC", u: "dBm", v: (e) => e.r.txFcc, capas: ["portatil", "fija", "modulo"], alias: ["fcc"] },
+    consumo: { t: "Consumo", u: "mA", v: (e) => e.r.consumo, capas: ["fija", "modulo"], alias: ["consumo", "ma"] },
+  };
+  const IP_OPC = [[0, "Da igual"], [4, "Salpicaduras o más (IP×4)"], [5, "Chorros de agua o más (IP×5)"], [6, "Chorros fuertes o más (IP×6)"], [7, "Inmersión (IP×7)"]];
+  const IP_CAPAS = ["portatil", "fija", "antena", "accesorio"];
+  // Rasgos de sí o no.
+  const BOOL = {
+    pantalla: { t: "Pantalla", v: (e) => e.r.pantalla, capas: ["portatil"], si: "Con pantalla", no: "Sin pantalla" },
+    teclado: { t: "Teclado", v: (e) => e.r.teclado, capas: ["portatil"], si: "Con teclado", no: "Sin teclado" },
+    gps: { t: "GPS", v: (e) => e.r.gps, capas: ["portatil"], si: "Con GPS", no: "Sin GPS" },
+    reemplazable: { t: "Batería reemplazable", v: (e) => e.r.reemplazable, capas: ["portatil", "fija"], si: "Batería reemplazable", no: "Batería fija" },
+    banda: { t: "Toda la banda 915 a 928", v: (e) => e.r.banda, capas: ["portatil", "fija", "modulo"], si: "Cubre 915 a 928 MHz", no: "No cubre 915 a 928 MHz" },
+  };
+  const aplica = (capas) => capas.includes(estado.capa);
+  const fabsDeCapa = () => [...new Set(eq.filter((e) => e.capa === estado.capa).map((e) => e.fabricante))].sort((a, b) => a.localeCompare(b, "es"));
+
+  // Una condición: {k, min, max} numérica, {k:"ip", min}, {k:<bool>, v:true|false} o {k:"fab", v:[...]}.
+  function cumple(e, c) {
+    if (NUM[c.k]) {
+      const v = NUM[c.k].v(e);
+      if (v === null) return estado.sinDato;
+      return (c.min == null || v >= c.min) && (c.max == null || v <= c.max);
+    }
+    if (c.k === "ip") { const v = IP_V(e); return v === null ? estado.sinDato : v >= c.min; }
+    if (BOOL[c.k]) { const v = BOOL[c.k].v(e); return v === null ? estado.sinDato : v === c.v; }
+    if (c.k === "fab") return c.v.includes(e.fabricante);
+    return true;
+  }
+  const num = (v, u) => (u === "USD" ? usd(v, v % 1 ? 2 : 0) : `${n(v, 1)} ${u}`);
+  function etiqueta(c) {
+    if (NUM[c.k]) {
+      const { t, u } = NUM[c.k];
+      if (c.min != null && c.max != null) return c.min === c.max ? `${t} = ${num(c.min, u)}` : `${t}: ${num(c.min, u)} a ${num(c.max, u)}`;
+      return c.max != null ? `${t} ≤ ${num(c.max, u)}` : `${t} ≥ ${num(c.min, u)}`;
+    }
+    if (c.k === "ip") return IP_OPC.find(([v]) => v === c.min)[1].replace(" o más", "").replace(/^./, (x) => "Resiste " + x.toLowerCase()) + (c.min < 7 ? " o más" : "");
+    if (BOOL[c.k]) return c.v ? BOOL[c.k].si : BOOL[c.k].no;
+    if (c.k === "fab") return `Fabricante: ${c.v.join(", ")}`;
+    return "";
+  }
+  const vigente = (c) => (NUM[c.k] ? aplica(NUM[c.k].capas) : c.k === "ip" ? aplica(IP_CAPAS) : BOOL[c.k] ? aplica(BOOL[c.k].capas) : c.k === "fab");
+
+  // Operadores del buscador, al estilo de Gmail: precio<50 peso<=100 bateria>2000 ip>=6 tiene:pantalla sin:gps fabricante:rak
+  const RE_OP = /(^|\s)([a-záéíóúñ]+)\s*(<=|>=|<|>|=|:)\s*([^\s]+)/gi;
+  function interpretar(textoCrudo) {
+    const conds = [];
+    const resto = textoCrudo.replace(RE_OP, (todo, pre, clave, op, valor) => {
+      const k = clave.toLowerCase(), val = valor.toLowerCase().replace(",", ".");
+      const numero = parseFloat(val.replace(/[^\d.]/g, ""));
+      const campo = Object.keys(NUM).find((c) => NUM[c].alias.includes(k));
+      if (campo && isFinite(numero)) {
+        // < y > se toman como ≤ y ≥, que es lo que muestra la ficha.
+        const c = { k: campo };
+        if (op.startsWith("<")) c.max = numero; else if (op.startsWith(">")) c.min = numero; else { c.min = numero; c.max = numero; }
+        conds.push(c); return pre;
+      }
+      if ((k === "ip" || k === "agua") && isFinite(numero)) { conds.push({ k: "ip", min: Math.min(7, Math.max(4, numero % 10)) }); return pre; }
+      if ((k === "tiene" || k === "con" || k === "sin" || k === "no") && op === ":") {
+        const b = Object.keys(BOOL).find((x) => x.startsWith(val.slice(0, 4)) || BOOL[x].t.toLowerCase().startsWith(val));
+        if (b) { conds.push({ k: b, v: k === "tiene" || k === "con" }); return pre; }
+      }
+      if ((k === "fabricante" || k === "marca") && op === ":") {
+        const fs = fabsDeCapa().filter((f) => f.toLowerCase().includes(val));
+        if (fs.length) { conds.push({ k: "fab", v: fs }); return pre; }
+      }
+      return todo;
+    });
+    return { conds, resto: resto.replace(/\s+/g, " ").trim() };
+  }
+  // Une condiciones: la nueva reemplaza a la del mismo campo.
+  const unir = (base, nuevas) => [...base.filter((c) => !nuevas.some((x) => x.k === c.k)), ...nuevas];
+
   function pintarCapas() {
     document.getElementById("capas").innerHTML = Object.entries(CAPAS).map(([k, c]) =>
       `<button type="button" role="tab" aria-selected="${k === estado.capa}" data-k="${k}">${c.plural}<span class="cuenta">${eq.filter((e) => e.capa === k).length}</span></button>`).join("");
+    pintarFiltros();
+  }
+
+  function pintarFiltros() {
+    const previa = interpretar(estado.texto).conds;
+    const fichas = [
+      ...estado.av.map((c) => `<span class="ficha-av"><button type="button" data-editar="${c.k}" title="Editar este filtro">${esc(etiqueta(c))}</button><button type="button" data-quitar-av="${c.k}" aria-label="Quitar el filtro ${esc(etiqueta(c))}">${ICONOS.cerrar}</button></span>`),
+      ...previa.map((c) => `<span class="ficha-av previa" title="Pulsa Enter en el buscador para fijarlo"><button type="button" tabindex="-1">${esc(etiqueta(c))}</button></span>`),
+    ];
     document.getElementById("filtros").innerHTML = FILTROS.filter((f) => !f[3] || f[3].includes(estado.capa)).map(([k, t]) =>
-      `<button type="button" class="filtro" data-f="${k}" aria-pressed="${estado.filtros.has(k)}">${estado.filtros.has(k) ? ICONOS.si : ""}${t}</button>`).join("") + `<span class="conteo" id="conteo"></span>`;
+      `<button type="button" class="filtro" data-f="${k}" aria-pressed="${estado.filtros.has(k)}">${estado.filtros.has(k) ? ICONOS.si : ""}${t}</button>`).join("") +
+      fichas.join("") + (estado.av.length ? `<button type="button" class="borrar-av" id="borrar-av">Quitar filtros</button>` : "") + `<span class="conteo" id="conteo"></span>`;
+    const b = document.getElementById("btn-filtros");
+    b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span class="visually-hidden">Filtros</span>` +
+      (estado.av.length ? `<span class="insignia" aria-label="${estado.av.length} activos">${estado.av.length}</span>` : "");
+    const aviso = document.getElementById("aviso-buscar");
+    aviso.hidden = !previa.length;
+    aviso.textContent = previa.length ? "Pulsa Enter para fijar el filtro." : "";
+  }
+
+  function filtrar(conds, textoLibre) {
+    const t = textoLibre.toLowerCase();
+    const fs = FILTROS.filter(([k]) => estado.filtros.has(k));
+    return eq.filter((e) => e.capa === estado.capa && (!t || `${e.fabricante} ${e.modelo}`.toLowerCase().includes(t)) && fs.every((f) => f[2](e)) && conds.every((c) => cumple(e, c)));
   }
 
   function lista() {
-    const t = estado.texto.trim().toLowerCase();
-    const fs = FILTROS.filter(([k]) => estado.filtros.has(k));
-    const l = eq.filter((e) => e.capa === estado.capa && (!t || `${e.fabricante} ${e.modelo}`.toLowerCase().includes(t)) && fs.every((f) => f[2](e)));
+    const { conds, resto } = interpretar(estado.texto);
+    const l = filtrar(unir(estado.av, conds), resto);
     const clave = { precio: (e) => e.r.precio, bateria: (e) => (e.r.bateria === null ? null : -e.r.bateria), peso: (e) => e.r.peso, nombre: null }[estado.orden];
     return l.sort((a, b) => {
       if (!clave) return nombre(a).localeCompare(nombre(b), "es");
@@ -172,6 +326,76 @@
     }).join("") || `<li class="vacio">Ningún equipo cumple estos filtros.</li>`;
   }
 
+  // ---------- panel de filtros ----------
+  const panel = document.getElementById("panel-av"), btnF = document.getElementById("btn-filtros");
+  let borrador = [];
+  const cond = (k) => borrador.find((c) => c.k === k);
+  function pintarPanel() {
+    const nums = Object.entries(NUM).filter(([, f]) => aplica(f.capas));
+    const bools = Object.entries(BOOL).filter(([, f]) => aplica(f.capas));
+    const fabs = fabsDeCapa(), fabSel = cond("fab")?.v || [];
+    const ip = cond("ip")?.min || 0;
+    panel.innerHTML = `<div class="cab"><b>Filtrar ${CAPAS[estado.capa].plural.toLowerCase()}</b><button type="button" data-cerrar aria-label="Cerrar">${ICONOS.cerrar}</button></div>
+      ${nums.map(([k, f]) => { const c = cond(k) || {}; return `<div class="campo"><span id="l-${k}">${f.t}</span><div class="rango" role="group" aria-labelledby="l-${k}">
+        <input type="number" inputmode="decimal" step="any" min="0" data-k="${k}" data-lado="min" placeholder="desde" value="${c.min ?? ""}" aria-label="${f.t} desde">
+        <span>a</span>
+        <input type="number" inputmode="decimal" step="any" min="0" data-k="${k}" data-lado="max" placeholder="hasta" value="${c.max ?? ""}" aria-label="${f.t} hasta">
+        <span>${f.u}</span></div></div>`; }).join("")}
+      ${aplica(IP_CAPAS) ? `<div class="campo"><span><label for="f-ip">Agua y polvo</label></span><select id="f-ip">${IP_OPC.map(([v, t]) => `<option value="${v}" ${v === ip ? "selected" : ""}>${t}</option>`).join("")}</select></div>` : ""}
+      ${bools.length ? `<div class="campo"><span>Tiene</span><div class="tris">${bools.map(([k, f]) => { const v = cond(k)?.v; return `<label><span>${f.t}</span><span class="tri" role="group" aria-label="${f.t}">
+        <button type="button" data-b="${k}" data-v="" aria-pressed="${v === undefined}">Da igual</button><button type="button" data-b="${k}" data-v="1" aria-pressed="${v === true}">Sí</button><button type="button" data-b="${k}" data-v="0" aria-pressed="${v === false}">No</button></span></label>`; }).join("")}</div></div>` : ""}
+      <div class="campo"><span>Fabricante</span><div class="fabs">${fabs.map((f) => `<label><input type="checkbox" data-fab="${esc(f)}" ${fabSel.includes(f) ? "checked" : ""}>${esc(f)} <span class="cuenta">${eq.filter((e) => e.capa === estado.capa && e.fabricante === f).length}</span></label>`).join("")}</div></div>
+      <label class="sindato"><input type="checkbox" id="f-sindato" ${estado.sinDato ? "checked" : ""}> Incluir los equipos que no publican el dato</label>
+      <div class="pie-av"><p class="pista">También desde el buscador: <code>precio&lt;50</code> <code>peso&lt;100</code> <code>ip&gt;=6</code> <code>tiene:pantalla</code> <code>fabricante:rak</code> y Enter.</p>
+        <button type="button" class="borrar-av" data-limpiar>Borrar todo</button>
+        <button type="button" class="btn btn-primario" data-aplicar></button></div>`;
+    contarBorrador();
+  }
+  function leerPanel() {
+    const nuevo = [];
+    Object.keys(NUM).forEach((k) => {
+      const lo = panel.querySelector(`[data-k="${k}"][data-lado="min"]`), hi = panel.querySelector(`[data-k="${k}"][data-lado="max"]`);
+      if (!lo) return;
+      const min = lo.value === "" ? null : +lo.value, max = hi.value === "" ? null : +hi.value;
+      if (min != null || max != null) nuevo.push({ k, ...(min != null && { min }), ...(max != null && { max }) });
+    });
+    const ip = panel.querySelector("#f-ip"); if (ip && +ip.value) nuevo.push({ k: "ip", min: +ip.value });
+    panel.querySelectorAll('.tri button[aria-pressed="true"][data-v]:not([data-v=""])').forEach((b) => nuevo.push({ k: b.dataset.b, v: b.dataset.v === "1" }));
+    const fabs = [...panel.querySelectorAll("[data-fab]:checked")].map((c) => c.dataset.fab);
+    if (fabs.length) nuevo.push({ k: "fab", v: fabs });
+    borrador = nuevo;
+  }
+  function contarBorrador() {
+    const antes = estado.sinDato;
+    estado.sinDato = panel.querySelector("#f-sindato")?.checked ?? estado.sinDato;
+    const k = filtrar(borrador, interpretar(estado.texto).resto).length;
+    estado.sinDato = antes;
+    const b = panel.querySelector("[data-aplicar]");
+    b.textContent = k === 0 ? "Aplicar, ninguno cumple" : k === 1 ? "Ver 1 equipo" : `Ver ${k} equipos`;
+  }
+  function abrirPanel(foco) {
+    borrador = estado.av.map((c) => ({ ...c }));
+    pintarPanel(); panel.hidden = false; btnF.setAttribute("aria-expanded", "true");
+    const el = foco && (panel.querySelector(`[data-k="${foco}"]`) || panel.querySelector(`[data-b="${foco}"]`) || (foco === "ip" && panel.querySelector("#f-ip")) || (foco === "fab" && panel.querySelector("[data-fab]")));
+    (el || panel.querySelector("input, select, button:not([data-cerrar])"))?.focus();
+  }
+  function cerrarPanel() { panel.hidden = true; btnF.setAttribute("aria-expanded", "false"); }
+  btnF.addEventListener("click", () => (panel.hidden ? abrirPanel() : cerrarPanel()));
+  panel.addEventListener("input", () => { leerPanel(); contarBorrador(); });
+  panel.addEventListener("change", () => { leerPanel(); contarBorrador(); });
+  panel.addEventListener("click", (ev) => {
+    const t = ev.target.closest("button"); if (!t) return;
+    if (t.dataset.b) { t.parentElement.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === t))); leerPanel(); contarBorrador(); }
+    else if (t.hasAttribute("data-cerrar")) { cerrarPanel(); btnF.focus(); }
+    else if (t.hasAttribute("data-limpiar")) { borrador = []; pintarPanel(); }
+    else if (t.hasAttribute("data-aplicar")) {
+      leerPanel(); estado.av = borrador; estado.sinDato = panel.querySelector("#f-sindato").checked;
+      cerrarPanel(); pintarFiltros(); pintarGrilla(); btnF.focus();
+    }
+  });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !panel.hidden) { cerrarPanel(); btnF.focus(); } });
+  document.addEventListener("click", (ev) => { if (!panel.hidden && !ev.target.closest(".av") && !ev.target.closest("[data-editar]")) cerrarPanel(); });
+
   function pintarBandeja() {
     const b = document.getElementById("bandeja");
     b.classList.toggle("visible", estado.sel.length > 0);
@@ -191,22 +415,38 @@
     const k = l.length;
     const cab = `<div class="hoja-cab" style="--k:${k}"><span class="titulo" id="hoja-titulo">Comparación</span>${l.map((e) =>
       `<div class="p"><div class="foto marco-foto">${foto(e, "")}</div><b>${esc(nombre(e))}</b><span class="sub">${esc(e.fabricante)}</span></div>`).join("")}</div>`;
+    const cuenta = (o) => filasPara(l, o).reduce((t, g) => t + g.filas.length, 0);
+    const extra = cuenta({ completo: true }) - cuenta();
     const cuerpo = filasPara(l).map((g) => `<h3>${esc(g.titulo)}</h3>` + g.filas.map((f) =>
       `<div class="hoja-fila" style="--k:${k}"><span class="t">${esc(f.t)}</span>${f.celdas.map((c, i) => `<div class="c ${f.mejores.includes(i) ? "celda-mejor" : ""}">${c}</div>`).join("")}</div>`).join("")).join("");
-    document.getElementById("hoja-contenido").innerHTML = cab + `<div class="hoja-cuerpo">${cuerpo}</div><div class="hoja-pie"><a class="btn btn-secundario" href="comparar.html">Abrir en la página de comparación</a></div>`;
+    document.getElementById("hoja-contenido").innerHTML = cab + `<div class="hoja-cuerpo">${cuerpo}</div><div class="hoja-pie"><a class="btn btn-primario" href="comparar.html">Ver la comparación completa, con ${extra} filas más</a></div>`;
     document.getElementById("hoja").showModal();
   }
 
   document.getElementById("capas").addEventListener("click", (ev) => {
     const b = ev.target.closest("button"); if (!b) return;
-    estado.capa = b.dataset.k; estado.filtros.clear(); pintarCapas(); pintarGrilla();
+    estado.capa = b.dataset.k; estado.filtros.clear();
+    estado.av = estado.av.filter((c) => vigente(c) && c.k !== "fab");
+    cerrarPanel(); pintarCapas(); pintarGrilla();
   });
   document.getElementById("filtros").addEventListener("click", (ev) => {
+    const ed = ev.target.closest("[data-editar]"); if (ed) { abrirPanel(ed.dataset.editar); return; }
+    const q = ev.target.closest("[data-quitar-av]"); if (q) { estado.av = estado.av.filter((c) => c.k !== q.dataset.quitarAv); pintarFiltros(); pintarGrilla(); return; }
+    if (ev.target.closest("#borrar-av")) { estado.av = []; pintarFiltros(); pintarGrilla(); return; }
     const b = ev.target.closest("[data-f]"); if (!b) return;
     const k = b.dataset.f; estado.filtros.has(k) ? estado.filtros.delete(k) : estado.filtros.add(k);
-    pintarCapas(); pintarGrilla();
+    pintarFiltros(); pintarGrilla();
   });
-  document.getElementById("buscar").addEventListener("input", (ev) => { estado.texto = ev.target.value; pintarGrilla(); });
+  const buscar = document.getElementById("buscar");
+  buscar.addEventListener("input", (ev) => { estado.texto = ev.target.value; pintarFiltros(); pintarGrilla(); });
+  buscar.addEventListener("keydown", (ev) => {
+    if (ev.key !== "Enter") return;
+    const { conds, resto } = interpretar(estado.texto);
+    if (!conds.length) return;
+    ev.preventDefault();
+    estado.av = unir(estado.av, conds); estado.texto = resto; buscar.value = resto;
+    pintarFiltros(); pintarGrilla();
+  });
   document.getElementById("orden").addEventListener("change", (ev) => { estado.orden = ev.target.value; pintarGrilla(); });
   document.getElementById("grilla").addEventListener("change", (ev) => {
     const c = ev.target.closest("input[data-id]"); if (!c) return;

@@ -207,66 +207,125 @@
 
 
   // ---------- atributos de comparación, agrupados por categoría (Baymard) ----------
+  // Las filas con «det» solo salen en la comparación completa (comparar.html y la ficha de las
+  // gráficas). La ventana del catálogo muestra lo esencial.
   const TODAS = Object.keys(CAPAS);
-  const precioHTML = (e) => e.r.precio === null ? `<span class="sin-dato">Sin dato</span>` :
+  const SD = `<span class="sin-dato">Sin dato</span>`;
+  const precioHTML = (e) => e.r.precio === null ? SD :
     `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>${e.r.precioMax ? `<span class="sub">hasta ${usd(e.r.precioMax)}</span>` : ""}`;
-  const dato = (v, sufijo = "", dec = 0) => esNum(v) ? `<span class="num">${n(v, dec)}${sufijo}</span>` : `<span class="sin-dato">Sin dato</span>`;
+  const dato = (v, sufijo = "", dec = 0) => esNum(v) ? `<span class="num">${n(v, dec)}${sufijo}</span>` : SD;
+  // Texto de datos listo para pantalla: sin comillas de cita, sin URLs, con mayúscula tras punto.
+  function texto(t, max = 120) {
+    if (!t) return SD;
+    let s = limpiar(t).replace(/https?:\/\/\S+/g, "").replace(/['"«»]/g, "").replace(/\(\s*\)/g, "").replace(/\s+([.,])/g, "$1").trim();
+    s = s.replace(/(^|\.\s+)([a-záéíóúñ])/g, (m, a, b) => a + b.toUpperCase());
+    if (!s) return SD;
+    const corto = s.length > max ? s.slice(0, max).replace(/\s+\S*$/, "") + "…" : s;
+    return `<span class="texto-dato"${corto !== s ? ` title="${esc(s)}"` : ""}>${esc(corto)}</span>`;
+  }
+  const puesto = (e, k, frase) => {
+    const p = e.r.puesto?.[k];
+    return p ? `<span class="num">${p.pos}.º ${frase}</span><span class="sub">de ${p.de} que publican el dato</span>` : SD;
+  };
+  const indice = (v, sufijo, dec = 1) => esNum(v) ? `<span class="num">${n(v, dec)}</span><span class="sub">${sufijo}</span>` : SD;
+  const IDX = {
+    mahUsd: (e) => (e.r.bateria && e.r.precio ? e.r.bateria / e.r.precio : null),
+    hUsd: (e) => (e.r.autonomia && e.r.precio ? (e.r.autonomia / e.r.precio) * 10 : null),
+    gMah: (e) => (e.r.peso && e.r.bateria ? (e.r.peso / e.r.bateria) * 1000 : null),
+    wUsd: (e) => (e.r.panel && e.r.precio ? (e.r.panel / e.r.precio) * 100 : null),
+    dbiUsd: (e) => (e.r.ganancia && e.r.precio ? (e.r.ganancia / e.r.precio) * 100 : null),
+  };
   const GRUPOS = [
     { titulo: "Compra", capas: TODAS, filas: [
       { t: "Precio", v: precioHTML, mejor: (e) => (e.r.precio === null ? null : -e.r.precio) },
-      { t: "Disponibilidad", mejor: (e) => (e.r.disponible === null ? null : +e.r.disponible), v: (e) => e.r.disponibleTexto ? siNo(e.r.disponible, e.r.disponibleTexto, e.r.disponibleTexto) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Disponibilidad", mejor: (e) => (e.r.disponible === null ? null : +e.r.disponible), v: (e) => e.r.disponibleTexto ? siNo(e.r.disponible, e.r.disponibleTexto, e.r.disponibleTexto) : SD },
       { t: "Se vende en Colombia", mejor: (e) => (e.r.colombia === null ? null : +e.r.colombia), v: (e) => siNo(e.r.colombia) },
+      { t: "Dónde se buscó en Colombia", det: true, v: (e) => texto(e.colombia?.detalle, 140) },
+      { t: "Precio el 4 de septiembre", det: true, mejor: (e) => (esNum(e.cambio_pct) ? -e.cambio_pct : null), v: (e) => !esNum(e.precio_anterior_usd) ? SD :
+        `<span class="num">${usd(e.precio_anterior_usd)}</span><span class="sub">${!esNum(e.cambio_pct) ? "no comparable" : e.cambio_pct === 0 ? "sin cambio" : e.cambio_pct < 0 ? `bajó ${n(-e.cambio_pct, 1)} %` : `subió ${n(e.cambio_pct, 1)} %`}</span>` },
+      { t: "Vendedor", det: true, v: (e) => texto(e.vendedor, 60) },
+    ] },
+    { titulo: "Frente a su capa", capas: TODAS, filas: [
+      { t: "Puesto por precio", det: true, mejor: (e) => (e.r.puesto?.precio ? -e.r.puesto.precio.pos / e.r.puesto.precio.de : null), v: (e) => puesto(e, "precio", "más barato") },
+      { t: "Puesto por batería", det: true, capas: ["portatil", "fija"], mejor: (e) => (e.r.puesto?.bateria ? -e.r.puesto.bateria.pos / e.r.puesto.bateria.de : null), v: (e) => puesto(e, "bateria", "con más batería") },
+      { t: "Puesto por peso", det: true, capas: ["portatil"], mejor: (e) => (e.r.puesto?.peso ? -e.r.puesto.peso.pos / e.r.puesto.peso.de : null), v: (e) => puesto(e, "peso", "más liviano") },
+      { t: "Puesto por autonomía", det: true, capas: ["portatil"], mejor: (e) => (e.r.puesto?.autonomia ? -e.r.puesto.autonomia.pos / e.r.puesto.autonomia.de : null), v: (e) => puesto(e, "autonomia", "que más dura") },
+      { t: "Puesto por ganancia", det: true, capas: ["antena"], mejor: (e) => (e.r.puesto?.ganancia ? -e.r.puesto.ganancia.pos / e.r.puesto.ganancia.de : null), v: (e) => puesto(e, "ganancia", "con más ganancia") },
+    ] },
+    { titulo: "Rendimiento por dólar", capas: ["portatil", "fija", "antena"], filas: [
+      { t: "Batería por dólar", det: true, capas: ["portatil", "fija"], mejor: IDX.mahUsd, v: (e) => indice(IDX.mahUsd(e), "mAh por cada USD") },
+      { t: "Horas de uso por cada USD 10", det: true, capas: ["portatil"], mejor: IDX.hUsd, v: (e) => indice(IDX.hUsd(e), "horas") },
+      { t: "Peso por cada 1.000 mAh", det: true, capas: ["portatil"], mejor: (e) => (IDX.gMah(e) === null ? null : -IDX.gMah(e)), v: (e) => indice(IDX.gMah(e), "gramos, menos es mejor") },
+      { t: "Panel por cada USD 100", det: true, capas: ["fija"], mejor: IDX.wUsd, v: (e) => indice(IDX.wUsd(e), "vatios") },
+      { t: "Ganancia por cada USD 100", det: true, capas: ["antena"], mejor: IDX.dbiUsd, v: (e) => indice(IDX.dbiUsd(e), "dBi") },
     ] },
     { titulo: "Sin celular", capas: ["portatil"], filas: [
       { t: "Qué se puede hacer sin celular", mejor: (e) => ({ total: 2, lee: 1, nada: 0 }[e.r.sinCelular] ?? null), v: (e) => sinCel(e.r.sinCelular) },
+      { t: "Cómo se usa sin celular", det: true, v: (e) => texto(e.sin_celular, 150) },
       { t: "Pantalla", mejor: (e) => (e.r.pantalla === null ? null : +e.r.pantalla), v: (e) => e.r.pantalla ? `<span class="si">${ICONOS.si}${esc(e.r.pantallaTexto)}</span>` : siNo(e.r.pantalla, "", "No tiene") },
       { t: "Teclado", mejor: (e) => (e.r.teclado === null ? null : +e.r.teclado), v: (e) => siNo(e.r.teclado, "Tiene", "No tiene") },
+      { t: "Controles", det: true, v: (e) => texto(e.entrada, 90) },
       { t: "GPS", mejor: (e) => (e.r.gps === null ? null : +e.r.gps), v: (e) => siNo(e.r.gps, "Tiene", "No tiene") },
+      { t: "Receptor GPS", det: true, v: (e) => texto(e.gps, 70) },
     ] },
-    { titulo: "Tamaño y peso", capas: ["portatil", "fija", "antena"], filas: [
-      { t: "Peso", mejor: (e) => (e.r.peso === null || e.capa !== "portatil" ? null : -e.r.peso), v: (e) => dato(e.r.peso, " g") },
-      { t: "Medidas", capas: ["portatil"], v: (e) => e.r.dimensiones ? `${esc(e.r.dimensiones)} mm` : `<span class="sin-dato">Sin dato</span>` },
+    { titulo: "Tamaño y peso", capas: ["portatil", "fija", "antena", "modulo"], filas: [
+      { t: "Peso", capas: ["portatil", "fija", "antena"], mejor: (e) => (e.r.peso === null || e.capa !== "portatil" ? null : -e.r.peso), v: (e) => dato(e.r.peso, " g") },
+      { t: "Medidas", det: true, v: (e) => e.r.dimensiones ? `${esc(e.r.dimensiones)} mm` : SD },
     ] },
     { titulo: "Energía", capas: ["portatil", "fija"], filas: [
       { t: "Batería", mejor: (e) => e.r.bateria, v: (e) => dato(e.r.bateria, " mAh") },
-      { t: "Autonomía en uso", mejor: (e) => e.r.autonomia, capas: ["portatil"], v: (e) => esNum(e.r.autonomia) ? `<span class="num">${n(e.r.autonomia)} h</span><span class="sub">${e.r.autonomiaFuente}</span>` : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Tipo de batería", det: true, v: (e) => texto(e.bateria_formato, 90) },
+      { t: "Autonomía en uso", mejor: (e) => e.r.autonomia, capas: ["portatil"], v: (e) => esNum(e.r.autonomia) ? `<span class="num">${n(e.r.autonomia)} h</span><span class="sub">${e.r.autonomiaFuente}</span>` : SD },
+      { t: "Condiciones de esa autonomía", det: true, capas: ["portatil", "fija"], v: (e) => texto(e.autonomia_texto, 150) },
       { t: "Panel solar", mejor: (e) => e.r.panel, capas: ["fija"], v: (e) => dato(e.r.panel, " W") },
-      { t: "Cómo se carga", capas: ["portatil"], v: (e) => e.r.recarga ? esc(e.r.recarga) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Cómo se carga", capas: ["portatil"], v: (e) => e.r.recarga ? esc(e.r.recarga) : SD },
+      { t: "Detalle de la carga", det: true, capas: ["portatil"], v: (e) => texto(e.recarga, 110) },
       { t: "Batería reemplazable", mejor: (e) => ({ "Sí, celda estándar": 2, "Con herramientas": 1, No: 0 }[e.r.reemplazableTexto] ?? null), v: (e) => e.r.reemplazableTexto === "Con herramientas" ? `<span class="si" style="--ok:var(--ink-2)">${ICONOS.medio}Con herramientas</span>` : siNo(e.r.reemplazable, e.r.reemplazableTexto || "Sí", "No") },
     ] },
     { titulo: "Resistencia", capas: ["portatil", "fija", "antena", "accesorio"], filas: [
-      { t: "Agua y polvo", mejor: (e) => (e.r.ip ? +e.r.ip.slice(-1) : e.r.ipTexto ? (e.r.agua ? 4.5 : 0) : null), v: (e) => e.r.ip ? siNo(e.r.agua, e.r.ip, e.r.ip) : e.r.ipTexto ? siNo(e.r.agua, e.r.ipTexto, e.r.ipTexto) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Agua y polvo", mejor: (e) => (e.r.ip ? +e.r.ip.slice(-1) : e.r.ipTexto ? (e.r.agua ? 4.5 : 0) : null), v: (e) => e.r.ip ? siNo(e.r.agua, e.r.ip, e.r.ip) : e.r.ipTexto ? siNo(e.r.agua, e.r.ipTexto, e.r.ipTexto) : SD },
+      { t: "Caídas", det: true, capas: ["portatil"], v: (e) => texto(e.resistencia_caida, 90) },
     ] },
     { titulo: "Radio", capas: ["portatil", "fija", "modulo"], filas: [
-      { t: "Meshtastic", mejor: (e) => (e.r.listo === null ? null : +e.r.listo), v: (e) => e.r.listoTexto ? siNo(e.r.listo, e.r.listoTexto, e.r.listoTexto) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Meshtastic", mejor: (e) => (e.r.listo === null ? null : +e.r.listo), v: (e) => e.r.listoTexto ? siNo(e.r.listo, e.r.listoTexto, e.r.listoTexto) : SD },
       { t: "Cubre 915 a 928 MHz", mejor: (e) => (e.r.banda === null ? null : +e.r.banda), v: (e) => siNo(e.r.banda, "Toda la banda colombiana", "No la cubre entera") },
+      { t: "Banda que declara", det: true, v: (e) => texto(e.banda_mhz, 80) },
       { t: "Potencia que declara el fabricante", mejor: (e) => e.r.tx, v: (e) => dato(e.r.tx, " dBm") },
-      { t: "Potencia con la que se certificó ante la FCC", mejor: (e) => e.r.txFcc, v: (e) => dato(e.r.txFcc, " dBm", 1) },
-      { t: "Microcontrolador y radio", v: (e) => e.r.chip ? esc(e.r.chip) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "Potencia con la que se certificó ante la FCC", det: true, mejor: (e) => e.r.txFcc, v: (e) => esNum(e.r.txFcc) ? `<span class="num">${n(e.r.txFcc, 1)} dBm</span>${e.fcc_id ? `<span class="sub">${esc(e.fcc_id)}</span>` : ""}` : e.fcc_nota ? texto(e.fcc_nota, 90) : SD },
+      { t: "Microcontrolador", det: true, v: (e) => texto(e.mcu, 60) },
+      { t: "Chip de radio", det: true, v: (e) => texto(e.radio, 60) },
       { t: "Consumo publicado", mejor: (e) => (e.r.consumo === null ? null : -e.r.consumo), capas: ["fija", "modulo"], v: (e) => dato(e.r.consumo, " mA", 1) },
+      { t: "Qué mide ese consumo", det: true, capas: ["fija", "modulo"], v: (e) => texto(e.consumo_texto, 130) },
     ] },
     { titulo: "Antena", capas: ["antena", "fija"], filas: [
       { t: "Ganancia", mejor: (e) => e.r.ganancia, v: (e) => dato(e.r.ganancia, " dBi", 2) },
-      { t: "ROE publicada", capas: ["antena"], v: (e) => e.r.roe ? esc(e.r.roe) : `<span class="sin-dato">Sin dato</span>` },
+      { t: "ROE publicada", det: true, capas: ["antena"], v: (e) => e.r.roe ? esc(e.r.roe) : SD },
+    ] },
+    { titulo: "Instalación y alternativas", capas: TODAS, filas: [
+      { t: "Dificultad de instalación", det: true, capas: ["fija", "modulo", "antena", "accesorio"], mejor: (e) => ({ baja: 2, "baja-media": 1.5, media: 1, alta: 0 }[String(e.complejidad || "").split(/\s+-\s+|\s/)[0]] ?? null), v: (e) => texto(e.complejidad, 110) },
+      { t: "Equipos parecidos", det: true, v: (e) => texto(e.equivalentes, 110) },
+      { t: "Fuentes que no coinciden", det: true, v: (e) => e.contradiccion ? `<span class="contra">${texto(e.contradiccion, 220)}</span>` : `<span class="sin-dato">Ninguna</span>` },
     ] },
   ];
   // Índices de las celdas con el mejor valor de la fila. Si todos empatan o faltan datos, ninguno.
   function mejoresDe(f, g, lista) {
     if (!f.mejor || lista.length < 2) return [];
     const p = lista.map((e) => ((f.capas || g.capas).includes(e.capa) ? f.mejor(e) : null));
-    const validos = p.filter((x) => typeof x === "number");
+    const validos = p.filter((x) => typeof x === "number" && isFinite(x));
     if (validos.length < 2) return [];
     const max = Math.max(...validos);
     if (validos.every((x) => x === max) && validos.length === lista.length) return [];
     return p.map((x, i) => (x === max ? i : -1)).filter((i) => i >= 0);
   }
   // Filas que aplican a al menos uno de los equipos elegidos. En una celda de otra capa: «No aplica».
-  function filasPara(lista) {
+  // completo: incluye las filas de detalle.
+  function filasPara(lista, { completo = false } = {}) {
     const capas = new Set(lista.map((e) => e.capa));
     return GRUPOS.filter((g) => g.capas.some((c) => capas.has(c))).map((g) => ({
       titulo: g.titulo,
-      filas: g.filas.filter((f) => (f.capas || g.capas).some((c) => capas.has(c))).map((f) => ({
+      filas: g.filas.filter((f) => (completo || !f.det) && (f.capas || g.capas).some((c) => capas.has(c))).map((f) => ({
         t: f.t,
+        det: !!f.det,
         celdas: lista.map((e) => ((f.capas || g.capas).includes(e.capa) ? f.v(e) : `<span class="sin-dato">No aplica</span>`)),
         mejores: mejoresDe(f, g, lista),
       })),
@@ -302,9 +361,18 @@
     const r = await fetch("datos/equipos.json", { cache: "no-cache" });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
-    d.equipos.forEach((e) => { e.r = rasgos(e); e.forma = forma(e); });
+    d.equipos.forEach((e) => { e.r = rasgos(e); e.forma = forma(e); e.r.puesto = {}; });
+    // Puesto de cada equipo dentro de su capa, entre los que publican el dato. Empates comparten puesto.
+    const CRIT = { precio: [(e) => e.r.precio, 1], bateria: [(e) => e.r.bateria, -1], peso: [(e) => e.r.peso, 1], autonomia: [(e) => e.r.autonomia, -1], ganancia: [(e) => e.r.ganancia, -1] };
+    Object.keys(CAPAS).forEach((c) => {
+      const de = d.equipos.filter((e) => e.capa === c);
+      Object.entries(CRIT).forEach(([k, [f, dir]]) => {
+        const con = de.filter((e) => esNum(f(e)));
+        con.forEach((e) => { e.r.puesto[k] = { pos: 1 + con.filter((o) => (f(o) - f(e)) * dir < 0).length, de: con.length }; });
+      });
+    });
     return d;
   }
 
-  window.RV = { foto, PAGINAS, GRUPOS, filasPara, resumen, nombre, guardarSeleccion, leerSeleccion, CAPAS, esc, esNum, fecha, usd, n, limpiar, primeraFrase, precioValido, rasgos, forma, silueta, ICONOS, siNo, sinCel, barra, cargar };
+  window.RV = { texto, foto, PAGINAS, GRUPOS, filasPara, resumen, nombre, guardarSeleccion, leerSeleccion, CAPAS, esc, esNum, fecha, usd, n, limpiar, primeraFrase, precioValido, rasgos, forma, silueta, ICONOS, siNo, sinCel, barra, cargar };
 })();
