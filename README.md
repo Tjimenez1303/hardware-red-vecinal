@@ -30,7 +30,7 @@ El tema claro u oscuro se cambia con el botón del sol y la luna.
 Es HTML, CSS y JS sin dependencias, sin construcción y sin `npm install`. La
 única carga externa es la fuente IBM Plex Sans de Google Fonts.
 
-- **Publicada:** GitHub Pages sirve `index.html` desde la raíz de la rama `main`.
+- **Publicada:** <https://tjimenez1303.github.io/hardware-red-vecinal/>, servida por GitHub Pages desde la raíz de la rama `main`.
 - **En local:** el navegador no deja leer `datos/equipos.json` desde `file://`,
   así que hay que servir la carpeta:
 
@@ -165,6 +165,8 @@ Si después de publicar se sigue viendo la versión vieja, añadir o subir un su
 
 ## Publicar
 
-El repositorio se creó sin remoto. Para publicarlo en GitHub Pages, el
-responsable crea el repositorio en su cuenta, lo empuja y activa Pages desde
-*Settings → Pages → Deploy from a branch → main / (root)*.
+- **Repositorio:** <https://github.com/Tjimenez1303/hardware-red-vecinal>, público.
+- **Sitio:** <https://tjimenez1303.github.io/hardware-red-vecinal/>. GitHub Pages lo sirve desde la raíz de la rama `main`.
+
+Cada `git push` a `main` vuelve a publicar el sitio en uno o dos minutos. Si se sigue
+viendo la versión anterior, ver la sección de caché más arriba.
