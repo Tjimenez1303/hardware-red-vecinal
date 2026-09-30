@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Gráficas y comparativas</title>
+<script>try{var t=localStorage.getItem("rv-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/comun.css">
+<style>
+  /* Cinco vistas sobre los mismos datos: dispersión libre, índices de valor, distribución de precios
+     por capa, perfil por percentiles y las dos familias portátiles. Ejes lineales desde cero salvo
+     donde se declara otra cosa en la propia figura. */
+  main { max-width: 1280px; margin: 0 auto; padding: 28px 24px 56px; }
+  h1 { font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -0.02em; margin: 0 0 4px; }
+  .sub-h { margin: 0; color: var(--ink-2); max-width: 72ch; }
+  .indice { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+  .indice a { text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13.5px; color: var(--ink-2); background: var(--surface); }
+  .indice a:hover { color: var(--ink); border-color: var(--ink-3); }
+  section.vista { margin-top: 48px; scroll-margin-top: 72px; }
+  section.vista > h2 { font-size: 22px; letter-spacing: -0.015em; margin: 0 0 4px; }
+  section.vista > p { margin: 0 0 14px; color: var(--ink-2); max-width: 72ch; }
+  .controles { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin: 0 0 14px; }
+  .controles label { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-2); }
+  .controles label, .selects label { max-width: 100%; min-width: 0; }
+  .controles select, .selects select { min-width: 0; max-width: 100%; flex: 1 1 auto; text-overflow: ellipsis; }
+  .lienzo { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 10px; min-width: 0; position: relative; }
+  svg.g { width: 100%; height: auto; display: block; overflow: visible; }
+  .g text { font-family: var(--f); fill: var(--ink-3); font-size: 12px; }
+  .g .rej { stroke: var(--line); stroke-width: 1; }
+  .g .eje { stroke: var(--ink-3); stroke-width: 1; }
+  .g .te { fill: var(--ink-2); font-size: 12.5px; font-weight: 500; }
+  .g .pista { fill: var(--ink-3); font-size: 12.5px; }
+  .g .p { cursor: pointer; }
+  .g .p circle { stroke: var(--surface); stroke-width: 2; }
+  .g .p:hover circle, .g .p.sel circle { r: 9; }
+  .g .p.sel circle { stroke: var(--ink); stroke-width: 2.5; }
+  .g .rot { fill: var(--ink); font-size: 12.5px; font-weight: 500; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); padding: 2px 4px 10px; }
+  .leyenda span { display: inline-flex; align-items: center; gap: 7px; }
+  .leyenda i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .nota { font-size: 12.5px; color: var(--ink-3); margin: 8px 4px 2px; }
+  .tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; padding: 7px 10px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, calc(-100% - 12px)); opacity: 0; transition: opacity .1s; z-index: 5; }
+  .tip.visible { opacity: 1; }
+  .con-panel { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+  aside.panel .foto { aspect-ratio: 4 / 3; padding: 14px; margin-bottom: 12px; }
+  aside.panel h3 { font-size: 19px; margin: 2px 0 4px; line-height: 1.2; }
+  aside.panel dl { margin: 10px 0 14px; }
+  aside.panel dl div { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+  aside.panel dt { color: var(--ink-2); }
+  aside.panel dd { margin: 0; text-align: right; }
+  aside.panel .vacio { color: var(--ink-2); font-size: 14px; }
+
+  /* Ranking de índices */
+  .ranking { display: grid; gap: 4px; }
+  .fila-r { display: grid; grid-template-columns: 38px minmax(120px, 30%) 1fr; gap: 10px; align-items: center; font-size: 13.5px; }
+  .fila-r .foto { width: 38px; height: 38px; padding: 2px; border-radius: 7px; }
+  .fila-r .nom { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .fila-r .nom small { color: var(--ink-3); }
+  .fila-r .pista-r { position: relative; height: 18px; }
+  .fila-r .barra-r { position: absolute; left: 0; top: 4px; height: 10px; border-radius: 0 5px 5px 0; background: var(--c); min-width: 2px; }
+  .fila-r .v { position: absolute; top: 0; font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; line-height: 18px; }
+  .fila-r.base .nom { font-weight: 600; }
+
+  /* Perfil por percentiles */
+  .selects { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; min-width: 0; }
+  .controles > * { min-width: 0; max-width: 100%; }
+  .selects label { display: inline-flex; align-items: center; gap: 8px; }
+  .selects i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .perfil { display: grid; gap: 12px; }
+  .perfil .attr { display: grid; grid-template-columns: 180px 1fr; gap: 14px; align-items: center; font-size: 14px; }
+  .perfil .attr > span { color: var(--ink-2); }
+  .perfil .riel { position: relative; height: 26px; }
+  .perfil .riel::before { content: ""; position: absolute; left: 0; right: 0; top: 12px; height: 2px; background: var(--line); border-radius: 1px; }
+  .perfil .riel .marca { position: absolute; top: 5px; width: 16px; height: 16px; border-radius: 50%; transform: translateX(-50%); border: 2px solid var(--surface); }
+  .perfil .riel .marca.sd { top: 7px; width: 12px; height: 12px; background: none !important; border: 2px dashed var(--ink-3); }
+  .perfil .ejes { display: grid; grid-template-columns: 180px 1fr; gap: 14px; font-size: 12px; color: var(--ink-3); }
+  .perfil .ejes div { display: flex; justify-content: space-between; }
+
+  /* Familias */
+  .familias { display: grid; gap: 14px; }
+  .familias .fila-f { display: grid; grid-template-columns: 180px 1fr; gap: 14px; align-items: center; font-size: 14px; }
+  .familias .fila-f > span { color: var(--ink-2); }
+  @media (max-width: 900px) { .con-panel { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    main { padding: 20px 16px 40px; }
+    .perfil .attr, .perfil .ejes, .familias .fila-f { grid-template-columns: 1fr; gap: 4px; }
+    .perfil .ejes > span { display: none; }
+    .fila-r { grid-template-columns: 32px minmax(90px, 40%) 1fr; }
+  }
+</style>
+</head>
+<body>
+<header id="barra"></header>
+<main>
+  <h1>Gráficas y comparativas</h1>
+  <p class="sub-h">Cinco maneras de mirar los mismos datos. Todas usan precios de lista del <span id="fecha-datos"></span> y dejan fuera, avisándolo, a los equipos sin el dato.</p>
+  <nav class="indice" aria-label="Gráficas">
+    <a href="#mapa">Mapa de compromisos</a><a href="#indices">Índices de valor</a><a href="#precios">Precios por capa</a><a href="#perfil">Perfil frente a la capa</a><a href="#familias">Las dos familias portátiles</a>
+  </nav>
+
+  <section class="vista" id="mapa">
+    <h2>Mapa de compromisos</h2>
+    <p>Elige qué comparar en cada eje. Cada punto es un equipo; toca uno para ver su ficha.</p>
+    <div class="controles">
+      <div class="segmentado" id="m-capas" role="tablist" aria-label="Tipo de equipo"></div>
+      <label for="m-x">Eje horizontal <select id="m-x"></select></label>
+      <label for="m-y">Eje vertical <select id="m-y"></select></label>
+      <label for="m-color">Color <select id="m-color"></select></label>
+    </div>
+    <div class="con-panel">
+      <div class="lienzo" id="m-lienzo">
+        <div class="leyenda" id="m-leyenda"></div>
+        <svg class="g" id="m-g" role="img" aria-label="Dispersión"></svg>
+        <p class="nota" id="m-fuera"></p>
+        <div class="tip" id="m-tip" role="tooltip"></div>
+      </div>
+      <aside class="panel" id="m-panel" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <section class="vista" id="indices">
+    <h2>Índices de valor</h2>
+    <p>Cuánto rinde cada dólar, o cada gramo. Barras en escala lineal desde cero; el nombre en negrilla es la línea base del proyecto.</p>
+    <div class="controles"><label for="i-indice">Índice <select id="i-indice"></select></label></div>
+    <div class="lienzo"><div class="ranking" id="i-ranking"></div><p class="nota" id="i-nota"></p></div>
+  </section>
+
+  <section class="vista" id="precios">
+    <h2>Precios por capa</h2>
+    <p>Cada punto es un equipo. La línea gruesa es la mediana de su capa, que es el umbral de bajo costo del proyecto; las finas marcan el primer y el tercer cuartil. Por encima del tercer cuartil, un equipo tiene que justificar su precio.</p>
+    <div class="lienzo"><svg class="g" id="p-g" role="img" aria-label="Distribución de precios por capa"></svg><div class="tip" id="p-tip" role="tooltip"></div></div>
+  </section>
+
+  <section class="vista" id="perfil">
+    <h2>Perfil frente a la capa</h2>
+    <p>Dónde queda cada equipo frente a los demás de su capa, en percentiles: a la derecha es mejor (más batería, menos peso, menos precio). Un círculo punteado a la izquierda indica que el dato no existe.</p>
+    <div class="controles"><div class="selects" id="f-selects"></div></div>
+    <div class="lienzo"><div class="perfil" id="f-perfil"></div></div>
+  </section>
+
+  <section class="vista" id="familias">
+    <h2>Las dos familias portátiles</h2>
+    <p>Mediana de cada familia: la etiqueta que depende del celular frente al aparato con pantalla propia. Cada punto claro es un equipo.</p>
+    <div class="leyenda" id="fa-leyenda"></div>
+    <div class="lienzo"><div class="familias" id="fa"></div></div>
+  </section>
+</main>
+
+<script src="assets/comun.js"></script>
+<script>
+(async function () {
+  const { esc, usd, n, foto, nombre, filasPara, CAPAS, ICONOS, barra, cargar, guardarSeleccion, leerSeleccion } = RV;
+  let d;
+  try { d = await cargar(); } catch (err) { document.querySelector("main").insertAdjacentHTML("afterbegin", `<p>No se pudieron cargar los datos: ${err.message}</p>`); return; }
+  barra("graficas.html", d.meta.fecha_datos);
+  document.getElementById("fecha-datos").textContent = RV.fecha(d.meta.fecha_datos);
+  const eq = d.equipos;
+  const PALETA = ["var(--fija)", "var(--portatil)", "var(--modulo)", "var(--antena)", "var(--accesorio)"]; // mismo orden que la leyenda de familias
+  const percentil = (ord, p) => { if (!ord.length) return null; const h = (ord.length - 1) * p, lo = Math.floor(h), hi = Math.ceil(h); return ord[lo] + (ord[hi] - ord[lo]) * (h - lo); };
+  function ticks(max) {
+    const paso0 = max / 5, mag = Math.pow(10, Math.floor(Math.log10(paso0 || 1)));
+    const paso = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((p) => p >= paso0);
+    const tope = Math.ceil(max / paso) * paso, t = [];
+    for (let v = 0; v <= tope + 1e-9; v += paso) t.push(+v.toFixed(6));
+    return { tope, t };
+  }
+  const anchoDe = (el) => Math.max(320, el.clientWidth - 28);
+
+  // ================= 1. Mapa de compromisos =================
+  const MAG = {
+    precio: { t: "Precio", u: "USD", v: (e) => e.r.precio, capas: ["portatil", "fija", "modulo", "antena"], menor: true },
+    bateria: { t: "Batería", u: "mAh", v: (e) => e.r.bateria, capas: ["portatil", "fija"] },
+    autonomia: { t: "Autonomía en uso", u: "h", v: (e) => e.r.autonomia, capas: ["portatil"] },
+    peso: { t: "Peso", u: "g", v: (e) => e.r.peso, capas: ["portatil", "fija", "antena", "modulo"], menor: true },
+    panel: { t: "Panel solar", u: "W", v: (e) => e.r.panel, capas: ["fija"] },
+    tx: { t: "Potencia declarada", u: "dBm", v: (e) => e.r.tx, capas: ["portatil", "fija", "modulo"] },
+    txFcc: { t: "Potencia certificada FCC", u: "dBm", v: (e) => e.r.txFcc, capas: ["portatil", "fija", "modulo"] },
+    consumo: { t: "Consumo", u: "mA", v: (e) => e.r.consumo, capas: ["fija", "modulo"], menor: true },
+    ganancia: { t: "Ganancia", u: "dBi", v: (e) => e.r.ganancia, capas: ["antena", "fija"] },
+  };
+  const COLORES = {
+    familia: { t: "Familia", colores: { "Nodo fijo": "var(--fija)", "Placa": "var(--modulo)", "Antena": "var(--antena)" }, orden: ["Etiqueta, depende del celular", "Con pantalla propia", "Nodo fijo", "Placa", "Antena"], cat: (e) => e.capa === "portatil" ? (e.familia === "a_etiqueta" ? "Etiqueta, depende del celular" : "Con pantalla propia") : CAPAS[e.capa].nombre },
+    listo: { t: "Meshtastic de fábrica", orden: ["Llega con Meshtastic", "Hay que instalarlo", "Sin dato"], cat: (e) => e.r.listo === true ? "Llega con Meshtastic" : e.r.listo === false ? "Hay que instalarlo" : "Sin dato" },
+    stock: { t: "Disponibilidad", orden: ["En stock", "Agotado o por reponer", "Sin dato"], cat: (e) => e.r.disponible === true ? "En stock" : e.r.disponible === false ? "Agotado o por reponer" : "Sin dato" },
+    agua: { t: "Resistencia al agua", orden: ["Resiste agua", "No resiste agua", "Sin dato"], cat: (e) => e.r.agua === true ? "Resiste agua" : e.r.agua === false ? "No resiste agua" : "Sin dato" },
+  };
+  const m = { capa: "portatil", x: "precio", y: "bateria", color: "familia", sel: null };
+
+  function controlesMapa() {
+    document.getElementById("m-capas").innerHTML = ["portatil", "fija", "modulo", "antena"].map((k) => `<button type="button" role="tab" aria-selected="${k === m.capa}" data-k="${k}">${CAPAS[k].plural}</button>`).join("");
+    const disp = Object.entries(MAG).filter(([, g]) => g.capas.includes(m.capa));
+    if (!disp.some(([k]) => k === m.x)) m.x = disp[0][0];
+    if (!disp.some(([k]) => k === m.y) || m.y === m.x) m.y = (disp.find(([k]) => k !== m.x) || disp[0])[0];
+    const opts = (sel) => disp.map(([k, g]) => `<option value="${k}" ${k === sel ? "selected" : ""}>${g.t}</option>`).join("");
+    document.getElementById("m-x").innerHTML = opts(m.x);
+    document.getElementById("m-y").innerHTML = opts(m.y);
+    document.getElementById("m-color").innerHTML = Object.entries(COLORES).map(([k, c]) => `<option value="${k}" ${k === m.color ? "selected" : ""}>${c.t}</option>`).join("");
+  }
+
+  function mapa() {
+    const X = MAG[m.x], Y = MAG[m.y];
+    const todos = eq.filter((e) => e.capa === m.capa);
+    const pts = todos.filter((e) => typeof X.v(e) === "number" && typeof Y.v(e) === "number");
+    // El color sigue a la categoría, no a su orden de aparición: cambiar de capa no repinta.
+    const C = COLORES[m.color];
+    const cats = C.orden.filter((c) => pts.some((e) => C.cat(e) === c));
+    const colorDe = (c) => c === "Sin dato" ? "var(--ink-3)" : C.colores?.[c] || PALETA[C.orden.indexOf(c) % PALETA.length];
+    const W = anchoDe(document.getElementById("m-lienzo")), H = Math.round(Math.min(540, Math.max(320, W * 0.58)));
+    const M = { l: 60, r: 20, t: 16, b: 46 };
+    const TX = ticks(Math.max(...pts.map(X.v), 1)), TY = ticks(Math.max(...pts.map(Y.v), 1));
+    const px = (v) => M.l + (v / TX.tope) * (W - M.l - M.r), py = (v) => H - M.b - (v / TY.tope) * (H - M.t - M.b);
+    const bueno = `${Y.menor ? "abajo" : "arriba"} ${X.menor ? "a la izquierda" : "a la derecha"}`;
+    const et = new Set(pts.filter((e) => e.linea_base).map((e) => e.id)); if (m.sel) et.add(m.sel);
+    const rot = pts.filter((e) => et.has(e.id)).map((e) => ({ e, x: px(X.v(e)), y: py(Y.v(e)) + 4 })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < rot.length; i++) if (rot[i].y - rot[i - 1].y < 16 && Math.abs(rot[i].x - rot[i - 1].x) < 220) rot[i].y = rot[i - 1].y + 16;
+    const g = document.getElementById("m-g");
+    g.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    g.setAttribute("aria-label", `${X.t} contra ${Y.t}, ${CAPAS[m.capa].plural}`);
+    g.innerHTML = TY.t.map((v) => `<line class="rej" x1="${M.l}" x2="${W - M.r}" y1="${py(v)}" y2="${py(v)}"/><text x="${M.l - 8}" y="${py(v) + 4}" text-anchor="end">${n(v)}</text>`).join("") +
+      TX.t.map((v) => `<text x="${px(v)}" y="${H - M.b + 18}" text-anchor="middle">${n(v)}</text>`).join("") +
+      `<line class="eje" x1="${M.l}" x2="${W - M.r}" y1="${H - M.b}" y2="${H - M.b}"/>` +
+      `<text class="te" x="${(M.l + W - M.r) / 2}" y="${H - 8}" text-anchor="middle">${esc(X.t)}, ${esc(X.u)}</text>` +
+      `<text class="te" x="14" y="${(M.t + H - M.b) / 2}" text-anchor="middle" transform="rotate(-90 14 ${(M.t + H - M.b) / 2})">${esc(Y.t)}, ${esc(Y.u)}</text>` +
+      `<text class="pista" x="${M.l + 12}" y="${M.t + 14}">Lo mejor queda ${bueno}</text>` +
+      pts.map((e) => `<g class="p ${m.sel === e.id ? "sel" : ""}" data-id="${esc(e.id)}" tabindex="0" role="button" aria-label="${esc(nombre(e))}"><circle cx="${px(X.v(e))}" cy="${py(Y.v(e))}" r="6.5" style="fill:${colorDe(COLORES[m.color].cat(e))}"/></g>`).join("") +
+      rot.map(({ e, x, y }) => { const der = x > W * 0.7; return `<text class="rot" x="${der ? x - 12 : x + 12}" y="${y}" text-anchor="${der ? "end" : "start"}">${esc(nombre(e))}</text>`; }).join("");
+    document.getElementById("m-leyenda").innerHTML = cats.map((c) => `<span><i style="background:${colorDe(c)}"></i>${esc(c)}</span>`).join("") + (et.size ? `<span style="color:var(--ink-3)">Con nombre: línea base y equipo elegido</span>` : "");
+    const fuera = todos.length - pts.length;
+    document.getElementById("m-fuera").textContent = fuera ? `${fuera} de ${todos.length} ${fuera === 1 ? "equipo no aparece" : "equipos no aparecen"} por falta de ${X.t.toLowerCase()} o ${Y.t.toLowerCase()}. Ejes lineales desde cero.` : "Ejes lineales desde cero.";
+    panelMapa();
+  }
+
+  function panelMapa() {
+    const p = document.getElementById("m-panel"), e = eq.find((x) => x.id === m.sel);
+    if (!e) { p.innerHTML = `<p class="vacio">Toca un punto para ver aquí la ficha del equipo, con su precio y el enlace a la tienda.</p>`; return; }
+    const filas = filasPara([e]).flatMap((g) => g.filas).slice(1, 8);
+    p.innerHTML = `<div class="foto marco-foto">${foto(e)}</div><span class="sub">${esc(e.fabricante)}</span><h3>${esc(nombre(e))}</h3>
+      ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : ""}
+      <dl>${filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")}</dl>
+      <button class="btn btn-secundario" type="button" id="m-anadir">Añadir a la comparación</button>`;
+    document.getElementById("m-anadir").addEventListener("click", (ev) => { const s = leerSeleccion().filter((x) => x !== e.id); s.unshift(e.id); guardarSeleccion(s.slice(0, 3)); ev.target.outerHTML = `<a class="btn btn-secundario" href="comparar.html">Añadido. Abrir la comparación</a>`; });
+  }
+
+  const mg = document.getElementById("m-g"), mtip = document.getElementById("m-tip");
+  mg.addEventListener("click", (ev) => { const p = ev.target.closest(".p"); if (p) { m.sel = p.dataset.id; mapa(); } });
+  mg.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { const p = ev.target.closest(".p"); if (p) { ev.preventDefault(); m.sel = p.dataset.id; mapa(); } } });
+  mg.addEventListener("mousemove", (ev) => {
+    const p = ev.target.closest(".p"); if (!p) { mtip.classList.remove("visible"); return; }
+    const e = eq.find((x) => x.id === p.dataset.id), X = MAG[m.x], Y = MAG[m.y];
+    mtip.textContent = `${nombre(e)}: ${n(X.v(e), 2)} ${X.u}, ${n(Y.v(e), 2)} ${Y.u}`;
+    const r = document.getElementById("m-lienzo").getBoundingClientRect(); mtip.style.left = ev.clientX - r.left + "px"; mtip.style.top = ev.clientY - r.top + "px"; mtip.classList.add("visible");
+  });
+  mg.addEventListener("mouseleave", () => mtip.classList.remove("visible"));
+  document.getElementById("m-capas").addEventListener("click", (ev) => { const b = ev.target.closest("button"); if (!b) return; m.capa = b.dataset.k; m.sel = null; controlesMapa(); mapa(); });
+  ["x", "y", "color"].forEach((k) => document.getElementById("m-" + k).addEventListener("change", (ev) => { m[k] = ev.target.value; if (k !== "color") controlesMapa(); mapa(); }));
+
+  // ================= 2. Índices de valor =================
+  const INDICES = {
+    mah_usd: { t: "mAh por dólar, portátiles", capa: "portatil", v: (e) => e.r.bateria && e.r.precio ? e.r.bateria / e.r.precio : null, f: (v) => `${n(v, 1)} mAh por USD` },
+    h_usd: { t: "Horas de uso por cada USD 10, portátiles", capa: "portatil", v: (e) => e.r.autonomia && e.r.precio ? (e.r.autonomia / e.r.precio) * 10 : null, f: (v) => `${n(v, 1)} h por USD 10` },
+    g_mah: { t: "Gramos por cada 1.000 mAh, portátiles (menos es mejor)", capa: "portatil", menor: true, v: (e) => e.r.peso && e.r.bateria ? (e.r.peso / e.r.bateria) * 1000 : null, f: (v) => `${n(v, 1)} g por 1.000 mAh` },
+    mah_usd_f: { t: "mAh por dólar, nodos fijos", capa: "fija", v: (e) => e.r.bateria && e.r.precio ? e.r.bateria / e.r.precio : null, f: (v) => `${n(v, 1)} mAh por USD` },
+    w_usd: { t: "Vatios de panel por cada USD 100, nodos fijos", capa: "fija", v: (e) => e.r.panel && e.r.precio ? (e.r.panel / e.r.precio) * 100 : null, f: (v) => `${n(v, 1)} W por USD 100` },
+    dbi_usd: { t: "dBi por cada USD 100, antenas", capa: "antena", v: (e) => e.r.ganancia && e.r.precio ? (e.r.ganancia / e.r.precio) * 100 : null, f: (v) => `${n(v, 1)} dBi por USD 100` },
+  };
+  let indice = "mah_usd";
+  document.getElementById("i-indice").innerHTML = Object.entries(INDICES).map(([k, x]) => `<option value="${k}">${x.t}</option>`).join("");
+  function indices() {
+    const I = INDICES[indice];
+    const todos = eq.filter((e) => e.capa === I.capa);
+    const l = todos.map((e) => ({ e, v: I.v(e) })).filter((x) => typeof x.v === "number" && isFinite(x.v)).sort((a, b) => I.menor ? a.v - b.v : b.v - a.v);
+    const max = Math.max(...l.map((x) => x.v), 1e-9);
+    document.getElementById("i-ranking").innerHTML = l.map(({ e, v }) => {
+      const w = (v / max) * 100, dentro = w > 70;
+      return `<div class="fila-r ${e.linea_base ? "base" : ""}"><span class="foto marco-foto">${foto(e, "")}</span><span class="nom" title="${esc(e.fabricante + " " + nombre(e))}">${esc(nombre(e))} <small>${esc(e.fabricante)}</small></span>
+        <div class="pista-r"><div class="barra-r" style="width:${w}%;--c:${CAPAS[e.capa].color}"></div><span class="v" style="${dentro ? `right:${100 - w + 1}%;color:#fff` : `left:calc(${w}% + 6px)`}">${I.f(v)}</span></div></div>`;
+    }).join("") || `<p class="nota">Ningún equipo de esta capa tiene los dos datos que pide el índice.</p>`;
+    const fuera = todos.length - l.length;
+    document.getElementById("i-nota").textContent = fuera ? `${fuera} de ${todos.length} equipos no aparecen porque les falta uno de los dos datos del índice.` : "";
+  }
+  document.getElementById("i-indice").addEventListener("change", (ev) => { indice = ev.target.value; indices(); });
+
+  // ================= 3. Precios por capa =================
+  function precios() {
+    const capas = ["modulo", "portatil", "fija", "antena", "accesorio"];
+    const el = document.getElementById("p-g"), W = anchoDe(el.parentElement), fila = 64, M = { l: 110, r: 24, t: 14, b: 44 };
+    const H = M.t + M.b + fila * capas.length;
+    const todos = eq.filter((e) => e.r.precio !== null);
+    const TX = ticks(Math.max(...todos.map((e) => e.r.precio)));
+    const px = (v) => M.l + (v / TX.tope) * (W - M.l - M.r);
+    let out = TX.t.map((v) => `<line class="rej" x1="${px(v)}" x2="${px(v)}" y1="${M.t}" y2="${H - M.b}"/><text x="${px(v)}" y="${H - M.b + 18}" text-anchor="middle">${n(v)}</text>`).join("");
+    out += `<text class="te" x="${(M.l + W - M.r) / 2}" y="${H - 8}" text-anchor="middle">Precio de lista, USD (escala lineal desde cero)</text>`;
+    capas.forEach((c, i) => {
+      const y = M.t + fila * i + fila / 2;
+      const vals = todos.filter((e) => e.capa === c).sort((a, b) => a.r.precio - b.r.precio);
+      const ord = vals.map((e) => e.r.precio);
+      out += `<text class="te" x="${M.l - 12}" y="${y + 4}" text-anchor="end">${CAPAS[c].plural}</text>`;
+      if (ord.length >= 3) {
+        const [q1, q2, q3] = [0.25, 0.5, 0.75].map((p) => percentil(ord, p));
+        out += `<line x1="${px(q1)}" x2="${px(q3)}" y1="${y}" y2="${y}" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>`;
+        out += [q1, q3].map((q) => `<line x1="${px(q)}" x2="${px(q)}" y1="${y - 12}" y2="${y + 12}" stroke="var(--ink-3)" stroke-width="1.5"/>`).join("");
+        out += `<line x1="${px(q2)}" x2="${px(q2)}" y1="${y - 16}" y2="${y + 16}" stroke="var(--ink)" stroke-width="3"/><text x="${px(q2)}" y="${y - 20}" text-anchor="middle" style="fill:var(--ink);font-weight:600">${usd(q2, 0)}</text>`;
+      }
+      vals.forEach((e, k) => { out += `<g class="p" data-id="${esc(e.id)}"><circle cx="${px(e.r.precio)}" cy="${y + ((k % 3) - 1) * 6}" r="5" style="fill:${CAPAS[c].color};opacity:.85"/></g>`; });
+    });
+    el.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    el.innerHTML = out;
+  }
+  const pg = document.getElementById("p-g"), ptip = document.getElementById("p-tip");
+  pg.addEventListener("mousemove", (ev) => { const p = ev.target.closest(".p"); if (!p) { ptip.classList.remove("visible"); return; } const e = eq.find((x) => x.id === p.dataset.id); ptip.textContent = `${nombre(e)}: ${usd(e.r.precio)}`; const r = pg.parentElement.getBoundingClientRect(); ptip.style.left = ev.clientX - r.left + "px"; ptip.style.top = ev.clientY - r.top + "px"; ptip.classList.add("visible"); });
+  pg.addEventListener("mouseleave", () => ptip.classList.remove("visible"));
+
+  // ================= 4. Perfil frente a la capa =================
+  const COLS3 = ["var(--portatil)", "var(--fija)", "var(--modulo)"];
+  const ATR = [
+    { t: "Precio", v: (e) => e.r.precio, menor: true },
+    { t: "Batería", v: (e) => e.r.bateria, capas: ["portatil", "fija"] },
+    { t: "Autonomía en uso", v: (e) => e.r.autonomia, capas: ["portatil"] },
+    { t: "Peso", v: (e) => e.r.peso, menor: true, capas: ["portatil", "fija", "antena"] },
+    { t: "Panel solar", v: (e) => e.r.panel, capas: ["fija"] },
+    { t: "Potencia declarada", v: (e) => e.r.tx, capas: ["portatil", "fija", "modulo"] },
+    { t: "Potencia certificada FCC", v: (e) => e.r.txFcc, capas: ["portatil", "fija", "modulo"] },
+    { t: "Resistencia al agua", v: (e) => (e.r.ip ? +e.r.ip.slice(-1) : e.r.ipTexto ? (e.r.agua ? 4.5 : 0) : null), capas: ["portatil", "fija", "antena"] },
+    { t: "Consumo", v: (e) => e.r.consumo, menor: true, capas: ["fija", "modulo"] },
+    { t: "Ganancia", v: (e) => e.r.ganancia, capas: ["antena"] },
+  ];
+  const porId = new Map(eq.map((e) => [e.id, e]));
+  let perfilSel = leerSeleccion().filter((id) => porId.has(id)).slice(0, 3);
+  if (perfilSel.length < 2) perfilSel = ["seeed-studio-sensecap-card-tracker-t1000-e", "elecrow-thinknode-m1", "heltec-meshpocket"].filter((id) => porId.has(id));
+  const opciones = Object.keys(CAPAS).map((c) => `<optgroup label="${CAPAS[c].plural}">${eq.filter((e) => e.capa === c).map((e) => `<option value="${esc(e.id)}">${esc(e.fabricante)} ${esc(nombre(e))}</option>`).join("")}</optgroup>`).join("");
+  function perfil() {
+    document.getElementById("f-selects").innerHTML = [0, 1, 2].map((i) => `<label><i style="background:${COLS3[i]}"></i><span class="visually-hidden">Equipo ${i + 1}</span><select data-i="${i}"><option value="">Ninguno</option>${opciones}</select></label>`).join("");
+    document.querySelectorAll("#f-selects select").forEach((s, i) => { s.value = perfilSel[i] || ""; });
+    const lista = perfilSel.map((id) => porId.get(id)).filter(Boolean);
+    const attrs = ATR.filter((a) => lista.some((e) => !a.capas || a.capas.includes(e.capa)));
+    const pct = (a, e) => {
+      if (a.capas && !a.capas.includes(e.capa)) return undefined;
+      const v = a.v(e); if (typeof v !== "number") return null;
+      const vals = eq.filter((x) => x.capa === e.capa).map(a.v).filter((x) => typeof x === "number");
+      if (vals.length < 2) return 50;
+      const peores = vals.filter((x) => (a.menor ? x > v : x < v)).length, iguales = vals.filter((x) => x === v).length - 1;
+      return ((peores + iguales / 2) / (vals.length - 1)) * 100;
+    };
+    document.getElementById("f-perfil").innerHTML = attrs.map((a) => `<div class="attr"><span>${a.t}</span><div class="riel">${lista.map((e, i) => {
+      const p = pct(a, e); if (p === undefined) return "";
+      return p === null ? `<span class="marca sd" style="left:${8 + i * 16}px" title="${esc(nombre(e))}: sin dato"></span>` : `<span class="marca" style="left:${p}%;background:${COLS3[i]}" title="${esc(nombre(e))}: percentil ${n(p)}"></span>`;
+    }).join("")}</div></div>`).join("") + `<div class="ejes"><span></span><div><span>Peor de su capa</span><span>Mediana</span><span>Mejor de su capa</span></div></div>`;
+  }
+  document.getElementById("f-selects").addEventListener("change", (ev) => { const s = ev.target.closest("select"); if (!s) return; perfilSel[+s.dataset.i] = s.value; perfilSel = perfilSel.filter(Boolean); perfil(); });
+
+  // ================= 5. Las dos familias portátiles =================
+  function familias() {
+    const fams = [["a_etiqueta", "Etiqueta, depende del celular", "var(--fija)"], ["b_pantalla", "Con pantalla propia", "var(--portatil)"]];
+    document.getElementById("fa-leyenda").innerHTML = fams.map(([, t, c]) => `<span><i style="background:${c}"></i>${t}</span>`).join("");
+    const met = [["Precio", (e) => e.r.precio, "USD", 0], ["Peso", (e) => e.r.peso, "g", 0], ["Batería", (e) => e.r.bateria, "mAh", 0], ["Autonomía en uso", (e) => e.r.autonomia, "h", 0]];
+    const W = Math.max(280, document.getElementById("fa").clientWidth - 200);
+    document.getElementById("fa").innerHTML = met.map(([t, f, u]) => {
+      const porFam = fams.map(([k]) => eq.filter((e) => e.capa === "portatil" && e.familia === k).map(f).filter((v) => typeof v === "number").sort((a, b) => a - b));
+      const max = Math.max(...porFam.flat(), 1), T = ticks(max);
+      const x = (v) => 8 + (v / T.tope) * (W - 16);
+      const meds = porFam.map((vs) => percentil(vs, 0.5));
+      const svg = `<svg class="g" viewBox="0 0 ${W} 56" role="img" aria-label="${t}: mediana por familia">
+        ${T.t.map((v) => `<text x="${x(v)}" y="54" text-anchor="middle">${n(v)}</text>`).join("")}
+        ${porFam.map((vs, i) => vs.map((v) => `<circle cx="${x(v)}" cy="${14 + i * 16}" r="4" style="fill:${fams[i][2]};opacity:.3"/>`).join("")).join("")}
+        ${meds[0] !== null && meds[1] !== null ? `<line x1="${x(meds[0])}" x2="${x(meds[1])}" y1="22" y2="22" stroke="var(--ink-3)" stroke-width="2"/>` : ""}
+        ${meds.map((md, i) => md === null ? "" : `<circle cx="${x(md)}" cy="22" r="7" style="fill:${fams[i][2]};stroke:var(--surface);stroke-width:2"/>`).join("")}
+      </svg>`;
+      const txt = meds.map((md, i) => md === null ? "sin datos" : `${n(md)} ${u}`).join(" frente a ");
+      return `<div class="fila-f"><span>${t}<br><small style="color:var(--ink-3)">${txt} (n = ${porFam[0].length} y ${porFam[1].length})</small></span>${svg}</div>`;
+    }).join("");
+  }
+
+  function todo() { mapa(); indices(); precios(); perfil(); familias(); }
+  m.sel = eq.find((e) => /MeshTracker X1/.test(e.modelo))?.id || null;
+  controlesMapa(); todo();
+  let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { mapa(); precios(); familias(); }, 150); });
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+})();
+</script>
+</body>
+</html>

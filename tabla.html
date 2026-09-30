@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Tabla de resultados</title>
+<script>try{var t=localStorage.getItem("rv-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/comun.css">
+<style>
+  /* Patrón: tabla de resultados tipo RTINGS / cuadrícula de datos (TanStack Table).
+     Barras dentro de las celdas numéricas, filas alternas, encabezado y primera columna fijos,
+     y un panel lateral con el detalle al elegir una fila. */
+  main { max-width: 1320px; margin: 0 auto; padding: 28px 24px 40px; }
+  h1 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.02em; margin: 0 0 4px; }
+  .sub-h { margin: 0; color: var(--ink-2); }
+  .herramientas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 20px 0 14px; }
+  .herramientas input[type="search"] { flex: 1 1 220px; max-width: 320px; }
+  .herramientas .conteo { margin-left: auto; font-size: 13.5px; color: var(--ink-3); }
+
+  .marco { overflow: auto; max-height: calc(100vh - 230px); min-height: 360px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 14px; }
+  th, td { padding: 10px 14px; text-align: left; white-space: nowrap; }
+  thead th { position: sticky; top: 0; z-index: 3; background: var(--surface); border-bottom: 1px solid var(--line); font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
+  thead th button { border: 0; background: none; padding: 0; font: inherit; color: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+  thead th button:hover { color: var(--ink); }
+  thead th[aria-sort="ascending"] button, thead th[aria-sort="descending"] button { color: var(--ink); }
+  thead th .flecha { width: 12px; height: 12px; opacity: 0; }
+  thead th[aria-sort="ascending"] .flecha, thead th[aria-sort="descending"] .flecha { opacity: 1; }
+  thead th[aria-sort="descending"] .flecha { transform: rotate(180deg); }
+  tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 45%, var(--surface)); }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover td { background: var(--accent-soft); }
+  tbody tr[aria-selected="true"] td { background: var(--accent-soft); }
+  td.equipo, th.equipo { position: sticky; left: 0; z-index: 2; background: inherit; }
+  tbody td.equipo { background: var(--surface); }
+  thead th.equipo { z-index: 4; }
+  .equipo-in { display: flex; align-items: center; gap: 12px; }
+  .equipo-in .foto { width: 48px; height: 48px; flex: none; padding: 3px; border-radius: 8px; }
+  .equipo-in b { display: block; font-weight: 600; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
+  .equipo-in span { font-size: 12.5px; color: var(--ink-3); }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  th.n { text-align: right; }
+  th.n button { flex-direction: row-reverse; }
+  /* Barra dentro de la celda: escala lineal desde cero en cada columna. */
+  .barra-celda { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; min-width: 150px; }
+  .barra-celda i { height: 6px; border-radius: 3px; background: var(--surface-2); position: relative; overflow: hidden; }
+  .barra-celda i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--p); background: var(--c, var(--ink-3)); border-radius: 3px; }
+  .barra-celda .v { min-width: 64px; }
+  td .si svg, td .no svg { width: 17px; height: 17px; }
+  .leyenda-tabla { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; }
+
+  aside.detalle { position: fixed; top: calc(56px + env(safe-area-inset-top, 0px)); right: 0; bottom: 0; width: min(420px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: -16px 0 40px rgb(0 0 0 / .08); transform: translateX(105%); transition: transform .25s; z-index: 25; overflow-y: auto; padding: 22px 24px 32px; }
+  aside.detalle.abierto { transform: none; }
+  aside .cerrar { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--surface-2); cursor: pointer; display: grid; place-items: center; }
+  aside .cerrar svg { width: 18px; height: 18px; }
+  aside .foto { aspect-ratio: 4 / 3; padding: 16px; margin: 14px 0 16px; }
+  aside h2 { font-size: 22px; margin: 2px 0 4px; letter-spacing: -0.01em; }
+  aside dl { margin: 16px 0 0; }
+  aside dl h3 { font-size: 13px; color: var(--ink-3); font-weight: 600; margin: 18px 0 4px; }
+  aside dl div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  aside dt { color: var(--ink-2); }
+  aside dd { margin: 0; text-align: right; }
+  aside .acciones { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  @media (max-width: 640px) { main { padding: 20px 16px 32px; } .marco { max-height: none; } }
+</style>
+</head>
+<body>
+<header id="barra"></header>
+<main>
+  <h1>Tabla de resultados</h1>
+  <p class="sub-h">Todas las cifras en una cuadrícula. Ordena con un clic en el encabezado y toca una fila para ver el detalle.</p>
+  <div class="herramientas">
+    <div class="segmentado" id="capas" role="tablist" aria-label="Tipo de equipo"></div>
+    <label class="visually-hidden" for="buscar">Buscar</label>
+    <input type="search" id="buscar" placeholder="Buscar por nombre, fabricante o chip">
+    <span class="conteo" id="conteo"></span>
+  </div>
+  <div class="marco"><table id="tabla"><thead></thead><tbody></tbody></table></div>
+  <p class="leyenda-tabla">Las barras parten de cero y se escalan dentro de cada columna, con el valor más alto de la capa como tope.</p>
+</main>
+<aside class="detalle" id="detalle" aria-label="Detalle del equipo" aria-hidden="true"></aside>
+
+<script src="assets/comun.js"></script>
+<script>
+(async function () {
+  const { esc, usd, n, foto, nombre, filasPara, CAPAS, ICONOS, siNo, barra, cargar, guardarSeleccion, leerSeleccion } = RV;
+  let d;
+  try { d = await cargar(); } catch (err) { document.getElementById("conteo").textContent = "No se pudieron cargar los datos: " + err.message; return; }
+  barra("tabla.html", d.meta.fecha_datos);
+  const eq = d.equipos;
+  const estado = { capa: "portatil", texto: "", orden: { k: "precio", dir: 1 }, abierto: null };
+  const FLECHA = `<svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 11l6-6 6 6"/></svg>`;
+
+  // Columnas por capa. tipo "barra": número con barra; "bool": ícono; "texto".
+  const COL = {
+    precio: { t: "Precio", tipo: "barra", v: (e) => e.r.precio, f: (v) => usd(v), menorMejor: true },
+    bateria: { t: "Batería", tipo: "barra", v: (e) => e.r.bateria, f: (v) => n(v) + " mAh" },
+    peso: { t: "Peso", tipo: "barra", v: (e) => e.r.peso, f: (v) => n(v) + " g", menorMejor: true },
+    autonomia: { t: "Autonomía", tipo: "barra", v: (e) => e.r.autonomia, f: (v) => n(v) + " h" },
+    panel: { t: "Panel solar", tipo: "barra", v: (e) => e.r.panel, f: (v) => n(v) + " W" },
+    tx: { t: "Potencia declarada", tipo: "barra", v: (e) => e.r.tx, f: (v) => n(v) + " dBm" },
+    txFcc: { t: "Potencia FCC", tipo: "barra", v: (e) => e.r.txFcc, f: (v) => n(v, 1) + " dBm" },
+    consumo: { t: "Consumo", tipo: "barra", v: (e) => e.r.consumo, f: (v) => n(v, 1) + " mA", menorMejor: true },
+    ganancia: { t: "Ganancia", tipo: "barra", v: (e) => e.r.ganancia, f: (v) => n(v, 2) + " dBi" },
+    pantalla: { t: "Pantalla", tipo: "bool", v: (e) => e.r.pantalla },
+    teclado: { t: "Teclado", tipo: "bool", v: (e) => e.r.teclado },
+    gps: { t: "GPS", tipo: "bool", v: (e) => e.r.gps },
+    sincel: { t: "Sin celular", tipo: "texto", v: (e) => ({ total: "Lee y responde", lee: "Solo lee", nada: "Necesita celular" }[e.r.sinCelular] || null) },
+    ip: { t: "Agua y polvo", tipo: "texto", v: (e) => e.r.ip || e.r.ipTexto },
+    listo: { t: "Llega con Meshtastic", tipo: "bool", v: (e) => e.r.listo },
+    reemplazable: { t: "Batería reemplazable", tipo: "texto", v: (e) => e.r.reemplazableTexto },
+    chip: { t: "Chip", tipo: "texto", v: (e) => e.r.chip },
+    colombia: { t: "En Colombia", tipo: "bool", v: (e) => e.r.colombia },
+  };
+  const PORCAPA = {
+    portatil: ["precio", "bateria", "autonomia", "peso", "sincel", "pantalla", "teclado", "gps", "ip", "reemplazable", "listo"],
+    fija: ["precio", "panel", "bateria", "tx", "ganancia", "reemplazable", "ip", "listo", "consumo"],
+    modulo: ["precio", "chip", "tx", "txFcc", "consumo", "peso", "listo", "colombia"],
+    antena: ["precio", "ganancia", "peso", "ip"],
+    accesorio: ["precio", "peso", "ip"],
+  };
+
+  function pintarCapas() {
+    document.getElementById("capas").innerHTML = Object.entries(CAPAS).map(([k, c]) =>
+      `<button type="button" role="tab" aria-selected="${k === estado.capa}" data-k="${k}">${c.plural}<span class="cuenta">${eq.filter((e) => e.capa === k).length}</span></button>`).join("");
+  }
+
+  function pintarTabla() {
+    const cols = PORCAPA[estado.capa];
+    const t = estado.texto.trim().toLowerCase();
+    let l = eq.filter((e) => e.capa === estado.capa && (!t || `${e.fabricante} ${e.modelo} ${e.r.chip || ""}`.toLowerCase().includes(t)));
+    const { k, dir } = estado.orden;
+    const val = k === "nombre" ? (e) => nombre(e).toLowerCase() : (e) => { const c = COL[k]; const v = c ? c.v(e) : null; return typeof v === "boolean" ? (v ? 1 : 0) : v; };
+    l.sort((a, b) => { const va = val(a), vb = val(b); if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1; return (typeof va === "string" ? va.localeCompare(vb, "es") : va - vb) * dir; });
+    const maximos = Object.fromEntries(cols.map((c) => [c, Math.max(0, ...eq.filter((e) => e.capa === estado.capa).map((e) => COL[c].v(e)).filter((v) => typeof v === "number"))]));
+    const color = CAPAS[estado.capa].color;
+    const ord = (key) => estado.orden.k === key ? (estado.orden.dir > 0 ? "ascending" : "descending") : "none";
+    document.querySelector("#tabla thead").innerHTML = `<tr><th class="equipo" aria-sort="${ord("nombre")}"><button type="button" data-k="nombre">Equipo ${FLECHA}</button></th>` +
+      cols.map((c) => `<th class="${COL[c].tipo === "barra" ? "n" : ""}" aria-sort="${ord(c)}"><button type="button" data-k="${c}">${COL[c].t} ${FLECHA}</button></th>`).join("") + `</tr>`;
+    document.querySelector("#tabla tbody").innerHTML = l.map((e) => `<tr data-id="${esc(e.id)}" aria-selected="${estado.abierto === e.id}" tabindex="0">
+      <td class="equipo"><div class="equipo-in"><span class="foto marco-foto">${foto(e, "")}</span><div><b>${esc(nombre(e))}</b><span>${esc(e.fabricante)}</span></div></div></td>` +
+      cols.map((c) => {
+        const col = COL[c], v = col.v(e);
+        if (col.tipo === "barra") return typeof v === "number"
+          ? `<td class="n"><div class="barra-celda"><i style="--p:${maximos[c] ? (v / maximos[c]) * 100 : 0}%;--c:${color}"></i><span class="v">${col.f(v)}</span></div></td>`
+          : `<td class="n"><span class="sin-dato">Sin dato</span></td>`;
+        if (col.tipo === "bool") return `<td>${siNo(v, "Sí", "No")}</td>`;
+        return `<td>${v ? esc(v) : `<span class="sin-dato">Sin dato</span>`}</td>`;
+      }).join("") + `</tr>`).join("");
+    document.getElementById("conteo").textContent = `${l.length} ${l.length === 1 ? "equipo" : "equipos"}`;
+  }
+
+  function abrir(id) {
+    const e = eq.find((x) => x.id === id); if (!e) return;
+    estado.abierto = id;
+    const a = document.getElementById("detalle");
+    a.innerHTML = `<button class="cerrar" type="button" aria-label="Cerrar el detalle">${ICONOS.cerrar}</button>
+      <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
+      <div class="foto marco-foto">${foto(e)}</div>
+      <span class="sub">${esc(e.fabricante)}</span><h2>${esc(nombre(e))}</h2>
+      <div class="acciones">${e.url ? `<a class="btn btn-primario" href="${esc(e.url)}" target="_blank" rel="noopener">Ver en la tienda ${ICONOS.externo}</a>` : ""}<button class="btn btn-secundario" type="button" id="anadir">Añadir a la comparación</button></div>
+      <dl>${filasPara([e]).map((g) => `<h3>${esc(g.titulo)}</h3>` + g.filas.map((f) => `<div><dt>${esc(f.t)}</dt><dd>${f.celdas[0]}</dd></div>`).join("")).join("")}</dl>`;
+    a.classList.add("abierto"); a.setAttribute("aria-hidden", "false");
+    a.querySelector(".cerrar").addEventListener("click", cerrar);
+    a.querySelector("#anadir").addEventListener("click", (ev) => {
+      const s = leerSeleccion().filter((x) => x !== e.id); s.unshift(e.id); guardarSeleccion(s.slice(0, 3));
+      ev.target.outerHTML = `<a class="btn btn-secundario" href="comparar.html">Añadido. Abrir la comparación</a>`;
+    });
+    a.querySelector(".cerrar").focus();
+    pintarTabla();
+  }
+  function cerrar() { const a = document.getElementById("detalle"); a.classList.remove("abierto"); a.setAttribute("aria-hidden", "true"); estado.abierto = null; pintarTabla(); }
+
+  document.getElementById("capas").addEventListener("click", (ev) => { const b = ev.target.closest("button"); if (!b) return; estado.capa = b.dataset.k; estado.orden = { k: "precio", dir: 1 }; pintarCapas(); pintarTabla(); });
+  document.getElementById("buscar").addEventListener("input", (ev) => { estado.texto = ev.target.value; pintarTabla(); });
+  document.querySelector("#tabla thead").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button[data-k]"); if (!b) return;
+    const k = b.dataset.k;
+    estado.orden = estado.orden.k === k ? { k, dir: -estado.orden.dir } : { k, dir: COL[k]?.tipo === "barra" && !COL[k].menorMejor ? -1 : 1 };
+    pintarTabla();
+  });
+  const tb = document.querySelector("#tabla tbody");
+  tb.addEventListener("click", (ev) => { if (ev.target.closest("a")) return; const tr = ev.target.closest("tr[data-id]"); if (tr) abrir(tr.dataset.id); });
+  tb.addEventListener("keydown", (ev) => { if (ev.key === "Enter") { const tr = ev.target.closest("tr[data-id]"); if (tr) abrir(tr.dataset.id); } });
+  document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && estado.abierto) cerrar(); });
+
+  pintarCapas(); pintarTabla();
+})();
+</script>
+</body>
+</html>

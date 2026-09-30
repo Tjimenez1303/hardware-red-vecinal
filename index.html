@@ -2,340 +2,229 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
 <title>Hardware Red Vecinal</title>
-<meta name="description" content="Comparador interno de hardware LoRa/Meshtastic para la Red Vecinal de Manizales: capa fija y capa portátil, con precios fechados y fuentes.">
+<script>try{var t=localStorage.getItem("rv-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=2026-09-30f">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/comun.css">
+<style>
+  /* Catálogo, página principal. Casilla «Comparar» siempre visible y bandeja persistente de lo
+     elegido (Baymard); la comparación se abre encima, sin perder el contexto del catálogo. */
+  main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 140px; }
+  .cabecera { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+  h1 { font-size: clamp(26px, 3.6vw, 36px); letter-spacing: -0.02em; margin: 0; }
+  .cabecera p { margin: 4px 0 0; color: var(--ink-2); }
+  .herramientas { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 22px 0 10px; }
+  .herramientas input[type="search"] { flex: 1 1 240px; max-width: 360px; }
+  .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .filtro { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font-size: 13.5px; cursor: pointer; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
+  .filtro[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .filtro svg { width: 14px; height: 14px; }
+  .conteo { font-size: 13.5px; color: var(--ink-3); margin-left: auto; }
+
+  .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 36px 24px; list-style: none; padding: 0; margin: 0; }
+  .item { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .item .foto { aspect-ratio: 1; padding: 16px; margin-bottom: 10px; position: relative; }
+  .item .aviso { position: absolute; top: 10px; left: 10px; font-size: 12px; background: #18181a; color: #ffffff; padding: 2px 9px; border-radius: 999px; z-index: 1; }
+  .item .fab { font-size: 12.5px; color: var(--ink-3); }
+  .item h2 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.3; }
+  .item .res { font-size: 13.5px; color: var(--ink-2); }
+  .item .pie { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  .item .precio { font-size: 16px; }
+  .comparar { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
+  .comparar input { width: 17px; height: 17px; accent-color: var(--ink); margin: 0; }
+  .vacio { padding: 60px 0; text-align: center; color: var(--ink-2); }
+
+  .bandeja { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 140%); transition: transform .25s; z-index: 40;
+    display: flex; align-items: center; gap: 14px; padding: 10px 10px 10px 16px; max-width: calc(100% - 32px);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 10px 30px rgb(0 0 0 / .14); }
+  .bandeja.visible { transform: translate(-50%, 0); }
+  .bandeja ul { display: flex; gap: 10px; list-style: none; margin: 0; padding: 0; overflow-x: auto; }
+  .bandeja li { display: flex; align-items: center; gap: 8px; background: var(--surface-2); border-radius: 10px; padding: 4px 6px 4px 8px; font-size: 13px; white-space: nowrap; }
+  .bandeja li .foto { width: 34px; height: 34px; padding: 2px; border-radius: 6px; }
+  .bandeja li button { border: 0; background: none; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; color: var(--ink-3); display: grid; place-items: center; }
+  .bandeja li button:hover { background: var(--surface); color: var(--ink); }
+  .bandeja li button svg { width: 15px; height: 15px; }
+  .bandeja .hueco { border: 1px dashed var(--line); background: none; color: var(--ink-3); padding: 10px 14px; }
+  .bandeja .btn:disabled { opacity: .45; cursor: default; }
+
+  dialog { border: 0; padding: 0; width: min(1100px, calc(100% - 32px)); max-height: calc(100% - 48px); border-radius: 18px; background: var(--bg); color: var(--ink); box-shadow: 0 30px 80px rgb(0 0 0 / .35); }
+  dialog::backdrop { background: rgb(0 0 0 / .45); }
+  .hoja-cab { position: sticky; top: 0; background: var(--bg); z-index: 2; display: grid; grid-template-columns: 180px repeat(var(--k), minmax(0, 1fr)); gap: 16px; padding: 18px 24px 14px; border-bottom: 1px solid var(--line); align-items: end; }
+  .hoja-cab .titulo { font-weight: 600; font-size: 18px; align-self: center; }
+  .hoja-cab .p { text-align: center; font-size: 14px; }
+  .hoja-cab .p .foto { width: 96px; height: 96px; margin: 0 auto 6px; padding: 6px; border-radius: 10px; }
+  .hoja-pie { display: flex; justify-content: flex-end; padding: 0 24px 22px; }
+  .hoja-cab .p b { display: block; }
+  .cerrar { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: var(--surface-2); cursor: pointer; display: grid; place-items: center; }
+  .cerrar svg { width: 18px; height: 18px; }
+  .hoja-cuerpo { padding: 4px 24px 28px; }
+  .hoja-cuerpo h3 { font-size: 16px; margin: 22px 0 2px; }
+  .hoja-fila { display: grid; grid-template-columns: 180px repeat(var(--k), minmax(0, 1fr)); gap: 16px; padding: 11px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .hoja-fila .t { color: var(--ink-2); font-size: 13.5px; }
+  .hoja-fila .c { text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+  @media (max-width: 640px) {
+    main { padding: 20px 16px 150px; }
+    .grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
+    .hoja-cab, .hoja-fila { grid-template-columns: repeat(var(--k), minmax(0, 1fr)); }
+    .hoja-cab .titulo { display: none; }
+    .hoja-fila .t { grid-column: 1 / -1; text-align: center; }
+  }
+</style>
 </head>
 <body>
-
-<header class="cabecera">
-  <h1>Hardware Red Vecinal</h1>
-  <p class="proposito">Qué comprar para la capa <b>fija</b> (nodos solares en postes, azoteas y cerros) y para la <b>portátil</b> (aparatos que llevan los vecinos), que se suma a la fija.</p>
-  <dl class="meta">
-    <div><dt>Precios consultados</dt><dd id="meta-fecha">—</dd></div>
-    <div><dt>Levantamiento base</dt><dd id="meta-base">—</dd></div>
-    <div><dt>TRM</dt><dd id="meta-trm">—</dd></div>
-    <div><dt>Equipos</dt><dd id="meta-n">—</dd></div>
-  </dl>
-  <p class="nota-precios"><b>Los precios caducan:</b> son de lista en USD, sin el 25–30 % de importación, y cada uno lleva su fecha y su vendedor. En las celdas, <span class="ausente">✕</span> la fuente no lo publica, <span class="na">—</span> no aplica a esa capa, <span class="espera">aún en espera</span> sin confirmar, y <span class="llamada">[n]</span> remite a la referencia.</p>
-</header>
-
-<nav class="secciones" aria-label="Secciones">
-  <a href="#comparador">Comparador</a>
-  <a href="#barras-sec">Barras</a>
-  <a href="#densidad">Límite de densidad</a>
-  <a href="#portatil">Capa portátil</a>
-  <a href="#umbral">Umbral por capa</a>
-  <a href="#cambios-sec">Qué cambió</a>
-  <a href="#colombia-sec">Colombia</a>
-  <a href="#vacios">Vacíos</a>
-  <a href="#referencias">Referencias</a>
-  <button class="boton tema-btn" id="tema" type="button">Tema claro u oscuro</button>
-</nav>
-
+<header id="barra"></header>
 <main>
-  <div class="aviso" id="carga-error" style="display:none"></div>
-
-
-  <!-- ================= COMPARADOR ================= -->
-  <section class="bloque" id="comparador">
-    <h2>Comparador</h2>
-    <div class="controles">
-      <div class="fila-principal">
-        <label class="campo buscar">Buscar por fabricante, modelo, MCU o radio
-          <input type="search" id="f-texto" placeholder="nRF52840, SX1262, Heltec, T-Echo…" autocomplete="off">
-        </label>
-        <div class="campo">Capas <span class="ausente">(Alt+clic deja solo esa)</span>
-          <div class="capas" id="f-capas" role="group" aria-label="Capas"></div>
-        </div>
-      </div>
-      <div class="fila-secundaria">
-        <details class="mas-filtros">
-          <summary>Más filtros <span id="n-filtros"></span></summary>
-          <div class="rejilla">
-            <label class="campo">Familia de microcontrolador<select id="f-mcu"></select></label>
-            <label class="campo">Chipset de radio<select id="f-radio"></select></label>
-            <label class="campo">Soporte de Meshtastic<select id="f-meshtastic"></select></label>
-            <label class="campo">Disponibilidad en Colombia<select id="f-colombia"></select></label>
-            <label class="campo">Familia portátil<select id="f-familia"></select></label>
-            <label class="campo">Precio USD, mínimo y máximo
-              <span class="rango"><input type="number" id="f-pmin" min="0" step="1" placeholder="mín" aria-label="Precio mínimo"><input type="number" id="f-pmax" min="0" step="1" placeholder="máx" aria-label="Precio máximo"></span>
-            </label>
-            <label class="campo">Batería mínima (mAh)<input type="number" id="f-bat" min="0" step="100" placeholder="1000"></label>
-            <label class="campo check"><input type="checkbox" id="f-conprecio"> Solo con precio verificable</label>
-          </div>
-        </details>
-        <div class="atajos">Ver:
-          <button class="atajo" type="button" data-solo="fija,portatil">fija y portátil</button>
-          <button class="atajo" type="button" data-solo="fija">solo fija</button>
-          <button class="atajo" type="button" data-solo="portatil">solo portátil</button>
-          <button class="atajo" type="button" data-solo="modulo">solo módulos</button>
-          <button class="atajo" type="button" data-solo="antena">solo antenas</button>
-          <button class="atajo limpiar" type="button" id="f-limpiar">Limpiar filtros</button>
-        </div>
-      </div>
+  <div class="cabecera">
+    <div>
+      <h1>Hardware para la Red Vecinal</h1>
+      <p>Los equipos para la capa fija y la portátil, con precio de lista y enlace a la tienda. Marca «Comparar» en hasta tres y ábrelos lado a lado.</p>
     </div>
-    <div class="resumen-filtro" id="resumen-filtro"></div>
-    <div class="tabla-envoltura">
-      <table class="datos" id="tabla">
-        <thead><tr></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p class="resumen-filtro">Toque el nombre de un equipo para ver su detalle: condiciones de la autonomía, qué queda sin celular, notas y contradicciones. Los encabezados con flecha ordenan; los datos ausentes van siempre al final.</p>
-  </section>
-
-  <!-- ================= BARRAS ================= -->
-  <section class="bloque" id="barras-sec">
-    <h2>Barras comparativas</h2>
-    <p class="prosa">Las barras usan el mismo filtro que la tabla. Cambie de magnitud y de escala; la figura declara siempre qué escala usa.</p>
-    <div class="barras-controles">
-      <label class="grupo">Magnitud <select id="b-metrica"></select></label>
-      <span class="grupo">Escala
-        <span class="seg"><button type="button" data-escala="lineal" aria-pressed="true">Lineal desde cero</button><button type="button" data-escala="log" aria-pressed="false">Logarítmica</button></span>
-      </span>
-    </div>
-    <figure class="figura" style="margin:0">
-      <p class="titulo-fig" id="titulo-fig"></p>
-      <p class="nota-escala" id="desc-fig" style="margin-top:0"></p>
-      <p class="nota-escala" id="nota-escala"></p>
-      <div class="leyenda" id="leyenda-fig"></div>
-      <div class="barras" id="barras"></div>
-      <div class="eje" id="eje"></div>
-    </figure>
-  </section>
-
-  <!-- ================= DENSIDAD ================= -->
-  <section class="bloque" id="densidad">
-    <h2>El límite de densidad del enjambre</h2>
-    <div class="prosa" id="densidad-cuerpo">
-      <p>La premisa «entre más gente lleve el aparato, mejor el enjambre» es cierta solo hasta un punto. Meshtastic retransmite por inundación gestionada: cada nodo repite lo que oye, salvo que oiga antes a otro repetirlo<span data-ref="mt-device mt-meshalgo"></span>. Todos los aparatos que se oyen entre sí comparten un solo canal (un <b>dominio de colisión</b>). Pasado cierto número, el canal se llena y la entrega cae.</p>
-
-      <div class="aviso"><b>Resultado negativo, primero.</b> No existe ninguna medición ni simulación revisada por pares que diga cuántos nodos Meshtastic en alcance mutuo aguanta el canal. El único preprint que mide perfiles de Meshtastic en 915 MHz (Universidad Militar Nueva Granada, mayo de 2026) mide enlaces punto a punto, no prueba <code>LONG_TURBO</code> y deja la escalabilidad de la inundación como trabajo futuro<span data-ref="arxiv-umng"></span>. Meshtastic tampoco publica un tope de nodos por dominio de colisión<span data-ref="mt-meshalgo mt-blog-flood"></span>. El número de abajo sale de la <b>convergencia de tres umbrales oficiales</b> y de un cálculo propio de carga del canal. Es una cifra de diseño, no una medición.</div>
-
-      <div class="regla">
-        <div class="cifra"><span class="n">≈ 40</span><p>aparatos que retransmiten por <b>dominio de colisión</b> es la cifra de diseño. Por encima, el canal se degrada; pasados unos 85, se satura en una ráfaga de emergencia. Los umbrales vienen del firmware, del blog oficial y del cálculo de carga de abajo.</p></div>
-        <div class="lienzo"><svg viewBox="0 0 900 128" role="img" aria-labelledby="regla-t regla-d" style="color:var(--pizarra)">
-          <title id="regla-t">Regla de densidad de 0 a 120 aparatos en alcance mutuo</title>
-          <desc id="regla-d">Hasta 40 el canal cabe; de 40 a 85 se degrada; por encima de 85 se satura. Marcas en 40, 60, 80 y 85.</desc>
-          <rect x="40" y="40" width="280" height="26" style="fill:var(--zona-ok)"/>
-          <rect x="320" y="40" width="315" height="26" style="fill:var(--zona-media)"/>
-          <rect x="635" y="40" width="245" height="26" style="fill:var(--zona-alta)"/>
-          <text x="54" y="58" font-size="12.5" font-weight="600">cabe</text>
-          <text x="334" y="58" font-size="12.5" font-weight="600">se degrada</text>
-          <text x="649" y="58" font-size="12.5" font-weight="600">se satura</text>
-          <line x1="145" y1="66" x2="145" y2="76" stroke="currentColor"/><text x="145" y="89" font-size="12" text-anchor="middle">piloto: 15</text>
-          <line x1="320" y1="18" x2="320" y2="66" stroke="currentColor" stroke-width="1.5"/><text x="325" y="14" font-size="12.5" text-anchor="start">40: el firmware empieza a espaciar su tráfico de fondo</text>
-          <line x1="460" y1="34" x2="460" y2="66" stroke="currentColor" stroke-width="1.5"/><text x="465" y="30" font-size="12.5" text-anchor="start">60: el blog oficial aconseja dejar LongFast</text>
-          <line x1="600" y1="40" x2="600" y2="80" stroke="currentColor" stroke-width="1.5"/><text x="595" y="89" font-size="12.5" text-anchor="end">80: se llena la NodeDB de un nRF52840</text>
-          <line x1="635" y1="40" x2="635" y2="96" stroke="currentColor" stroke-width="1.5"/><text x="640" y="105" font-size="12.5">85: canal al 25 % con buena supresión</text>
-          <line x1="40" y1="66" x2="880" y2="66" stroke="currentColor" stroke-opacity=".35"/>
-          <text x="40" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">0</text><text x="180" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">20</text><text x="320" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">40</text><text x="460" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">60</text><text x="600" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">80</text><text x="740" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">100</text><text x="880" y="124" font-size="11" text-anchor="middle" style="fill:var(--pizarra-3)">120</text>
-        </svg></div>
-        <p class="pie">Aparatos en alcance mutuo, escala lineal desde cero. Las zonas combinan umbrales oficiales (40, 60, 80) y el cálculo propio de ocupación (85), que es una estimación.</p>
-      </div>
-
-      <h3>1. ¿Cuántos nodos aguanta el canal? Lo que sí está publicado</h3>
-      <table class="simple">
-        <thead><tr><th>Umbral</th><th>Cifra</th><th>Qué significa</th><th>Fuente</th></tr></thead>
-        <tbody>
-          <tr><td>Utilización de canal «cortés»</td><td class="num">25 %</td><td>Por encima, el nodo deja de enviar su telemetría, su posición y sus respuestas de NodeInfo. La ocupación se mide en una ventana deslizante de 60 s y cuenta todo lo que se oye, no solo lo propio.</td><td>Código<span data-ref="fw-airtime"></span></td></tr>
-          <tr><td>Tope duro de utilización</td><td class="num">40 %</td><td>Por encima, ningún rol envía tráfico de fondo propio. <b>No frena las retransmisiones ni el texto</b>: en los archivos revisados no hay descarte de retransmisiones por ocupación de canal.</td><td>Código<span data-ref="fw-airtime"></span></td></tr>
-          <tr><td>Escalado por tamaño de malla</td><td class="num">40 nodos</td><td>Con más de 40 nodos vistos en 2 h, los intervalos de telemetría, posición y NodeInfo se multiplican por 1 + (N − 40)·2<sup>SF</sup>/(BW·100). Con <code>LONG_TURBO</code> y 100 nodos, ×3,46; con LongFast, ×5,92. <b class="contra">Contradicción:</b> la documentación da un factor fijo de 0,075 por nodo y el código usa la fórmula por preset (su propio comentario lo reconoce).</td><td>Documentación y código<span data-ref="mt-meshalgo fw-default"></span></td></tr>
-          <tr><td>Señal para dejar LongFast</td><td class="num">&gt; 60 nodos</td><td>«especialmente si están en relativa proximidad». El mismo texto relata una malla regional de más de 150 nodos en LongFast con picos de ocupación superiores al 65 %, en la que el texto era «extremadamente poco fiable».</td><td>Blog oficial<span data-ref="mt-blog-longfast"></span></td></tr>
-          <tr><td>Señal para quitar un rol de infraestructura</td><td class="num">ChUtil 25 %<br>AirUtilTX 7–8 %</td><td>Si se superan, se deja de usar ese rol en el punto.</td><td>Blog oficial<span data-ref="mt-blog-routerlate"></span></td></tr>
-          <tr><td>Tamaño de la NodeDB</td><td class="num">80 / 100–250</td><td>80 nodos en nRF52 y de 100 a 250 en ESP32-S3 (v2.7.26). En la pre-release 2.8.0, 120 en nRF52840. Con la base llena se borra el nodo más antiguo que no sea favorito. El blog de DEF CON habla de «unos 100»: <b class="contra">contradicción</b> con el código, que da cifras distintas según la plataforma.</td><td>Código y blog<span data-ref="fw-pbconst fw-pbconst-dev mt-blog-defcon"></span></td></tr>
-          <tr><td>Mallas grandes documentadas</td><td>más de 100, 700 y 2.000</td><td>El blog oficial afirma que la inundación funciona en mallas de más de 100 nodos «con control de tráfico adecuado», sin cifra de entrega. Bay Mesh tiene más de 700 nodos. En DEF CON 33 los asistentes reportaron más de 2.000, sin cifras oficiales de entrega.</td><td>Blog oficial<span data-ref="mt-blog-flood mt-blog-zerocost mt-blog-defcon"></span></td></tr>
-        </tbody>
-      </table>
-
-      <p><b>La única cifra de entrega contra número de nodos</b> es una simulación de un colaborador externo en el foro del firmware (fuente de comunidad, no revisada). Con límite de 3 saltos, la inundación entrega el 100 % a 20 nodos, el 92 % a 100, el 14 % a 500 y el 2 % a 1.000. Con 7 saltos mejora (51 % a 500) pero no se cura. Al modelar el semidúplex, la entrega cae del 87,5 % al 6 % en una malla de 235 nodos<span data-ref="gh-9936"></span>. <b class="contra">Contradicción dentro de la misma fuente:</b> una primera tabla del autor, con un límite de 30 saltos, daba 99 % a 1.000 nodos. Él mismo reconoce que su simulador «sobrestima» la ventaja de su propuesta. No se usa como cifra de diseño.</p>
-
-      <h3>Cálculo propio de carga del canal <span class="espera" style="font-style:normal">(estimado)</span></h3>
-      <p>Supuestos a la vista. Tiempo en aire de un mensaje de 50 bytes con la fórmula de Semtech que implementa el firmware (preámbulo de 16 símbolos): <b>443 ms en <code>LONG_TURBO</code></b> y 641 ms en LongFast<span data-ref="fw-radioif mt-radio"></span>. El escenario es la ráfaga después de una alerta: cada aparato envía un mensaje en 5 minutos. <i>k</i> es cuántas veces se transmite cada mensaje dentro del dominio de colisión: 2 si la supresión de duplicados funciona (el original y una retransmisión), 4 si falla en parte por nodos ocultos entre laderas. Ocupación = N · k · 0,443 s / 300 s.</p>
-      <table class="simple" style="max-width:720px">
-        <thead><tr><th>Aparatos en alcance mutuo</th><th>LONG_TURBO, k = 2</th><th>LONG_TURBO, k = 4</th><th>LongFast, k = 4 (referencia)</th></tr></thead>
-        <tbody>
-          <tr><td class="num">15 (piloto, fase 1)</td><td class="num">4 %</td><td class="num">9 %</td><td class="num">13 %</td></tr>
-          <tr><td class="num">25</td><td class="num">7 %</td><td class="num">15 %</td><td class="num">21 %</td></tr>
-          <tr><td class="num"><b>40</b></td><td class="num">12 %</td><td class="num"><b>24 %</b></td><td class="num">34 %</td></tr>
-          <tr><td class="num">60</td><td class="num">18 %</td><td class="num">35 %</td><td class="num">51 %</td></tr>
-          <tr><td class="num">80</td><td class="num">24 %</td><td class="num">47 %</td><td class="num">68 %</td></tr>
-          <tr><td class="num">120</td><td class="num">35 %</td><td class="num">71 %</td><td class="num">103 %</td></tr>
-        </tbody>
-      </table>
-      <p>Con el umbral cortés del 25 %, el canal aguanta <b>unos 42 aparatos con supresión imperfecta y unos 85 con supresión buena</b>. Ese rango coincide con los umbrales oficiales de 40, 60 y 80. Solo el tráfico de fondo de la 2.7 (posición y telemetría cada hora, NodeInfo cada 3 h) ocupa un 5 % a 40 nodos y un 10 % a 80: el que satura es el tráfico humano en ráfaga, no el automático. <b>Un hallazgo a favor:</b> el <code>LONG_TURBO</code> que nos impone la norma ocupa el 69 % del tiempo en aire de LongFast por mensaje, así que da aproximadamente un 45 % más de capacidad que el preset por defecto. Lo que la norma cuesta en alcance (3 dB), lo devuelve en densidad.</p>
-
-      <h3>2. ¿Qué rol lleva cada aparato? (firmware 2.7.26, estable al 29-sep-2026)</h3>
-      <table class="simple">
-        <thead><tr><th>Rol</th><th>Qué hace</th><th>En esta red</th></tr></thead>
-        <tbody>
-          <tr><td><code>CLIENT</code></td><td>Rol por defecto. Retransmite solo si nadie lo hizo antes y cancela su retransmisión si oye un duplicado.</td><td>Portátiles en zonas de baja densidad: laderas sin poste, que es donde la premisa se cumple. Nodos fijos de barrio.</td></tr>
-          <tr><td><code>CLIENT_MUTE</code></td><td>No retransmite nada. Recomendado oficialmente para zonas de mucho tráfico y para los aparatos de más de un mismo dueño: «uno CLIENT o CLIENT_BASE y el resto CLIENT_MUTE».</td><td>Portátiles por encima de unos 40 en el mismo dominio de colisión, y todos menos 2 o 3 en puntos de concentración (salón comunal, refugio, punto de encuentro).</td></tr>
-          <tr><td><code>CLIENT_BASE</code></td><td>Retransmite siempre lo que va hacia o desde sus favoritos; el resto lo trata como CLIENT.</td><td>Nodo de azotea de una familia o de la JAC, con los portátiles del hogar como favoritos.</td></tr>
-          <tr><td><code>ROUTER</code></td><td>Retransmite siempre y con prioridad, sin cancelar. Según el protobuf, solo para torre o cima de montaña; «no para tejados ni nodos móviles».</td><td><b>Solo</b> los repetidores de cerro de la troncal: 2, 4 y 6 según la fase.</td></tr>
-          <tr><td><code>ROUTER_LATE</code></td><td>Retransmite siempre, pero tarde. Pensado para cubrir zonas ciegas; «no es buena elección para nodos de tejado».</td><td>Solo el nodo fijo que sea el <b>único</b> enlace hacia una sombra de ladera, vigilando ChUtil &lt; 25 % y AirUtilTX &lt; 7–8 %.</td></tr>
-          <tr><td><code>REPEATER</code></td><td><b>Deprecado desde v2.7.11</b> porque crea huecos en la cadena de retransmisión. El protobuf manda pasar a ROUTER o ROUTER_LATE. <b class="contra">Contradicción:</b> el blog de roles lo sigue describiendo como vigente.</td><td>No usar.</td></tr>
-        </tbody>
-      </table>
-      <p>Fuentes de la tabla<span data-ref="mt-device mt-blog-roles mt-blog-routerlate pb-config"></span>. <b>Resultado negativo:</b> no existe una proporción oficial de routers frente a clientes. El único porcentaje publicado, un 3 % de routers, es el supuesto de un ejemplo de colisiones en el blog de saltos gratis, no una recomendación<span data-ref="mt-blog-zerocost"></span>. Tampoco hay una frase oficial que diga qué rol lleva un portátil: solo la prohibición de ROUTER en nodos móviles.</p>
-
-      <h3>3. Límite de saltos y <code>LONG_TURBO</code></h3>
-      <ul>
-        <li><b>Límite de saltos: 3 por defecto, 7 como máximo.</b> La documentación dice «Really, 3 is fine»<span data-ref="mt-lora fw-meshtypes"></span>. Cada salto extra multiplica las retransmisiones de toda difusión. La simulación comunitaria muestra que el límite de saltos es también un techo de entrega<span data-ref="gh-9936"></span>.</li>
-        <li><b>Saltos gratis en la troncal.</b> Desde finales de 2025, un paquete que llega de un ROUTER o ROUTER_LATE marcado como favorito no descuenta salto al pasar por otro nodo de infraestructura<span data-ref="mt-blog-zerocost"></span>. Si los repetidores de cerro se marcan como favoritos entre sí, <b>toda la troncal cuenta como un solo salto</b>, y los 3 saltos quedan para el primer y el último tramo en los barrios.</li>
-        <li><b><code>LONG_TURBO</code>: SF11, 500 kHz, CR 4/8, 1,34 kbps, 150 dB de presupuesto de enlace</b>, frente a 1,07 kbps y 153 dB de LongFast<span data-ref="mt-radio fw-meshradio"></span>. Es el único preset que cumple el ancho de banda mínimo de 500 kHz del numeral 3.6<span data-ref="ane-105"></span>. Ventana de contención: la ranura dura unos 18 ms en <code>LONG_TURBO</code> y unos 28 ms en LongFast (cálculo sobre la fórmula del código)<span data-ref="fw-radioif"></span>.</li>
-        <li><b><code>LONG_TURBO</code> y LongFast no se oyen entre sí</b>, lo dicen las notas de la 2.8.0<span data-ref="fw-rel28"></span>. <b class="contra">Contradicción que no resolvemos:</b> la comunidad Meshtastic Colombia recomienda región ANZ, <b>LongFast, 7 saltos y 30 dBm</b><span data-ref="meshcol"></span>. Una red en <code>LONG_TURBO</code> queda aislada de esa comunidad, y con LongFast a 250 kHz no se cumple el ancho mínimo de la norma. Es una decisión del proyecto, no técnica.</li>
-        <li><b>Aviso de la pre-release 2.8.0</b> (1-sep-2026): reasigna por completo regiones y presets, pone <code>LONG_TURBO</code> por defecto en los nodos nuevos de EE. UU. y apaga la telemetría y la posición por defecto<span data-ref="fw-rel28"></span>. Para el piloto conviene fijar la versión estable 2.7.x y reverificar ANZ y <code>LONG_TURBO</code> después de cada flasheo.</li>
-        <li><b>Riesgo por probar en banco:</b> el preprint de la UMNG vio fallar de golpe el preset SF11/125 kHz/CR 4/8 a 80 dB de atenuación con SNR de +10 dB. Lo atribuye, como hipótesis, a una interacción entre SF11, CR 4/8 y la detección de canal del firmware<span data-ref="arxiv-umng"></span>. <code>LONG_TURBO</code> usa el mismo par SF11 y CR 4/8, a 500 kHz, y no se ha probado.</li>
-      </ul>
-
-      <h3>4. Traducido a Manizales: cuántos por barrio y cómo configurados</h3>
-      <table class="simple">
-        <thead><tr><th>Fase (escala de <code>_proyecto.md</code>)</th><th>Portátiles</th><th>Por dominio de colisión</th><th>Configuración</th></tr></thead>
-        <tbody>
-          <tr><td>Fase 1: piloto en un barrio de ladera</td><td class="num">15</td><td class="num">15</td><td>Todos en <code>CLIENT</code>. Ocupación en ráfaga del 4 al 9 %: el límite de densidad <b>no aprieta</b> en el piloto.</td></tr>
-          <tr><td>Fase 2: comunas de ladera prioritarias</td><td class="num">80</td><td class="num">10–25 si se reparten en 4 o más barrios</td><td>Todos en <code>CLIENT</code>, salvo en puntos de concentración.</td></tr>
-          <tr><td>Fase 3: ciudad</td><td class="num">300</td><td class="num">hasta ~40 en CLIENT por barrio</td><td>Por encima de ~40 en un mismo barrio que se oye entre sí, los adicionales en <code>CLIENT_MUTE</code>. Primero se silencian las etiquetas de la familia (a), que tienen menos batería y dependen del celular.</td></tr>
-        </tbody>
-      </table>
-      <p><b>Recomendación por barrio:</b> entre 15 y 40 portátiles en <code>CLIENT</code> por dominio de colisión, repartidos donde no llega el poste. Los que pasen de ~40 van en <code>CLIENT_MUTE</code>, y también en <code>CLIENT_MUTE</code> todos menos 2 o 3 en cualquier punto donde se junten decenas de aparatos. Además:</p>
-      <ol>
-        <li>Límite de saltos en 3. Repetidores de cerro en <code>ROUTER</code>, favoritos entre sí (saltos gratis).</li>
-        <li>Nodos fijos de barrio en <code>CLIENT</code>. <code>ROUTER_LATE</code> solo si un nodo es el único enlace de una sombra, vigilando su ocupación.</li>
-        <li>En cada portátil, como <b>favoritos</b>: el nodo fijo del barrio y el nodo que origina las alertas. Así no salen nunca de la NodeDB de 80 nodos de los nRF52840. Una ciudad con 120 fijos y 300 portátiles supera con creces ese tamaño.</li>
-        <li>Posición y telemetría apagadas en los portátiles: ahorran aire y protegen la ubicación de los vecinos. Es lo que la 2.8 hará por defecto.</li>
-        <li>Alertas por canal de difusión, no por mensaje directo. El mensaje directo depende de la clave pública guardada en la NodeDB y genera acuses de recibo.</li>
-      </ol>
-      <p class="ausente">Por qué un barrio es un solo dominio: el preprint de la UMNG estima alcances de 1,5 a 5 km para SF11–12 en entorno urbano denso (modelo con exponente 3,5, no medición)<span data-ref="arxiv-umng"></span>. Un barrio de ladera es más pequeño, así que sus portátiles se oyen entre sí salvo por el relieve. El relieve puede partir el barrio en dos dominios, y solo una medición de campo lo dice.</p>
-    </div>
-  </section>
-
-  <!-- ================= PORTÁTIL ================= -->
-  <section class="bloque" id="portatil">
-    <h2>Capa portátil: las dos familias</h2>
-    <div class="prosa" id="portatil-cuerpo">
-      <p>La capa portátil tiene hoy 26 aparatos: los 10 del 4-sep y 16 añadidos en esta revisión. Se comparan con criterios propios, no con los de la capa fija: la capa fija se juzga por su consumo dormido, y un portátil se juzga por lo que dura andando. Para verlos en la tabla, use el filtro <button class="atajo" type="button" data-solo="portatil">solo portátil</button> y el de familia.</p>
-
-      <table class="simple">
-        <thead><tr><th>Criterio</th><th>(a) Etiqueta sin pantalla, emparejada al celular</th><th>(b) Aparato con pantalla propia</th></tr></thead>
-        <tbody>
-          <tr><td>Ejemplos</td><td>SenseCAP T1000-E, MeshTracker X1, WisMesh Tag, ThinkNode M3, WisMesh Pocket Mini, ThinkNode M4, R1 Neo, MiniTrekker MKII</td><td>ThinkNode M1/M5/M9, T-Echo, MeshPocket, Wio Tracker L1 Pro, Nano G2 Ultra, Cardputer, T-Deck Plus/Pro, T-Lora Pager, WisMesh TAP, WisMesh Pocket V2</td></tr>
-          <tr><td>Portabilidad (peso publicado)</td><td>32 g (T1000-E), 38,7 g (M3), 45 g (X1), 84 g (R1 Neo). Tamaño de tarjeta o llavero.</td><td>77 a 140 g: Cardputer 77, M1 y M5 81, M9 y Nano 123, MeshPocket 140. Cabe en un bolsillo, pero se nota.</td></tr>
-          <tr><td>Autonomía en uso</td><td>X1 «hasta 5 días» y M3 18 h, con un mensaje por minuto (la misma ficha dice también «al menos 12 h»). El Tag, 2 a 3 días según reportes de usuarios que cita RAK. T1000-E: ✕ en la ficha.</td><td>M1 «más de 48 h» (la comunidad mide de 24 h con GPS a unos 4 días). Nano G2 Ultra, unos 5 días. El resto, ✕. <b>Casi nadie publica la autonomía en uso.</b></td></tr>
-          <tr><td>Recarga</td><td>Varias usan <b>cable magnético propietario</b> (T1000-E, Tag, M3). Si el cable se pierde en un apagón, no hay cómo cargar. X1 y R1 Neo usan USB-C.</td><td>USB-C casi siempre. La MeshPocket carga por Qi2 y además es una batería externa de 5.000 o 10.000 mAh que <b>recarga celulares</b>.</td></tr>
-          <tr><td>Pilas comunes reemplazables</td><td colspan="2"><b>Resultado negativo: ningún portátil usa pilas AA, AAA ni 18650 extraíble.</b> El más cercano es el Nano G2 Ultra: una LiPo con conector JST que se cambia quitando 4 tuercas. El ThinkNode M4 rotula «18650», pero no confirma que la celda se pueda sacar. Las 18650 sí se consiguen ya en Colombia (ver mercado colombiano) y alimentan los nodos fijos SenseCAP y Heltec.</td></tr>
-          <tr><td>Dependencia del celular</td><td><b>Total para leer.</b> Sin teléfono, la etiqueta solo manda su posición o un SOS con un botón y <b>sigue retransmitiendo para los demás</b>. El vecino queda sordo, pero su aparato sigue sirviendo a la red.</td><td>Parcial o nula. Con pantalla y sin teclado (T-Echo, M1, M5, MeshPocket, L1 Pro) el vecino lee sin teléfono, pero no escribe texto libre. Con teclado (Cardputer, T-Deck, T-Lora Pager, M9, TAP) lee y responde solo.</td></tr>
-          <tr><td>Robustez</td><td>IP65 (T1000-E) e IP66 (X1, Tag, M3). La mejor protección publicada de la capa.</td><td>Casi todo ✕. La WisMesh TAP es IP65, y la MeshPocket declara que no es resistente al agua.</td></tr>
-          <tr><td>Resistencia a caídas</td><td colspan="2"><b>Resultado negativo: ningún fabricante publica altura de caída ni ensayo MIL-STD.</b></td></tr>
-          <tr><td>Llega funcionando</td><td>Todas preflasheadas o con soporte oficial.</td><td>La mayoría preflasheados. El T-Watch S3 exige flasheo manual, y el T-Lora Pager no confirma que traiga Meshtastic cargado. El Cardputer declara 868–923 MHz, <b>sin cubrir 923–928</b>.</td></tr>
-          <tr><td>Precio (USD, lista, 29-sep)</td><td>De 39,00 (Tag) a 89,00 (R1 Neo, agotado). T1000-E y M3 a 39,90; X1 a 49,90.</td><td>De 27,36 (T-Echo Lite) a 109,00 (TAP). L1 Pro a 47,90, MeshPocket a 49,00, M1 y M5 a 53,90, M9 a 74,90.</td></tr>
-          <tr><td>En Colombia</td><td colspan="2"><b>Resultado negativo: ningún portátil autónomo a la venta con vendedor colombiano.</b> Se revisaron Electronilab, Sigma, Ardobot, DynamoElectronics y Didácticas. MercadoLibre no se pudo revisar porque exige iniciar sesión.</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Qué papel cumple cada familia</h3>
-      <ul>
-        <li><b>Familia (a): reparto masivo.</b> Es la más barata, la más liviana y la mejor sellada. Va a los hogares que ya tienen un celular compatible. <b>Su punto débil, sin rodeos:</b> el vecino solo lee la alerta si su celular tiene la app de Meshtastic instalada, está emparejado y <b>tiene batería</b>. El escenario que justifica esta red es un apagón, y en un apagón largo el celular es lo primero que se muere. Lo que sí queda sin celular es valioso para la red, aunque no para su dueño: la etiqueta sigue retransmitiendo, y cada una suma caminos a la malla.</li>
-        <li><b>Familia (b): uno por cuadra.</b> Va a los líderes de cuadra, los brigadistas de la JAC y los hogares sin celular. Sobrevive mejor al apagón porque no necesita un segundo equipo. Los modelos con teclado (M9 a USD 74,90, Cardputer a 48) permiten además confirmar y responder. La <b>MeshPocket</b> (USD 49) resuelve de paso el punto débil de la familia (a): sus 5.000 mAh recargan los celulares de la cuadra.</li>
-        <li><b>Mezcla sugerida</b> (criterio propio, no dato): etiquetas para la mayoría de los hogares con celular, y al menos un aparato con pantalla por cuadra, dentro del tope de ~40 aparatos en <code>CLIENT</code> por dominio de colisión de la sección anterior.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================= UMBRAL ================= -->
-  <section class="bloque" id="umbral">
-    <h2>Umbral de bajo costo, por capa</h2>
-    <p class="prosa">Mediana (p50) y cuartiles del precio de lista, calculados <b>por capa</b> y en vivo a partir de <code>datos/equipos.json</code>. Una placa suelta no se compara con un aparato de bolsillo terminado ni con un nodo solar cerrado: mezclarlas produce un umbral falso. El p50 es el umbral de bajo costo; por encima del p75 un equipo debe justificar su precio.</p>
-    <table class="simple" id="umbrales">
-      <thead><tr><th>Capa</th><th>n</th><th>mín</th><th>p25</th><th>p50</th><th>p75</th><th>máx</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <!-- ================= CAMBIOS ================= -->
-  <section class="bloque" id="cambios-sec">
-    <h2>Qué cambió desde el 4-sep-2026</h2>
-    <div class="prosa" id="cambios-cuerpo">
-      <p>Todos los precios se reverificaron el 29-sep-2026 en la ficha del fabricante o del distribuidor, 25 días después del levantamiento base. <b>Lo esencial:</b></p>
-      <ul>
-        <li><b>La mayoría de los precios no se movió.</b> Bajan los SenseCAP de la línea base: el P1 de 77,99 a 72,90 (−6,5 %) y el P1-Pro de 100,99 a 93,90 (−7,0 %). Suben la Heltec Wireless Paper (+25 %) y la WisMesh Pocket V2, cuyo mínimo pasa de 84,97 a 89,97.</li>
-        <li><b>Agotados:</b> R1 Neo (hoy a 89,00, sin stock en ninguna variante), T-Deck original, Nano G2 Ultra, la sectorial Ubiquiti y la Heltec Wireless Stick V3 de 915 MHz. El Atlavox Beacon está en backorder.</li>
-        <li><b>Cuatro correcciones al levantamiento del 4-sep, que no son cambios de mercado</b> (marcadas «corrección» en la tabla):
-          <ul>
-            <li>El RAK4631 costaba 17,99; los 9,90 eran del RAK11200 de la misma página.</li>
-            <li>El T3-S3 V1.0 de 915 MHz cuesta 17,12; los 23,65 eran de la variante de 2,4 GHz.</li>
-            <li>El T-Beam de 915 MHz cuesta 33,15; los 30,77 eran de la variante de 433 MHz.</li>
-            <li>La URL del P1-Pro para MeshCore apuntaba a otro producto.</li>
-          </ul></li>
-        <li><b>Rambal es una tienda chilena</b>: su «COP 32.000» del 4-sep eran pesos chilenos. Sale de la lista colombiana.</li>
-        <li><b>Ya hay celdas 18650 sueltas en Colombia</b> (Sigma, Vistronica y Didácticas, desde COP 16.065). El 4-sep no había ninguna con precio visible, y es el consumible principal de los nodos SenseCAP y Heltec.</li>
-        <li><b>La antena de fábrica del SenseCAP Solar Node cubre 868–915 MHz</b> y deja fuera 915–928 MHz, que es la banda colombiana. Seeed recomienda para ese nodo la antena de fibra de 5,8 dBi (902–928). Refuerza la reserva 2 de la línea base.</li>
-        <li><b>Capa fija: ningún nodo nuevo desde el 4-sep.</b> Se añade el SpecFive Spec5 Relay (USD 274,99), que ya existía pero no estaba relevado. Las antenas de la troncal, relevadas el 4-sep sin URL, ahora llevan la ficha del vendedor: la Laird FG9026 cuesta 319,99 en RFWEL, la fibra Seeed de 8 dBi 29,90 y la ALFA de 12 dBi sigue en 67,97. La yagi de Data Alliance ya no tiene ficha, y el precio de la PCTEL queda tras una verificación anti-bots.</li>
-        <li><b>Capa portátil: 16 aparatos nuevos o no relevados antes.</b> Los más relevantes son la SenseCAP MeshTracker X1 (USD 49,90, IP66, radio LR2021), la WisMesh Tag (39,00, IP66), la ThinkNode M3 (39,90, IP66) y la ThinkNode M9 (74,90, con teclado).</li>
-      </ul>
-    </div>
-    <h3>Precios que cambiaron o equipos que dejaron de estar disponibles</h3>
-    <table class="simple" id="cambios">
-      <thead><tr><th>Capa</th><th>Equipo</th><th>USD 4-sep</th><th>USD hoy</th><th>Δ</th><th>Disponibilidad</th><th>Nota</th></tr></thead>
-      <tbody></tbody>
-    </table>
-    <h3>Equipos añadidos en esta revisión</h3>
-    <ul id="nuevos-lista"></ul>
-  </section>
-
-
-  <!-- ================= MERCADO COLOMBIANO ================= -->
-  <section class="bloque" id="colombia-sec">
-    <h2>Mercado colombiano</h2>
-    <p class="prosa">Fichas de vendedores colombianos reverificadas el 29-sep-2026, en COP con IVA salvo que se indique. Aquí están las placas sueltas, las antenas cortas, la energía y las celdas. <b>No hay a la venta en el país ningún nodo de malla terminado, ningún portátil autónomo ni ninguna antena de alta ganancia para 902–928 MHz.</b> La red se puede construir con equipos baratos, pero todavía no se puede propagar sin importar.</p>
-    <table class="simple" id="mercado-co" style="max-width:none">
-      <thead><tr><th>Tipo</th><th>Producto</th><th>Vendedor</th><th>COP</th><th>Stock</th><th>Cambio / nota</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <!-- ================= VACÍOS ================= -->
-  <section class="bloque" id="vacios">
-    <h2>Vacíos</h2>
-    <div class="prosa" id="vacios-cuerpo">
-      <p>Qué no se pudo verificar y qué haría falta para cerrarlo.</p>
-      <table class="simple">
-        <thead><tr><th>Vacío</th><th>Para cerrarlo</th></tr></thead>
-        <tbody>
-          <tr><td><b>No hay una cifra medida de nodos en alcance mutuo.</b> El «≈ 40» sale de umbrales oficiales y de un cálculo propio, no de una medición.</td><td>Correr Meshtasticator con <code>LONG_TURBO</code> (el simulador no lo trae; hay que añadirlo) y, sobre todo, medir el canal en el piloto con 15 aparatos: ChUtil y AirUtilTX de cada nodo durante un simulacro.</td></tr>
-          <tr><td><code>LONG_TURBO</code> no está probado en ningún estudio. Hay además un aviso de fallo abrupto con SF11 y CR 4/8 a 125 kHz.</td><td>Prueba de banco con dos nodos y un atenuador, barriendo la atenuación en <code>LONG_TURBO</code>, antes de comprar a escala.</td></tr>
-          <tr><td>Autonomía en uso: 21 de los 26 portátiles no publican horas, y los 5 que sí lo hacen no dan las mismas condiciones.</td><td>Medirla en el piloto con un perfil fijo: <code>LONG_TURBO</code>, posición apagada y un mensaje cada 10 min.</td></tr>
-          <tr><td>Autonomía sin sol de los nodos fijos: ningún fabricante la publica en días. La cifra de 10 a 16 días de la línea base es un cálculo del proyecto.</td><td>Aplicar la guía oficial de Meshtastic para medir el consumo de un nodo solar (sep-2026) sobre un P1-Pro.</td></tr>
-          <tr><td>Peso y resistencia a caídas: 16 de 26 portátiles sin peso publicado, y ninguno declara ensayo de caída.</td><td>Pesarlos al recibir la primera compra, y pedir el dato al fabricante.</td></tr>
-          <tr><td>Consumo publicado: cada fabricante mide una cosa distinta (recepción, reposo, máximo). La barra de consumo compara definiciones diferentes y lo dice.</td><td>Medir con un USB-meter en el mismo modo para todos los candidatos finales.</td></tr>
-          <tr><td>Disponibilidad en Colombia: MercadoLibre exige iniciar sesión y no se revisó. Interelectricas y Supportech (PCTEL) están tras verificaciones anti-bots que no se sortearon.</td><td>Revisión manual desde un navegador con sesión.</td></tr>
-          <tr><td>Precios que no se pudieron ver: yagi de Data Alliance (ficha retirada), PCTEL MFB-9153 (anti-bots) y el paquete Heltec de placa más kit solar (no hay precio de lista del paquete).</td><td>Cotizar directamente.</td></tr>
-          <tr><td>Seeed «Pager X2»: solo aparece en un agregador de videos, sin página oficial. No entra en la tabla.</td><td>Esperar la ficha oficial de Seeed.</td></tr>
-          <tr><td>Chipset del T-Lora Pager de 915 MHz (SX1262 según LilyGO, LR1121 según meshtastic.org) y banda del Cardputer y del C6L (868–923 MHz).</td><td>Preguntar al fabricante antes de comprar.</td></tr>
-          <tr><td>Bluetooth del M5Stack C6L (ESP32-C6): la comunidad dice que aún no funciona en Meshtastic y el vendedor dice que sí.</td><td>Probar una unidad.</td></tr>
-          <tr><td>Interoperar con la comunidad Meshtastic Colombia (LongFast) o cumplir la norma (<code>LONG_TURBO</code>): las dos cosas a la vez no se pueden.</td><td>Decisión del proyecto, idealmente en conversación con la comunidad.</td></tr>
-          <tr><td>Método: Exa sirvió copias viejas de varias tiendas (SenseCAP a 77,99 cuando la ficha decía 72,90, y stocks colombianos invertidos). Todo precio de la tabla se contrastó con la ficha servida el 29-sep. Un subagente usó el navegador interno al mismo tiempo que la sesión principal; sus lecturas coinciden con las comprobaciones independientes que se hicieron por descarga directa.</td><td>En la próxima actualización, leer precios con el JSON de variantes de la tienda y no con buscadores.</td></tr>
-          <tr><td>La NTC 1486 y la revisión de uso libre que la ANE tiene en curso no se reverificaron en esta revisión.</td><td>Reverificar antes de radicar cualquier documento que se apoye en este comparador.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- ================= REFERENCIAS ================= -->
-  <section class="bloque" id="referencias">
-    <h2>Referencias</h2>
-    <p class="prosa">Solo fuentes abiertas y leídas en esta revisión o en el levantamiento del 4-sep-2026, con su fecha de consulta.</p>
-    <ol class="referencias" id="lista-referencias"></ol>
-  </section>
+  </div>
+  <div class="herramientas">
+    <div class="segmentado" id="capas" role="tablist" aria-label="Tipo de equipo"></div>
+    <label class="visually-hidden" for="buscar">Buscar</label>
+    <input type="search" id="buscar" placeholder="Buscar por nombre o fabricante">
+    <label class="visually-hidden" for="orden">Ordenar</label>
+    <select id="orden">
+      <option value="precio">Más baratos primero</option>
+      <option value="bateria">Más batería primero</option>
+      <option value="peso">Más livianos primero</option>
+      <option value="nombre">Por nombre</option>
+    </select>
+  </div>
+  <div class="filtros" id="filtros"></div>
+  <ul class="grilla" id="grilla"></ul>
 </main>
 
-<div class="tooltip" id="tooltip" role="tooltip"></div>
-<footer>Red Vecinal LoRa, Manizales (Caldas), AIThinkers. Datos en <code>datos/equipos.json</code>; ver README para actualizarlos. Esta página no detecta nada ni decide niveles de alerta: compara el hardware de la capa de entrega.</footer>
-<script src="assets/app.js?v=2026-09-30f"></script>
+<div class="bandeja" id="bandeja" role="region" aria-label="Equipos para comparar">
+  <ul id="bandeja-lista"></ul>
+  <button class="btn btn-primario" type="button" id="abrir">Comparar</button>
+</div>
+
+<dialog id="hoja" aria-labelledby="hoja-titulo">
+  <button class="cerrar" type="button" id="cerrar" aria-label="Cerrar la comparación"></button>
+  <div id="hoja-contenido"></div>
+</dialog>
+
+<script src="assets/comun.js"></script>
+<script>
+(async function () {
+  const { esc, usd, n, foto, resumen, nombre, filasPara, CAPAS, ICONOS, barra, cargar, guardarSeleccion } = RV;
+  let d;
+  try { d = await cargar(); } catch (err) { document.getElementById("grilla").textContent = "No se pudieron cargar los datos: " + err.message; return; }
+  barra("index.html", d.meta.fecha_datos);
+  document.getElementById("cerrar").innerHTML = ICONOS.cerrar;
+  const eq = d.equipos;
+  const porId = new Map(eq.map((e) => [e.id, e]));
+  const MAX = 3;
+  const estado = { capa: "portatil", texto: "", orden: "precio", filtros: new Set(), sel: [] };
+
+  const FILTROS = [
+    ["listo", "Llega con Meshtastic", (e) => e.r.listo === true],
+    ["sincel", "Funciona sin celular", (e) => e.r.sinCelular === "total" || e.r.sinCelular === "lee", ["portatil"]],
+    ["agua", "Resiste agua", (e) => e.r.agua === true],
+    ["stock", "En stock", (e) => e.r.disponible === true],
+    ["co", "Se vende en Colombia", (e) => e.r.colombia === true],
+  ];
+
+  function pintarCapas() {
+    document.getElementById("capas").innerHTML = Object.entries(CAPAS).map(([k, c]) =>
+      `<button type="button" role="tab" aria-selected="${k === estado.capa}" data-k="${k}">${c.plural}<span class="cuenta">${eq.filter((e) => e.capa === k).length}</span></button>`).join("");
+    document.getElementById("filtros").innerHTML = FILTROS.filter((f) => !f[3] || f[3].includes(estado.capa)).map(([k, t]) =>
+      `<button type="button" class="filtro" data-f="${k}" aria-pressed="${estado.filtros.has(k)}">${estado.filtros.has(k) ? ICONOS.si : ""}${t}</button>`).join("") + `<span class="conteo" id="conteo"></span>`;
+  }
+
+  function lista() {
+    const t = estado.texto.trim().toLowerCase();
+    const fs = FILTROS.filter(([k]) => estado.filtros.has(k));
+    const l = eq.filter((e) => e.capa === estado.capa && (!t || `${e.fabricante} ${e.modelo}`.toLowerCase().includes(t)) && fs.every((f) => f[2](e)));
+    const clave = { precio: (e) => e.r.precio, bateria: (e) => (e.r.bateria === null ? null : -e.r.bateria), peso: (e) => e.r.peso, nombre: null }[estado.orden];
+    return l.sort((a, b) => {
+      if (!clave) return nombre(a).localeCompare(nombre(b), "es");
+      const va = clave(a), vb = clave(b);
+      if (va === null && vb === null) return 0; if (va === null) return 1; if (vb === null) return -1;
+      return va - vb;
+    });
+  }
+
+  function pintarGrilla() {
+    const l = lista();
+    document.getElementById("conteo").textContent = `${l.length} ${l.length === 1 ? "equipo" : "equipos"}`;
+    document.getElementById("grilla").innerHTML = l.map((e) => {
+      const marcado = estado.sel.includes(e.id);
+      const lleno = !marcado && estado.sel.length >= MAX;
+      const aviso = e.disponibilidad === "agotado" ? "Agotado" : e.linea_base ? "Línea base del proyecto" : e.nuevo ? "Nuevo en el catálogo" : "";
+      return `<li class="item">
+        <div class="foto marco-foto">${aviso ? `<span class="aviso">${aviso}</span>` : ""}${foto(e)}</div>
+        <span class="fab">${esc(e.fabricante)}</span>
+        <h2>${esc(nombre(e))}</h2>
+        <span class="res">${esc(resumen(e)) || "&nbsp;"}</span>
+        <div class="pie">
+          ${e.r.precio !== null ? `<a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a>` : `<span class="sin-dato">Sin dato</span>`}
+          <label class="comparar"><input type="checkbox" data-id="${esc(e.id)}" ${marcado ? "checked" : ""} ${lleno ? "disabled" : ""}> Comparar</label>
+        </div>
+      </li>`;
+    }).join("") || `<li class="vacio">Ningún equipo cumple estos filtros.</li>`;
+  }
+
+  function pintarBandeja() {
+    const b = document.getElementById("bandeja");
+    b.classList.toggle("visible", estado.sel.length > 0);
+    const items = estado.sel.map((id) => porId.get(id)).map((e) =>
+      `<li><span class="foto marco-foto">${foto(e, "")}</span>${esc(nombre(e))}<button type="button" data-quitar="${esc(e.id)}" aria-label="Quitar ${esc(nombre(e))}">${ICONOS.cerrar}</button></li>`);
+    const huecos = MAX - estado.sel.length;
+    if (huecos > 0 && estado.sel.length) items.push(`<li class="hueco">Puedes añadir ${huecos} más</li>`);
+    document.getElementById("bandeja-lista").innerHTML = items.join("");
+    const abrir = document.getElementById("abrir");
+    abrir.disabled = estado.sel.length < 2;
+    abrir.textContent = estado.sel.length < 2 ? "Elige al menos dos" : `Comparar ${estado.sel.length}`;
+    guardarSeleccion(estado.sel);
+  }
+
+  function abrirHoja() {
+    const l = estado.sel.map((id) => porId.get(id));
+    const k = l.length;
+    const cab = `<div class="hoja-cab" style="--k:${k}"><span class="titulo" id="hoja-titulo">Comparación</span>${l.map((e) =>
+      `<div class="p"><div class="foto marco-foto">${foto(e, "")}</div><b>${esc(nombre(e))}</b><span class="sub">${esc(e.fabricante)}</span></div>`).join("")}</div>`;
+    const cuerpo = filasPara(l).map((g) => `<h3>${esc(g.titulo)}</h3>` + g.filas.map((f) =>
+      `<div class="hoja-fila" style="--k:${k}"><span class="t">${esc(f.t)}</span>${f.celdas.map((c, i) => `<div class="c ${f.mejores.includes(i) ? "celda-mejor" : ""}">${c}</div>`).join("")}</div>`).join("")).join("");
+    document.getElementById("hoja-contenido").innerHTML = cab + `<div class="hoja-cuerpo">${cuerpo}</div><div class="hoja-pie"><a class="btn btn-secundario" href="comparar.html">Abrir en la página de comparación</a></div>`;
+    document.getElementById("hoja").showModal();
+  }
+
+  document.getElementById("capas").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button"); if (!b) return;
+    estado.capa = b.dataset.k; estado.filtros.clear(); pintarCapas(); pintarGrilla();
+  });
+  document.getElementById("filtros").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-f]"); if (!b) return;
+    const k = b.dataset.f; estado.filtros.has(k) ? estado.filtros.delete(k) : estado.filtros.add(k);
+    pintarCapas(); pintarGrilla();
+  });
+  document.getElementById("buscar").addEventListener("input", (ev) => { estado.texto = ev.target.value; pintarGrilla(); });
+  document.getElementById("orden").addEventListener("change", (ev) => { estado.orden = ev.target.value; pintarGrilla(); });
+  document.getElementById("grilla").addEventListener("change", (ev) => {
+    const c = ev.target.closest("input[data-id]"); if (!c) return;
+    const id = c.dataset.id;
+    estado.sel = c.checked ? [...estado.sel, id].slice(0, MAX) : estado.sel.filter((x) => x !== id);
+    pintarGrilla(); pintarBandeja();
+  });
+  document.getElementById("bandeja-lista").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-quitar]"); if (!b) return;
+    estado.sel = estado.sel.filter((x) => x !== b.dataset.quitar); pintarGrilla(); pintarBandeja();
+  });
+  document.getElementById("abrir").addEventListener("click", abrirHoja);
+  document.getElementById("cerrar").addEventListener("click", () => document.getElementById("hoja").close());
+
+  // Ejemplo de partida: dos equipos ya marcados, para que la bandeja se vea desde el inicio.
+  estado.sel = ["seeed-studio-sensecap-card-tracker-t1000-e", "elecrow-thinknode-m1"].filter((id) => porId.has(id));
+  pintarCapas(); pintarGrilla(); pintarBandeja();
+})();
+</script>
 </body>
 </html>

@@ -1,25 +1,34 @@
-# Hardware Red Vecinal LoRa: comparador
+# Hardware Red Vecinal LoRa
 
 Herramienta **interna** de la comunidad AIThinkers para decidir la compra de
 hardware de la Red Vecinal LoRa (Manizales, Caldas). La Red Vecinal es una capa
 de entrega resiliente para las alertas que el SAT y el SISMAN-LISA ya calculan:
 no detecta nada ni decide niveles de alerta.
 
-Compara en una sola página estática las dos capas de la red:
+Cubre las dos capas de la red:
 
 - **Capa fija:** nodos solares en postes y azoteas, más la troncal entre cerros.
-  Incluye módulos (placas sueltas), antenas y accesorios.
+  Incluye placas sueltas, antenas y accesorios.
 - **Capa portátil:** aparatos de bolsillo que llevan los vecinos. Hay dos familias:
   (a) etiqueta sin pantalla emparejada al celular y (b) aparato con pantalla propia.
 
-Además del comparador, la página documenta el **límite de densidad del enjambre**
-(cuántos aparatos en alcance mutuo aguanta el canal y con qué rol va cada uno), el
-umbral de bajo costo calculado por capa, los cambios de precio, el mercado
-colombiano y los vacíos de información.
+## Las páginas
+
+| Página | Para qué |
+|---|---|
+| `index.html` | **Catálogo.** Galería con foto, filtros y orden. Se marcan hasta tres equipos y se comparan en una ventana sin salir del catálogo. |
+| `tabla.html` | **Tabla de resultados.** Todas las cifras en una cuadrícula, con barras dentro de las celdas y un panel de detalle por equipo. |
+| `comparar.html` | **Comparación frente a frente** de tres equipos. En cada fila, el mejor valor va en negrilla. Se pueden esconder las filas iguales. |
+| `asistente.html` | **Asistente de compra.** Preguntas que cambian según las respuestas (a un portátil le pregunta el tamaño, a un repetidor de cerro la exposición) y una recomendación con dos alternativas. |
+| `graficas.html` | **Gráficas.** Mapa de compromisos con ejes a elegir, índices de valor por dólar, precios por capa con sus cuartiles, perfil de un equipo frente a su capa y las dos familias portátiles. |
+
+La selección para comparar se guarda en el navegador y pasa de una página a otra.
+El tema claro u oscuro se cambia con el botón del sol y la luna.
 
 ## Verla
 
-Es HTML, CSS y JS sin dependencias, sin construcción y sin `npm install`.
+Es HTML, CSS y JS sin dependencias, sin construcción y sin `npm install`. La
+única carga externa es la fuente IBM Plex Sans de Google Fonts.
 
 - **Publicada:** GitHub Pages sirve `index.html` desde la raíz de la rama `main`.
 - **En local:** el navegador no deja leer `datos/equipos.json` desde `file://`,
@@ -34,11 +43,19 @@ Es HTML, CSS y JS sin dependencias, sin construcción y sin `npm install`.
 ## Estructura
 
 ```
-index.html            la página; el texto de análisis va aquí
-datos/equipos.json    todos los datos: equipos, mercado colombiano, referencias
-assets/estilo.css     estilos (tema claro y oscuro)
-assets/app.js         filtros, orden, barras, umbrales y referencias numeradas
+index.html, tabla.html, comparar.html, asistente.html, graficas.html
+assets/comun.js         carga de datos, rasgos derivados, filas del comparador, barra y tema
+assets/comun.css        tokens de color (claro y oscuro), barra, botones, estados
+assets/img/<id>.jpg     una foto por equipo, descargada de la ficha del fabricante
+datos/equipos.json      todos los datos: equipos, mercado colombiano, referencias
+FUENTES.md              de dónde sale cada precio y cada dato (se genera)
+herramientas/fuentes.py genera FUENTES.md desde el JSON
+docs/densidad.md        el límite de densidad del enjambre, roles y configuración para Manizales
+docs/familias-portatiles.md   comparación de las dos familias portátiles
 ```
+
+Las referencias no están en la web: viven en `FUENTES.md` y en los dos
+documentos de `docs/`.
 
 ## De dónde salen los datos
 
@@ -46,34 +63,45 @@ assets/app.js         filtros, orden, barras, umbrales y referencias numeradas
 |---|---|---|
 | 48 equipos base | `datos/equipos-2026-09-04b.json` del proyecto Red Vecinal LoRa (49 relevados; el WisBlock Starter Kit estaba duplicado y se fusionó) | 4-sep-2026 |
 | Precios, disponibilidad y fichas | Reverificados en la ficha del fabricante o del distribuidor: JSON de variantes de la tienda, JSON-LD de la ficha o navegador | 29-sep-2026 |
-| 16 portátiles y 1 nodo fijo nuevos, 6 antenas con URL | Investigación del 29-sep-2026 | 29-sep-2026 |
-| Límite de densidad | Documentación y blog oficiales de Meshtastic, código de `meshtastic/firmware` (v2.7.26), un preprint y una simulación de comunidad. Ver la sección en la página | 29-sep-2026 |
+| Equipos nuevos: 16 portátiles, 1 nodo fijo y 6 antenas | Investigación del 29-sep-2026 | 29-sep-2026 |
+| Huecos de ficha llenados con otra fuente | Wikis, manuales y directorios; cada uno anotado en `fuentes_campos` con URL, cita y condiciones | 29 y 30-sep-2026 |
+| Potencia certificada ante la FCC | Concesiones e informes de prueba en fccid.io, leídos con navegador | 30-sep-2026 |
+| Fotos | `og:image` de la ficha o imagen de la variante en el JSON de la tienda, reducidas a 800 px | 29-sep-2026 |
 
 TRM de referencia: COP 3.140,55/USD (Banco de la República, 3-sep-2026). Los
-precios son de lista en USD, **sin** el 25–30 % de importación.
+precios son de lista en USD, **sin** el costo de importación.
 
 ## Reglas de los datos
 
 Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
 
-1. **Un precio sin URL de vendedor y sin fecha no entra en ninguna tabla.** La
-   página lo hace cumplir: si falta `url` o `fecha_consulta`, muestra ✕ en vez del
-   precio y lo excluye de las barras y de los umbrales.
-2. **Dato no publicado:** `null` en el JSON, que se muestra como **✕**. Nunca se
-   rellena con una estimación.
-3. **Dato sin confirmar:** la cadena `"aún en espera"`.
-4. **Dato que no aplica** a la capa de esa fila (la autonomía en uso de una antena,
-   por ejemplo): la página muestra **—**. No va en el JSON: sale de la lista
-   `capas` de cada columna en `assets/app.js`. No hay que confundirlo con ✕.
-5. **Dato verificado:** lleva su llamada numerada a la lista de referencias
-   (campo `refs`, con claves de `referencias`).
-6. **Las contradicciones entre fuentes se reportan** (campo `contradiccion`), no
-   se resuelven.
+1. **Un precio sin URL de vendedor y sin fecha no entra.** La página lo hace
+   cumplir: si falta `url` o `fecha_consulta`, muestra «Sin dato» y deja el equipo
+   fuera de las barras, los umbrales y las gráficas de precio.
+2. **Dato no publicado:** `null` en el JSON, que la página muestra como «Sin dato».
+   Nunca se rellena con una estimación. Antes de dejar un hueco se busca la
+   referencia exacta en la ficha, el manual, la wiki del fabricante y, si existe,
+   el registro FCC.
+3. **Dato que no aplica** a la capa (la autonomía en uso de una antena, por
+   ejemplo): la página muestra «No aplica». Sale de la lista `capas` de cada fila
+   en `assets/comun.js`, no del JSON.
+4. **Dato llenado con otra fuente:** va en `fuentes_campos.<campo>` con `url`,
+   `cita`, `tipo_fuente` (oficial, comercial o comunidad) y `condiciones`. La
+   autonomía dice además si la dio el fabricante o la midió la comunidad.
+5. **Las contradicciones entre fuentes se reportan** en el campo `contradiccion`,
+   no se resuelven.
+6. **La potencia declarada y la certificada son dos datos distintos.** `tx_dbm` es
+   lo que publica el fabricante (casi siempre el máximo del chip). `tx_fcc_dbm` es
+   la potencia conducida con la que se certificó el equipo ante la FCC. Varios
+   equipos LilyGO y Heltec se certificaron por debajo de 8 dBm. Tres Elecrow (M1,
+   M5 y M9) se certificaron por intensidad de campo y no tienen cifra.
 7. **No se añade a `referencias` ninguna fuente que no se haya abierto.**
-8. **Los precios de buscadores o de su caché no valen.** En esta revisión, Exa
-   sirvió copias viejas de varias tiendas. Hay que leer la ficha en vivo.
+8. **Los precios de buscadores o de su caché no valen.** Exa sirvió copias viejas
+   de varias tiendas. Hay que leer la ficha en vivo.
 
-## Cómo actualizar los precios
+## Cómo actualizar
+
+### Precios
 
 1. Abrir la ficha de cada equipo (`url`). En tiendas Shopify (RAK, LilyGO,
    Rokland, SpecFive, Atlavox, M5Stack), añadir `.js` a la URL del producto
@@ -81,51 +109,54 @@ Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
 2. En `datos/equipos.json`, para cada equipo:
    - antes de tocar nada, copiar el precio viejo a `precio_anterior_usd`;
    - actualizar `precio_usd`, `precio_max_usd`, `variante_precio`, `disponibilidad`
-     (`en stock` · `agotado` · `preventa` · `backorder` · `descontinuado` · `null`) y
+     (`en stock`, `agotado`, `preventa`, `backorder`, `descontinuado` o `null`) y
      `fecha_consulta` (AAAA-MM-DD);
    - anotar en `cambio` lo que cambió.
-3. Actualizar `meta.fecha_datos`.
-4. Subir el sufijo `?v=` de `assets/estilo.css` y `assets/app.js` en
-   `index.html`, para que GitHub Pages no sirva la versión en caché.
-5. Las columnas de la tabla se definen en `COLUMNAS` (`assets/app.js`), cada una
-   con las capas a las que aplica, y el detalle desplegable de cada fila en
-   `DETALLE`. Para añadir un campo al comparador se añade ahí.
-6. Los umbrales por capa, la tabla de cambios y las barras **se recalculan solos**
-   desde el JSON. El texto de las secciones de densidad, capa portátil, cambios y
-   vacíos está escrito a mano en `index.html`: si los datos cambian, hay que
-   revisarlo.
+3. Actualizar `meta.fecha_datos` y regenerar las fuentes:
 
-### Campos de un equipo
+   ```bash
+   python3 herramientas/fuentes.py
+   ```
 
-| Campo | Contenido |
-|---|---|
-| `capa` | `fija` · `portatil` · `modulo` · `antena` · `accesorio` |
-| `subcapa` | detalle (`nodo_desplegable`, `placa`, `energia_encapsulado`, …) |
-| `familia` | solo portátiles: `a_etiqueta` · `b_pantalla` |
-| `mcu`, `mcu_familia`, `radio`, `radio_familia` | texto de la ficha y familia normalizada para los filtros |
-| `meshtastic` | `preflasheado` · `oficial` · `comunidad` · `no_corre` · `null` · `"aún en espera"` |
-| `colombia` | `{estado: si \| no \| sin_dato, detalle, url}` |
-| `peso_g`, `bateria_mah`, `consumo_ma`, `autonomia_uso_h`, `autonomia_dias`, `tx_dbm`, `ganancia_dbi` | números, o `null` si no están publicados |
-| `autonomia_texto`, `consumo_texto` | condiciones textuales de la cifra; salen en el tooltip |
-| `refs` | claves de `referencias` |
+### Un equipo nuevo
 
-## Estilo: «Ancho de banda»
+1. Añadirlo a `datos/equipos.json` con un `id` único en minúsculas y guiones.
+2. Guardar su foto en `assets/img/<id>.jpg` y poner esa ruta en `imagen`, con la
+   URL de donde salió en `imagen_fuente`. En macOS, para dejarla como las demás:
 
-Si se edita la página, conviene mantener la dirección visual:
+   ```bash
+   sips -s format jpeg -s formatOptions 82 -Z 800 original.png --out assets/img/<id>.jpg
+   ```
 
-- **Una sola familia, Archivo, usando su eje de ancho.** Títulos expandidos
-  (`wdth` 125) y muy pesados; tabla condensada (`wdth` 78) con cifras tabulares;
-  texto corrido en ancho normal. La monoespaciada es solo para identificadores de
-  configuración como `LONG_TURBO`.
-- **Color de fondo:** papel niebla `#EEF1EF` con tinta pizarra `#1F2A2E`. En modo
-  oscuro, la pizarra se vuelve el fondo.
-- **Cada capa es una franja de color** que aparece en el selector, en el borde de
-  cada fila y en las barras. Los colores (fija `#1F5FA8`, portátil `#EE7B00`,
-  módulo `#159068`, antena `#7B4FB8`, accesorio `#A5782A`) se validaron para
-  daltonismo en los dos modos. Si se añade una capa, hay que volver a validarlos.
-- **El rojo `#B3312A` es solo para contradicciones.**
-- **Se evita:** tarjetas con número grande, metadatos unidos con punto medio,
-  etiquetas en mayúsculas, sombras y el mismo radio en todo.
+   Sin foto, la página dibuja una silueta según el tipo de equipo.
+3. Regenerar `FUENTES.md`.
+
+### Una fila o una columna
+
+- Las filas del comparador y de la ventana de comparación están en `GRUPOS`
+  (`assets/comun.js`). Cada fila tiene un título, una función que pinta la celda,
+  las capas a las que aplica y, si tiene sentido, una función `mejor` que decide
+  cuál va en negrilla.
+- Las columnas de la tabla están en `COL` y `PORCAPA` (`tabla.html`).
+- Los ejes del mapa de compromisos y los índices de valor están en `MAG` e
+  `INDICES` (`graficas.html`).
+- Las preguntas del asistente están en `PREGUNTAS` (`asistente.html`). Cada una
+  tiene una condición `cuando` que decide si aparece según las respuestas previas.
+
+### Caché de GitHub Pages
+
+Si después de publicar se sigue viendo la versión vieja, añadir o subir un sufijo
+`?v=` a `assets/comun.css` y `assets/comun.js` en las cinco páginas.
+
+## Estilo
+
+- **Una sola familia, IBM Plex Sans**, con cifras tabulares en las tablas.
+- **Cada capa tiene su color**: fija azul, portátil naranja, placa verde, antena
+  violeta y accesorio ocre. Se usan igual en las cinco páginas y en las gráficas.
+- **El mejor valor de una fila va en negrilla.** No se usa color para eso.
+- **Se evita:** cajas alrededor de cada bloque, etiquetas en mayúsculas, metadatos
+  unidos con punto medio, guiones largos como separador y llamadas numeradas en
+  el texto.
 
 ## Publicar
 

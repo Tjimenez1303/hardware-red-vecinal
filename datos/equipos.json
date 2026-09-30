@@ -74,7 +74,9 @@
    "colombia": {
     "estado": "sin_dato"
    },
-   "correccion": "El mínimo de 9,90 registrado el 4-sep era del RAK11200 de la misma página; el RAK4631 costaba 17,99."
+   "correccion": "El mínimo de 9,90 registrado el 4-sep era del RAK11200 de la misma página; el RAK4631 costaba 17,99.",
+   "imagen": "assets/img/rakwireless-rak4631-wisblock-core.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wisblock-core-modules"
   },
   {
    "id": "rakwireless-rak11310-wisblock-core",
@@ -135,7 +137,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/rakwireless-rak11310-wisblock-core.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wisblock-core-modules"
   },
   {
    "id": "seeed-studio-xiao-nrf52840-wio-sx1262-kit-for-meshtastic",
@@ -149,7 +153,7 @@
    "mcu": "nRF52840",
    "radio": "Wio-SX1262",
    "banda_mhz": "862-930",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": 13.49,
    "precio_usd": 13.49,
    "precio_max_usd": 13.49,
@@ -196,7 +200,18 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://files.seeedstudio.com/products/SenseCAP/Wio_SX1262/Wio-SX1262_Module_Datasheet.pdf",
+     "cita": "Output power 22dBm max @862-930MHz",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "reportado",
+     "condiciones": "Datasheet del módulo Wio-SX1262 (la placa de expansión del kit), 862–930 MHz, máximo; no es una hoja del kit completo"
+    }
+   },
+   "imagen": "assets/img/seeed-studio-xiao-nrf52840-wio-sx1262-kit-for-meshtastic.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/XIAO-nRF52840-Wio-SX1262-Kit-for-Meshtastic-p-6400.html"
   },
   {
    "id": "heltec-wireless-stick-lite",
@@ -230,8 +245,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 90.0,
+   "consumo_texto": "LoRa RX, TX desactivado y RX activado; fuente de alimentación no indicada en la fila (las filas de TX dicen USB)",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -257,7 +272,18 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://resource.heltec.cn/download/Wireless_Stick_Lite_V3/HTIT-WSL_V3(Rev1.1).pdf",
+     "cita": "RX TX disabled; RX enabled 90 mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa RX, TX desactivado y RX activado; fuente de alimentación no indicada en la fila (las filas de TX dicen USB)"
+    }
+   },
+   "imagen": "assets/img/heltec-wireless-stick-lite.jpg",
+   "imagen_fuente": "https://heltec.org/project/wireless-stick-lite-v2/"
   },
   {
    "id": "lilygo-t3-s3-v1-3",
@@ -318,6 +344,20 @@
    ],
    "colombia": {
     "estado": "sin_dato"
+   },
+   "imagen": "assets/img/lilygo-t3-s3-v1-3.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t3-s3-v1-3",
+   "fcc_id": "2ASYE-T3-S3-V13",
+   "tx_fcc_dbm": 7.0,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T3-S3-V13/Test-Report/Test-Report-9643892",
+     "cita": "Peak Output Power 6.81dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.005 W conducidos en 902-928 MHz, que son 7,0 dBm. Informe de prueba LoRa: «Peak Output Power 6.81dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
    }
   },
   {
@@ -379,7 +419,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/heltec-wireless-paper.jpg",
+   "imagen_fuente": "https://heltec.org/project/wireless-paper/"
   },
   {
    "id": "lilygo-t-lora-c6",
@@ -440,7 +482,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/lilygo-t-lora-c6.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-lora-c6"
   },
   {
    "id": "lilygo-t3-lora32-v1-6-1",
@@ -454,7 +498,7 @@
    "mcu": "ESP32",
    "radio": "SX1276",
    "banda_mhz": "433 / 868 / 915",
-   "tx_dbm": null,
+   "tx_dbm": 14.0,
    "precio_anterior_usd": 17.8,
    "precio_usd": 17.8,
    "precio_max_usd": 17.8,
@@ -503,7 +547,28 @@
     "estado": "si",
     "detalle": "Sigma Electrónica, COP 142.800, 7 disponibles (Vistronica 183.439, 2 uds; Electronilab y Didácticas agotados)",
     "url": "https://www.sigmaelectronica.net/producto/ttgo-lora32-915mhz/"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://wiki.lilygo.cc/products/t3-series/t3-lora32/",
+     "cita": "SX1276 (868/915/923 MHz) or SX1278 (433 MHz) LoRa, +14 dBm TX, 9.9 mA RX",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "Wiki LilyGO de la placa: módulo LoRa SX1276 '+14 dBm TX'. Cifra del módulo LoRa de la placa; coincide con el tope RFO del chip SX1276, no es una medición de la placa"
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T3-V1-6-1/Test-Report/LoRa-Test-Report-6022099",
+     "cita": "Peak Output Power 10.83dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.012 W conducidos en 902-928 MHz, que son 10,8 dBm. Informe de prueba LoRa: «Peak Output Power 10.83dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/lilygo-t3-lora32-v1-6-1.jpg",
+   "imagen_fuente": "https://lilygo.cc/products/lora3",
+   "fcc_id": "2ASYE-T3-V1-6-1",
+   "tx_fcc_dbm": 10.8
   },
   {
    "id": "heltec-wifi-lora-32",
@@ -566,7 +631,9 @@
     "estado": "si",
     "detalle": "DynamoElectronics, COP 167.000, quedan 2",
     "url": "https://www.dynamoelectronics.com/tienda/lora-32-v3lora-915-wifi-ble-oled-lipo/"
-   }
+   },
+   "imagen": "assets/img/heltec-wifi-lora-32.jpg",
+   "imagen_fuente": "https://heltec.org/project/wifi-lora-32-v3/"
   },
   {
    "id": "heltec-wifi-lora-32-v4-3-v4-3-1",
@@ -600,8 +667,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 90.0,
+   "consumo_texto": "LoRa RX, TX desactivado y RX activado; hoja V3.2; alimentación no indicada en la fila",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -629,7 +696,18 @@
     "estado": "si",
     "detalle": "Didácticas, kit con carcasa y antena, COP 209.440",
     "url": "https://www.didacticaselectronicas.com/shop/heltec-wb32laf-v40-kit-kit-wifi-lora-32v4-esp32s3-sx1262-con-carcasa-y-antena-50420"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://resource.heltec.cn/download/WiFi_LoRa_32_V3/HTIT-WB32LA_V3.2.pdf",
+     "cita": "RX TX disabled; RX enabled 90 mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa RX, TX desactivado y RX activado; hoja V3.2; alimentación no indicada en la fila"
+    }
+   },
+   "imagen": "assets/img/heltec-wifi-lora-32-v4-3-v4-3-1.jpg",
+   "imagen_fuente": "https://heltec.org/project/wifi-lora-32-v4/"
   },
   {
    "id": "heltec-wireless-stick",
@@ -663,8 +741,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 90.0,
+   "consumo_texto": "LoRa RX, TX desactivado y RX activado; hoja Wireless Stick V3 Rev1.0; alimentación no indicada en la fila",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -690,7 +768,18 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://resource.heltec.cn/download/Wireless_Stick_V3/HTIT-WS_V3(Rev1.0).pdf",
+     "cita": "RX TX disabled; RX enabled 90 mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa RX, TX desactivado y RX activado; hoja Wireless Stick V3 Rev1.0; alimentación no indicada en la fila"
+    }
+   },
+   "imagen": "assets/img/heltec-wireless-stick.jpg",
+   "imagen_fuente": "https://heltec.org/project/wireless-stick-v3/"
   },
   {
    "id": "heltec-mesh-node-t114",
@@ -751,6 +840,20 @@
    ],
    "colombia": {
     "estado": "sin_dato"
+   },
+   "imagen": "assets/img/heltec-mesh-node-t114.jpg",
+   "imagen_fuente": "https://heltec.org/project/mesh-node-t114/",
+   "fcc_id": "2A2GJ-HT-N5262",
+   "tx_fcc_dbm": 12.6,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2A2GJ-HT-N5262",
+     "cita": "0.0182 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0182 W conducidos en 902-928 MHz, que son 12,6 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware. La FCC lo registra como Mesh Node HT-N5262.",
+     "fecha": "2026-09-30"
+    }
    }
   },
   {
@@ -765,7 +868,7 @@
    "mcu": "ESP32-S3 (Xtensa LX7 dual-core, 240 MHz)",
    "radio": "Semtech SX1262 (US 915 / EU 868 MHz)",
    "banda_mhz": "US915 / EU868",
-   "tx_dbm": null,
+   "tx_dbm": 21.4,
    "precio_anterior_usd": 20.9,
    "precio_usd": 20.9,
    "precio_max_usd": null,
@@ -785,8 +888,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": "reportado: CNX Software midió 7–8 h en LONG_FAST con la versión M2 con batería de 1000 mAh (otro SKU) https://www.cnx-software.com/2025/07/07/thinknode-m1-m2-review-getting-started-with-meshtastic/",
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 188.0,
+   "consumo_texto": "Dispositivo completo recibiendo datos, DC 4,2 V, pantalla encendida. La fila 'Current - Receive' de la misma hoja da 150 mA sin más condiciones",
    "recarga": "USB-C 5 V/1 A (con batería instalada, cargador integrado)",
    "depende_celular": "parcial",
    "sin_celular": "OLED 1,3\" 128x64 con estado y mensajes, botones de encendido, función, reset y boot. Sin GPS ni teclado. Sin batería no funciona sin cable.",
@@ -811,7 +914,25 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://www.elecrow.com/download/product/CIL13002M/ThinkNode_M2_Meshtastic_Signal_Transceiver_DataSheet.pdf",
+     "cita": "Transmit Power 21.2 dBm @868Mhz 21.4 dBm @915Mhz",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "reportado",
+     "condiciones": "915 MHz (21,2 dBm a 868 MHz); Transmit Power del transceptor LoRa, hoja de datos de la placa"
+    },
+    "consumo_ma": {
+     "url": "https://www.elecrow.com/download/product/CIL13002M/ThinkNode_M2_Meshtastic_Signal_Transceiver_DataSheet.pdf",
+     "cita": "Normal operation: Receiving data 188mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "reportado",
+     "condiciones": "Dispositivo completo recibiendo datos, DC 4,2 V, pantalla encendida. La fila 'Current - Receive' de la misma hoja da 150 mA sin más condiciones"
+    }
+   },
+   "imagen": "assets/img/elecrow-thinknode-m2.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m2-meshtastic-lora-signal-transceiver-with-1-3-oled-display-powered-by-esp32-s3-without-battery.html"
   },
   {
    "id": "heltec-wireless-tracker",
@@ -845,8 +966,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 80.0,
+   "consumo_texto": "LoRa RX, TX desactivado y RX activado, alimentado por USB. Con batería VBAT la misma hoja da 59 mA",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -872,7 +993,18 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://resource.heltec.cn/download/Wireless_Tracker/Wireless%20Tracker1.1.pdf",
+     "cita": "RX TX disabled; RX enabled 80 (USB power) 59 (VBAT/battery powered) mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa RX, TX desactivado y RX activado, alimentado por USB. Con batería VBAT la misma hoja da 59 mA"
+    }
+   },
+   "imagen": "assets/img/heltec-wireless-tracker.jpg",
+   "imagen_fuente": "https://heltec.org/project/wireless-tracker/"
   },
   {
    "id": "m5stack-c6l-unit-for-meshtastic",
@@ -935,7 +1067,9 @@
     "estado": "si",
     "detalle": "DynamoElectronics, COP 176.000",
     "url": "https://www.dynamoelectronics.com/tienda/modulo-de-comunicacion-c6l-unit-for-meshtastic/"
-   }
+   },
+   "imagen": "assets/img/m5stack-c6l-unit-for-meshtastic.jpg",
+   "imagen_fuente": "https://shop.m5stack.com/products/m5stack-c6l-unit-for-meshtastic-sx1262-esp32-c6"
   },
   {
    "id": "lilygo-t3-s3-e-paper",
@@ -996,7 +1130,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/lilygo-t3-s3-e-paper.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/ts-s3-epaper"
   },
   {
    "id": "lilygo-t3-s3-v1-0",
@@ -1058,7 +1194,21 @@
    "colombia": {
     "estado": "sin_dato"
    },
-   "correccion": "Los 23,65 del 4-sep eran de la variante SX1280 de 2,4 GHz; la de 915 MHz (SX1262) cuesta 17,12."
+   "correccion": "Los 23,65 del 4-sep eran de la variante SX1280 de 2,4 GHz; la de 915 MHz (SX1262) cuesta 17,12.",
+   "imagen": "assets/img/lilygo-t3-s3-v1-0.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t3s3-v1-0",
+   "fcc_id": "2ASYE-T3-S3",
+   "tx_fcc_dbm": 7.7,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T3-S3/Test-Report/Test-Report-LoRa-8384749",
+     "cita": "Peak Output Power 7.68dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0059 W conducidos en 902-928 MHz, que son 7,7 dBm. Informe de prueba LoRa: «Peak Output Power 7.68dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   }
   },
   {
    "id": "rakwireless-wisblock-meshtastic-starter-kit",
@@ -1119,7 +1269,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/rakwireless-wisblock-meshtastic-starter-kit.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit-new"
   },
   {
    "id": "heltec-capsule-sensor-v3",
@@ -1153,8 +1305,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 90.0,
+   "consumo_texto": "LoRa Receiving, valor típico; rango de batería 3,0–4,2 V; tensión exacta no indicada",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1180,7 +1332,28 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://resource.heltec.cn/download/Heltec%20Capsule%20Sensor%20V3/CapSule%20Sensor%20V3.pdf",
+     "cita": "LoRa Receiving 90 mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa Receiving, valor típico; rango de batería 3,0–4,2 V; tensión exacta no indicada"
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2A2GJ-HRI-3641",
+     "cita": "0.0045 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0045 W conducidos en 902-928 MHz, que son 6,5 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/heltec-capsule-sensor-v3.jpg",
+   "imagen_fuente": "https://heltec.org/project/heltec-capsule-sensor-v3/",
+   "fcc_id": "2A2GJ-HRI-3641",
+   "tx_fcc_dbm": 6.5
   },
   {
    "id": "rakwireless-wismesh-rak3312-starter-kit",
@@ -1194,7 +1367,7 @@
    "mcu": "ESP32-S3",
    "radio": "SX1262",
    "banda_mhz": "US915 / AU915 / KR920 / AS923",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": 28.99,
    "precio_usd": 28.99,
    "precio_max_usd": 45.99,
@@ -1214,8 +1387,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 25.46,
+   "consumo_texto": "LoRa RX, BW 125 kHz, alimentación 3,3 V, 25 °C, módulo RAK3312 (no el kit completo con base)",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1241,7 +1414,25 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak3312/datasheet/",
+     "cita": "Transmitter output power is programmable up to +22 dBm.",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "Datasheet del WisBlock Core RAK3312 (el núcleo del kit): potencia de TX LoRa programable hasta +22 dBm. No se leyó una hoja del kit como tal"
+    },
+    "consumo_ma": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak3312/datasheet/",
+     "cita": "Lora RX LoRa 125 kHz 25.46 mA",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "LoRa RX, BW 125 kHz, alimentación 3,3 V, 25 °C, módulo RAK3312 (no el kit completo con base)"
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-rak3312-starter-kit.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/meshtastic-starter-kit-esp32-s3-lora-sx1262"
   },
   {
    "id": "lilygo-t-beam",
@@ -1304,7 +1495,21 @@
     "estado": "no",
     "detalle": "Listado en Electronilab (T-Beam V1.2, 209.900) y Ardobot (V1.0): los dos agotados"
    },
-   "correccion": "Los 30,77 del 4-sep eran de la variante de 433 MHz; la de 915 MHz cuesta 33,15."
+   "correccion": "Los 30,77 del 4-sep eran de la variante de 433 MHz; la de 915 MHz cuesta 33,15.",
+   "imagen": "assets/img/lilygo-t-beam.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-beam",
+   "fcc_id": "2ASYE-T-BEAM",
+   "tx_fcc_dbm": 11.1,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-BEAM/Test-Report/LoRa-Report-6019979",
+     "cita": "Peak Output Power 11.06dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.013 W conducidos en 902-928 MHz, que son 11,1 dBm. Informe de prueba LoRa: «Peak Output Power 11.06dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware. Certificado como T-BEAM V1.1.",
+     "fecha": "2026-09-30"
+    }
+   }
   },
   {
    "id": "heltec-wireless-tracker-v2",
@@ -1365,7 +1570,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/heltec-wireless-tracker-v2.jpg",
+   "imagen_fuente": "https://heltec.org/project/wireless-tracker-v2/"
   },
   {
    "id": "heltec-mesh-node-t096",
@@ -1379,7 +1586,7 @@
    "mcu": "nRF52840",
    "radio": "SX1262 + GNSS UC6580",
    "banda_mhz": "470-510 / 863-870 / 902-928",
-   "tx_dbm": null,
+   "tx_dbm": 28.0,
    "precio_anterior_usd": 33.9,
    "precio_usd": 33.9,
    "precio_max_usd": 33.9,
@@ -1426,7 +1633,28 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://resource.heltec.cn/download/Mesh_Node_T096/Datasheet/Mesh%20Node%20T096.pdf",
+     "cita": "delivers transmit power of 28±1 dBm",
+     "tipo_fuente": "oficial (fabricante)",
+     "procedencia": "verificado",
+     "condiciones": "Potencia de TX con PA, 28±1 dBm (la hoja lo repite en la sección de descripción). La tabla de consumo llega hasta la fila de 29 dBm"
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2A2GJ-MESHNODET096",
+     "cita": "0.0037 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0037 W conducidos en 902-928 MHz, que son 5,7 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/heltec-mesh-node-t096.jpg",
+   "imagen_fuente": "https://heltec.org/project/t096/",
+   "fcc_id": "2A2GJ-MESHNODET096",
+   "tx_fcc_dbm": 5.7
   },
   {
    "id": "lilygo-t-beam-supreme",
@@ -1487,6 +1715,20 @@
    ],
    "colombia": {
     "estado": "sin_dato"
+   },
+   "imagen": "assets/img/lilygo-t-beam-supreme.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-beam-supreme",
+   "fcc_id": "2ASYE-T-BEAM-S3",
+   "tx_fcc_dbm": 22.0,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-BEAM-S3",
+     "cita": "0.157 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.157 W conducidos en 902-928 MHz, que son 22,0 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware. La FCC lo registra como T-BEAM-S3, el nombre de la versión ESP32-S3 que la tienda vende como Supreme.",
+     "fecha": "2026-09-30"
+    }
    }
   },
   {
@@ -1513,7 +1755,7 @@
    "cambio": "No comparable: el 63,10 del 4-sep era la suma de dos fichas, no un precio de lista.",
    "meshtastic": "oficial",
    "peso_g": 850,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "178 × 178 × 35",
    "bateria_mah": null,
    "bateria_formato": "18650 en paralelo, 1-4 celdas",
    "bateria_reemplazable": "sí (celdas 18650 estándar, las instala el cliente)",
@@ -1549,7 +1791,18 @@
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
    },
-   "precio_nota": "no hay precio de lista del paquete: kit 45,20 + placa V3 17,90 = 63,10 (suma estimada de dos fichas)"
+   "precio_nota": "no hay precio de lista del paquete: kit 45,20 + placa V3 17,90 = 63,10 (suma estimada de dos fichas)",
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://heltec.org/project/solar-kit-for-dev-board-waterproof-enclosure-for-outdoor-meshtastic-meshcore/",
+     "cita": "Product size | 178*178*35mm",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Solar Kit (caja solar), sin placa ni baterías. La misma página trae además «180 × 180 × 35 cm» en Characteristics (error evidente de unidad). Peso declarado: 850 g."
+    }
+   },
+   "imagen": "assets/img/heltec-wifi-lora-32-v3.jpg",
+   "imagen_fuente": "https://heltec.org/project/solar-kit-for-dev-board-waterproof-enclosure-for-outdoor-meshtastic-meshcore/"
   },
   {
    "id": "seeed-studio-sensecap-solar-node-p1",
@@ -1583,8 +1836,8 @@
    "autonomia_dias": null,
    "autonomia_texto": "Wiki: 3350 mAh = 136,8 h; 12000 mAh = 490,2 h. No aclara modo ni sol (implica unos 24,5 mA medios, estimado)",
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 10.65,
+   "consumo_texto": "Wiki de Seeed, tabla «Active mode power consumption», fila «Static Current». No define si es recepción o reposo y dice que las cifras son solo de referencia. Sin GPS. Con GPS suma 50 mA. En reposo apagado: 56,2 µA.",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1611,7 +1864,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://wiki.seeedstudio.com/get_started_with_meshtastic_solar_node/",
+     "cita": "Static Current | 10.65 mA",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Wiki de Seeed, tabla «Active mode power consumption», fila «Static Current». No define si es recepción o reposo y dice que las cifras son solo de referencia. Sin GPS. Con GPS suma 50 mA. En reposo apagado: 56,2 µA."
+    }
+   },
+   "imagen": "assets/img/seeed-studio-sensecap-solar-node-p1.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-for-Meshtastic-LoRa-p-6425.html"
   },
   {
    "id": "elecrow-thinknode-m6",
@@ -1640,7 +1904,7 @@
    "dimensiones_mm": null,
    "bateria_mah": 7000,
    "bateria_formato": "2 x 18650 Panasonic, con carcasa de acero y válvula de seguridad",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "sí",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": "'opera estable en días nublados o lluviosos continuos'; sin cifra",
@@ -1656,9 +1920,9 @@
    "grado_ip": "IP65",
    "resistencia_caida": null,
    "panel_w": 6,
-   "ganancia_dbi": null,
+   "ganancia_dbi": 0.7,
    "vswr": null,
-   "contradiccion": "peso: 800 g en el encabezado de SKU frente a 530 g neto en la especificación",
+   "contradiccion": "peso: 800 g en el encabezado de SKU frente a 530 g neto en la especificación Potencia: 16,6 dBm conducidos en la concesión FCC, 16,644 dBm medidos en su informe de prueba, frente a 22 dBm en un directorio comunitario.",
    "notas": "Existe otra ficha 'ThinkNode M6 for LoRa' sin soporte Meshtastic; no confundir. Stock: 'Only %1 left' (texto literal de la página). Reventa EU Passion-Radio: 61,30 EUR sin IVA, agotado, 1 mes. Dimensiones 210x156x42 mm; -20 a 60 °C.",
    "procedencia": "verificado",
    "equivalentes": "SenseCAP Solar Node, WisMesh Repeater Mini V2",
@@ -1673,7 +1937,36 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "bateria_reemplazable": {
+     "url": "https://www.elecrow.com/thinknode-m6-outdoor-solar-power-for-meshtastic-powered-by-nrf52840-supports-gps.html",
+     "cita": "Type | 2x 18650 lithium-ion batteries, Panasonic",
+     "tipo_fuente": "fabricante",
+     "procedencia": "reportado",
+     "condiciones": "Solo por la definición del campo: el manual y la ficha declaran 2 celdas 18650 estándar (Panasonic, 7000 mAh). No hay instrucción de sustitución ni fotos internas accesibles. El acceso físico al compartimento no está documentado."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2BDNA-TNM6-ELE/Test-Report/Test-Report-Lora-8764297",
+     "cita": "Max. RF output power: 16.644 dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.04617 W conducidos en 902-928 MHz, que son 16,6 dBm. Informe de prueba LoRa: «Max. RF output power: 16.644 dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    },
+    "ganancia_dbi": {
+     "url": "https://fccid.io/2BDNA-TNM6-ELE/Test-Report/Test-Report-Lora-8764297",
+     "cita": "Antenna installation: External antenna Antenna Gain: 0.7 dBi",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "fecha": "2026-09-30",
+     "condiciones": "Ganancia de la antena externa incluida, declarada en el informe de prueba FCC CTB25082609105RF02."
+    }
+   },
+   "imagen": "assets/img/elecrow-thinknode-m6.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m6-outdoor-solar-power-for-meshtastic-powered-by-nrf52840-supports-gps.html",
+   "fcc_id": "2BDNA-TNM6-ELE",
+   "tx_fcc_dbm": 16.6
   },
   {
    "id": "rakwireless-wismesh-repeater-mini-v2",
@@ -1699,7 +1992,7 @@
    "cambio": "sin cambio (89,90-99,90)",
    "meshtastic": "preflasheado",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "150 × 100 × 50",
    "bateria_mah": 3200,
    "bateria_formato": "Li-Ion empaquetada, IEC 62133-2, fijada con adhesivo 3M VHB",
    "bateria_reemplazable": null,
@@ -1707,8 +2000,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 17.0,
+   "consumo_texto": "Es del MÓDULO RAK4631, no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. No incluye base RAK19003, cargador ni GPS. Solo aplica a las variantes 22 dBm (RAK4631). La variante 1 W (RAK10729) usa RAK3401 + RAK13302 y no tiene cifra.",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1718,7 +2011,7 @@
    "grado_ip": "IP67",
    "resistencia_caida": null,
    "panel_w": null,
-   "ganancia_dbi": null,
+   "ganancia_dbi": 2.3,
    "vswr": "≤1,5 en 902-928 (variante 9xx)",
    "contradiccion": "fecha de lanzamiento: Mesh America dice que RAK 'no ha publicado precio ni fecha de envío' el 24-sep, pero la tienda ya lista 89,90-99,90. IP: la ficha dice IP67; la página del Unify Enclosure dice IP65",
    "notas": "La variante 1 W no lleva GPS (docs de RAK). RAK advierte que los dispositivos 1 W solo son legales en US915. El kit RAK13302 tiene certificación FCC con salida máxima de unos 24,5 dBm, no 30. No lo evalué contra la norma colombiana. Caja 150x100x50 mm.",
@@ -1734,7 +2027,32 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://store.rakwireless.com/products/wismesh-repeater-mini-v2",
+     "cita": "External dimensions: 150 mm x 100 mm x 50 mm (including lid)",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Dimensiones externas incluyendo tapa. La misma página da el enclosure como 150 × 100 × 45 mm sin tapa."
+    },
+    "ganancia_dbi": {
+     "url": "https://store.rakwireless.com/products/wismesh-antenna",
+     "cita": "915MHz (902-928 MHz) with a max gain of 2.3 dBi and a VSWR ≤ 1.5",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Antena WisMesh Blade incluida, variante 915 MHz (la 868 MHz da 2,8 dBi). Ganancia máxima. RAK usa esa antena en toda la familia Mini."
+    },
+    "consumo_ma": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "Rx mode LoRa @37.5 Kbps | 17 mA | LoRa @ Receive mode &BT sleep",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Es del MÓDULO RAK4631, no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. No incluye base RAK19003, cargador ni GPS. Solo aplica a las variantes 22 dBm (RAK4631). La variante 1 W (RAK10729) usa RAK3401 + RAK13302 y no tiene cifra."
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-repeater-mini-v2.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-repeater-mini-v2"
   },
   {
    "id": "seeed-studio-sensecap-solar-node-p1-pro-para-meshcore",
@@ -1776,7 +2094,7 @@
    "pantalla": null,
    "entrada": null,
    "gps": null,
-   "grado_ip": null,
+   "grado_ip": "IPX6",
    "resistencia_caida": null,
    "panel_w": 5,
    "ganancia_dbi": 2.0,
@@ -1797,7 +2115,18 @@
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
    },
-   "correccion": "La URL del 4-sep apuntaba al MeshCore Starter Kit, otro producto; el mínimo de 89,90 no correspondía a este equipo."
+   "correccion": "La URL del 4-sep apuntaba al MeshCore Starter Kit, otro producto; el mínimo de 89,90 no correspondía a este equipo.",
+   "fuentes_campos": {
+    "grado_ip": {
+     "url": "https://wiki.seeedstudio.com/meshtastic_solar_node/",
+     "cita": "Waterproof rating | IPX6",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Declarado en la wiki de hardware de la familia SenseCAP Solar Node (P1/P1-Pro), no en una ficha específica de la edición MeshCore. El hardware es el mismo (XIAO nRF52840 Plus, Wio-SX1262, L76K). Ver Contradicciones: otras fuentes dicen IPX5."
+    }
+   },
+   "imagen": "assets/img/seeed-studio-sensecap-solar-node-p1-pro-para-meshcore.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshcore-p-6741.html"
   },
   {
    "id": "rakwireless-wismesh-repeater-mini",
@@ -1823,7 +2152,7 @@
    "cambio": "sin cambio (99,00)",
    "meshtastic": "preflasheado",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "150 × 100 × 50",
    "bateria_mah": 3200,
    "bateria_formato": "Li-Ion empaquetada, IEC 62133-2",
    "bateria_reemplazable": null,
@@ -1831,8 +2160,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 17.0,
+   "consumo_texto": "Es del MÓDULO RAK4631 (el repetidor declara usarlo), no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. No incluye base, cargador ni pérdidas.",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1842,7 +2171,7 @@
    "grado_ip": "IP67",
    "resistencia_caida": null,
    "panel_w": null,
-   "ganancia_dbi": null,
+   "ganancia_dbi": 2.3,
    "vswr": "≤1,5 en 902-928",
    "contradiccion": "ninguna",
    "notas": "La ficha dice 'disponible por distribuidores'; no muestra stock propio. Ya existe el V2 como sucesor; RAK no declara descontinuado el v1.",
@@ -1858,7 +2187,32 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://store.rakwireless.com/products/wismesh-meshtastic-solar-repeater-mini",
+     "cita": "External dimensions: 150 mm x 100 mm x 50 mm (including lid)",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Externas con tapa. Enclosure sin tapa: 150 × 100 × 45 mm."
+    },
+    "ganancia_dbi": {
+     "url": "https://store.rakwireless.com/products/wismesh-antenna",
+     "cita": "915MHz (902-928 MHz) with a max gain of 2.3 dBi and a VSWR ≤ 1.5",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Antena WisMesh Blade 915 MHz incluida (ganancia máxima; 2,8 dBi en la variante 868 MHz)."
+    },
+    "consumo_ma": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "Rx mode LoRa @37.5 Kbps | 17 mA | LoRa @ Receive mode &BT sleep",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Es del MÓDULO RAK4631 (el repetidor declara usarlo), no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. No incluye base, cargador ni pérdidas."
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-repeater-mini.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-meshtastic-solar-repeater-mini"
   },
   {
    "id": "rakwireless-wismesh-repeater",
@@ -1872,7 +2226,7 @@
    "mcu": "nRF52840",
    "radio": "SX1262 (RAK4631)",
    "banda_mhz": "902-928 (variante US915)",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": 99.0,
    "precio_usd": 99.0,
    "precio_max_usd": 299.0,
@@ -1892,8 +2246,8 @@
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 17.0,
+   "consumo_texto": "Es del MÓDULO RAK4631 (declarado por el RAK10721), no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. El repetidor no tiene batería interna y acepta 5–16 V DC.",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1919,7 +2273,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "LoRa PA Boost mode with 22 dBm output power",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Por módulo: la ficha de RAK declara el WisBlock RAK4631 (SX1262) y la hoja del RAK4631 da «LoRa PA Boost mode with 22 dBm output power». No hay cifra específica para el RAK10721."
+    },
+    "consumo_ma": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "Rx mode LoRa @37.5 Kbps | 17 mA | LoRa @ Receive mode &BT sleep",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Es del MÓDULO RAK4631 (declarado por el RAK10721), no del equipo completo: «Rx mode LoRa @37.5 Kbps», LoRa en recepción y BT en reposo. El repetidor no tiene batería interna y acepta 5–16 V DC."
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-repeater.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-meshtastic-solar-repeater"
   },
   {
    "id": "seeed-studio-sensecap-solar-node-p1-pro",
@@ -1953,8 +2325,8 @@
    "autonomia_dias": null,
    "autonomia_texto": "Hoja Digikey: 'operación continua incluso sin sol' con 4 x 3350 mAh; sin cifra de días. Wiki: 136,8 h con 3350 mAh, modo no aclarado",
    "autonomia_comunidad": null,
-   "consumo_ma": null,
-   "consumo_texto": null,
+   "consumo_ma": 10.65,
+   "consumo_texto": "Misma tabla de la wiki, que cubre P1 y P1-Pro sin separar por variante. «Static Current» no se define como recepción. GPS operando: +50 mA. TX EU868 157,74 mA; TX US915 205,22 mA.",
    "recarga": null,
    "depende_celular": null,
    "sin_celular": null,
@@ -1981,7 +2353,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "consumo_ma": {
+     "url": "https://wiki.seeedstudio.com/get_started_with_meshtastic_solar_node/",
+     "cita": "Static Current | 10.65 mA",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Misma tabla de la wiki, que cubre P1 y P1-Pro sin separar por variante. «Static Current» no se define como recepción. GPS operando: +50 mA. TX EU868 157,74 mA; TX US915 205,22 mA."
+    }
+   },
+   "imagen": "assets/img/seeed-studio-sensecap-solar-node-p1-pro.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html"
   },
   {
    "id": "heltec-meshtower-v2-30dbm-outdoor-lora-node",
@@ -2007,10 +2390,10 @@
    "cambio": "mínimo sin cambio (109,00); máximo baja de 139,00 a 129,00",
    "meshtastic": "aún en espera",
    "peso_g": 1500,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "125 (+40 antena) × 125 × 52",
    "bateria_mah": 8400.0,
    "bateria_formato": "3 celdas de litio, cargar 0-45 °C, descargar -20 a 60 °C; tipo no publicado",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
@@ -2042,7 +2425,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://heltec.org/project/meshtower/",
+     "cita": "Enclosure: 125 (+40ANT) * 125 * 52 mm Panel: 320 * 230 mm",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Solo la carcasa de aluminio. Panel solar aparte: 320 × 230 mm. Coincide entre la página del fabricante, la wiki y el datasheet."
+    },
+    "bateria_reemplazable": {
+     "url": "https://docs.heltec.org/en/node/meshtower/index.html",
+     "cita": "If you choose to replace the battery, the voltage must match the parameters in the table below",
+     "tipo_fuente": "fabricante",
+     "procedencia": "reportado",
+     "condiciones": "Heltec documenta que la batería puede sustituirse («If you choose to replace the battery»): 3 celdas Li-ion de 3,7–3,8 V, recomienda rango ancho de temperatura. No describe el procedimiento. Una reseña de cliente indica que hay que retirar el panel de acceso y la tapa frontal para llegar a los controles internos, lo que da «con herramientas» (inferencia de esa reseña)."
+    }
+   },
+   "imagen": "assets/img/heltec-meshtower-v2-30dbm-outdoor-lora-node.jpg",
+   "imagen_fuente": "https://heltec.org/project/meshtower/"
   },
   {
    "id": "atlavox-beacon-solar-mesh-node",
@@ -2068,10 +2469,10 @@
    "cambio": "mínimo sin cambio (235,99); máximo 269,99 no visible",
    "meshtastic": "preflasheado",
    "peso_g": 1000,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "101,6 × 139,7 × 257,2 (estimado)",
    "bateria_mah": 5000,
    "bateria_formato": "LiPo con circuito de protección; sobrecorriente 2000 mA, descarga 3,0 V, carga 4,28 V",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": "'menos de una hora de sol al día' basta para mantener la carga; reseña: mínimo de 94 % tras 3 días de tormentas",
@@ -2103,7 +2504,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://atlavox.com/products/atlavox-beacon-solar-meshtastic-node",
+     "cita": "Frame Thickness 4\" Frame Width 5 1/2\" Frame Height 10 1/8\"",
+     "tipo_fuente": "comercial",
+     "procedencia": "estimado",
+     "condiciones": "Marco completo. Fuente en pulgadas: espesor 4\", ancho 5 1/2\" (6 1/4\" con tornillos de mano), alto 10 1/8\". Conversión ×25,4 es cálculo propio. Peso declarado: 1 kg (2 lb 6 oz). Un tercero lista la caja IP67 como 10⅛×5½×4 in."
+    },
+    "bateria_reemplazable": {
+     "url": "https://atlavox.com/pages/atlavox-beacon-getting-started",
+     "cita": "Allen Wrench - For opening enclosure",
+     "tipo_fuente": "comercial",
+     "procedencia": "reportado",
+     "condiciones": "Batería LiPo 5.000 mAh tipo «pillow» instalada de fábrica con interruptor, dentro de la caja; el kit incluye llave Allen «for opening enclosure». Ninguna fuente dice expresamente que sea sustituible, el valor sale de la guía de Atlavox y del desarme de NodakMesh."
+    }
+   },
+   "imagen": "assets/img/atlavox-beacon-solar-mesh-node.jpg",
+   "imagen_fuente": "https://atlavox.com/products/atlavox-beacon-solar-meshtastic-node"
   },
   {
    "id": "rakwireless-wismesh-repeater-solar-battery-lite",
@@ -2117,7 +2536,7 @@
    "mcu": "nRF52840",
    "radio": "SX1262 (RAK4631)",
    "banda_mhz": "US 915 (868 requiere cambiar la antena)",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": 299.0,
    "precio_usd": 299.0,
    "precio_max_usd": 309.97,
@@ -2164,7 +2583,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "LoRa PA Boost mode with 22 dBm output power",
+     "tipo_fuente": "fabricante",
+     "procedencia": "verificado",
+     "condiciones": "Por módulo: la ficha de Rokland declara «WisBlock RAK4631 nRF52840 LoRa module» y la hoja del RAK4631 da 22 dBm máx. No hay cifra propia del kit."
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-repeater-solar-battery-lite.jpg",
+   "imagen_fuente": "https://store.rokland.com/products/rakwireless-wismesh-repeater-reliable-meshtastic-repeater-for-challenging-environmentsrak"
   },
   {
    "id": "seeed-studio-sensecap-card-tracker-t1000-e",
@@ -2194,9 +2624,9 @@
    "bateria_mah": 700,
    "bateria_formato": "LiPo recargable interna (Seeed la llama 'rechargeable lithium battery')",
    "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "autonomia_uso_h": 46.0,
    "autonomia_dias": null,
-   "autonomia_texto": "Seeed (blog oficial, 30-ago-2024): «up to 2 days of battery life», sin condiciones de intervalo ni de GPS. La ficha de producto no publica autonomía.",
+   "autonomia_texto": "Hoja de cálculo oficial de Seeed (T1000-E for Meshtastic Consumption Test and Battery Life Calculation): US915, preset LongFast, 50 paquetes/h de 100 bytes, batería 700 mAh con 90% utilizable, GPS apagado. Resultado 1,93 días × 24 = 46,4 h (cálculo del dato publicado). Con GPS encendido: 1,91 días = 45,8 h (GPS 53,26 mA, 5 s de adquisición). Corriente base 12,05 mA; corriente TX en US915 148,53 mA (no es potencia en dBm).",
    "autonomia_comunidad": "reportado: usuario en GitHub meshtastic/firmware#10796: 'up to 2,5 days / 5 days with night shutdown' (condiciones no detalladas) https://github.com/meshtastic/firmware/issues/10796 ; mismo hilo reporta descarga fuerte estando apagado (50% tras 2 semanas). Blog de terceros (getupandgocamping.com) da 1–2 días con GPS siempre encendido y posición cada 5 min: fuente débil, no la uso.",
    "consumo_ma": null,
    "consumo_texto": null,
@@ -2226,7 +2656,29 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "autonomia_uso_h": {
+     "url": "https://files.seeedstudio.com/wiki/SenseCAP/Meshtastic/T1000-E%20for%20Meshtastic%20Consumption%20Test%20and%20Battery%20Life%20Calculation.xlsx",
+     "cita": "US915 Battery life (Days) LONGFAST 1.93; Battery capacity (mAh) 700",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Hoja de cálculo oficial de Seeed (T1000-E for Meshtastic Consumption Test and Battery Life Calculation): US915, preset LongFast, 50 paquetes/h de 100 bytes, batería 700 mAh con 90% utilizable, GPS apagado. Resultado 1,93 días × 24 = 46,4 h (cálculo del dato publicado). Con GPS encendido: 1,91 días = 45,8 h (GPS 53,26 mA, 5 s de adquisición). Corriente base 12,05 mA; corriente TX en US915 148,53 mA (no es potencia en dBm)."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/Z4T-T1000-E",
+     "cita": "0.12 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.12 W conducidos en 902-928 MHz, que son 20,8 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/seeed-studio-sensecap-card-tracker-t1000-e.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html",
+   "fcc_id": "Z4T-T1000-E",
+   "tx_fcc_dbm": 20.8
   },
   {
    "id": "lilygo-t-watch-s3",
@@ -2252,8 +2704,8 @@
    "cambio": "Sin cambio (42,98).",
    "meshtastic": "oficial",
    "peso_g": null,
-   "dimensiones_mm": null,
-   "bateria_mah": null,
+   "dimensiones_mm": "51,5 × 42 × 20 (sin correa)",
+   "bateria_mah": 470.0,
    "bateria_formato": null,
    "bateria_reemplazable": null,
    "autonomia_uso_h": null,
@@ -2262,7 +2714,7 @@
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "Micro-USB (entrada 3,9–6 V; corriente programable 0–1024 mA, recomendada <130 mA)",
    "depende_celular": "parcial",
    "sin_celular": "Pantalla táctil, háptico, altavoz y micrófono según meshtastic.org. Cómo se escribe un mensaje sin teléfono no está documentado.",
    "pantalla": "táctil (tamaño no publicado en la ficha S3)",
@@ -2288,7 +2740,42 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://wiki.lilygo.cc/products/t-watch-series/t-watch-s3/",
+     "cita": "51.5 × 42 × 20 mm (without strap)",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Wiki del T-Watch S3. Un distribuidor da otra cifra: ver Contradicciones."
+    },
+    "bateria_mah": {
+     "url": "https://wiki.lilygo.cc/products/t-watch-series/t-watch-s3/",
+     "cita": "Battery Capacity | 470 mAh",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Wiki y Tinytronics dicen 470. Meshtastic y Hubtronics dicen 400: ver Contradicciones. La variante S3 Plus lleva 940."
+    },
+    "recarga": {
+     "url": "https://wiki.lilygo.cc/products/t-watch-series/t-watch-s3/",
+     "cita": "MicroUSB Input Voltage | 3.9 V - 6 V",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Conector Micro-USB, no USB-C."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-WATCH-S3",
+     "cita": "Peak Output Power 6.78dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0048 W conducidos en 902-928 MHz, que son 6,8 dBm. Informe de prueba LoRa: «Peak Output Power 6.78dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/lilygo-t-watch-s3.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-de/products/t-watch-s3",
+   "fcc_id": "2ASYE-T-WATCH-S3",
+   "tx_fcc_dbm": 6.8
   },
   {
    "id": "m5stack-cardputer-mesh-kit-for-meshtastic",
@@ -2324,7 +2811,7 @@
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C (también alimenta el aparato)",
    "depende_celular": "no",
    "sin_celular": "Teclado completo de 56 teclas y pantalla LCD: se lee y se escribe sin teléfono. GPS propio.",
    "pantalla": "LCD 1,14\" 240x135",
@@ -2349,7 +2836,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "recarga": {
+     "url": "https://shop.m5stack.com/blogs/blog/m5stack-cardputer-adv-the-limitless-computer",
+     "cita": "The USB-C port is used for programming the Stamp, power delivery, and charging the integrated battery.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Cardputer-Adv con cargador TP4057. La wiki pide poner el interruptor en ON mientras carga."
+    }
+   },
+   "imagen": "assets/img/m5stack-cardputer-mesh-kit-for-meshtastic.jpg",
+   "imagen_fuente": "https://shop.m5stack.com/products/cardputer-mesh-kit-for-meshtastic-esp32-s3"
   },
   {
    "id": "lilygo-t-echo",
@@ -2363,7 +2861,7 @@
    "mcu": "Nordic nRF52840",
    "radio": "Semtech SX1262",
    "banda_mhz": "433 / 868 / 915",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": 48.49,
    "precio_usd": 48.49,
    "precio_max_usd": 54.42,
@@ -2410,7 +2908,28 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://wiki.lilygo.cc/products/t-echo-series/t-echo/",
+     "cita": "SX1262 LoRa module, supports multiple frequency bands, output power −17 to 22 dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Rango configurable declarado en la wiki: −17 a 22 dBm. Es el rango del módulo SX1262 vía RadioLib, no una medición ni el valor por defecto del aparato. Usar con reserva."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-ECHO/Test-Report/Test-Report-LoRa-6227961",
+     "cita": "Peak Output Power 12.49dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.018 W conducidos en 902-928 MHz, que son 12,6 dBm. Informe de prueba LoRa: «Peak Output Power 12.49dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/lilygo-t-echo.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-echo-meshtastic",
+   "fcc_id": "2ASYE-T-ECHO",
+   "tx_fcc_dbm": 12.6
   },
   {
    "id": "heltec-meshpocket",
@@ -2424,7 +2943,7 @@
    "mcu": "Nordic nRF52840",
    "radio": "Semtech SX1262",
    "banda_mhz": "863-870 / 902-928",
-   "tx_dbm": null,
+   "tx_dbm": 21.0,
    "precio_anterior_usd": 49.0,
    "precio_usd": 49.0,
    "precio_max_usd": 59.0,
@@ -2452,7 +2971,7 @@
    "pantalla": "e-ink 2,13\"",
    "entrada": "botones laterales (CTRL/USER)",
    "gps": "no",
-   "grado_ip": null,
+   "grado_ip": "Sin resistencia al agua: el fabricante declara 'Waterproof Rating: None'",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": null,
@@ -2471,7 +2990,35 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "tx_dbm": {
+     "url": "https://resource.heltec.cn/download/MeshPocket/datasheet/MeshPocket_1.0.1.pdf",
+     "cita": "902~928 | 21 ± 1",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Hoja de datos oficial Heltec MeshPocket Rev. 1.0.1, tabla 2.3.2 'Transmitter Power': máximo 21 ± 1 dBm en 902~928 MHz (y en 863~870 MHz). Es cifra del aparato, no solo del chip."
+    },
+    "grado_ip": {
+     "url": "https://resource.heltec.cn/download/MeshPocket/datasheet/MeshPocket_1.0.0.pdf",
+     "cita": "Waterproof Rating | None",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Datasheet Rev. 1.0.0 dice 'Waterproof Rating | None'. El User Guide Rev. 1.0.1 dice 'Without waterproof features'. El datasheet 1.0.1 eliminó la fila."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2A2GJ-HT-298A",
+     "cita": "0.0054 W",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0054 W conducidos en 902-928 MHz, que son 7,3 dBm. Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/heltec-meshpocket.jpg",
+   "imagen_fuente": "https://heltec.org/project/meshpocket/",
+   "fcc_id": "2A2GJ-HT-298A",
+   "tx_fcc_dbm": 7.3
   },
   {
    "id": "elecrow-thinknode-m1",
@@ -2532,7 +3079,12 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/elecrow-thinknode-m1.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m1-meshtastic-lora-signal-transceiver-powered-by-nrf52840-with-154-screen-support-gps.html",
+   "fcc_id": "2BDNA-TNMS-ELE",
+   "fcc_nota": "Certificado junto con el M5 bajo la regla 15.249, que mide intensidad de campo y no publica potencia conducida."
   },
   {
    "id": "muzi-works-r1-neo",
@@ -2561,7 +3113,7 @@
    "dimensiones_mm": "58,0 x 63,5 x 17,8 (sin antena; látigo 170 mm)",
    "bateria_mah": 1500,
    "bateria_formato": "LiPo/Li-ion polímero protegida, interna",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": "Muzi: 'multi-day battery life with GPS on', sin cifra. Linuxgizmos (nota de prensa del lanzamiento): 'up to three days of operation with GPS enabled', sin intervalo.",
@@ -2574,7 +3126,7 @@
    "pantalla": "ninguna",
    "entrada": "un botón táctil-elastómero con indicador LED",
    "gps": "sí, GPS/BDS con interruptor de apagado",
-   "grado_ip": null,
+   "grado_ip": "sin grado IP declarado para el aparato; «water resistant»; solo el conector USB-C es IP68",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": null,
@@ -2595,7 +3147,25 @@
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
    },
-   "correccion": "El 4-sep se registró un rango 65–99; hoy hay un único precio de 89,00 y el de 65 no se pudo atribuir a ninguna variante."
+   "correccion": "El 4-sep se registró un rango 65–99; hoy hay un único precio de 89,00 y el de 65 no se pudo atribuir a ninguna variante.",
+   "fuentes_campos": {
+    "grado_ip": {
+     "url": "https://muzi.works/products/r1-neo-complete-meshtastic-device",
+     "cita": "IP68 rated USB-C connector with built-in gasket",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "Juntas en conector SMA con O-ring y en la base. El FAQ de muzi dice que H1 y R1 (modelos anteriores) no son resistentes al agua; no aplica al Neo."
+    },
+    "bateria_reemplazable": {
+     "url": "https://github.com/meshcore-dev/MeshCore/issues/1275",
+     "cita": "open it up, disconnect the antenna, slide out the board, and unplug the battery",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Comentario de un usuario: abrir, desconectar la antena, sacar la placa y desenchufar la batería. Caja sellada con junta de compresión. No es fuente del fabricante."
+    }
+   },
+   "imagen": "assets/img/muzi-works-r1-neo.jpg",
+   "imagen_fuente": "https://muzi.works/products/r1-neo-complete-meshtastic-device"
   },
   {
    "id": "lilygo-t-deck-plus-meshtastic",
@@ -2621,23 +3191,23 @@
    "cambio": "Sin cambio (77,16).",
    "meshtastic": "preflasheado",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "100 × 68 × 11",
    "bateria_mah": 2000,
    "bateria_formato": "batería interna integrada ('Built-in 2000 mah battery')",
    "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "autonomia_uso_h": 12.0,
    "autonomia_dias": null,
-   "autonomia_texto": null,
+   "autonomia_texto": "Uso medio: mensajes, lista de nodos y mapas ocasionales. El indicador de batería es poco fiable.",
    "autonomia_comunidad": "reportado: reseña en la página de LILYGO (Barrel Roll): 'needs to last longer than 24 hours with modest use'; pide un botón de reset protegido y funda anticaída https://lilygo.cc/en-us/products/t-deck-plus-meshtastic",
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C (LED azul indica carga)",
    "depende_celular": "no",
    "sin_celular": "Teclado QWERTY completo y pantalla de 2,8\": se lee y se escribe sin teléfono; incluye GPS, micrófono, altavoz, ranura TF, Wi-Fi.",
    "pantalla": "IPS LCD 2,8\" 320x240 (ST7789)",
    "entrada": "teclado + trackball + táctil (lo de trackball/táctil según repo LilyGO)",
    "gps": "sí (tipo no publicado en la ficha)",
-   "grado_ip": null,
+   "grado_ip": "sin grado IP; no resistente al agua ni al polvo",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": null,
@@ -2656,7 +3226,50 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck-plus/",
+     "cita": "Dimensions | 100 × 68 × 11 mm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Wiki del fabricante. Una reseña da otra cifra: ver Contradicciones."
+    },
+    "recarga": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck-plus/",
+     "cita": "A lit blue LED means the battery is charging",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": null
+    },
+    "autonomia_uso_h": {
+     "url": "https://www.thesecuredad.com/post/lilygo-t-deck-plus-review-standalone-meshtastic-without-your-phone",
+     "cita": "I get about 12 hours of medium use on a full charge.",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Uso medio: mensajes, lista de nodos y mapas ocasionales. El indicador de batería es poco fiable."
+    },
+    "grado_ip": {
+     "url": "https://ossmalta.eu/lilygo-t-deck-plus-review-a-meshtastic-handheld-with-great-potential-and-quirky-flaws/",
+     "cita": "The device has no IP rating, meaning it is not water or dust resistant.",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Dicho por reseñas y distribuidor, no por el fabricante."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-DECK-PLUS/Test-Report/Test-Report-LoRa-8633121",
+     "cita": "Peak Output Power 4.83dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.003 W conducidos en 902-928 MHz, que son 4,8 dBm. Informe de prueba LoRa: «Peak Output Power 4.83dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "autonomia_fuente": "comunidad",
+   "imagen": "assets/img/lilygo-t-deck-plus-meshtastic.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-deck-plus-meshtastic",
+   "fcc_id": "2ASYE-T-DECK-PLUS",
+   "tx_fcc_dbm": 4.8
   },
   {
    "id": "rakwireless-wismesh-pocket-v2",
@@ -2685,7 +3298,7 @@
    "dimensiones_mm": "94 x 52 x 30",
    "bateria_mah": 3200,
    "bateria_formato": "LiPo recargable interna con monitoreo NTC, certificada IEC 62133-2:2017",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
@@ -2703,7 +3316,7 @@
    "panel_w": null,
    "ganancia_dbi": null,
    "vswr": null,
-   "contradiccion": "'Regular price $89.97 / Sale price $0.00' en la ficha vs 89,97 en las variantes. Banda no fijada en el SKU. Folleto RAK marca IP67 para otros modelos, no para éste.",
+   "contradiccion": "'Regular price $89.97 / Sale price $0.00' en la ficha vs 89,97 en las variantes. Banda no fijada en el SKU. Folleto RAK marca IP67 para otros modelos, no para éste. Autonomía medida por la comunidad: 28 h (NepaMesh) frente a algo más de 72 h (Adrelien); no se elige una.",
    "notas": "'Pre-flashed with Meshtastic firmware' (ficha). Antena de 2 dBi y conector SMA. V2 corrige regulador de voltaje y batería para CE.",
    "procedencia": "verificado (JSON Shopify + ficha); docs.rakwireless.com devolvió CRAWL_NOT_FOUND",
    "equivalentes": "T1000-E, ThinkNode M1/M2",
@@ -2717,7 +3330,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "bateria_reemplazable": {
+     "url": "https://docs.rakwireless.com/product-categories/meshtastic/wismesh-pocket-v2/quickstart/",
+     "cita": "The WisMesh Pocket V2 has an internal connector for a Li-ion battery. Make sure to double-check the battery cable polarity during replacement.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "La Quick Start oficial de RAK documenta conector interno de batería Li-ion (JST PHR-3 en EU/UK, PHR-2 en otros mercados) y un procedimiento de desarme: 4 tornillos de esquina, desconectar 3 cables IPEX y 4 tornillos de la placa, y separar el cable de batería."
+    }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-pocket-v2.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-pocket"
   },
   {
    "id": "lilygo-t-lora-pager-meshtastic",
@@ -2746,10 +3370,10 @@
    "dimensiones_mm": "106 x 89 x 23",
    "bateria_mah": 1500,
    "bateria_formato": "3,7 V 5,55 Wh (wiki LilyGO), interna",
-   "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "bateria_reemplazable": "con herramientas",
+   "autonomia_uso_h": 18.0,
    "autonomia_dias": null,
-   "autonomia_texto": null,
+   "autonomia_texto": "Variante LR1121 EU868, GPS encendido sin lograr fix, pantalla dormida sola. El medidor BQ27220 falló a mitad de prueba (saltó de 38 % a 100 %). Con pantalla encendida y tecleo, el revisor estima 5 a 10 h.",
    "autonomia_comunidad": "reportado: reseña en la página de LILYGO (sam arnold): 'lasts around 5hr' (firmware inestable). https://lilygo.cc/en-us/products/t-lora-pager-meshtastic",
    "consumo_ma": null,
    "consumo_texto": null,
@@ -2759,7 +3383,7 @@
    "pantalla": "IPS 2,33\" 480x222 (ST7796)",
    "entrada": "teclado 34 teclas + encoder",
    "gps": "sí, u-blox MIA-M10Q",
-   "grado_ip": null,
+   "grado_ip": "sin grado IP; no resistente al agua",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": null,
@@ -2779,7 +3403,43 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "autonomia_uso_h": {
+     "url": "https://adrelien.com/lilygo-t-lora-pager-review-packed-with-features-you-cant-use-yet/",
+     "cita": "the device kept actually running for around 18 hours total under these conditions",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Variante LR1121 EU868, GPS encendido sin lograr fix, pantalla dormida sola. El medidor BQ27220 falló a mitad de prueba (saltó de 38 % a 100 %). Con pantalla encendida y tecleo, el revisor estima 5 a 10 h."
+    },
+    "grado_ip": {
+     "url": "https://adrelien.com/lilygo-t-lora-pager-review-packed-with-features-you-cant-use-yet/",
+     "cita": "No Water Resistance There's no IP rating.",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Afirmación del revisor. Lo atribuye a puertos, ranura SD, rejilla del altavoz y dos bisagras de antena."
+    },
+    "bateria_reemplazable": {
+     "url": "https://adrelien.com/lilygo-t-lora-pager-review-packed-with-features-you-cant-use-yet/",
+     "cita": "the battery isn't designed to be user-swapped",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Caja atornillada y abrible, pero el revisor dice que la batería no está pensada para cambio por el usuario. Sin detalle del conector."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-LORA-PAGER",
+     "cita": "Peak Output Power 7.27dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.005 W conducidos en 902-928 MHz, que son 7,0 dBm. Informe de prueba LoRa: «Peak Output Power 7.27dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "autonomia_fuente": "comunidad",
+   "imagen": "assets/img/lilygo-t-lora-pager-meshtastic.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-us/products/t-lora-pager-meshtastic",
+   "fcc_id": "2ASYE-T-LORA-PAGER",
+   "tx_fcc_dbm": 7.0
   },
   {
    "id": "heltec-solar-kit-for-dev-board-waterproof-enclosure",
@@ -2839,7 +3499,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/heltec-solar-kit-for-dev-board-waterproof-enclosure.jpg",
+   "imagen_fuente": "https://heltec.org/project/solar-kit-for-dev-board-waterproof-enclosure-for-outdoor-meshtastic-meshcore/"
   },
   {
    "id": "rakwireless-lightning-arrestor-2",
@@ -2899,7 +3561,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/rakwireless-lightning-arrestor-2.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/lora-rf-lightning-arrestor-outdoor-ip67"
   },
   {
    "id": "rakwireless-wismesh-unify-enclosure-100x75x38mm-con-panel-so",
@@ -2959,7 +3623,9 @@
    ],
    "colombia": {
     "estado": "sin_dato"
-   }
+   },
+   "imagen": "assets/img/rakwireless-wismesh-unify-enclosure-100x75x38mm-con-panel-so.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-unify-enclosure"
   },
   {
    "id": "sensecap-meshtracker-x1",
@@ -3021,7 +3687,10 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/sensecap-meshtracker-x1.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/sensecap-meshtracker-x1-meshtastic-gps-tracker-p-6935.html"
   },
   {
    "id": "wismesh-tag",
@@ -3049,10 +3718,10 @@
    "fecha_lanzamiento": "2025-08 (página publicada 2025-08-13)",
    "meshtastic": "preflasheado",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "92 × 59 × 7,5",
    "bateria_mah": 1000,
    "bateria_formato": "Li-Ion interna",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "no",
    "autonomia_uso_h": 48,
    "autonomia_dias": null,
    "autonomia_texto": "2-3 días con GPS activo (RAK cita reportes de usuarios; Hexaspot repite lo mismo)",
@@ -3070,7 +3739,7 @@
    "panel_w": null,
    "ganancia_dbi": null,
    "vswr": null,
-   "contradiccion": null,
+   "contradiccion": "Peso: 47 g (Oppedahl) frente a 30 g (mesh-sn.de); RAK no lo publica.",
    "notas": "La autonomía de 2-3 días es dato de usuarios que cita el fabricante, no medición del fabricante. Hexaspot (EU868) lo vende a EUR 48,50 y también lo lista para MeshCore.",
    "procedencia": "verificado",
    "mcu_familia": "nRF52840",
@@ -3082,7 +3751,26 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "bateria_reemplazable": {
+     "url": "https://docs.rakwireless.com/product-categories/meshtastic/wismesh-tag/quickstart/",
+     "cita": "The enclosure cannot be opened without damaging the device.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "RAK declara que la caja no se puede abrir sin dañar el aparato."
+    },
+    "dimensiones_mm": {
+     "url": "https://www.cnx-software.com/2025/11/12/wismesh-tag-a-thin-ip66-rated-meshtastic-gps-tracker-for-outdoor-use/",
+     "cita": "Dimensions – 92 x 59 x 7.5mm",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Reseña de CNX Software (2025-11-12). La página de RAK solo trae la cota en una figura, no legible como texto. Contradice la ficha de mesh-sn.de (ver Contradicciones)."
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/wismesh-tag.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-tag-meshtastic-gps-lora-tracker-ip66"
   },
   {
    "id": "wismesh-pocket-mini",
@@ -3097,7 +3785,7 @@
    "mcu": "Nordic nRF52840 (RAK4631 sobre RAK19003)",
    "radio": "Semtech SX1262",
    "banda_mhz": null,
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": null,
    "precio_usd": 59.97,
    "precio_max_usd": 59.97,
@@ -3113,18 +3801,18 @@
    "dimensiones_mm": "54 x 59 x 24",
    "bateria_mah": 1000,
    "bateria_formato": null,
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C (cable Type-C incluido; RAK recomienda cargador de 5 V/2 A). Conector interno de 5 V/panel solar (JST ZHR-2)",
    "depende_celular": "sí",
    "sin_celular": "Nodo y repetidor; sin pantalla ni GPS.",
    "pantalla": "ninguna (no se menciona; la lista de Meshtastic indica sin GPS)",
-   "entrada": null,
+   "entrada": "Interruptor deslizante ON/OFF. Sin pantalla ni GPS; se controla desde la app",
    "gps": "no",
    "grado_ip": null,
    "resistencia_caida": null,
@@ -3143,7 +3831,39 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "recarga": {
+     "url": "https://docs.rakwireless.com/product-categories/meshtastic/wismesh-pocket-mini/quickstart/",
+     "cita": "To recharge the device, plug a USB-C cable into the device and connected it to a 5 V/2 A USB wall charger.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Solo se carga con el interruptor ON/OFF en posición ON. Puerto USB-C bajo tapa de goma."
+    },
+    "entrada": {
+     "url": "https://store.rakwireless.com/products/wismesh-pocket-mini",
+     "cita": "It doesn't feature an OLED display and has no location-tracking functionality.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "La Quick Start y la página de la tienda no listan botones de usuario."
+    },
+    "bateria_reemplazable": {
+     "url": "https://docs.rakwireless.com/product-categories/meshtastic/wismesh-pocket-mini/quickstart/",
+     "cita": "The WisMesh Pocket Mini has an internal connector for a Li-ion battery. Double-check the battery cable polarity when replacing.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "La Quick Start oficial declara un conector interno de batería Li-ion (JST PHR-2) y habla de 'replacing'. No detalla los pasos de apertura. La caja es impresa en 3D."
+    },
+    "tx_dbm": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "LoRa PA Boost mode with 22 dBm output power",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Por módulo: el aparato declara usar el núcleo RAK4631. La hoja del RAK4631 dice 'LoRa PA Boost mode with 22 dBm output power' (consumo 125 mA a 20 dBm). No es una cifra medida ni declarada para el aparato completo."
+    }
+   },
+   "imagen": "assets/img/wismesh-pocket-mini.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-pocket-mini"
   },
   {
    "id": "wismesh-tap-v2",
@@ -3205,7 +3925,9 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "imagen": "assets/img/wismesh-tap-v2.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/meshtastic-touch-client-wismesh-tap-v2-sx1262"
   },
   {
    "id": "wismesh-tap",
@@ -3220,7 +3942,7 @@
    "mcu": "Nordic nRF52840 (RAK4631)",
    "radio": "Semtech SX1262",
    "banda_mhz": "antena de 2,3 dBi (902-928 MHz)",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": null,
    "precio_usd": 109.0,
    "precio_max_usd": 109.0,
@@ -3233,7 +3955,7 @@
    "fecha_lanzamiento": "2024-12 (página fechada 2024-12-23)",
    "meshtastic": "oficial",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "100 × 75 × 38",
    "bateria_mah": 3200,
    "bateria_formato": null,
    "bateria_reemplazable": null,
@@ -3267,7 +3989,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://www.modubits.com/product/rakwireless-wismesh-tap-touchscreen-915-mhz-handheld-or-mountable-unit-lora-gps/",
+     "cita": "Dimensions: 100mm x 75mm x 38mm",
+     "tipo_fuente": "comercial",
+     "procedencia": "reportado",
+     "condiciones": "Ficha del distribuidor Modubits, que presenta el aparato como desarrollado con Rokland. RAK no la publica como texto."
+    },
+    "tx_dbm": {
+     "url": "https://docs.rakwireless.com/product-categories/wisblock/rak4631/datasheet/",
+     "cita": "LoRa PA Boost mode with 22 dBm output power",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Por módulo: RAK4631 declarado en la tienda de RAK y en meshtastic.org. La hoja del RAK4631 dice 22 dBm máximo en PA_BOOST. No es una cifra del aparato completo."
+    }
+   },
+   "imagen": "assets/img/wismesh-tap.jpg",
+   "imagen_fuente": "https://store.rakwireless.com/products/wismesh-tap"
   },
   {
    "id": "wio-tracker-l1-pro",
@@ -3298,10 +4038,10 @@
    "dimensiones_mm": "181 x 56 x 26 (solo CNX Software; parece incluir antena y no cuadra con 'de bolsillo'; sin confirmar en Seeed)",
    "bateria_mah": 2000,
    "bateria_formato": "Li-ion, conector JST de 2 pines 1,25 mm",
-   "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "bateria_reemplazable": "con herramientas",
+   "autonomia_uso_h": 129.0,
    "autonomia_dias": null,
-   "autonomia_texto": null,
+   "autonomia_texto": "Hoja de cálculo oficial de Seeed (Wio Tracker L1 Power Consumption Test and Battery Life Calculation), batería 2000 mAh: US915, LongFast, 30 paquetes/h de 100 bytes, GPS apagado. Resultado 5,37 días × 24 = 128,9 h. Con GPS encendido (ciclo de 30 min) sigue en 5,37 días. Corriente TX US915 205,22 mA; base 12,67 mA con pantalla apagada y 16,64 mA con pantalla encendida. La hoja corresponde a la familia L1, y la L1 Pro trae la misma batería de 2000 mAh.",
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
@@ -3329,7 +4069,26 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "autonomia_uso_h": {
+     "url": "https://files.seeedstudio.com/products/SenseCAP/Wio-Tracker/Wio%20Tracker%20L1%20Power%20Consumption%20Test%20and%20Battery%20Life%20Calculation.xlsx",
+     "cita": "US915 Battery life (Days) LONGFAST 5.3687; Battery capacity (mAh) 2000",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Hoja de cálculo oficial de Seeed (Wio Tracker L1 Power Consumption Test and Battery Life Calculation), batería 2000 mAh: US915, LongFast, 30 paquetes/h de 100 bytes, GPS apagado. Resultado 5,37 días × 24 = 128,9 h. Con GPS encendido (ciclo de 30 min) sigue en 5,37 días. Corriente TX US915 205,22 mA; base 12,67 mA con pantalla apagada y 16,64 mA con pantalla encendida. La hoja corresponde a la familia L1, y la L1 Pro trae la misma batería de 2000 mAh."
+    },
+    "bateria_reemplazable": {
+     "url": "https://www.hackster.io/skruglewicz/wio-tracker-l1-quickstart-1a909a",
+     "cita": "You need a 2000mAh Lipo battery with a 2 Pin 1.0mm JST (SH) Plug Jack connector.",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "La wiki de Seeed lista un conector de batería de litio de 2 pines y 1,25 mm. La caja es una carcasa impresa en 3D cerrada con tornillos M2 (modelos STL y pruebas de la comunidad). No hay manual oficial de desarme."
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/wio-tracker-l1-pro.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html"
   },
   {
    "id": "thinknode-m3",
@@ -3391,6 +4150,21 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/thinknode-m3.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m3-meshtastic-tracker-with-gps-wifi-ble-function-for-positioning.html",
+   "fcc_id": "2BDNA-TNM3-ELE",
+   "tx_fcc_dbm": 8.8,
+   "fuentes_campos": {
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2BDNA-TNM3-ELE/Test-Report/Test-Report-2-8990457",
+     "cita": "Conducted Power (dBm) 8.845",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.00766 W conducidos en 902-928 MHz, que son 8,8 dBm. Informe de prueba LoRa: «Conducted Power (dBm) 8.845». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
    }
   },
   {
@@ -3406,7 +4180,7 @@
    "mcu": "Nordic nRF52840",
    "radio": "Semtech LR1110",
    "banda_mhz": "868-915",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": null,
    "precio_usd": 60.4,
    "precio_max_usd": 60.4,
@@ -3418,24 +4192,24 @@
    "cambio": null,
    "fecha_lanzamiento": "2025-08 (página fechada 2025-08-29)",
    "meshtastic": "oficial",
-   "peso_g": null,
-   "dimensiones_mm": null,
+   "peso_g": 190.0,
+   "dimensiones_mm": "87,3 × 67,7 × 27,6",
    "bateria_mah": 7000,
    "bateria_formato": "la ficha rotula '18650 lithium-ion' y 7000 mAh / 25,2 Wh; sin confirmar si es una celda extraíble",
    "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "autonomia_uso_h": 120.0,
    "autonomia_dias": null,
-   "autonomia_texto": null,
+   "autonomia_texto": "Manual oficial (versión Tracker), fila 'Battery Runtime 5 Days' (5 × 24 = 120 h), batería 7000 mAh. Sin condiciones de intervalo, GPS ni preset. El manual de la versión Meshtastic es un PDF de solo imagen y no se pudo leer.",
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
    "recarga": "USB-C entrada/salida, carga rápida y MagSafe 15 W; puede cargar 2 dispositivos",
    "depende_celular": "sí",
    "sin_celular": "La ficha no menciona pantalla: por lo publicado, sin teléfono solo hace de nodo con GPS. Sin confirmar.",
-   "pantalla": null,
-   "entrada": null,
+   "pantalla": "Sin pantalla: indicador LED de batería, indicador LED de función y sensor de temperatura y humedad",
+   "entrada": "Botón de función (un clic despierta LoRa o envía posición), botón de luz y botón ON/OFF de power bank. Sin teclado ni pantalla táctil",
    "gps": "sí (GPS/BeiDou/GLONASS/QZSS)",
-   "grado_ip": null,
+   "grado_ip": "Sin grado IP declarado; la tienda dice 'waterproof, dustproof and shockproof'",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": null,
@@ -3453,7 +4227,71 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "peso_g": {
+     "url": "https://www.elecrow.com/download/product/LMM14004D/ThinkNode_M4_User_Manual_for_Tracker.pdf",
+     "cita": "Weight 190g",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Manual oficial (versión Tracker, mismo hardware) y wiki de Elecrow."
+    },
+    "dimensiones_mm": {
+     "url": "https://www.elecrow.com/download/product/LMM14004D/ThinkNode_M4_User_Manual_for_Tracker.pdf",
+     "cita": "87.3*67.7*27.6mm (excluding cable length)",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Manual oficial (versión Tracker), sin cable. La wiki de Elecrow redondea el alto a 28 mm."
+    },
+    "autonomia_uso_h": {
+     "url": "https://www.elecrow.com/download/product/LMM14004D/ThinkNode_M4_User_Manual_for_Tracker.pdf",
+     "cita": "Battery Runtime 5 Days",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Manual oficial (versión Tracker), fila 'Battery Runtime 5 Days' (5 × 24 = 120 h), batería 7000 mAh. Sin condiciones de intervalo, GPS ni preset. El manual de la versión Meshtastic es un PDF de solo imagen y no se pudo leer."
+    },
+    "grado_ip": {
+     "url": "https://www.elecrow.com/thinknode-m4-power-bank-lora-device-with-meshtastic-lora-tracker-function-powered-by-nrf52840.html",
+     "cita": "Made of high-strength shell material, it is waterproof, dustproof and shockproof",
+     "tipo_fuente": "comercial",
+     "procedencia": "reportado",
+     "condiciones": "Afirmación genérica de la página de Elecrow. La wiki y el manual no listan grado IP, y el aparato tiene puerto USB-C y cables de programación. No usar como IP."
+    },
+    "pantalla": {
+     "url": "https://www.elecrow.com/download/product/LMM14004D/ThinkNode_M4_User_Manual_for_Tracker.pdf",
+     "cita": "1 Battery Indicator Light ... 3 Function Indicator Light ... 4 Function Button",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Partes del aparato según el manual oficial (versión Tracker)."
+    },
+    "entrada": {
+     "url": "https://www.manualslib.com/manual/4109337/Elecrow-Thinknode-M4.html",
+     "cita": "In standby state, single click to wake up the device's LoRa function.",
+     "tipo_fuente": "oficial",
+     "procedencia": "reportado",
+     "condiciones": "Manual oficial (versión Tracker) y ManualsLib (versión Meshtastic)."
+    },
+    "tx_dbm": {
+     "url": "https://www.elecrow.com/download/product/LMM14004D/ThinkNode_M4_User_Manual_for_Tracker.pdf",
+     "cita": "Transmit Power +22 dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Manual oficial (versión Tracker, LR1110), fila 'Transmit Power'. Alcance máximo declarado: 8 km. Corriente TX máxima 175 mA según la wiki."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2BDNA-TNM4-ELE",
+     "cita": "Max. RF output power: 4.851dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.00306 W conducidos en 902-928 MHz, que son 4,9 dBm. Informe de prueba LoRa: «Max. RF output power: 4.851dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/thinknode-m4.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m4-power-bank-lora-device-with-meshtastic-lora-tracker-function-powered-by-nrf52840.html",
+   "fcc_id": "2BDNA-TNM4-ELE",
+   "tx_fcc_dbm": 4.9
   },
   {
    "id": "thinknode-m5",
@@ -3485,9 +4323,9 @@
    "bateria_mah": 1200,
    "bateria_formato": "litio recargable interna",
    "bateria_reemplazable": null,
-   "autonomia_uso_h": null,
+   "autonomia_uso_h": 9.3,
    "autonomia_dias": null,
-   "autonomia_texto": "corriente máxima ~340 mA (CPU + LoRa); no hay cifra de horas",
+   "autonomia_texto": "Manual oficial, fila 'Battery life': 9,3 h máximo y 3,6 h mínimo (batería 1200 mAh, consumo máximo 340 mA). Sin condiciones que expliquen el máximo y el mínimo.",
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
@@ -3515,7 +4353,21 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "autonomia_uso_h": {
+     "url": "https://www.elecrow.com/download/product/ILM13205D/ThinkNode_M5_User_Manual.pdf",
+     "cita": "Battery life 9.3 h(Max), 3.6 h(Min)",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Manual oficial, fila 'Battery life': 9,3 h máximo y 3,6 h mínimo (batería 1200 mAh, consumo máximo 340 mA). Sin condiciones que expliquen el máximo y el mínimo."
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/thinknode-m5.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m5-meshtastic-lora-signal-transceiver-esp32-s3-1-54-screen-gps-function.html",
+   "fcc_id": "2BDNA-TNMS-ELE",
+   "fcc_nota": "Certificado junto con el M1 bajo la regla 15.249, que mide intensidad de campo y no publica potencia conducida."
   },
   {
    "id": "thinknode-m9",
@@ -3576,7 +4428,11 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "imagen": "assets/img/thinknode-m9.jpg",
+   "imagen_fuente": "https://www.elecrow.com/thinknode-m9-meshtastic-communication-terminal-with-full-keyboard-2-4inch-lcd.html",
+   "fcc_id": "2BDNA-TNM9",
+   "fcc_nota": "Certificado bajo la regla 15.249, que mide intensidad de campo y no publica potencia conducida."
   },
   {
    "id": "t-deck-pro",
@@ -3591,7 +4447,7 @@
    "mcu": "ESP32-S3FN16R8",
    "radio": "Semtech SX1262",
    "banda_mhz": "915 (opción de frecuencia)",
-   "tx_dbm": null,
+   "tx_dbm": 22.0,
    "precio_anterior_usd": null,
    "precio_usd": 92.35,
    "precio_max_usd": 110.85,
@@ -3604,7 +4460,7 @@
    "fecha_lanzamiento": null,
    "meshtastic": "oficial",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "120 × 66 × 13,5",
    "bateria_mah": 1400,
    "bateria_formato": "integrada (built-in)",
    "bateria_reemplazable": null,
@@ -3614,10 +4470,10 @@
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C 5 V / 500 mA; cargador BQ25896 y medidor BQ27220",
    "depende_celular": "no",
    "sin_celular": "Es un mensajero autónomo con teclado. La ficha lista GPS, ranura TF, micrófono y altavoz.",
-   "pantalla": null,
+   "pantalla": "E-paper de 3,1\" GDEQ031T10, 320 × 240, táctil (CST328)",
    "entrada": "teclado (sin detalle en el extracto)",
    "gps": "sí",
    "grado_ip": null,
@@ -3638,7 +4494,49 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck-pro/",
+     "cita": "Dimensions | 120 × 66 × 13.5 mm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": null
+    },
+    "recarga": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck-pro/",
+     "cita": "USB Input | 5 V / 500 mA (Type-C)",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "CNX cita TP4065B según esquemas: discrepa con la wiki."
+    },
+    "pantalla": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck-pro/",
+     "cita": "3.1-inch GDEQ031T10 e-paper display (320 × 240) with CST328 touch",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Refresco según CNX: completo 3 s, rápido 1 s, parcial 0,5 s. Tras 5 refrescos rápidos o parciales hay que hacer uno completo para evitar ghosting."
+    },
+    "tx_dbm": {
+     "url": "https://www.cnx-software.com/2025/04/03/lilygo-t-deck-pro-esp32-s3-lora-messenger-e-paper-touch-display-keyboard-and-4g-lte-or-audio-codec-option/",
+     "cita": "SX1262 LoRa module @ 868/915 MHz; up to +22 dBm Tx power",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "CNX lo lista en las especificaciones del aparato (módulo SX1262, 868/915 MHz), pero es cifra de módulo, no medición. Usar con reserva."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-DECK-PRO/Test-Report/Test-Report-LoRa-8765036",
+     "cita": "Peak Output Power 6.91 dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.005 W conducidos en 902-928 MHz, que son 7,0 dBm. Informe de prueba LoRa: «Peak Output Power 6.91 dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/t-deck-pro.jpg",
+   "imagen_fuente": "https://lilygo.cc/products/t-deck-pro-meshtastic",
+   "fcc_id": "2ASYE-T-DECK-PRO",
+   "tx_fcc_dbm": 7.0
   },
   {
    "id": "t-echo-lite",
@@ -3666,21 +4564,21 @@
    "fecha_lanzamiento": "2025-04 (página fechada 2025-04-29)",
    "meshtastic": "oficial",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "41 × 41 × 14,5",
    "bateria_mah": null,
    "bateria_formato": null,
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "sí",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C 5 V (500 mA según la ficha del kit); entrada solar 4,5–6 V",
    "depende_celular": "parcial",
    "sin_celular": "Pantalla e-paper con estado; no está publicado si se pueden redactar mensajes.",
    "pantalla": "e-paper",
-   "entrada": null,
+   "entrada": "Botones Reset y User; con KeyShield, teclado físico 5×4 (TCA8418); sin pantalla táctil",
    "gps": "opcional (módulo de expansión L76K, referencia H770)",
    "grado_ip": null,
    "resistencia_caida": null,
@@ -3699,7 +4597,49 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://www.cnx-software.com/2025/04/25/lilygo-t-echo-lite-a-1-22-inch-e-paper-display-board-with-nrf52840-soc-lora-transceiver-gps/",
+     "cita": "Dimensions – 41 x 41 x 14.5mm",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "CNX, abril de 2025; no aclara si es módulo o unidad completa con carcasa. Con el KeyShield (teclado): 102 × 41 × 22 mm."
+    },
+    "recarga": {
+     "url": "https://www.cnx-software.com/2025/04/25/lilygo-t-echo-lite-a-1-22-inch-e-paper-display-board-with-nrf52840-soc-lora-transceiver-gps/",
+     "cita": "Solar panel connector for 4.5 – 6V input",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": null
+    },
+    "entrada": {
+     "url": "https://wiki.lilygo.cc/products/t-echo-series/t-echo-lite-kit/",
+     "cita": "5×4 physical keyboard (TCA8418)",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "El KeyShield es accesorio aparte; no está en la ficha base."
+    },
+    "bateria_reemplazable": {
+     "url": "https://www.hackster.io/news/lilygo-s-t-echo-lite-is-a-more-compact-take-on-the-lora-capable-meshtastic-compatible-t-echo-1f330db2140f",
+     "cita": "connectors on its rear for an optional battery",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "Por diseño: sin batería incluida; se conecta una celda Li-ion estándar al conector de la base. Acceso dentro de la carcasa acrílica no verificado."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-ECHO-LITE",
+     "cita": "Peak Output Power 6.90 dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Informe de prueba LoRa: «Peak Output Power 6.90 dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware. La certificación es del módulo T-Echo Lite Core, que es el que lleva este equipo.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/t-echo-lite.jpg",
+   "imagen_fuente": "https://lilygo.cc/en-de/products/t-echo-lite",
+   "fcc_id": "2ASYE-T-ECHO-LITE",
+   "tx_fcc_dbm": 6.9
   },
   {
    "id": "t-echo-card",
@@ -3716,18 +4656,18 @@
    "banda_mhz": "400-520 y 830-945",
    "tx_dbm": null,
    "precio_anterior_usd": null,
-   "precio_usd": null,
-   "precio_max_usd": null,
-   "variante_precio": "reportado por CNX: 60,31 en la tienda de LilyGO (agotado allí) y 74,98 en AliExpress; sin URL de vendedor verificada",
-   "url": null,
-   "vendedor": null,
+   "precio_usd": 58.04,
+   "precio_max_usd": 60.31,
+   "variante_precio": "915 MHz sin cable magnético: 58,04; con cable 60,31. Todas las variantes de 915 MHz agotadas (JSON de la tienda, 30-sep)",
+   "url": "https://lilygo.cc/products/t-echo-card",
+   "vendedor": "LILYGO",
    "fecha_consulta": "2026-09-29",
    "disponibilidad": "agotado",
    "cambio": null,
    "fecha_lanzamiento": "2026-08 (cobertura de CNX Software 2026-08-09)",
    "meshtastic": "oficial",
    "peso_g": null,
-   "dimensiones_mm": null,
+   "dimensiones_mm": "90 × 60 × 9,5",
    "bateria_mah": 800,
    "bateria_formato": null,
    "bateria_reemplazable": null,
@@ -3741,7 +4681,7 @@
    "depende_celular": "parcial",
    "sin_celular": "Mini OLED de 0,42 pulgadas, altavoz y micrófono; no está publicado qué puede hacerse sin teléfono.",
    "pantalla": "OLED de 0,42 pulgadas",
-   "entrada": null,
+   "entrada": "Botones Reset, Boot y User; OLED de 0,42\" (72×40) sin táctil; diseñado para usarse con smartphone",
    "gps": "sí (L76K, GPS/GLONASS/BeiDou/QZSS)",
    "grado_ip": "IP66",
    "resistencia_caida": null,
@@ -3760,7 +4700,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "dimensiones_mm": {
+     "url": "https://lilygo.cc/products/t-echo-card",
+     "cita": "Dimensions | 90 x 60 x 9.5 mm",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": null
+    },
+    "entrada": {
+     "url": "https://www.cnx-software.com/2026/08/08/lilygo-t-echo-card-a-weatherproof-solar-powered-nrf52840-based-lora-gps-development-kit/",
+     "cita": "Reset, Boot, and User buttons (Orange color)",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": null
+    }
+   },
+   "imagen": "assets/img/t-echo-card.jpg",
+   "imagen_fuente": "https://lilygo.cc/products/t-echo-card"
   },
   {
    "id": "nano-g2-ultra",
@@ -3802,7 +4760,7 @@
    "depende_celular": "parcial",
    "sin_celular": "OLED de 1,3 pulgadas con estado; no está publicado si permite redactar mensajes.",
    "pantalla": "OLED de 1,3 pulgadas",
-   "entrada": null,
+   "entrada": "Botón de programa (1 pulsación cambia de página, 2 envía ping, larga apaga), botón de mensaje leído, botón Reset, interruptores de encendido, GPS y LED/zumbador; pantalla OLED de 1,3\" sin táctil",
    "gps": "sí (GPS y BDS, antena interna)",
    "grado_ip": null,
    "resistencia_caida": null,
@@ -3822,7 +4780,19 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "entrada": {
+     "url": "https://wiki.bqvoy.com/en/meshtastic/nano-g2-ultra",
+     "cita": "Program Button: Single press changes the page of information displayed on the screen.",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": null
+    }
+   },
+   "autonomia_fuente": "fabricante",
+   "imagen": "assets/img/nano-g2-ultra.jpg",
+   "imagen_fuente": "https://store.bqvoy.com/product/meshtastic-mesh-device-nano-g2-ultra/"
   },
   {
    "id": "minitrekker-mkii",
@@ -3837,7 +4807,7 @@
    "mcu": "ESP32-S3 o nRF52 según edición",
    "radio": null,
    "banda_mhz": null,
-   "tx_dbm": null,
+   "tx_dbm": 28.0,
    "precio_anterior_usd": null,
    "precio_usd": 79.99,
    "precio_max_usd": 84.99,
@@ -3849,9 +4819,9 @@
    "cambio": null,
    "fecha_lanzamiento": "2026-07-30",
    "meshtastic": "preflasheado",
-   "peso_g": null,
-   "dimensiones_mm": null,
-   "bateria_mah": null,
+   "peso_g": 63.0,
+   "dimensiones_mm": "21 × 51 × 71 (114 con antena)",
+   "bateria_mah": 1200.0,
    "bateria_formato": null,
    "bateria_reemplazable": null,
    "autonomia_uso_h": null,
@@ -3884,7 +4854,39 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "peso_g": {
+     "url": "https://specfive.com/products/spec5-minitrekker-mkii",
+     "cita": "Weight | 63 g",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "PETG, sin antena. El MiniTrekker original pesaba 64 g."
+    },
+    "dimensiones_mm": {
+     "url": "https://specfive.com/products/spec5-minitrekker-mkii",
+     "cita": "Dimensions | 21 × 51 × 71 mm (114 mm with antenna)",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "Orden tal como figura en la tienda."
+    },
+    "bateria_mah": {
+     "url": "https://specfive.com/products/spec5-minitrekker-mkii",
+     "cita": "Battery | 1 × 1200 mAh LiPo",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "1 celda LiPo, USB-C 5 V."
+    },
+    "tx_dbm": {
+     "url": "https://specfive.com/products/spec5-minitrekker-mkii",
+     "cita": "28 dBm High-Power LoRa Radio: Enhanced transmit power provides better signal penetration",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "«28 dBm High-Power LoRa Radio». El blog lo atribuye a la edición ESP32-S3; no aclara si la nRF52 es igual. Ganancia de la antena externa no publicada."
+    }
+   },
+   "imagen": "assets/img/minitrekker-mkii.jpg",
+   "imagen_fuente": "https://specfive.com/products/spec5-minitrekker-mkii"
   },
   {
    "id": "t-deck",
@@ -3915,14 +4917,14 @@
    "dimensiones_mm": null,
    "bateria_mah": null,
    "bateria_formato": null,
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "con herramientas",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
    "autonomia_comunidad": null,
    "consumo_ma": null,
    "consumo_texto": null,
-   "recarga": null,
+   "recarga": "USB-C",
    "depende_celular": "no",
    "sin_celular": "Pantalla IPS 2,8 pulgadas 320x240 y minitecado: mensajería autónoma.",
    "pantalla": "IPS LCD 2,8 pulgadas 320x240",
@@ -3933,8 +4935,8 @@
    "panel_w": null,
    "ganancia_dbi": null,
    "vswr": null,
-   "contradiccion": null,
-   "notas": "Referencia de costo bajo: candidato 46,52 sin confirmar. Sin GPS ni batería integrada, probablemente exige batería externa.",
+   "contradiccion": "GPS y batería: la wiki de LilyGO le atribuye GPS MIA-M10Q y batería de 2000 mAh; la ficha de la tienda no menciona ninguno de los dos y el paquete lista solo el equipo, un conector de 6 pines y un cable.",
+   "notas": "Referencia de costo bajo: candidato 46,52 sin confirmar. La tienda no lista batería en el contenido del paquete.",
    "procedencia": "verificado",
    "mcu_familia": "ESP32-S3",
    "radio_familia": "SX1262",
@@ -3946,7 +4948,45 @@
    "colombia": {
     "estado": "no",
     "detalle": "No hallado en Electronilab, Sigma, Ardobot, Dynamo ni Didácticas (29-sep). MercadoLibre no se pudo revisar (exige sesión)."
-   }
+   },
+   "fuentes_campos": {
+    "recarga": {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck/",
+     "cita": "USB | 1 × Type-C",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": null
+    },
+    "bateria_reemplazable": {
+     "url": "https://www.community.lilygo.cc/topic/707/t-deck-internal-battery-what-kind",
+     "cita": "The board has 'a female receptacle' and the cable has 'a male plug'.",
+     "tipo_fuente": "comunidad",
+     "procedencia": "reportado",
+     "condiciones": "La placa tiene receptáculo JST hembra y la batería llega aparte con pigtail; hay que abrir la caja. Una cuenta de GitHub reporta un conector suelto en la batería."
+    },
+    "tx_fcc_dbm": {
+     "url": "https://fccid.io/2ASYE-T-DECK/Test-Report/Test-Report-LoRa-7851102",
+     "cita": "Peak Output Power 6.56dBm",
+     "tipo_fuente": "oficial",
+     "procedencia": "verificado",
+     "condiciones": "Concesión FCC: 0.0045 W conducidos en 902-928 MHz, que son 6,5 dBm. Informe de prueba LoRa: «Peak Output Power 6.56dBm». Es la potencia con la que se certificó el equipo, no la máxima que permite el chip ni la que fija el firmware.",
+     "fecha": "2026-09-30"
+    }
+   },
+   "imagen": "assets/img/t-deck.jpg",
+   "imagen_fuente": "https://lilygo.cc/products/t-deck-meshtastic",
+   "fcc_id": "2ASYE-T-DECK",
+   "tx_fcc_dbm": 6.5,
+   "refs_navegador": [
+    {
+     "url": "https://wiki.lilygo.cc/products/t-deck-series/t-deck/",
+     "fecha": "2026-09-30"
+    },
+    {
+     "url": "https://lilygo.cc/products/t-deck-meshtastic",
+     "fecha": "2026-09-30"
+    }
+   ]
   },
   {
    "id": "a1",
@@ -3990,7 +5030,7 @@
    "pantalla": null,
    "entrada": null,
    "gps": null,
-   "grado_ip": null,
+   "grado_ip": "apta para exterior (sin grado IP)",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": 12,
@@ -4007,7 +5047,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ninguna tienda del país vende antenas de alta ganancia para 902–928 MHz (4-sep); SYSCOM Colombia solo con cuenta de cliente"
-   }
+   },
+   "fuentes_campos": {
+    "grado_ip": {
+     "url": "https://store.rokland.com/products/12-dbi-aya-9012-alfa-network-n-female-directional-yagi-outdoor-iot-915-mhz-antenna",
+     "cita": "certified and designed for outdoor environments and is weatherproof",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "Rokland declara «certified and designed for outdoor environments and is weatherproof», operación todo clima, viento 135 mph, -40 a 80 °C. No da IP. Es copy del distribuidor, no del fabricante ALFA."
+    }
+   },
+   "imagen": "assets/img/a1.jpg",
+   "imagen_fuente": "https://store.rokland.com/products/12-dbi-aya-9012-alfa-network-n-female-directional-yagi-outdoor-iot-915-mhz-antenna"
   },
   {
    "id": "a2",
@@ -4128,7 +5179,9 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ninguna tienda del país vende antenas de alta ganancia para 902–928 MHz (4-sep); SYSCOM Colombia solo con cuenta de cliente"
-   }
+   },
+   "imagen": "assets/img/a3.jpg",
+   "imagen_fuente": "https://store.ui.com/us/en/products/am-9m13-120"
   },
   {
    "id": "a4",
@@ -4172,7 +5225,7 @@
    "pantalla": null,
    "entrada": null,
    "gps": null,
-   "grado_ip": null,
+   "grado_ip": "apta para exterior (sin grado IP)",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": 8.0,
@@ -4189,7 +5242,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ninguna tienda del país vende antenas de alta ganancia para 902–928 MHz (4-sep); SYSCOM Colombia solo con cuenta de cliente"
-   }
+   },
+   "fuentes_campos": {
+    "grado_ip": {
+     "url": "https://shop.rfwel.com/902-928-mhz-8dbi-fiberglass-omni-antenna.html",
+     "cita": "ultra-rugged, high-gain, outdoor rated 900 MHz omnidirectional antenna",
+     "tipo_fuente": "comercial",
+     "procedencia": "verificado",
+     "condiciones": "La hoja de TE/Laird no declara IP. Solo habla de fibra de vidrio con recubrimiento UV. RFWEL la llama «outdoor rated»."
+    }
+   },
+   "imagen": "assets/img/a4.jpg",
+   "imagen_fuente": "https://shop.rfwel.com/902-928-mhz-8dbi-fiberglass-omni-antenna.html"
   },
   {
    "id": "a5",
@@ -4233,7 +5297,7 @@
    "pantalla": null,
    "entrada": null,
    "gps": null,
-   "grado_ip": null,
+   "grado_ip": "apta para exterior (sin grado IP)",
    "resistencia_caida": null,
    "panel_w": null,
    "ganancia_dbi": 8.0,
@@ -4250,7 +5314,18 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ninguna tienda del país vende antenas de alta ganancia para 902–928 MHz (4-sep); SYSCOM Colombia solo con cuenta de cliente"
-   }
+   },
+   "fuentes_campos": {
+    "grado_ip": {
+     "url": "https://www.hashtagiot.com/shop/lora-fiberglass-antenna-kit-902-928mhz-8dbi-1300mm-rf-explorer-rfela-5-8x9/",
+     "cita": "Robust enough to withstand the harsh outdoor environment",
+     "tipo_fuente": "comercial",
+     "procedencia": "reportado",
+     "condiciones": "Texto copiado de Seeed por un distribuidor; ni Seeed ni la wiki dan IP. Amazon añade «weatherproof» (revendedor)."
+    }
+   },
+   "imagen": "assets/img/a5.jpg",
+   "imagen_fuente": "https://www.seeedstudio.com/RF-Explorer-LoRa-Fiberglass-Antenna-Kit-902-928MHz-8dBi-1300mm-p-5278.html"
   },
   {
    "id": "a6",
@@ -4267,11 +5342,11 @@
    "banda_mhz": "902-928",
    "tx_dbm": 150.0,
    "precio_anterior_usd": null,
-   "precio_usd": null,
+   "precio_usd": 115.38,
    "precio_max_usd": null,
    "variante_precio": "114,45 = Supportech USA (precio público); 177,76 = precio de lista en Winncom (el precio de cliente exige login)",
-   "url": "https://supportech-usa.com/mfb-9153/",
-   "vendedor": "Supportech USA",
+   "url": "https://www.talleycom.com/product/MXRMFB9153",
+   "vendedor": "Talley",
    "fecha_consulta": "2026-09-29",
    "disponibilidad": null,
    "cambio": "antes 'precio tras cuenta de cliente'; ahora hay precio público (114,45)",
@@ -4300,10 +5375,10 @@
    "ganancia_dbi": 5.25,
    "vswr": "1,5:1 máximo en 902-928",
    "contradiccion": "ninguna",
-   "notas": "Altura 59 cm (23,25 in). Base de aluminio con conexión a tierra de CC. Montaje se vende aparte. Supportech: 10 unidades en stock. Relevada el 4-sep sin URL de vendedor: no entraba en tabla hasta esta revisión.",
+   "notas": "Precio visto el 30-sep en la ficha de Talley (PCTEL/MaxRad MFB9153). La ganancia de 5,25 dBi viene de un distribuidor; la hoja de PCTEL dice 3 dBd.",
    "procedencia": "reportado (extracto de búsqueda)",
-   "precio_espera": true,
-   "precio_nota": "Supportech USA la muestra a 114,45 según un extracto de búsqueda; la ficha está tras una verificación anti-bots y no se abrió",
+   "precio_espera": false,
+   "precio_nota": null,
    "mcu_familia": null,
    "radio_familia": null,
    "cambio_pct": null,
@@ -4340,11 +5415,11 @@
    "cambio": "no estaba en la tabla del 04-sep (nodo cerrado relevante añadido)",
    "fecha_lanzamiento": null,
    "meshtastic": "preflasheado",
-   "peso_g": null,
+   "peso_g": 1134.0,
    "dimensiones_mm": null,
    "bateria_mah": null,
    "bateria_formato": "2 x 18650 internas ('LiPo' en la ficha)",
-   "bateria_reemplazable": null,
+   "bateria_reemplazable": "sí",
    "autonomia_uso_h": null,
    "autonomia_dias": null,
    "autonomia_texto": null,
@@ -4374,7 +5449,25 @@
    "colombia": {
     "estado": "no",
     "detalle": "Ningún fabricante de nodos de malla tiene canal minorista en Colombia (4-sep); no reverificado el 29-sep"
-   }
+   },
+   "fuentes_campos": {
+    "peso_g": {
+     "url": "https://specfive.com/products/spec5-meshtastic-relay",
+     "cita": "Weight | 2.5 lbs",
+     "tipo_fuente": "comercial",
+     "procedencia": "estimado",
+     "condiciones": "Tabla Overview de la ficha: «Weight 2.5 lbs». Conversión 2,5 × 453,6 g (estimado). Sin aclarar si es equipo o envío. La variante Shopify dice 1.814 g (4 lb), probablemente envío."
+    },
+    "bateria_reemplazable": {
+     "url": "https://specfive.com/products/spec5-meshtastic-relay",
+     "cita": "Qty (2) Internal 18650 LiPo Batteries",
+     "tipo_fuente": "comercial",
+     "procedencia": "reportado",
+     "condiciones": "Solo por la definición del campo: la ficha declara «Qty (2) Internal 18650 LiPo Batteries» (celdas 18650 estándar, nomenclatura «LiPo» imprecisa). El acceso al compartimento no está documentado. Capacidad en mAh: `no publicado`."
+    }
+   },
+   "imagen": "assets/img/specfive-llc-spec5-relay.jpg",
+   "imagen_fuente": "https://specfive.com/products/spec5-meshtastic-relay"
   }
  ],
  "mercado_colombia": [

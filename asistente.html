@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Asistente de compra</title>
+<script>try{var t=localStorage.getItem("rv-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/comun.css">
+<style>
+  /* Buscador guiado de producto (NN/g «Wizards»): una pregunta por paso, preguntas sobre la tarea,
+     ramas según las respuestas y siempre una mejor opción con sus razones. */
+  main { max-width: 980px; margin: 0 auto; padding: 32px 24px 40px; }
+  .progreso { display: flex; align-items: center; gap: 14px; margin: 0 0 34px; }
+  .progreso .pista { flex: 1; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .progreso .pista i { display: block; height: 100%; background: var(--accent); width: var(--p); transition: width .25s; }
+  .progreso span { font-size: 13px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .respuestas { display: flex; flex-wrap: wrap; gap: 6px; margin: -18px 0 26px; }
+  .respuestas button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+  .respuestas button:hover { border-color: var(--ink-3); color: var(--ink); }
+  h1 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
+  .lead { color: var(--ink-2); margin: 0 0 28px; max-width: 60ch; }
+  .opciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .opcion { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 20px 18px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s, transform .15s; }
+  .opcion:hover { border-color: var(--ink-3); transform: translateY(-1px); }
+  .opcion[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .opcion svg { width: 34px; height: 34px; color: var(--accent); }
+  .opcion b { font-size: 16px; }
+  .opcion span { font-size: 13.5px; color: var(--ink-2); }
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .atras { border: 0; background: none; color: var(--ink-2); cursor: pointer; font-size: 14px; padding: 8px 0; }
+  .atras:hover { color: var(--ink); }
+
+  .resultado { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 36px; align-items: start; }
+  .resultado .foto { aspect-ratio: 1; padding: 26px; position: relative; }
+  .sello { position: absolute; top: 14px; left: 14px; background: #18181a; color: #fff; font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; z-index: 1; }
+  .resultado h2 { font-size: 28px; letter-spacing: -0.02em; margin: 2px 0 6px; line-height: 1.15; }
+  .resultado .precio-g { font-size: 20px; margin: 6px 0 16px; }
+  .razones { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 10px; }
+  .razones li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+  .razones svg { width: 20px; height: 20px; flex: none; margin-top: 1px; }
+  .razones .ok svg { color: var(--ok); }
+  .razones .ojo svg { color: var(--ink-3); }
+  .acciones { display: flex; gap: 10px; flex-wrap: wrap; }
+  .alternativas { margin-top: 44px; }
+  .alternativas h3 { font-size: 17px; margin: 0 0 14px; }
+  .alt { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 14px 0; border-top: 1px solid var(--line); }
+  .alt .foto { aspect-ratio: 1; padding: 8px; }
+  .alt b { display: block; font-size: 16px; }
+  .alt span { font-size: 13.5px; color: var(--ink-2); }
+  .aviso { background: var(--accent-soft); color: var(--ink); border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 0 0 18px; }
+  @media (max-width: 720px) {
+    main { padding: 24px 16px 32px; }
+    .resultado { grid-template-columns: 1fr; gap: 20px; }
+    .alt { grid-template-columns: 72px minmax(0, 1fr); }
+    .alt .precio { grid-column: 2; }
+  }
+</style>
+</head>
+<body>
+<header id="barra"></header>
+<main>
+  <div class="progreso" id="progreso"></div>
+  <div class="respuestas" id="respuestas" aria-label="Respuestas dadas"></div>
+  <div id="paso"></div>
+</main>
+
+<script src="assets/comun.js"></script>
+<script>
+(async function () {
+  const { esc, usd, n, foto, nombre, resumen, ICONOS, barra, cargar, guardarSeleccion } = RV;
+  let d;
+  try { d = await cargar(); } catch (err) { document.getElementById("paso").textContent = "No se pudieron cargar los datos: " + err.message; return; }
+  barra("asistente.html", d.meta.fecha_datos);
+  const eq = d.equipos;
+  const ic = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  const portatil = (r) => r.uso === "cel" || r.uso === "sincel";
+  const fija = (r) => r.uso === "poste" || r.uso === "cerro";
+
+  // Cada opción puede traer una condición (filtro) y un texto de razón para el resultado.
+  const PREGUNTAS = [
+    { id: "uso", corto: "Para quién", titulo: "¿Quién va a usar el aparato?", lead: "Según la respuesta, las preguntas siguientes cambian.", opciones: [
+      { v: "cel", t: "Un vecino con celular", s: "Etiqueta pequeña que se empareja con el teléfono", i: ic('<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/>') },
+      { v: "sincel", t: "Un vecino sin celular o un líder de cuadra", s: "Aparato con pantalla propia", i: ic('<rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4M8 9h8M8 12h5"/>') },
+      { v: "poste", t: "Un poste o una azotea del barrio", s: "Nodo solar fijo que repite para el barrio", i: ic('<path d="M12 21V8M8 21h8M5 8h14l-2-4H7z"/>') },
+      { v: "cerro", t: "Un repetidor en un cerro", s: "Nodo fijo para la troncal", i: ic('<path d="M2 20l7-12 4 6 3-4 6 10z"/><path d="M16 10V4M14 6l2-2 2 2"/>') },
+    ] },
+    { id: "tamano", cuando: portatil, corto: "Tamaño", titulo: "¿Cómo lo va a llevar?", lead: "Un aparato que no cabe en el bolsillo termina guardado en un cajón.", opciones: [
+      { v: "bolsillo", t: "En el bolsillo o de llavero", s: "Lo más pequeño y liviano", i: ic('<path d="M6 3h12v8a6 6 0 0 1-12 0z"/><path d="M9 7h6"/>'),
+        ok: (e) => (e.r.peso !== null ? e.r.peso <= 70 : ["tarjeta", "llavero"].includes(e.forma)), razon: (e) => e.r.peso ? `Pesa ${n(e.r.peso)} g, cabe en el bolsillo` : "Tamaño de tarjeta o llavero" },
+      { v: "mano", t: "En la mano o en la cartera", s: "Hasta unos 150 g", i: ic('<path d="M7 11V6a2 2 0 0 1 4 0v5M11 10V4a2 2 0 0 1 4 0v7M15 11V7a2 2 0 0 1 4 0v7a7 7 0 0 1-14 0v-2a2 2 0 0 1 4 0"/>'),
+        ok: (e) => (e.r.peso !== null ? e.r.peso <= 150 : !["teclado", "tactil"].includes(e.forma)), razon: (e) => e.r.peso ? `Pesa ${n(e.r.peso)} g` : null },
+      { v: "da-igual", t: "No importa el tamaño", s: "Prioriza lo demás", i: ic('<circle cx="12" cy="12" r="8"/><path d="M8 12h8"/>') },
+    ] },
+    { id: "responder", cuando: (r) => r.uso === "sincel", corto: "Responder", titulo: "¿Tiene que poder responder sin celular?", lead: "Leer la alerta basta para la mayoría. Responder sirve a quien coordina la cuadra.", opciones: [
+      { v: "si", t: "Sí, escribir mensajes", s: "Con teclado físico o en pantalla", i: ic('<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h1M11 10h1M15 10h1M7 14h10"/>'),
+        ok: (e) => e.r.sinCelular === "total", razon: () => "Se escribe y se responde sin celular" },
+      { v: "no", t: "Basta con leer la alerta", s: "Pantalla sin teclado", i: ic('<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h4"/>'),
+        ok: (e) => e.r.sinCelular === "lee" || e.r.sinCelular === "total", razon: () => "La alerta se lee en el aparato, sin celular" },
+    ] },
+    { id: "lluvia", cuando: portatil, corto: "Lluvia", titulo: "¿Va a estar bajo la lluvia?", lead: "En las laderas de Manizales la lluvia horizontal es parte del escenario.", opciones: [
+      { v: "si", t: "Sí, a la intemperie", s: "Grado IP65 o más", i: ic('<path d="M7 17a5 5 0 0 1 .5-10A6 6 0 0 1 19 9a4 4 0 0 1-1 8"/><path d="M9 20l1-2M13 21l1-2"/>'),
+        ok: (e) => e.r.agua === true, razon: (e) => `${e.r.ip || e.r.ipTexto}, aguanta lluvia` },
+      { v: "no", t: "Casi siempre bajo techo", s: "No hace falta sellado", i: ic('<path d="M3 11l9-7 9 7v9H3z"/>') },
+    ] },
+    { id: "apagon", cuando: portatil, corto: "Apagón", titulo: "En un apagón largo, ¿cómo se carga?", lead: "Sin red eléctrica, lo que carga por USB-C se alimenta de un power bank o de un panel pequeño.", opciones: [
+      { v: "usbc", t: "Con un power bank por USB-C", s: "Conector estándar, no cable propietario", i: ic('<rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10 7h4"/>'),
+        ok: (e) => /USB-C/.test(e.r.recarga || ""), razon: () => "Carga por USB-C, sirve cualquier power bank" },
+      { v: "powerbank", t: "Que además cargue el celular", s: "Aparato que es también batería externa", i: ic('<rect x="3" y="7" width="14" height="10" rx="2"/><path d="M21 11v2M8 10l-2 3h4l-2 3"/>'),
+        ok: (e) => e.forma === "bateria", razon: () => "Es también un power bank: recarga el celular" },
+      { v: "da-igual", t: "No importa", s: "Prioriza lo demás", i: ic('<circle cx="12" cy="12" r="8"/><path d="M8 12h8"/>') },
+    ] },
+    { id: "sol", cuando: fija, corto: "Sol", titulo: "¿Cuánto sol directo recibe el sitio?", lead: "La niebla de Manizales reduce las horas de sol equivalente.", opciones: [
+      { v: "mucho", t: "Buena parte del día", s: "Sin sombra de edificios ni árboles", i: ic('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>') },
+      { v: "poco", t: "Poco, o con sombra parte del día", s: "Hace falta más reserva", i: ic('<path d="M7 17a5 5 0 0 1 .5-10A6 6 0 0 1 19 9a4 4 0 0 1-1 8z"/>'),
+        ok: (e) => (e.r.bateria ?? 0) >= 5000 || (e.r.panel ?? 0) >= 6, razon: (e) => e.r.bateria ? `Reserva de ${n(e.r.bateria)} mAh${e.r.panel ? ` y panel de ${n(e.r.panel)} W` : ""}` : `Panel de ${n(e.r.panel)} W` },
+    ] },
+    { id: "mantenimiento", cuando: fija, corto: "Mantenimiento", titulo: "¿Quién le va a cambiar la batería?", lead: "La batería es lo primero que se gasta en un nodo solar.", opciones: [
+      { v: "vecinos", t: "Vecinos, sin herramientas especiales", s: "Celdas 18650 estándar", i: ic('<rect x="8" y="3" width="8" height="18" rx="2"/><path d="M10 3V2h4v1"/>'),
+        ok: (e) => e.r.reemplazable === true, razon: () => "Usa celdas estándar que se cambian a mano" },
+      { v: "tecnico", t: "Un técnico con herramientas", s: "Puede abrir la caja", i: ic('<path d="M14 6l4 4-8 8H6v-4z"/><path d="M12 8l4 4"/>') },
+    ] },
+    { id: "expuesto", cuando: (r) => r.uso === "cerro", corto: "Exposición", titulo: "¿Qué tan expuesto está el cerro?", lead: "En una cima, viento y lluvia llegan de lado.", opciones: [
+      { v: "mucho", t: "Muy expuesto", s: "IP66 o más", i: ic('<path d="M3 8h11a3 3 0 1 0-3-3M3 16h15a3 3 0 1 1-3 3M3 12h18"/>'),
+        ok: (e) => e.r.ip && +e.r.ip.slice(-1) >= 6, razon: (e) => `${e.r.ip}, hecho para intemperie dura` },
+      { v: "normal", t: "Protegido en parte", s: "IP65 basta", i: ic('<path d="M3 20l9-14 9 14z"/>'),
+        ok: (e) => e.r.agua === true, razon: (e) => `${e.r.ip || e.r.ipTexto}` },
+    ] },
+    { id: "tope", corto: "Presupuesto", titulo: "¿Cuánto se puede gastar por aparato?", lead: "Precio de lista en dólares. Traerlo a Colombia suma entre 25 % y 30 %.", opciones: [
+      { v: 50, t: "Hasta USD 50", s: "Para repartir muchos", i: ic('<circle cx="12" cy="12" r="8"/><path d="M12 8v8"/>') },
+      { v: 80, t: "Hasta USD 80", s: "Punto medio", i: ic('<circle cx="12" cy="12" r="8"/><path d="M10 8v8M14 8v8"/>') },
+      { v: 120, t: "Hasta USD 120", s: "Para puestos clave", i: ic('<circle cx="12" cy="12" r="8"/><path d="M9 8v8M12 8v8M15 8v8"/>') },
+      { v: 9999, t: "Sin tope", s: "Ver lo mejor que hay", i: ic('<path d="M7 12c0-2.8 2-4 3.5-4S14 10 12 12s1.5 4 3.5 4S19 14.8 17 12 13 8 10.5 8"/>') },
+    ] },
+    { id: "prioridad", corto: "Prioridad", titulo: "Entre los que cumplen, ¿qué pesa más?", lead: "Se usa para ordenar el resultado.", opciones: [
+      { v: "bateria", t: "Que dure la batería", s: "Más capacidad primero", i: ic('<rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 11v2M6 10v4M9 10v4M12 10v4"/>') },
+      { v: "listo", t: "Que llegue listo para usar", s: "Con Meshtastic de fábrica y en stock", i: ic('<path d="M4 12l5 5 11-11"/>') },
+      { v: "barato", t: "Que sea lo más barato", s: "Menor precio primero", i: ic('<path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.5" cy="7.5" r="1.5"/>') },
+    ] },
+  ];
+  const r = {};
+  let paso = 0;
+  const visibles = () => PREGUNTAS.filter((q) => !q.cuando || (r.uso && q.cuando(r)));
+
+  function pintarCabeza() {
+    const vs = visibles();
+    const total = r.uso ? vs.length : 1 + 4; // estimación antes de la primera respuesta
+    const hechos = Math.min(paso, vs.length);
+    document.getElementById("progreso").innerHTML = `<div class="pista"><i style="--p:${(hechos / (r.uso ? vs.length : total)) * 100}%"></i></div><span>${paso < vs.length ? `Pregunta ${paso + 1} de ${vs.length}` : "Recomendación"}</span>`;
+    document.getElementById("respuestas").innerHTML = vs.slice(0, paso).map((q, i) => {
+      const o = q.opciones.find((x) => String(x.v) === String(r[q.id]));
+      return o ? `<button type="button" data-ir="${i}" title="Cambiar esta respuesta">${esc(q.corto)}: ${esc(o.t)}</button>` : "";
+    }).join("");
+  }
+
+  function pintarPregunta() {
+    const q = visibles()[paso];
+    document.getElementById("paso").innerHTML = `<h1 tabindex="-1">${q.titulo}</h1><p class="lead">${q.lead}</p>
+      <div class="opciones" role="group" aria-label="${esc(q.titulo)}">${q.opciones.map((o) =>
+        `<button type="button" class="opcion" data-v="${o.v}" aria-pressed="${String(r[q.id]) === String(o.v)}">${o.i}<b>${o.t}</b><span>${o.s}</span></button>`).join("")}</div>
+      <div class="nav">${paso > 0 ? `<button type="button" class="atras" id="atras">Volver a la pregunta anterior</button>` : "<span></span>"}</div>`;
+  }
+
+  const POOL = {
+    cel: (e) => e.capa === "portatil" && e.familia === "a_etiqueta",
+    sincel: (e) => e.capa === "portatil" && (e.r.sinCelular === "total" || e.r.sinCelular === "lee"),
+    poste: (e) => e.capa === "fija" && e.subcapa === "nodo_desplegable",
+    cerro: (e) => e.capa === "fija" && e.subcapa === "nodo_desplegable",
+  };
+
+  function recomendar() {
+    const vs = visibles();
+    // Condiciones activas, de la más importante a la menos: se relajan desde el final si nada cumple.
+    const conds = vs.filter((q) => !["uso", "tope", "prioridad"].includes(q.id)).map((q) => ({ q, o: q.opciones.find((x) => String(x.v) === String(r[q.id])) })).filter((c) => c.o && c.o.ok);
+    conds.push({ q: { corto: "Presupuesto" }, o: { ok: (e) => e.r.precio <= r.tope, razon: (e) => r.tope >= 9999 ? "" : `${usd(e.r.precio)}, dentro del presupuesto de ${usd(r.tope, 0)}` } });
+    const base = eq.filter((e) => POOL[r.uso](e) && e.r.precio !== null);
+    let activas = conds.slice(), lista = [], relajadas = [];
+    while (true) {
+      lista = base.filter((e) => activas.every((c) => c.o.ok(e)));
+      if (lista.length || !activas.length) break;
+      relajadas.unshift(activas.pop().q.corto);
+    }
+    if (!lista.length) lista = base.slice();
+    const orden = {
+      bateria: (a, b) => (b.r.bateria ?? -1) - (a.r.bateria ?? -1),
+      listo: (a, b) => ((b.r.listo && b.r.disponible) ? 1 : 0) - ((a.r.listo && a.r.disponible) ? 1 : 0),
+      barato: () => 0,
+    }[r.prioridad];
+    lista.sort((a, b) => ((b.r.disponible !== false) - (a.r.disponible !== false)) || orden(a, b) || ((b.r.listo === true) - (a.r.listo === true)) || a.r.precio - b.r.precio);
+    return { lista: lista.slice(0, 3), activas, relajadas };
+  }
+
+  function razones(e, activas) {
+    const out = [];
+    const ok = (t) => t && out.push(`<li class="ok">${ICONOS.si}<span>${esc(t)}</span></li>`);
+    const ojo = (t) => out.push(`<li class="ojo">${ICONOS.no}<span>${esc(t)}</span></li>`);
+    activas.forEach((c) => ok(c.o.razon && c.o.razon(e)));
+    if (e.r.bateria && !activas.some((c) => /Reserva/.test(c.o.razon?.(e) || ""))) ok(`Batería de ${n(e.r.bateria)} mAh${e.r.autonomia ? `, unas ${n(e.r.autonomia)} h en uso ${e.r.autonomiaFuente}` : ""}`);
+    if (e.r.listo === true) ok("Llega con Meshtastic de fábrica"); else if (e.r.listo === false) ojo("Hay que instalarle Meshtastic");
+    if (e.r.disponible === false) ojo(`${e.r.disponibleTexto} en la tienda del fabricante`);
+    if (e.r.banda === false) ojo("No cubre toda la banda de 915 a 928 MHz");
+    if (e.capa === "portatil" && e.r.sinCelular === "nada") ojo("Para leer la alerta hace falta el celular con la app");
+    return out.join("");
+  }
+
+  function pintarResultado() {
+    const { lista, activas, relajadas } = recomendar();
+    const [mejor, ...alt] = lista;
+    if (!mejor) { document.getElementById("paso").innerHTML = `<h1>No hay equipos con precio para esta combinación</h1><div class="nav"><button type="button" class="atras" id="reiniciar">Empezar de nuevo</button></div>`; return; }
+    const antena = r.uso === "cerro" ? eq.filter((e) => e.capa === "antena" && e.r.precio !== null && /yagi/i.test(e.modelo)).sort((a, b) => a.r.precio - b.r.precio)[0] : null;
+    document.getElementById("paso").innerHTML = `
+      ${relajadas.length ? `<p class="aviso">Ningún equipo cumplía todo. Para mostrar opciones se dejó de exigir: ${relajadas.map((t) => t.toLowerCase()).join(", ")}.</p>` : ""}
+      <div class="resultado">
+        <div class="foto marco-foto"><span class="sello">Mejor opción</span>${foto(mejor)}</div>
+        <div>
+          <span class="sub">${esc(mejor.fabricante)}</span>
+          <h2 tabindex="-1">${esc(nombre(mejor))}</h2>
+          <div class="precio-g"><a class="precio" href="${esc(mejor.url)}" target="_blank" rel="noopener">${usd(mejor.r.precio)}</a></div>
+          <ul class="razones">${razones(mejor, activas)}</ul>
+          <div class="acciones">
+            <a class="btn btn-primario" href="${esc(mejor.url)}" target="_blank" rel="noopener">Ver en la tienda ${ICONOS.externo}</a>
+            ${lista.length > 1 ? `<a class="btn btn-secundario" id="comparar" href="comparar.html">Compararlo con las alternativas</a>` : ""}
+          </div>
+        </div>
+      </div>
+      ${antena ? `<p class="aviso" style="margin-top:28px">Para la troncal súmale una antena direccional. La más económica con precio verificado es la <b>${esc(antena.fabricante)} ${esc(nombre(antena))}</b>, ${usd(antena.r.precio)}.</p>` : ""}
+      ${alt.length ? `<div class="alternativas"><h3>${alt.length === 1 ? "Otra que también cumple" : "Otras dos que también cumplen"}</h3>${alt.map((e) => `<div class="alt"><div class="foto marco-foto">${foto(e, "")}</div><div><b>${esc(nombre(e))}</b><span>${esc(e.fabricante)}, ${esc(resumen(e))}</span></div><a class="precio" href="${esc(e.url)}" target="_blank" rel="noopener">${usd(e.r.precio)}</a></div>`).join("")}</div>` : ""}
+      <div class="nav"><button type="button" class="atras" id="atras">Volver a la pregunta anterior</button><button type="button" class="atras" id="reiniciar">Empezar de nuevo</button></div>`;
+    document.getElementById("comparar")?.addEventListener("click", () => guardarSeleccion(lista.map((e) => e.id)));
+  }
+
+  function pintar() { pintarCabeza(); paso < visibles().length ? pintarPregunta() : pintarResultado(); }
+
+  document.getElementById("paso").addEventListener("click", (ev) => {
+    const o = ev.target.closest(".opcion");
+    if (o) {
+      const q = visibles()[paso];
+      r[q.id] = q.id === "tope" ? +o.dataset.v : o.dataset.v;
+      if (q.id === "uso") PREGUNTAS.forEach((p) => { if (p.id !== "uso" && p.cuando && !p.cuando(r)) delete r[p.id]; });
+      paso++; pintar(); window.scrollTo({ top: 0 }); document.querySelector("#paso h1, #paso h2")?.focus(); return;
+    }
+    if (ev.target.closest("#atras")) { paso = Math.max(0, paso - 1); pintar(); return; }
+    if (ev.target.closest("#reiniciar")) { paso = 0; Object.keys(r).forEach((k) => delete r[k]); pintar(); }
+  });
+  document.getElementById("respuestas").addEventListener("click", (ev) => { const b = ev.target.closest("[data-ir]"); if (b) { paso = +b.dataset.ir; pintar(); } });
+
+  // Abre con una recomendación de ejemplo ya calculada; «Empezar de nuevo» lleva a la primera pregunta.
+  Object.assign(r, { uso: "sincel", tamano: "mano", responder: "no", lluvia: "no", apagon: "usbc", tope: 80, prioridad: "bateria" });
+  paso = visibles().length;
+  pintar();
+})();
+</script>
+</body>
+</html>

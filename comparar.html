@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Comparar equipos</title>
+<script>try{var t=localStorage.getItem("rv-tema");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/comun.css">
+<style>
+  /* Tabla de comparación de producto (NN/g, Baymard): productos en columnas, atributos en filas
+     agrupadas, encabezado fijo, interruptor de solo diferencias y el mejor valor de cada fila en negrilla. */
+  main { max-width: 1180px; margin: 0 auto; padding: 32px 24px 0; }
+  .intro { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 6px; text-wrap: balance; }
+  .intro p { margin: 0; color: var(--ink-2); max-width: 56ch; }
+  .atajos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .atajos button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: 13.5px; cursor: pointer; color: var(--ink-2); }
+  .atajos button:hover { border-color: var(--ink-3); color: var(--ink); }
+
+  .rejilla { display: grid; grid-template-columns: 220px repeat(3, minmax(0, 1fr)); column-gap: 24px; }
+  .cabeza { margin-top: 36px; align-items: start; }
+  .cabeza .vacio { grid-column: 1; }
+  .prod { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 0; }
+  .prod select { width: 100%; max-width: 280px; margin-bottom: 18px; }
+  .prod .foto { width: 100%; max-width: 240px; aspect-ratio: 1; padding: 14px; }
+  .prod .fab { font-size: 13px; color: var(--ink-3); margin-top: 10px; }
+  .prod .modelo { font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; min-height: 2.4em; display: flex; align-items: center; }
+  .prod .res { font-size: 13.5px; color: var(--ink-2); min-height: 2.6em; }
+  .prod .precio-grande { font-size: 19px; margin: 8px 0 12px; }
+  .prod .precio-grande .precio { font-weight: 600; }
+
+  .fijo { position: sticky; top: calc(56px + env(safe-area-inset-top, 0px)); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); margin: 0 -24px; padding: 10px 24px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+  .fijo.visible { opacity: 1; transform: none; pointer-events: auto; }
+  .fijo .rejilla { align-items: center; }
+  .mini { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .mini .foto { width: 46px; height: 46px; flex: none; padding: 3px; border-radius: 8px; }
+  .mini b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mini span { font-size: 13px; color: var(--ink-2); }
+
+  .controles { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 28px 0 8px; flex-wrap: wrap; }
+  .controles .nota { font-size: 13px; color: var(--ink-3); }
+  section.grupo { margin-top: 28px; }
+  section.grupo h2 { font-size: 20px; letter-spacing: -0.01em; margin: 0 0 4px; }
+  .fila { padding: 14px 0; border-top: 1px solid var(--line); align-items: start; }
+  .fila .t { font-size: 14px; color: var(--ink-2); padding-top: 1px; }
+  .fila .c { font-size: 15px; min-width: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .fila.igual { display: none; }
+  .solo-dif .fila.igual { display: none; }
+  body:not(.solo-dif) .fila.igual { display: grid; }
+  .sin-grupo { display: none; }
+
+  @media (max-width: 760px) {
+    main { padding: 24px 16px 0; }
+    .rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+    .cabeza .vacio, .fijo .vacio { display: none; }
+    .col3 { display: none !important; }
+    .fila .t { grid-column: 1 / -1; text-align: center; margin-bottom: 6px; }
+    .fijo { margin: 0 -16px; padding: 8px 16px; }
+    .prod .modelo { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<header id="barra"></header>
+<main>
+  <div class="intro">
+    <div>
+      <h1>Compara hasta tres equipos</h1>
+      <p>Elige un equipo en cada columna. En cada fila, el mejor valor va en negrilla. Puedes esconder lo que es igual en los tres.</p>
+    </div>
+  </div>
+  <div class="atajos" id="atajos" aria-label="Comparaciones sugeridas"></div>
+
+  <div class="rejilla cabeza" id="cabeza"><div class="vacio"></div></div>
+
+  <div class="fijo" id="fijo" aria-hidden="true"><div class="rejilla" id="fijo-rejilla"><div class="vacio"></div></div></div>
+
+  <div class="controles">
+    <label class="interruptor"><input type="checkbox" role="switch" id="dif"> Mostrar solo las diferencias</label>
+    <span class="nota" id="nota-movil"></span>
+  </div>
+  <div id="tabla"></div>
+</main>
+<p class="pie-proto" id="pie"></p>
+
+<script src="assets/comun.js"></script>
+<script>
+(async function () {
+  const { esc, usd, foto, filasPara, resumen, nombre, CAPAS, barra, cargar, leerSeleccion } = RV;
+  let d;
+  try { d = await cargar(); } catch (err) { document.getElementById("tabla").textContent = "No se pudieron cargar los datos: " + err.message; return; }
+  barra("comparar.html", d.meta.fecha_datos);
+  const eq = d.equipos;
+  const porId = new Map(eq.map((e) => [e.id, e]));
+  const buscar = (patron) => eq.find((e) => patron.test(e.fabricante + " " + e.modelo))?.id;
+
+  const ATAJOS = [
+    ["Etiquetas de bolsillo", [/T1000-E/, /MeshTracker X1/, /WisMesh Tag/]],
+    ["Con pantalla propia", [/ThinkNode M1/, /T-Echo \(/, /MeshPocket/]],
+    ["Con teclado", [/ThinkNode M9/, /Cardputer/, /T-Deck Plus/]],
+    ["Nodos solares", [/Solar Node P1-Pro$/, /ThinkNode M6/, /Repeater Mini V2/]],
+    ["Antenas para la troncal", [/AYA-9012/, /FG9026/, /Fiberglass/]],
+  ].map(([t, ps]) => [t, ps.map(buscar).filter(Boolean)]);
+
+  let sel = leerSeleccion().filter((id) => porId.has(id)).slice(0, 3);
+  if (sel.length < 2) sel = ATAJOS[0][1].slice();
+  while (sel.length < 3) sel.push(eq.find((e) => !sel.includes(e.id) && e.capa === porId.get(sel[0]).capa).id);
+
+  document.getElementById("atajos").innerHTML = ATAJOS.map(([t], i) => `<button type="button" data-i="${i}">${t}</button>`).join("");
+  document.getElementById("atajos").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button"); if (!b) return;
+    sel = ATAJOS[+b.dataset.i][1].slice(0, 3); pintar();
+  });
+
+  const orden = Object.keys(CAPAS);
+  const opciones = orden.map((c) => `<optgroup label="${CAPAS[c].plural}">` +
+    eq.filter((e) => e.capa === c).sort((a, b) => (a.r.precio ?? 1e9) - (b.r.precio ?? 1e9))
+      .map((e) => `<option value="${esc(e.id)}">${esc(e.fabricante)} ${esc(nombre(e))}${e.r.precio !== null ? ", " + usd(e.r.precio, 0) : ""}</option>`).join("") + `</optgroup>`).join("");
+
+  function columna(e, i) {
+    return `<div class="prod ${i === 2 ? "col3" : ""}">
+      <label class="visually-hidden" for="s${i}">Equipo ${i + 1}</label>
+      <select id="s${i}" data-i="${i}">${opciones}</select>
+      <div class="foto marco-foto">${foto(e)}</div>
+      <span class="etiqueta-capa" style="--c:${CAPAS[e.capa].color}"><i></i>${CAPAS[e.capa].nombre}</span>
+      <span class="fab">${esc(e.fabricante)}</span>
+      <span class="modelo">${esc(nombre(e))}</span>
+      <span class="res">${esc(resumen(e))}</span>
+      <span class="precio-grande">${e.r.precio !== null ? `<span class="precio">${usd(e.r.precio)}</span>` : `<span class="sin-dato">Sin dato</span>`}</span>
+      ${e.url ? `<a class="btn btn-secundario" href="${esc(e.url)}" target="_blank" rel="noopener">Ver en la tienda ${RV.ICONOS.externo}</a>` : ""}
+    </div>`;
+  }
+
+  function pintar() {
+    const lista = sel.map((id) => porId.get(id));
+    const cab = document.getElementById("cabeza");
+    cab.innerHTML = `<div class="vacio"></div>` + lista.map(columna).join("");
+    lista.forEach((e, i) => { const s = document.getElementById("s" + i); s.value = e.id; });
+    document.getElementById("fijo-rejilla").innerHTML = `<div class="vacio"></div>` + lista.map((e, i) =>
+      `<div class="mini ${i === 2 ? "col3" : ""}"><div class="foto marco-foto">${foto(e, "")}</div><div style="min-width:0"><b>${esc(nombre(e))}</b><span>${e.r.precio !== null ? usd(e.r.precio) : "Sin precio"}</span></div></div>`).join("");
+
+    const grupos = filasPara(lista);
+    const movil = matchMedia("(max-width: 760px)").matches;
+    document.getElementById("tabla").innerHTML = grupos.map((g) => {
+      const filas = g.filas.map((f) => {
+        const comparables = movil ? f.celdas.slice(0, 2) : f.celdas;
+        const igual = comparables.every((c) => c === comparables[0]);
+        return `<div class="rejilla fila ${igual ? "igual" : ""}"><div class="t">${esc(f.t)}</div>${f.celdas.map((c, i) => `<div class="c ${i === 2 ? "col3" : ""} ${f.mejores.includes(i) ? "celda-mejor" : ""}">${c}</div>`).join("")}</div>`;
+      });
+      const todasIguales = g.filas.every((f, k) => filas[k].includes('fila igual'));
+      return `<section class="grupo ${todasIguales ? "todo-igual" : ""}"><h2>${esc(g.titulo)}</h2>${filas.join("")}</section>`;
+    }).join("");
+    aplicarDif();
+    document.getElementById("nota-movil").textContent = movil ? "En pantallas angostas se comparan los dos primeros." : "";
+  }
+
+  function aplicarDif() {
+    const on = document.getElementById("dif").checked;
+    document.body.classList.toggle("solo-dif", on);
+    document.querySelectorAll("section.grupo").forEach((s) => { s.hidden = on && s.classList.contains("todo-igual"); });
+  }
+
+  document.getElementById("cabeza").addEventListener("change", (ev) => {
+    const s = ev.target.closest("select"); if (!s) return;
+    sel[+s.dataset.i] = s.value; pintar();
+  });
+  document.getElementById("dif").addEventListener("change", aplicarDif);
+  matchMedia("(max-width: 760px)").addEventListener("change", pintar);
+
+  // Encabezado fijo compacto cuando la cabecera grande sale de la vista (Baymard: persistir encabezados).
+  const fijo = document.getElementById("fijo");
+  new IntersectionObserver(([en]) => { const v = !en.isIntersecting && en.boundingClientRect.top < 0; fijo.classList.toggle("visible", v); fijo.setAttribute("aria-hidden", String(!v)); }, { threshold: 0 })
+    .observe(document.getElementById("cabeza"));
+
+  document.getElementById("pie").textContent = `Precios de lista en USD, sin importación, consultados el ${RV.fecha(d.meta.fecha_datos)} en la tienda de cada fabricante.`;
+  pintar();
+})();
+</script>
+</body>
+</html>
