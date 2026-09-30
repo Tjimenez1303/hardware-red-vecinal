@@ -8,19 +8,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=2026-09-30c">
+<link rel="stylesheet" href="assets/estilo.css?v=2026-09-30f">
 </head>
 <body>
 
 <header class="cabecera">
   <h1>Hardware Red Vecinal</h1>
-  <p class="proposito">Qué comprar para las dos capas de la red: la <b>fija</b>, de nodos solares en postes, azoteas y cerros, y la <b>portátil</b>, de aparatos que los vecinos llevan encima. La portátil se suma a la fija; no la reemplaza.</p>
+  <p class="proposito">Qué comprar para la capa <b>fija</b> (nodos solares en postes, azoteas y cerros) y para la <b>portátil</b> (aparatos que llevan los vecinos), que se suma a la fija.</p>
   <dl class="meta">
     <div><dt>Precios consultados</dt><dd id="meta-fecha">—</dd></div>
     <div><dt>Levantamiento base</dt><dd id="meta-base">—</dd></div>
     <div><dt>TRM</dt><dd id="meta-trm">—</dd></div>
     <div><dt>Equipos</dt><dd id="meta-n">—</dd></div>
   </dl>
+  <p class="nota-precios"><b>Los precios caducan:</b> son de lista en USD, sin el 25–30 % de importación, y cada uno lleva su fecha y su vendedor. En las celdas, <span class="ausente">✕</span> la fuente no lo publica, <span class="na">—</span> no aplica a esa capa, <span class="espera">aún en espera</span> sin confirmar, y <span class="llamada">[n]</span> remite a la referencia.</p>
 </header>
 
 <nav class="secciones" aria-label="Secciones">
@@ -38,35 +39,45 @@
 
 <main>
   <div class="aviso" id="carga-error" style="display:none"></div>
-  <div class="aviso"><b>Los precios caducan.</b> Cada precio lleva su fecha de consulta y el enlace al vendedor; un precio sin los dos no se muestra. Son precios de lista en USD, <b>sin</b> el 25–30 % de importación (IVA sobre CIF, flete y agenciamiento; el arancel de las partidas 8517/8525/8526 es 0 %). En las celdas, <span class="ausente">✕</span> es un dato que la fuente no publica, <span class="espera">aún en espera</span> es un dato sin confirmar, y un valor con llamada <span class="llamada">[n]</span> está verificado en la referencia n.</div>
+
 
   <!-- ================= COMPARADOR ================= -->
   <section class="bloque" id="comparador">
     <h2>Comparador</h2>
     <div class="controles">
-      <label class="campo ancho">Buscar (fabricante, modelo, MCU, chipset de radio)
-        <input type="search" id="f-texto" placeholder="p. ej. nRF52840, SX1262, Heltec, T-Echo" autocomplete="off">
-      </label>
-      <div class="campo ancho">Capas <span class="ausente">(clic para mostrar u ocultar; Alt+clic deja solo esa)</span>
-        <div class="capas" id="f-capas" role="group" aria-label="Capas"></div>
+      <div class="fila-principal">
+        <label class="campo buscar">Buscar por fabricante, modelo, MCU o radio
+          <input type="search" id="f-texto" placeholder="nRF52840, SX1262, Heltec, T-Echo…" autocomplete="off">
+        </label>
+        <div class="campo">Capas <span class="ausente">(Alt+clic deja solo esa)</span>
+          <div class="capas" id="f-capas" role="group" aria-label="Capas"></div>
+        </div>
+      </div>
+      <div class="fila-secundaria">
+        <details class="mas-filtros">
+          <summary>Más filtros <span id="n-filtros"></span></summary>
+          <div class="rejilla">
+            <label class="campo">Familia de microcontrolador<select id="f-mcu"></select></label>
+            <label class="campo">Chipset de radio<select id="f-radio"></select></label>
+            <label class="campo">Soporte de Meshtastic<select id="f-meshtastic"></select></label>
+            <label class="campo">Disponibilidad en Colombia<select id="f-colombia"></select></label>
+            <label class="campo">Familia portátil<select id="f-familia"></select></label>
+            <label class="campo">Precio USD, mínimo y máximo
+              <span class="rango"><input type="number" id="f-pmin" min="0" step="1" placeholder="mín" aria-label="Precio mínimo"><input type="number" id="f-pmax" min="0" step="1" placeholder="máx" aria-label="Precio máximo"></span>
+            </label>
+            <label class="campo">Batería mínima (mAh)<input type="number" id="f-bat" min="0" step="100" placeholder="1000"></label>
+            <label class="campo check"><input type="checkbox" id="f-conprecio"> Solo con precio verificable</label>
+          </div>
+        </details>
         <div class="atajos">Ver:
           <button class="atajo" type="button" data-solo="fija,portatil">fija y portátil</button>
           <button class="atajo" type="button" data-solo="fija">solo fija</button>
           <button class="atajo" type="button" data-solo="portatil">solo portátil</button>
           <button class="atajo" type="button" data-solo="modulo">solo módulos</button>
+          <button class="atajo" type="button" data-solo="antena">solo antenas</button>
+          <button class="atajo limpiar" type="button" id="f-limpiar">Limpiar filtros</button>
         </div>
       </div>
-      <label class="campo">Familia de microcontrolador<select id="f-mcu"></select></label>
-      <label class="campo">Chipset de radio<select id="f-radio"></select></label>
-      <label class="campo">Soporte de Meshtastic<select id="f-meshtastic"></select></label>
-      <label class="campo">Disponibilidad en Colombia<select id="f-colombia"></select></label>
-      <label class="campo">Familia portátil<select id="f-familia"></select></label>
-      <label class="campo">Precio USD (mín – máx)
-        <span class="rango"><input type="number" id="f-pmin" min="0" step="1" placeholder="mín"><input type="number" id="f-pmax" min="0" step="1" placeholder="máx"></span>
-      </label>
-      <label class="campo">Batería mínima (mAh)<input type="number" id="f-bat" min="0" step="100" placeholder="p. ej. 1000"></label>
-      <label class="campo check"><input type="checkbox" id="f-conprecio"> Solo con precio verificable</label>
-      <div class="campo" style="justify-content:flex-end"><button class="boton" type="button" id="f-limpiar">Limpiar filtros</button></div>
     </div>
     <div class="resumen-filtro" id="resumen-filtro"></div>
     <div class="tabla-envoltura">
@@ -75,7 +86,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="resumen-filtro">Clic en un encabezado con ↕ para ordenar; los datos ausentes van siempre al final. Pase el cursor sobre la autonomía para ver sus condiciones.</p>
+    <p class="resumen-filtro">Toque el nombre de un equipo para ver su detalle: condiciones de la autonomía, qué queda sin celular, notas y contradicciones. Los encabezados con flecha ordenan; los datos ausentes van siempre al final.</p>
   </section>
 
   <!-- ================= BARRAS ================= -->
@@ -134,15 +145,15 @@
         <tbody>
           <tr><td>Utilización de canal «cortés»</td><td class="num">25 %</td><td>Por encima, el nodo deja de enviar su telemetría, su posición y sus respuestas de NodeInfo. La ocupación se mide en una ventana deslizante de 60 s y cuenta todo lo que se oye, no solo lo propio.</td><td>Código<span data-ref="fw-airtime"></span></td></tr>
           <tr><td>Tope duro de utilización</td><td class="num">40 %</td><td>Por encima, ningún rol envía tráfico de fondo propio. <b>No frena las retransmisiones ni el texto</b>: en los archivos revisados no hay descarte de retransmisiones por ocupación de canal.</td><td>Código<span data-ref="fw-airtime"></span></td></tr>
-          <tr><td>Escalado por tamaño de malla</td><td class="num">40 nodos</td><td>Con más de 40 nodos vistos en 2 h, los intervalos de telemetría, posición y NodeInfo se multiplican por 1 + (N − 40)·2<sup>SF</sup>/(BW·100). Con <code>LONG_TURBO</code> y 100 nodos, ×3,46; con LongFast, ×5,92. <b>Contradicción:</b> la documentación da un factor fijo de 0,075 por nodo y el código usa la fórmula por preset (su propio comentario lo reconoce).</td><td>Documentación y código<span data-ref="mt-meshalgo fw-default"></span></td></tr>
+          <tr><td>Escalado por tamaño de malla</td><td class="num">40 nodos</td><td>Con más de 40 nodos vistos en 2 h, los intervalos de telemetría, posición y NodeInfo se multiplican por 1 + (N − 40)·2<sup>SF</sup>/(BW·100). Con <code>LONG_TURBO</code> y 100 nodos, ×3,46; con LongFast, ×5,92. <b class="contra">Contradicción:</b> la documentación da un factor fijo de 0,075 por nodo y el código usa la fórmula por preset (su propio comentario lo reconoce).</td><td>Documentación y código<span data-ref="mt-meshalgo fw-default"></span></td></tr>
           <tr><td>Señal para dejar LongFast</td><td class="num">&gt; 60 nodos</td><td>«especialmente si están en relativa proximidad». El mismo texto relata una malla regional de más de 150 nodos en LongFast con picos de ocupación superiores al 65 %, en la que el texto era «extremadamente poco fiable».</td><td>Blog oficial<span data-ref="mt-blog-longfast"></span></td></tr>
           <tr><td>Señal para quitar un rol de infraestructura</td><td class="num">ChUtil 25 %<br>AirUtilTX 7–8 %</td><td>Si se superan, se deja de usar ese rol en el punto.</td><td>Blog oficial<span data-ref="mt-blog-routerlate"></span></td></tr>
-          <tr><td>Tamaño de la NodeDB</td><td class="num">80 / 100–250</td><td>80 nodos en nRF52 y de 100 a 250 en ESP32-S3 (v2.7.26). En la pre-release 2.8.0, 120 en nRF52840. Con la base llena se borra el nodo más antiguo que no sea favorito. El blog de DEF CON habla de «unos 100»: <b>contradicción</b> con el código, que da cifras distintas según la plataforma.</td><td>Código y blog<span data-ref="fw-pbconst fw-pbconst-dev mt-blog-defcon"></span></td></tr>
+          <tr><td>Tamaño de la NodeDB</td><td class="num">80 / 100–250</td><td>80 nodos en nRF52 y de 100 a 250 en ESP32-S3 (v2.7.26). En la pre-release 2.8.0, 120 en nRF52840. Con la base llena se borra el nodo más antiguo que no sea favorito. El blog de DEF CON habla de «unos 100»: <b class="contra">contradicción</b> con el código, que da cifras distintas según la plataforma.</td><td>Código y blog<span data-ref="fw-pbconst fw-pbconst-dev mt-blog-defcon"></span></td></tr>
           <tr><td>Mallas grandes documentadas</td><td>más de 100, 700 y 2.000</td><td>El blog oficial afirma que la inundación funciona en mallas de más de 100 nodos «con control de tráfico adecuado», sin cifra de entrega. Bay Mesh tiene más de 700 nodos. En DEF CON 33 los asistentes reportaron más de 2.000, sin cifras oficiales de entrega.</td><td>Blog oficial<span data-ref="mt-blog-flood mt-blog-zerocost mt-blog-defcon"></span></td></tr>
         </tbody>
       </table>
 
-      <p><b>La única cifra de entrega contra número de nodos</b> es una simulación de un colaborador externo en el foro del firmware (fuente de comunidad, no revisada). Con límite de 3 saltos, la inundación entrega el 100 % a 20 nodos, el 92 % a 100, el 14 % a 500 y el 2 % a 1.000. Con 7 saltos mejora (51 % a 500) pero no se cura. Al modelar el semidúplex, la entrega cae del 87,5 % al 6 % en una malla de 235 nodos<span data-ref="gh-9936"></span>. <b>Contradicción dentro de la misma fuente:</b> una primera tabla del autor, con un límite de 30 saltos, daba 99 % a 1.000 nodos. Él mismo reconoce que su simulador «sobrestima» la ventaja de su propuesta. No se usa como cifra de diseño.</p>
+      <p><b>La única cifra de entrega contra número de nodos</b> es una simulación de un colaborador externo en el foro del firmware (fuente de comunidad, no revisada). Con límite de 3 saltos, la inundación entrega el 100 % a 20 nodos, el 92 % a 100, el 14 % a 500 y el 2 % a 1.000. Con 7 saltos mejora (51 % a 500) pero no se cura. Al modelar el semidúplex, la entrega cae del 87,5 % al 6 % en una malla de 235 nodos<span data-ref="gh-9936"></span>. <b class="contra">Contradicción dentro de la misma fuente:</b> una primera tabla del autor, con un límite de 30 saltos, daba 99 % a 1.000 nodos. Él mismo reconoce que su simulador «sobrestima» la ventaja de su propuesta. No se usa como cifra de diseño.</p>
 
       <h3>Cálculo propio de carga del canal <span class="espera" style="font-style:normal">(estimado)</span></h3>
       <p>Supuestos a la vista. Tiempo en aire de un mensaje de 50 bytes con la fórmula de Semtech que implementa el firmware (preámbulo de 16 símbolos): <b>443 ms en <code>LONG_TURBO</code></b> y 641 ms en LongFast<span data-ref="fw-radioif mt-radio"></span>. El escenario es la ráfaga después de una alerta: cada aparato envía un mensaje en 5 minutos. <i>k</i> es cuántas veces se transmite cada mensaje dentro del dominio de colisión: 2 si la supresión de duplicados funciona (el original y una retransmisión), 4 si falla en parte por nodos ocultos entre laderas. Ocupación = N · k · 0,443 s / 300 s.</p>
@@ -168,7 +179,7 @@
           <tr><td><code>CLIENT_BASE</code></td><td>Retransmite siempre lo que va hacia o desde sus favoritos; el resto lo trata como CLIENT.</td><td>Nodo de azotea de una familia o de la JAC, con los portátiles del hogar como favoritos.</td></tr>
           <tr><td><code>ROUTER</code></td><td>Retransmite siempre y con prioridad, sin cancelar. Según el protobuf, solo para torre o cima de montaña; «no para tejados ni nodos móviles».</td><td><b>Solo</b> los repetidores de cerro de la troncal: 2, 4 y 6 según la fase.</td></tr>
           <tr><td><code>ROUTER_LATE</code></td><td>Retransmite siempre, pero tarde. Pensado para cubrir zonas ciegas; «no es buena elección para nodos de tejado».</td><td>Solo el nodo fijo que sea el <b>único</b> enlace hacia una sombra de ladera, vigilando ChUtil &lt; 25 % y AirUtilTX &lt; 7–8 %.</td></tr>
-          <tr><td><code>REPEATER</code></td><td><b>Deprecado desde v2.7.11</b> porque crea huecos en la cadena de retransmisión. El protobuf manda pasar a ROUTER o ROUTER_LATE. <b>Contradicción:</b> el blog de roles lo sigue describiendo como vigente.</td><td>No usar.</td></tr>
+          <tr><td><code>REPEATER</code></td><td><b>Deprecado desde v2.7.11</b> porque crea huecos en la cadena de retransmisión. El protobuf manda pasar a ROUTER o ROUTER_LATE. <b class="contra">Contradicción:</b> el blog de roles lo sigue describiendo como vigente.</td><td>No usar.</td></tr>
         </tbody>
       </table>
       <p>Fuentes de la tabla<span data-ref="mt-device mt-blog-roles mt-blog-routerlate pb-config"></span>. <b>Resultado negativo:</b> no existe una proporción oficial de routers frente a clientes. El único porcentaje publicado, un 3 % de routers, es el supuesto de un ejemplo de colisiones en el blog de saltos gratis, no una recomendación<span data-ref="mt-blog-zerocost"></span>. Tampoco hay una frase oficial que diga qué rol lleva un portátil: solo la prohibición de ROUTER en nodos móviles.</p>
@@ -178,7 +189,7 @@
         <li><b>Límite de saltos: 3 por defecto, 7 como máximo.</b> La documentación dice «Really, 3 is fine»<span data-ref="mt-lora fw-meshtypes"></span>. Cada salto extra multiplica las retransmisiones de toda difusión. La simulación comunitaria muestra que el límite de saltos es también un techo de entrega<span data-ref="gh-9936"></span>.</li>
         <li><b>Saltos gratis en la troncal.</b> Desde finales de 2025, un paquete que llega de un ROUTER o ROUTER_LATE marcado como favorito no descuenta salto al pasar por otro nodo de infraestructura<span data-ref="mt-blog-zerocost"></span>. Si los repetidores de cerro se marcan como favoritos entre sí, <b>toda la troncal cuenta como un solo salto</b>, y los 3 saltos quedan para el primer y el último tramo en los barrios.</li>
         <li><b><code>LONG_TURBO</code>: SF11, 500 kHz, CR 4/8, 1,34 kbps, 150 dB de presupuesto de enlace</b>, frente a 1,07 kbps y 153 dB de LongFast<span data-ref="mt-radio fw-meshradio"></span>. Es el único preset que cumple el ancho de banda mínimo de 500 kHz del numeral 3.6<span data-ref="ane-105"></span>. Ventana de contención: la ranura dura unos 18 ms en <code>LONG_TURBO</code> y unos 28 ms en LongFast (cálculo sobre la fórmula del código)<span data-ref="fw-radioif"></span>.</li>
-        <li><b><code>LONG_TURBO</code> y LongFast no se oyen entre sí</b>, lo dicen las notas de la 2.8.0<span data-ref="fw-rel28"></span>. <b>Contradicción que no resolvemos:</b> la comunidad Meshtastic Colombia recomienda región ANZ, <b>LongFast, 7 saltos y 30 dBm</b><span data-ref="meshcol"></span>. Una red en <code>LONG_TURBO</code> queda aislada de esa comunidad, y con LongFast a 250 kHz no se cumple el ancho mínimo de la norma. Es una decisión del proyecto, no técnica.</li>
+        <li><b><code>LONG_TURBO</code> y LongFast no se oyen entre sí</b>, lo dicen las notas de la 2.8.0<span data-ref="fw-rel28"></span>. <b class="contra">Contradicción que no resolvemos:</b> la comunidad Meshtastic Colombia recomienda región ANZ, <b>LongFast, 7 saltos y 30 dBm</b><span data-ref="meshcol"></span>. Una red en <code>LONG_TURBO</code> queda aislada de esa comunidad, y con LongFast a 250 kHz no se cumple el ancho mínimo de la norma. Es una decisión del proyecto, no técnica.</li>
         <li><b>Aviso de la pre-release 2.8.0</b> (1-sep-2026): reasigna por completo regiones y presets, pone <code>LONG_TURBO</code> por defecto en los nodos nuevos de EE. UU. y apaga la telemetría y la posición por defecto<span data-ref="fw-rel28"></span>. Para el piloto conviene fijar la versión estable 2.7.x y reverificar ANZ y <code>LONG_TURBO</code> después de cada flasheo.</li>
         <li><b>Riesgo por probar en banco:</b> el preprint de la UMNG vio fallar de golpe el preset SF11/125 kHz/CR 4/8 a 80 dB de atenuación con SNR de +10 dB. Lo atribuye, como hipótesis, a una interacción entre SF11, CR 4/8 y la detección de canal del firmware<span data-ref="arxiv-umng"></span>. <code>LONG_TURBO</code> usa el mismo par SF11 y CR 4/8, a 500 kHz, y no se ha probado.</li>
       </ul>
@@ -325,6 +336,6 @@
 
 <div class="tooltip" id="tooltip" role="tooltip"></div>
 <footer>Red Vecinal LoRa, Manizales (Caldas), AIThinkers. Datos en <code>datos/equipos.json</code>; ver README para actualizarlos. Esta página no detecta nada ni decide niveles de alerta: compara el hardware de la capa de entrega.</footer>
-<script src="assets/app.js?v=2026-09-30c"></script>
+<script src="assets/app.js?v=2026-09-30f"></script>
 </body>
 </html>

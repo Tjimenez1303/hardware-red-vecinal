@@ -62,12 +62,15 @@ Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
 2. **Dato no publicado:** `null` en el JSON, que se muestra como **✕**. Nunca se
    rellena con una estimación.
 3. **Dato sin confirmar:** la cadena `"aún en espera"`.
-4. **Dato verificado:** lleva su llamada numerada a la lista de referencias
+4. **Dato que no aplica** a la capa de esa fila (la autonomía en uso de una antena,
+   por ejemplo): la página muestra **—**. No va en el JSON: sale de la lista
+   `capas` de cada columna en `assets/app.js`. No hay que confundirlo con ✕.
+5. **Dato verificado:** lleva su llamada numerada a la lista de referencias
    (campo `refs`, con claves de `referencias`).
-5. **Las contradicciones entre fuentes se reportan** (campo `contradiccion`), no
+6. **Las contradicciones entre fuentes se reportan** (campo `contradiccion`), no
    se resuelven.
-6. **No se añade a `referencias` ninguna fuente que no se haya abierto.**
-7. **Los precios de buscadores o de su caché no valen.** En esta revisión, Exa
+7. **No se añade a `referencias` ninguna fuente que no se haya abierto.**
+8. **Los precios de buscadores o de su caché no valen.** En esta revisión, Exa
    sirvió copias viejas de varias tiendas. Hay que leer la ficha en vivo.
 
 ## Cómo actualizar los precios
@@ -84,7 +87,10 @@ Son las mismas del informe al IDEA del 4-sep-2026 y no se negocian:
 3. Actualizar `meta.fecha_datos`.
 4. Subir el sufijo `?v=` de `assets/estilo.css` y `assets/app.js` en
    `index.html`, para que GitHub Pages no sirva la versión en caché.
-5. Los umbrales por capa, la tabla de cambios y las barras **se recalculan solos**
+5. Las columnas de la tabla se definen en `COLUMNAS` (`assets/app.js`), cada una
+   con las capas a las que aplica, y el detalle desplegable de cada fila en
+   `DETALLE`. Para añadir un campo al comparador se añade ahí.
+6. Los umbrales por capa, la tabla de cambios y las barras **se recalculan solos**
    desde el JSON. El texto de las secciones de densidad, capa portátil, cambios y
    vacíos está escrito a mano en `index.html`: si los datos cambian, hay que
    revisarlo.

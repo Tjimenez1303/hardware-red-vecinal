@@ -2,6 +2,7 @@
    Sin dependencias ni construcción: lee datos/equipos.json y pinta.
    Convención de celdas (la misma del informe al IDEA del 4-sep-2026):
      null            -> ✕  dato no publicado por la fuente
+     columna ajena   -> —  el dato no aplica a la capa de esa fila
      "aún en espera" -> dato sin confirmar
      valor           -> verificado, con llamada numerada a la lista de referencias */
 
@@ -25,8 +26,8 @@
   const COLOMBIA = { si: "Se vende en CO", no: "No encontrado en CO", sin_dato: "Sin dato" };
   const METRICAS = {
     precio_usd: { nombre: "Precio", unidad: "USD", dec: 2, desc: "Precio mínimo de lista de la variante indicada, en USD, sin importación." },
-    consumo_ma: { nombre: "Consumo publicado", unidad: "mA", dec: 1, desc: "Corriente tal como la publica el fabricante. OJO: cada fabricante mide una cosa distinta (recepción, reposo activo, máximo con CPU y radio); la definición de cada cifra está en el tooltip de la tabla. Compare solo cifras con la misma definición." },
-    autonomia_uso_h: { nombre: "Autonomía en uso", unidad: "h", dec: 0, desc: "Horas en uso declaradas por el fabricante. Casi nadie la publica, y quien lo hace no da las mismas condiciones (intervalo de posición, GPS, pantalla): son cifras de catálogo, no comparables entre sí sin leer el tooltip." },
+    consumo_ma: { nombre: "Consumo publicado", unidad: "mA", dec: 1, desc: "Corriente tal como la publica el fabricante. Cada fabricante mide una cosa distinta (recepción, reposo activo, máximo con CPU y radio): la definición de cada cifra está en el detalle de la fila, en la tabla. Compare solo cifras con la misma definición." },
+    autonomia_uso_h: { nombre: "Autonomía en uso", unidad: "h", dec: 0, desc: "Horas en uso declaradas por el fabricante. Casi nadie la publica, y quien lo hace no da las mismas condiciones (intervalo de posición, GPS, pantalla): son cifras de catálogo, no comparables entre sí sin leer sus condiciones en el detalle de la fila." },
     bateria_mah: { nombre: "Batería", unidad: "mAh", dec: 0, desc: "Capacidad nominal de la batería incluida. Ningún fabricante de nodos fijos publica autonomía sin sol en días: la capacidad es el único indicador comparable de reserva." },
     peso_g: { nombre: "Peso", unidad: "g", dec: 0, desc: "Peso del aparato según el fabricante." },
   };
@@ -40,6 +41,7 @@
     precioMin: null, precioMax: null, bateriaMin: null,
     soloConPrecio: false,
     orden: { clave: "precio_usd", dir: 1 },
+    abiertos: new Set(),
     metrica: "precio_usd",
     escala: "lineal",
   };
@@ -138,101 +140,162 @@
   }
 
   // ---------- tabla ----------
+  // Cada columna declara a qué capas aplica. Se muestran las columnas que aplican a alguna capa
+  // visible; en una fila de otra capa la celda dice «—» (no aplica), que no es lo mismo que ✕
+  // (la fuente no lo publica).
+  const TODAS = Object.keys(CAPAS);
+  const RADIO = ["fija", "portatil", "modulo"];
+  const NA = `<span class="na" title="No aplica a esta capa">—</span>`;
+  const corto = (fam, crudo) => (fam && !fam.startsWith("otro") ? fam : crudo);
+
   const COLUMNAS = [
-    { clave: "capa", titulo: "Capa", orden: true },
-    { clave: "modelo", titulo: "Equipo", orden: true },
-    { clave: "precio_usd", titulo: "Precio USD", orden: true, num: true },
-    { clave: "disponibilidad", titulo: "Disponib." },
-    { clave: "cambio_pct", titulo: "Δ vs 4-sep", orden: true, num: true },
-    { clave: "mcu", titulo: "MCU" },
-    { clave: "radio", titulo: "Radio" },
-    { clave: "tx_dbm", titulo: "TX dBm", orden: true, num: true },
-    { clave: "meshtastic", titulo: "Meshtastic" },
-    { clave: "colombia", titulo: "Colombia" },
-    { clave: "peso_g", titulo: "Peso g", orden: true, num: true },
-    { clave: "dimensiones_mm", titulo: "Dimensiones mm" },
-    { clave: "bateria_mah", titulo: "Batería mAh", orden: true, num: true },
-    { clave: "bateria_reemplazable", titulo: "Pila reempl." },
-    { clave: "autonomia_uso_h", titulo: "Autonomía en uso h", orden: true, num: true },
-    { clave: "autonomia_dias", titulo: "Sin sol días", orden: true, num: true },
-    { clave: "consumo_ma", titulo: "Consumo mA", orden: true, num: true },
-    { clave: "recarga", titulo: "Recarga" },
-    { clave: "depende_celular", titulo: "Depende del celular" },
-    { clave: "grado_ip", titulo: "IP" },
-    { clave: "ganancia_dbi", titulo: "Ganancia dBi", orden: true, num: true },
-    { clave: "notas", titulo: "Notas" },
+    { clave: "modelo", titulo: "Equipo", orden: true, capas: TODAS, td: equipoTD },
+    { clave: "precio_usd", titulo: "Precio USD", orden: true, num: true, capas: TODAS, td: precioTD },
+    { clave: "disponibilidad", titulo: "Disponib.", capas: TODAS, td: (e) => celda(e.disponibilidad) },
+    { clave: "cambio_pct", titulo: "Δ vs 4-sep", orden: true, num: true, capas: TODAS, td: cambioTD },
+    { clave: "chip", titulo: "MCU + radio", capas: RADIO, td: (e) => {
+        const m = corto(e.mcu_familia, e.mcu), r = corto(e.radio_familia, e.radio);
+        return m || r ? `${m ? esc(m) : celda(null)} + ${r ? esc(r) : celda(null)}` : celda(null);
+      } },
+    { clave: "tx_dbm", titulo: "TX dBm", orden: true, num: true, capas: RADIO, td: (e) => celda(e.tx_dbm) },
+    { clave: "meshtastic", titulo: "Meshtastic", capas: RADIO, td: (e) => {
+        const mt = e.meshtastic;
+        return mt && MESHTASTIC[mt] ? `<span class="mt mt-${mt}">${MESHTASTIC[mt]}</span>` : celda(mt);
+      } },
+    { clave: "colombia", titulo: "Colombia", capas: TODAS, td: (e) => {
+        const co = e.colombia || { estado: "sin_dato" };
+        if (co.estado === "si") return co.url ? `<a href="${esc(co.url)}" target="_blank" rel="noopener">sí</a>` : "sí";
+        return co.estado === "no" ? "no" : `<span class="ausente">sin dato</span>`;
+      } },
+    { clave: "peso_g", titulo: "Peso g", orden: true, num: true, capas: TODAS, td: (e) => celda(e.peso_g) },
+    { clave: "bateria_mah", titulo: "Batería mAh", orden: true, num: true, capas: ["fija", "portatil"], td: (e) => celda(e.bateria_mah) },
+    { clave: "bateria_reemplazable", titulo: "Batería reempl.", capas: ["fija", "portatil"], td: (e) => celda(e.bateria_reemplazable, { max: 24 }) },
+    { clave: "autonomia_uso_h", titulo: "Autonomía en uso h", orden: true, num: true, capas: ["portatil"], td: (e) => celda(e.autonomia_uso_h) },
+    { clave: "panel_w", titulo: "Panel W", orden: true, num: true, capas: ["fija"], td: (e) => celda(e.panel_w) },
+    { clave: "consumo_ma", titulo: "Consumo mA", orden: true, num: true, capas: ["fija", "modulo"], td: (e) => celda(e.consumo_ma, { dec: 1 }) },
+    { clave: "recarga", titulo: "Recarga", capas: ["portatil"], td: (e) => celda(e.recarga, { max: 24 }) },
+    { clave: "depende_celular", titulo: "Depende del celular", capas: ["portatil"], td: (e) => celda(e.depende_celular) },
+    { clave: "grado_ip", titulo: "IP", capas: ["fija", "portatil", "antena", "accesorio"], td: (e) => celda(e.grado_ip, { max: 18 }) },
+    { clave: "ganancia_dbi", titulo: "Ganancia dBi", orden: true, num: true, capas: ["fija", "antena"], td: (e) => celda(e.ganancia_dbi, { dec: 1 }) },
+    { clave: "vswr", titulo: "ROE", capas: ["antena"], td: (e) => celda(e.vswr, { max: 18 }) },
   ];
 
-  function pintarCabecera() {
-    const tr = $("#tabla thead tr");
-    tr.innerHTML = COLUMNAS.map((c) => {
+  // Lo que va en el detalle desplegable de cada fila. `siempre` muestra ✕ si falta,
+  // porque para esa capa el dato es un criterio de compra y su ausencia es información.
+  const DETALLE = [
+    { t: "Variante del precio", k: "variante_precio", capas: TODAS },
+    { t: "Qué cambió", k: "cambio", capas: TODAS },
+    { t: "Colombia", k: "colombia", capas: TODAS, f: (e) => {
+        const co = e.colombia || {};
+        const base = co.estado === "si" ? "Se vende" : co.estado === "no" ? "No se encontró" : "Sin dato";
+        return `${base}${co.detalle ? `: ${esc(co.detalle)}` : ""}${co.url ? `. <a href="${esc(co.url)}" target="_blank" rel="noopener">Ficha colombiana</a>` : ""}`;
+      } },
+    { t: "Banda", k: "banda_mhz", capas: RADIO },
+    { t: "MCU", k: "mcu", capas: RADIO },
+    { t: "Radio", k: "radio", capas: RADIO },
+    { t: "Dimensiones mm", k: "dimensiones_mm", capas: ["portatil", "accesorio"], siempre: ["portatil"] },
+    { t: "Batería", k: "bateria_formato", capas: ["fija", "portatil"] },
+    { t: "Autonomía según el fabricante", k: "autonomia_texto", capas: ["fija", "portatil"], siempre: ["portatil", "fija"] },
+    { t: "Autonomía según la comunidad", k: "autonomia_comunidad", capas: ["portatil"] },
+    { t: "Consumo, definición de la cifra", k: "consumo_texto", capas: RADIO },
+    { t: "Sin celular queda", k: "sin_celular", capas: ["portatil"], siempre: ["portatil"] },
+    { t: "Pantalla", k: "pantalla", capas: ["portatil"] },
+    { t: "Entrada", k: "entrada", capas: ["portatil"] },
+    { t: "GPS", k: "gps", capas: ["portatil"] },
+    { t: "Resistencia a caídas", k: "resistencia_caida", capas: ["portatil"], siempre: ["portatil"] },
+    { t: "ROE de la antena", k: "vswr", capas: ["fija"] },
+    { t: "Complejidad de montaje", k: "complejidad", capas: TODAS },
+    { t: "Equivalentes intercambiables", k: "equivalentes", capas: TODAS },
+    { t: "Notas", k: "notas", capas: TODAS },
+    { t: "Contradicción", k: "contradiccion", capas: TODAS, clase: "contra-bloque" },
+    { t: "Procedencia", k: "procedencia", capas: TODAS },
+  ];
+
+  function columnasVisibles() {
+    return COLUMNAS.filter((c) => c.capas.some((k) => estado.capas.has(k)));
+  }
+
+  function equipoTD(e) {
+    const capa = CAPAS[e.capa];
+    const abierto = estado.abiertos.has(e.id);
+    const etiquetas = [
+      capa.nombre + (e.subcapa_nombre ? `, ${e.subcapa_nombre}` : ""),
+      e.familia === "a_etiqueta" ? "familia (a) etiqueta" : e.familia === "b_pantalla" ? "familia (b) pantalla" : "",
+      e.linea_base ? "línea base" : "",
+      e.nuevo ? "nuevo" : "",
+    ].filter(Boolean).join(", ");
+    return `<button class="abrir" type="button" aria-expanded="${abierto}" aria-controls="det-${esc(e.id)}"><span class="giro" aria-hidden="true">${abierto ? "−" : "+"}</span><span><b>${esc(e.fabricante)}</b> ${esc(e.modelo)}</span></button>${llamadas(e.refs)}` +
+      `<span class="sub">${esc(etiquetas)}${e.contradiccion ? `, <span class="contra">contradicción</span>` : ""}</span>`;
+  }
+
+  function precioTD(e) {
+    if (precioValido(e)) {
+      const max = esNum(e.precio_max_usd) && e.precio_max_usd > e.precio_usd ? `–${fmt(e.precio_max_usd)}` : "";
+      return `<a href="${esc(e.url)}" target="_blank" rel="noopener">${fmt(e.precio_usd)}${max}</a><span class="precio-fecha">${esc(e.fecha_consulta)}</span>`;
+    }
+    if (e.precio_espera) return `<span class="espera">aún en espera</span>`;
+    if (e.url) return `${celda(null)} <a href="${esc(e.url)}" target="_blank" rel="noopener">ficha</a>`;
+    return celda(null);
+  }
+
+  function cambioTD(e) {
+    if (esNum(e.cambio_pct)) {
+      const cl = e.cambio_pct > 0.5 ? "cambio-sube" : e.cambio_pct < -0.5 ? "cambio-baja" : "sin-cambio";
+      return `<span class="${cl}">${e.cambio_pct > 0 ? "+" : ""}${fmt(e.cambio_pct, 1)} %</span>`;
+    }
+    if (e.correccion) return `<span class="correccion">corrección</span>`;
+    return e.nuevo ? `<span class="ausente">nuevo</span>` : `<span class="ausente">—</span>`;
+  }
+
+  function detalleHTML(e, ncol) {
+    const items = DETALLE.filter((d) => d.capas.includes(e.capa)).map((d) => {
+      const v = d.f ? d.f(e) : e[d.k];
+      const vacio = v === null || v === undefined || v === "";
+      if (vacio && !(d.siempre || []).includes(e.capa)) return "";
+      const val = d.f ? v : vacio ? celda(null) : v === ESPERA ? celda(v) : esc(v);
+      return `<div class="${d.clase || ""}"><dt>${d.t}</dt><dd>${val}</dd></div>`;
+    }).join("");
+    const vend = e.url ? `<div><dt>Ficha del vendedor</dt><dd><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.vendedor || e.fabricante)}</a>${e.fecha_consulta ? `, consultada el ${esc(e.fecha_consulta)}` : ""}${e.precio_nota ? `. ${esc(e.precio_nota)}` : ""}</dd></div>` : "";
+    const refs = e.refs && e.refs.length ? `<div><dt>Referencias</dt><dd>${llamadas(e.refs)}</dd></div>` : "";
+    return `<tr class="detalle" id="det-${esc(e.id)}"><td colspan="${ncol}"><dl class="detalle-cuerpo" style="--franja-det:${CAPAS[e.capa].color}">${vend}${items}${refs}</dl></td></tr>`;
+  }
+
+  function pintarCabecera(cols) {
+    $("#tabla thead tr").innerHTML = cols.map((c) => {
       const act = estado.orden.clave === c.clave;
-      const fl = c.orden ? `<span class="flecha">${act ? (estado.orden.dir > 0 ? "▲" : "▼") : "↕"}</span>` : "";
-      return `<th class="${c.orden ? "ordenable" : ""}" data-clave="${c.clave}" ${c.orden ? `aria-sort="${act ? (estado.orden.dir > 0 ? "ascending" : "descending") : "none"}" tabindex="0"` : ""}>${c.titulo}${fl}</th>`;
+      const fl = c.orden ? `<span class="flecha" aria-hidden="true">${act ? (estado.orden.dir > 0 ? "▲" : "▼") : "↕"}</span>` : "";
+      return `<th class="${c.orden ? "ordenable" : ""}${c.num ? " n" : ""}" data-clave="${c.clave}" ${c.orden ? `aria-sort="${act ? (estado.orden.dir > 0 ? "ascending" : "descending") : "none"}" tabindex="0"` : ""}>${c.titulo}${fl}</th>`;
     }).join("");
   }
 
-  function filaHTML(e) {
-    const capa = CAPAS[e.capa];
-    const tds = [];
-    tds.push(`<td style="--franja:${capa.color}">${capa.nombre}${e.subcapa_nombre ? `<span class="sub">${esc(e.subcapa_nombre)}</span>` : ""}</td>`);
-    const fam = e.familia === "a_etiqueta" ? "familia (a): etiqueta" : e.familia === "b_pantalla" ? "familia (b): pantalla propia" : "";
-    tds.push(`<td class="modelo"><b>${esc(e.fabricante)}</b> ${esc(e.modelo)}${llamadas(e.refs)}${e.linea_base ? `<span class="sub">línea base del proyecto</span>` : ""}${fam ? `<span class="sub">${fam}</span>` : ""}</td>`);
-    // precio
-    if (precioValido(e)) {
-      const max = esNum(e.precio_max_usd) && e.precio_max_usd > e.precio_usd ? `–${fmt(e.precio_max_usd)}` : "";
-      tds.push(`<td class="num"><a href="${esc(e.url)}" target="_blank" rel="noopener" title="${esc(e.variante_precio || "Abrir ficha del vendedor")}">${fmt(e.precio_usd)}${max}</a><span class="precio-fecha" title="${esc((e.vendedor || "") + ", consultado el " + e.fecha_consulta)}">${esc(e.fecha_consulta)}</span></td>`);
-    } else if (e.precio_espera) {
-      tds.push(`<td class="num"><span class="espera">aún en espera</span><span class="precio-fecha recorte" title="${esc(e.precio_nota || "")}">${esc(e.precio_nota || "")}</span></td>`);
-    } else if (e.url) {
-      tds.push(`<td class="num sin-precio"><span class="ausente">✕</span> <a href="${esc(e.url)}" target="_blank" rel="noopener">ficha</a><span class="precio-fecha recorte" title="${esc(e.precio_nota || "precio no legible")}">${esc(e.precio_nota || "precio no legible")}${e.fecha_consulta ? ", " + esc(e.fecha_consulta) : ""}</span></td>`);
-    } else {
-      tds.push(`<td class="num">${celda(null)}</td>`);
-    }
-    tds.push(`<td>${celda(e.disponibilidad)}</td>`);
-    if (esNum(e.cambio_pct)) {
-      const cl = e.cambio_pct > 0.5 ? "cambio-sube" : e.cambio_pct < -0.5 ? "cambio-baja" : "";
-      const s = e.cambio_pct > 0 ? "+" : "";
-      tds.push(`<td class="num ${cl}" title="Antes: USD ${fmt(e.precio_anterior_usd)}">${s}${fmt(e.cambio_pct, 1)} %</td>`);
-    } else if (e.correccion) {
-      tds.push(`<td class="num" title="${esc(e.correccion)}"><span class="espera">corrección</span></td>`);
-    } else {
-      tds.push(`<td class="num">${e.nuevo ? `<span class="ausente">nuevo</span>` : `<span class="ausente">—</span>`}</td>`);
-    }
-    tds.push(`<td>${celda(e.mcu)}</td>`);
-    tds.push(`<td>${celda(e.radio)}</td>`);
-    tds.push(`<td class="num">${celda(e.tx_dbm)}</td>`);
-    const mt = e.meshtastic;
-    tds.push(`<td class="mt ${mt ? "mt-" + mt : ""}">${mt && MESHTASTIC[mt] ? MESHTASTIC[mt] : celda(mt)}</td>`);
-    const co = e.colombia || { estado: "sin_dato" };
-    const coTxt = co.estado === "si"
-      ? `${co.url ? `<a href="${esc(co.url)}" target="_blank" rel="noopener">sí</a>` : "sí"}${co.detalle ? ` <span class="recorte ausente" style="font-size:11px" title="${esc(co.detalle)}">${esc(co.detalle)}</span>` : ""}`
-      : co.estado === "no" ? `<span title="${esc(co.detalle || "")}" style="cursor:help">no <span class="ausente" style="font-size:10px">(ver)</span></span>` : `<span class="ausente">sin dato</span>`;
-    tds.push(`<td>${coTxt}</td>`);
-    tds.push(`<td class="num">${celda(e.peso_g)}</td>`);
-    tds.push(`<td>${celda(e.dimensiones_mm)}</td>`);
-    tds.push(`<td class="num">${celda(e.bateria_mah)}</td>`);
-    tds.push(`<td>${celda(e.bateria_reemplazable)}</td>`);
-    tds.push(`<td class="num" title="${esc([e.autonomia_texto, e.autonomia_comunidad ? "Comunidad (no del fabricante): " + e.autonomia_comunidad : ""].filter(Boolean).join(". "))}">${celda(e.autonomia_uso_h)}${!esNum(e.autonomia_uso_h) && (e.autonomia_texto || e.autonomia_comunidad) ? ` <span class="ausente" style="font-size:10px">(ver)</span>` : ""}</td>`);
-    tds.push(`<td class="num" title="${esc(e.autonomia_texto || "")}">${celda(e.autonomia_dias, { dec: 0 })}</td>`);
-    tds.push(`<td class="num" title="${esc(e.consumo_texto || "")}">${celda(e.consumo_ma, { dec: 1 })}</td>`);
-    tds.push(`<td>${celda(e.recarga)}</td>`);
-    tds.push(`<td title="${esc(e.sin_celular ? "Sin teléfono queda: " + e.sin_celular : "")}">${celda(e.depende_celular)}${e.sin_celular ? ` <span class="ausente" style="font-size:10px">(ver)</span>` : ""}</td>`);
-    tds.push(`<td>${celda(e.grado_ip)}</td>`);
-    tds.push(`<td class="num">${celda(e.ganancia_dbi, { dec: 1 })}</td>`);
-    const notaTxt = [e.notas, e.contradiccion ? "Contradicción: " + e.contradiccion : "", e.variante_precio ? "Variante de precio: " + e.variante_precio : ""].filter(Boolean).join(". ");
-    tds.push(`<td class="notas">${notaTxt ? `<span class="recorte r3" title="${esc(notaTxt)}">${e.contradiccion ? `<b class="contra">Contradicción.</b> ` : ""}${esc(e.notas || e.contradiccion || e.variante_precio || "")}</span>` : ""}</td>`);
-    return `<tr>${tds.join("")}</tr>`;
+  function filaHTML(e, cols) {
+    const tds = cols.map((c, i) => {
+      const aplica = c.capas.includes(e.capa);
+      const cls = [i === 0 ? "equipo" : "", c.num ? "num" : "", "c-" + c.clave].filter(Boolean).join(" ");
+      const estilo = i === 0 ? ` style="--franja:${CAPAS[e.capa].color}"` : "";
+      return `<td class="${cls}"${estilo}>${aplica ? c.td(e) : NA}</td>`;
+    }).join("");
+    return `<tr data-id="${esc(e.id)}">${tds}</tr>` + (estado.abiertos.has(e.id) ? detalleHTML(e, cols.length) : "");
   }
 
   function pintarTabla(lista) {
-    pintarCabecera();
-    $("#tabla tbody").innerHTML = lista.map(filaHTML).join("") ||
-      `<tr><td colspan="${COLUMNAS.length}" style="padding:12px">Ningún equipo cumple los filtros.</td></tr>`;
+    const cols = columnasVisibles();
+    pintarCabecera(cols);
+    $("#tabla tbody").innerHTML = lista.map((e) => filaHTML(e, cols)).join("") ||
+      `<tr><td colspan="${cols.length}" style="padding:12px">Ningún equipo cumple los filtros. <button class="atajo" type="button" data-limpiar>Limpiar filtros</button></td></tr>`;
+    const env = $(".tabla-envoltura");
+    env.style.setProperty("--ancho-visible", env.clientWidth + "px");
     const conPrecio = lista.filter(precioValido).length;
     const col = COLUMNAS.find((c) => c.clave === estado.orden.clave)?.titulo || "";
     $("#resumen-filtro").textContent =
-      `${lista.length} de ${estado.datos.equipos.length} equipos, ${conPrecio} con precio verificable. Ordenado por ${col.replace(/ ↕| ▲| ▼/g, "")}, ${estado.orden.dir > 0 ? "de menor a mayor" : "de mayor a menor"}.`;
+      `${lista.length} de ${estado.datos.equipos.length} equipos, ${conPrecio} con precio verificable. Ordenado por ${col}, ${estado.orden.dir > 0 ? "de menor a mayor" : "de mayor a menor"}. ${cols.length} columnas para las capas elegidas.`;
+    const n = filtrosActivos();
+    $("#n-filtros").textContent = n ? `(${n} activo${n > 1 ? "s" : ""})` : "";
+  }
+
+  function filtrosActivos() {
+    return ["mcu", "radio", "meshtastic", "colombia", "familia"].filter((k) => estado[k]).length +
+      ["precioMin", "precioMax", "bateriaMin"].filter((k) => estado[k] !== null).length + (estado.soloConPrecio ? 1 : 0);
   }
 
   // ---------- barras ----------
@@ -425,12 +488,29 @@
     $("#f-pmax").addEventListener("input", (e) => { estado.precioMax = num(e.target.value); actualizar(); });
     $("#f-bat").addEventListener("input", (e) => { estado.bateriaMin = num(e.target.value); actualizar(); });
     $("#f-conprecio").addEventListener("change", (e) => { estado.soloConPrecio = e.target.checked; actualizar(); });
-    $("#f-limpiar").addEventListener("click", () => {
+    const limpiar = () => {
       Object.assign(estado, { texto: "", mcu: "", radio: "", meshtastic: "", colombia: "", familia: "", precioMin: null, precioMax: null, bateriaMin: null, soloConPrecio: false });
       estado.capas = new Set(Object.keys(CAPAS));
       document.querySelectorAll(".controles input, .controles select").forEach((i) => (i.type === "checkbox" ? (i.checked = false) : (i.value = "")));
       chips.querySelectorAll("[data-capa]").forEach((x) => x.setAttribute("aria-pressed", "true"));
       actualizar();
+    };
+    $("#f-limpiar").addEventListener("click", limpiar);
+
+    // Detalle desplegable de cada fila: botón nativo, así que funciona con clic, toque y Enter.
+    $("#tabla tbody").addEventListener("click", (ev) => {
+      if (ev.target.closest("[data-limpiar]")) { limpiar(); return; }
+      const b = ev.target.closest("button.abrir");
+      if (!b) return;
+      const id = b.closest("tr").dataset.id;
+      estado.abiertos.has(id) ? estado.abiertos.delete(id) : estado.abiertos.add(id);
+      actualizar();
+      const nb = document.querySelector(`#tabla tr[data-id="${CSS.escape(id)}"] button.abrir`);
+      if (nb) nb.focus({ preventScroll: true });
+    });
+    window.addEventListener("resize", () => {
+      const env = $(".tabla-envoltura");
+      env.style.setProperty("--ancho-visible", env.clientWidth + "px");
     });
 
     $("#tabla thead").addEventListener("click", (ev) => {
